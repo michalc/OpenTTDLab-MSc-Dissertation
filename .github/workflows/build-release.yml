@@ -18,13 +18,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Build PDF
         run: |
-          docker run --rm -v $PWD:/workdir -e TEXINPUTS=/workdir//: texlive/texlive:TL2022-historic pdflatex -output-directory /workdir -jobname michal-charemza-openttd-dissertation-proposal /workdir/main.tex
+          docker run --rm -v $PWD:/workdir -e TEXINPUTS=/workdir//: texlive/texlive:TL2022-historic pdflatex -output-directory /workdir -jobname michal-charemza-openttd-msc-dissertation /workdir/main.tex
       - name: Upload PDF
         uses: actions/upload-artifact@v3
         with:
-          name: michal-charemza-openttd-dissertation-proposal
+          name: michal-charemza-openttd-msc-dissertation
           path: |
-            michal-charemza-openttd-dissertation-proposal.pdf
+            michal-charemza-openttd-msc-dissertation.pdf
 
   release:
     name: Release
@@ -39,8 +39,8 @@ jobs:
       - name: Download PDF
         uses: actions/download-artifact@v3
         with:
-          name: michal-charemza-openttd-dissertation-proposal
-          path: michal-charemza-openttd-dissertation-proposal
+          name: michal-charemza-openttd-msc-dissertation
+          path: michal-charemza-openttd-msc-dissertation
       - name: Determine release tag
         run: |
           echo "RELEASE_TAG=$(git log -1 --pretty='format:%cd' --date=format:'v%Y%m%d.%H%M%S')" >> "$GITHUB_ENV"
@@ -57,7 +57,7 @@ jobs:
       - name: Release PDF under release tag
         uses: softprops/action-gh-release@v1
         with:
-          files: michal-charemza-openttd-dissertation-proposal/michal-charemza-openttd-dissertation-proposal.pdf
+          files: michal-charemza-openttd-dissertation-proposal/michal-charemza-openttd-msc-dissertation.pdf
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

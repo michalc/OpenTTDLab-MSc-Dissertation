@@ -70,4 +70,5 @@ jobs:
             michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
+          body: '![](https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png)'
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

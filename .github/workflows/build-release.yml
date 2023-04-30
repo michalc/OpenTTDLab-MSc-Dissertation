@@ -25,7 +25,7 @@ jobs:
       - name: Build PNG of first page
         run: |
           sudo apt-get install -y ghostscript
-          gs -r300 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+          gs -r600 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
       - name: Upload PDF and PNG
         uses: actions/upload-artifact@v3
         with:

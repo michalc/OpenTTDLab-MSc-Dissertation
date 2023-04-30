@@ -57,7 +57,7 @@ jobs:
       - name: Release PDF under release tag
         uses: softprops/action-gh-release@v1
         with:
-          files: michal-charemza-openttd-dissertation-proposal/michal-charemza-openttd-msc-dissertation.pdf
+          files: michal-charemza-openttd-msc-dissertation/michal-charemza-openttd-msc-dissertation.pdf
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

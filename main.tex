@@ -2,10 +2,51 @@
 
 \usepackage{preprint}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{wrapfig}
 
 \title{Reproducible experiments using OpenTTD}
 \author{Michal Charemza}
 \date{April 2023}
+
+% From https://www.overleaf.com/latex/templates/sticky-notes/ftrvjddrmbwx
+% Vebjørn S. Førde
+% Creative Commons CC BY 4.0
+% Yellow:
+\definecolor{BgYellow}{HTML}{FFF59C}
+\definecolor{FrameYellow}{HTML}{F7A600}
+\newtcolorbox{YStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgYellow, colframe=FrameYellow, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameYellow,right color=FrameYellow,
+        middle color=FrameYellow]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgYellow!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameYellow,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameYellow] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
 
 \begin{document}
 
@@ -21,5 +62,47 @@
 
   \end{@twocolumnfalse}
 ]
+
+\section{Introduction}
+
+\begin{YStkyNote}[TODO]
+Explain what OpenTTD is in more detail, with maybe a screenshot and some history? Summarise the main themes of research using it.
+\end{YStkyNote}
+
+\section{Reproducibility, Replicatability, \& Repeatability}
+
+\begin{YStkyNote}[TODO]
+Explain the differences
+\end{YStkyNote}
+
+\section{Review of research using OpenTTD}
+
+\begin{YStkyNote}[TODO]
+Give specific examples of the issues in research
+\end{YStkyNote}
+
+\section{Review of OpenTTD configuration}
+
+\begin{YStkyNote}[TODO]
+Explain some of the configuration thas is useful for reproducibility
+\end{YStkyNote}
+
+\section{Possible extensions to OpenTTD}
+
+\begin{YStkyNote}[TODO]
+Suggest extensions that would address the issues of the research
+\end{YStkyNote}
+
+\section{Research vs. recreation}
+
+\begin{YStkyNote}[TODO]
+OpenTTD is a game, and not for research. Is there a tension? Could it be for both?
+\end{YStkyNote}
+
+\section{Conclusion}
+
+\begin{YStkyNote}[TODO]
+Briefly repeat the main points above
+\end{YStkyNote}
 
 \end{document}

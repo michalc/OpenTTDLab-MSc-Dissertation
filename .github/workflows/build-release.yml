@@ -1,0 +1,63 @@
+name: Build and release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build PDF
+        run: |
+          docker run --rm -v $PWD:/workdir -e TEXINPUTS=/workdir//: texlive/texlive:TL2022-historic pdflatex -output-directory /workdir -jobname michal-charemza-openttd-dissertation-proposal /workdir/main.tex
+      - name: Upload PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: michal-charemza-openttd-dissertation-proposal
+          path: |
+            michal-charemza-openttd-dissertation-proposal.pdf
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download PDF
+        uses: actions/download-artifact@v3
+        with:
+          name: michal-charemza-openttd-dissertation-proposal
+          path: michal-charemza-openttd-dissertation-proposal
+      - name: Determine release tag
+        run: |
+          echo "RELEASE_TAG=$(git log -1 --pretty='format:%cd' --date=format:'v%Y%m%d.%H%M%S')" >> "$GITHUB_ENV"
+      - name: Create release tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ env.RELEASE_TAG }}',
+              sha: context.sha
+            })
+      - name: Release PDF under release tag
+        uses: softprops/action-gh-release@v1
+        with:
+          files: michal-charemza-openttd-dissertation-proposal/michal-charemza-openttd-dissertation-proposal.pdf
+          generate_release_notes: true
+          name: ${{ env.RELEASE_TAG }}
+          tag_name: refs/tags/${{ env.RELEASE_TAG }}

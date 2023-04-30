@@ -22,12 +22,17 @@ jobs:
       - name: Build PDF
         run: |
           docker run --rm -v $PWD:/workdir -e TEXINPUTS=/workdir//: texlive/texlive:TL2022-historic pdflatex -output-directory /workdir -jobname michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }} /workdir/main.tex
-      - name: Upload PDF
+      - name: Build PNG of first page
+        run: |
+          sudo apt-get install -y ghostscript
+          gs -r300 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+      - name: Upload PDF and PNG
         uses: actions/upload-artifact@v3
         with:
           name: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}
           path: |
             michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
 
   release:
     name: Release
@@ -42,7 +47,7 @@ jobs:
       - name: Determine release tag
         run: |
           echo "RELEASE_TAG=$(git log -1 --pretty='format:%cd' --date=format:'v%Y%m%d.%H%M%S')" >> "$GITHUB_ENV"
-      - name: Download PDF
+      - name: Download PDF and PNG
         uses: actions/download-artifact@v3
         with:
           name: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}

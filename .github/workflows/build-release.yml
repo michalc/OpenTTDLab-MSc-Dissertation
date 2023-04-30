@@ -62,10 +62,12 @@ jobs:
               ref: 'refs/tags/${{ env.RELEASE_TAG }}',
               sha: context.sha
             })
-      - name: Release PDF under release tag
+      - name: Release PDF and PNG under release tag
         uses: softprops/action-gh-release@v1
         with:
-          files: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+          files: |
+            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

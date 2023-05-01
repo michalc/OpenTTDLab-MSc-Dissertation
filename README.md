@@ -8,7 +8,7 @@ MSc dissertation on OpenTTD, reproducible research, and supply chain resilience
 [↓ PDF of latest version](https://github.com/michalc/openttd-msc-dissertation/releases/latest)
 
 <a href="https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttd-msc-dissertation.pdf" title="Download PDF of latest version">
-    <img src="https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttd-msc-dissertation.png" width="510">
+    <img src="https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttd-msc-dissertation.png">
 </a>
 
 

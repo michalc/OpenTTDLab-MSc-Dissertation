@@ -75,6 +75,6 @@ jobs:
           body: |
             **First page** (click to download PDF of all pages):
             <a href="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf">
-              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png" width="510" height="660">
+              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png" width="510">
             </a>
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

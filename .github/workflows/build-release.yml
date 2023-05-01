@@ -54,6 +54,10 @@ jobs:
         with:
           name: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}
           path: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}
+      - name: Create assets without the tag in their names (for /latest redirects)
+        run: |
+          cp michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.pdf
+          cp michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.png
       - name: Create release tag
         uses: actions/github-script@v5
         with:
@@ -70,6 +74,8 @@ jobs:
           files: |
             michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
             michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
+            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.pdf
+            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.png
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           body: |

@@ -13,7 +13,7 @@
 \author{Michal Charemza}
 \date{April 2023}
 
-% From https://www.overleaf.com/latex/templates/sticky-notes/ftrvjddrmbwx
+% Based on https://www.overleaf.com/latex/templates/sticky-notes/ftrvjddrmbwx
 % Vebjørn S. Førde
 % Creative Commons CC BY 4.0
 % Yellow:
@@ -22,7 +22,7 @@
 \newtcolorbox{YStkyNote}[1][]{%
     enhanced,
     before skip=2mm,after skip=2mm, 
-    width=0.4\textwidth, % width of the sticky note
+    width=\columnwidth - 3mm, % width of the sticky note
     boxrule=0.2mm,
     colback=BgYellow, colframe=FrameYellow, % Colors
     attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},

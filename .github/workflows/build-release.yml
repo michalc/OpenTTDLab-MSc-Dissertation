@@ -23,10 +23,11 @@ jobs:
         # If it's not run twice (the first time to get the aux file) then the margin tick marks are not in the right place
         run: |
           docker run --rm -v $PWD:/workdir texlive/texlive:TL2022-historic bash -c "cd /workdir && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
-      - name: Build PNG of first page
+      - name: Build PNG of pages
         run: |
           sudo apt-get install -y ghostscript
-          gs -r600 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+          gs -r300 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-%03d.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+          montage -mode concatenate -geometry +0+0 michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
       - name: Upload PDF and PNG
         uses: actions/upload-artifact@v3
         with:
@@ -80,6 +81,6 @@ jobs:
           body: |
             **First page** (click to download PDF of all pages):
             <a href="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf">
-              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png" width="510">
+              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png">
             </a>
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

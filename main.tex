@@ -85,10 +85,45 @@ Explain the differences
 \section{Review of research using OpenTTD}
 
 \begin{YStkyNote}
-Give specific examples of the issues in research
+Give specific examples of the research and issues in research
 \end{YStkyNote}
 
-\section{Review of OpenTTD configuration}
+\section{Review of OpenTTD command line options and configuration}
+OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing. The ones that are particularly applicable for experiments are listed below.
+
+\subsection{Command line options}
+
+\begin{description}
+\item[-G \textless seed\textgreater] Allows the specification of the seed that initialises the random number generator that controls the pseudo random aspects of the game. For example, OpenTTD can auto generate landscapes. With the same seed (along with other configuration) one generation will be the same as the next
+\item[-g] Starts a game immediately, rather than requiring the user to click through a introductory menu 
+\item[-vnull:ticks=\textless number of ticks\textgreater] Puts the same into a "null" video mode that does not display the playing area on screen, and exits the game after a set number of \emph{ticks}. A tick is equal to approximately 1/Y of a day in game time.
+\end{description}
+
+\subsection{Configuration options}
+
+\begin{description}
+\item[{fast\_forward\_speed\_limit} = \textless limit\textgreater] Limits the ticks per second the limit, which has a hard coded maximum in the game of 50000
+
+\item[{[ai\_players]}] Allows the specification of which player are human and which are AI, and when they start playing.
+
+\end{description}
+
+
+
+
+
+
+
+
+
+
+
+
+Fast forward speed limit - 50000 makes a year go by in less than 5 seconds
+
+
+? How to have non humna players from the get go?
+It seems to be slightly random
 
 \begin{YStkyNote}
 Explain some of the configuration that is useful for reproducibility
@@ -99,6 +134,12 @@ Explain some of the configuration that is useful for reproducibility
 \begin{YStkyNote}
 Suggest extensions that would address the issues of the research
 \end{YStkyNote}
+
+Lift limit on game speed to... infinite?
+
+Start game in fast forward mode
+
+There is some randomness as to when the AIs start?
 
 \section{Research vs. recreation}
 

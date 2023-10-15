@@ -9,7 +9,7 @@
 \usepackage{wrapfig}
 \usepackage[hidelinks]{hyperref}
 
-\title{Reproducible experiments using OpenTTD}
+\title{Replicable experiments using OpenTTD}
 \author{Michal Charemza}
 \date{April 2023}
 
@@ -57,7 +57,7 @@
     \maketitle
 
     \begin{abstract}
-        OpenTTD is an open source real time strategy (RTS) business simulation game based on the 1994 game Transport Tycoon Deluxe. In spite of being designed as a recreational game, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the reproducibility of their experiments. This paper summarises the problems, and suggests extensions to OpenTTD to avoid these problems in future.
+        OpenTTD is an open source real time strategy (RTS) business simulation game based on the 1994 game Transport Tycoon Deluxe. In spite of being designed as a recreational game, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the replicability of their experiments. This paper summarises the problems, and suggests patterns of usage of OpenTTD to avoid these problems in future research.
     \end{abstract}
 \vspace{0.35cm}
 
@@ -75,12 +75,14 @@ OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation gam
 \label{fig:openttd}
 \end{figure}
 
-OpenTTD was created as a game for recreation. However, it is remarkably flexible: it has been successfully used as a tool to research artificial intelligence (AI) and machine learning (ML) algorithms \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid \cite{HansenMuprhie2018}. Using it a a tool for research is the focus of this paper, and specifically its features for reproducible research.
+OpenTTD was created as a game for recreation. However, it is remarkably flexible: it has been successfully used as a tool to research artificial intelligence (AI) and machine learning (ML) algorithms \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid \cite{HansenMuprhie2018}. Using it a a tool for research is the focus of this paper, and specifically its features for replicable research.
 
-\section{Reproducibility, Replicatability, \& Repeatability}
+\section{Repeatability, Replicatability, \& Reproducibility }
 \begin{YStkyNote}
 Explain the differences
 \end{YStkyNote}
+
+Is this, methods and results \cite{plesser_reproducibility_2018}
 
 \section{Review of research using OpenTTD}
 
@@ -89,7 +91,7 @@ Give specific examples of the research and issues in research
 \end{YStkyNote}
 
 \section{Review of OpenTTD command line options and configuration}
-OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing. The ones that are particularly applicable for experiments are listed below.
+OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing. The ones that are particularly applicable are reviewed below
 
 \subsection{Command line options}
 
@@ -107,14 +109,26 @@ OpenTTD as of version 13.4 has over X command line options and Y configuration o
 \item[{[ai\_players]}] Allows the specification of which player are human and which are AI, and when they start playing.
 
 \item[autosave = monthly|daily|other CHECK]
-\item[keep\_all\_autosave]
-\item[autosave\_on\_exit] 
-\item[max\_num\_autosaves] A number of autosave related settings allow the player to automatically save OpenTTD in a custom binary format regularly while the game runs.
 
+\item[keep\_all\_autosave]  A boolean value that allows all autosaves to be kept for further analysis
 \end{description}
+
+\section{Extracting data from OpenTTD}
+
+OpenTTD does saves its data in a custom binary format. OpenTTD offers an extremely basic tool for extracting some data from this format, but it only shows X and Y.
+
+Extracting data from this format into a structure that is ready to be analysed.
+
+\section{Example results using these patterns}
+
+
 
 
 \section{Possible extensions to OpenTTD}
+
+Disable the max fast forward speed limit
+
+Maximum number of autosaves
 
 \begin{YStkyNote}
 Suggest extensions that would address the issues of the research

@@ -11,7 +11,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
-\title{Repeatable, Replicable, \& Reproducible experiments using OpenTTD}
+\title{OpenTTDLab: Repeatable, Replicable, \& Reproducible experiments using OpenTTD}
 \author{Michal Charemza}
 \date{April 2023}
 
@@ -59,7 +59,7 @@
     \maketitle
 
     \begin{abstract}
-        OpenTTD is an open source real time strategy (RTS) business simulation game based on the 1994 game Transport Tycoon Deluxe. In spite of being designed as a recreational game, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. This paper summarises the problems, and presents a simple framework that allows OpenTTD to be used in a way to avoid these problems in future research.
+        OpenTTD is an open source real time strategy (RTS) business simulation game based on the 1994 game Transport Tycoon Deluxe. In spite of being designed as a recreational game, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. This paper summarises the problems, and presents a framework that allows OpenTTD to be used in a way to avoid these problems in future research: OpenTTDLab.
     \end{abstract}
 \vspace{0.35cm}
 
@@ -183,24 +183,38 @@ The specification of the random seed should mean that OpenTTD affords exact repe
 \item[keep\_all\_autosave]  A boolean value that allows all autosaves to be kept for further analysis
 \end{description}
 
-\section{The prototype framework}
+\section{The save game format}
 
-OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format. However, a separate Python based tool is available to extract data from save games.
+OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format. However, a separate Python based tool is available to extract data from save games
 
-The framework uses this tool to set the various options of OpenTTD, and outputs two things:
+\section{The framework}
+
+The framework has two audiences. The first audience is an experimenter looking to conduct experiments with an AI, be it their own, or others, or a combination. The second is someone looking to reproduce or replicate another team's results. As such it contains separate instructions for both of these audiences.
+
+\subsection{The experimenting team}
+
+It takes the command line options in code, the various options of OpenTTD, and outputs two things:
 
 \begin{itemize}
-\item The results of the experiments at hand in a format chosen by the experimenter, for example in CSV format
-\item The metadata of the experiments: the version of OpenTTD, the version of the save game reader, any commend line options, and all configuration, highlighting the configuration the differs from the defaults for that version of OpenTTD
+\item The results of the experiments - these are as Python variable, which allows the persistance of the results to be chosen by the experimenter. For example, in a basic CSV format.
+\item The metadata of the experiments: the version of OpenTTD, the version of the framework itself, any commend line options, and all configuration, highlighting the configuration the differs from the defaults for that version of OpenTTD
 \end{itemize}
+
+\subsection{The reproducing or replicating team}
+
+This leads to the second audience. The framework contains instructions to follow for a separate team trying to reproduce or replicate the experiments of the first team. These instructions mean that the first team can role-play as a reproducer or replicator, and test themselves how straightforward it is to reproduce the experiments, and judge for themselves if it is possible that their results be reproduced, and their research be awarded the badges of Figure \ref{fig:acm_badges}.
+
+The replicability of results would be more difficult to judge - the author's artefacts cannot be used in this case, which means that if a team want to role play, they have to recreate their own artefacts, without reference to their original. The system here at least means that the "boilerplate" is handled, and this can be focused on.
 
 \section{Example results using the framework}
 
-The framework has been used to extract how the bank balance from OpenTTD change over time, as in \label{fig:value-over-time}. The 
+The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 
 \begin{itemize}
   \item This has been created using a non-modified version of OpenTTD 13.1.
-  \item The
+  \item The exact random seeds are shown
+  \item There are 50 experiments run
+  \item Each is run for the same amount of in game time
 \end{itemize}
 
 The output of the seeds used, all settings, OpenTTD version, without modification, should make the experiments repeatable, reproducible, and ideally replicable. Thus it is an improvement in these terms over many of the results reviewed in section 4.

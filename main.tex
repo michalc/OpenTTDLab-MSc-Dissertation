@@ -83,19 +83,17 @@ Using OpenTTD as a tool for research is the focus of this paper, and specificall
 
 \section{Repeatability, Replicatability, \& Reproducibility}
 
-The terms repeatability, replicability, and reproducibility unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. To add to the confusion, the ACM have swapped their definitions reproducibility and replicability \cite{association_for_computing_machiner_new_2020}. For the avoidance of doubt, I use the ACM's definitions that are current as of October 2023 \cite{association_for_computing_machiner_artifact_2020}, summarised as
+The terms repeatability, replicability, and reproducibility unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. To add to the confusion, the ACM have swapped their definitions reproducibility and replicability \cite{association_for_computing_machiner_new_2020}. For the avoidance of doubt, I use the ACM's definitions that are current as of October 2023 \cite{association_for_computing_machiner_artifact_2020}. For some results of an experiment conducted by a team of authors, where some computer-based artefacts were created to conduct these, these can be summarised as
 
 \begin{description}
-\item[Repeatability] Same team, same artifacts
-\item[Reproducibility]  Different team, using author-supplied artefacts
-\item[Replicability] Different team, not using author-supplied artefacts
+\item[Repeatability] The authors can obtain the results again, using the same artefacts.
+\item[Reproducibility] A different team can obtain the results, using the original authors' artefacts.
+\item[Replicability] A different team can obtain the results, without using any of the original authors' artefacts.
 \end{description}
 
-The strongest of these these, replicability, does not require a full re-implementation of all artifacts used in the research, but only those supplied by the author supplied. In OpenTTD terms, if an author writes a custom AI that is used in experiments, only that AI would need to be implemented by another team to replicate the research. OpenTTD itself would not need to be re-implemented. ? Say something about this... is this a limitation of the framework?
+The strongest of these these, replicability, does not require a full re-implementation of all artifacts used in the research, but only those created by the original team. In OpenTTD terms, if an author writes a custom AI that is used in experiments, only that AI would need to be implemented by another team to replicate the research. OpenTTD itself would not need to be re-implemented in order for experiments to satisfy the definition of replicability.
 
-Beyond just supplying definitions, the ACM also provide a system of 5 badges \ref{fig:acm_badges} that can be applied to published research to incentivise research authors to make it so their research is reproducible and replicable by other teams. Other similar systems of badges are available, for example X, Y and Z.
-
-"In each cases, exact replication or reproduction of results is not required, or even expected. Instead, the results must be in agreement to within a tolerance deemed acceptable for experiments of the given type. In particular, differences in the results should not change the main claims made in the paper."
+Beyond just supplying definitions, the ACM also provide a system of 5 badges, as seen in Figure \ref{fig:acm_badges}. These can be applied to published research to incentivise research authors to make it so their research is reproducible and replicable by other teams. Other similar systems of badges are available.
 
 \begin{figure}
      \centering
@@ -136,33 +134,29 @@ Beyond just supplying definitions, the ACM also provide a system of 5 badges \re
         \label{fig:acm_badges}
 \end{figure}
 
-It is my hope that the framework presented here will make it more likely that research using OpenTTD will be not only repeatable, reproducible and replicable, but also more likely that upon publication, given all of these badges. ?? How often is the last one given - it surely requires a lot of effort
+It is my hope that the framework presented here will make it more likely that research using OpenTTD will be not only repeatable, reproducible and replicable, but also more likely that upon publication, given all of these badges. 
 
 \section{Review of research using OpenTTD}
 
-\begin{YStkyNote}
-Give specific examples of the research and issues in research
-\end{YStkyNote}
-
 From the found published research using OpenTTD, in my opinion there is yet to be a single case that couldn't offer significant improvements in at least one of its repeatability, replicability or replicability.
 
-Repeatability
+\subsection{Repeatability}
 
-Repeatability should be the easiest of the 3Rs to achieve, especially with computer based simulation. However, much of the existing research using OpenTTD uses a low number of repeated experiments, with little or no statistical analysis, suggesting that it was not straightforward.
+Repeatability should be the easiest of the 3Rs to achieve, especially with computer based simulation. However, much of the existing research using OpenTTD uses a low number of repeated experiments, with little or no statistical analysis, suggesting that it was not straightforward. The experiments of \cite{wisniewski2011artificial} were run just 3 times for example. The experiments in \cite{rios2009trains} were run 14 times, but not even for the same amount of in-game time.
 
-Reproducibility
+\subsection{Reproducibility}
 
-For reproducibility the author-supplied artifacts must be clear and available. There were references to modified OpenTTD in X,Y, no code of the custom AIs in X. Potentially the authors could be contacted to supply their own artefacts, but this is not ideal, nor offers a strong guarantee that the artefacts supplied were exactly as wthey were that generated the results.
+For reproducibility the author-supplied artifacts must be clear and available. There were references to modified OpenTTD in \cite{wisniewski2011artificial}, but the modified versions does not seem to be available. Potentially the authors could be contacted to supply their own artefacts, but this is not ideal, nor offers a strong guarantee that the artefacts supplied were exactly as they were that generated the results.
 
-No version of OpenTTD mentioned:
-No author-supplied artefacts linked from paper
-No mention of version of the author-supplied artefacts
+Also, the version of OpenTTD is not mentioned
 
-Replicability
+The seeds of each experiements were also not supplied.
 
-This is the most difficult to judge without actually attempting to do it.
+\subsection{Replicability}
 
+This is the most difficult to judge without actually attempting to do it, and it is what.
 
+However, if an experiemnt isn't even reproducible, it is even more difficult to replicate it.
 
 \section{Review of OpenTTD command line options and configuration}
 OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing. The ones that are particularly applicable to a  for repeatable, reproducible, and replicable research are reviewed below.
@@ -189,36 +183,42 @@ The specification of the random seed should mean that OpenTTD affords exact repe
 \item[keep\_all\_autosave]  A boolean value that allows all autosaves to be kept for further analysis
 \end{description}
 
-\section{Extracting data from OpenTTD}
+\section{The prototype framework}
 
-OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format, but it only shows X and Y. Since approxyimaty XXX a separate Python based tool has been available to extract data from save games
+OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format. However, a separate Python based tool is available to extract data from save games.
 
-Extracting data from this format into a structure that is ready to be analysed has been done using. At the time of w
+The framework uses this tool to set the various options of OpenTTD, and outputs two things:
 
-\section{Example results using these patterns}
+\begin{itemize}
+\item The results of the experiments at hand in a format chosen by the experimenter, for example in CSV format
+\item The metadata of the experiments: the version of OpenTTD, the version of the save game reader, any commend line options, and all configuration, highlighting the configuration the differs from the defaults for that version of OpenTTD
+\end{itemize}
 
+\section{Example results using the framework}
 
+The framework has been used to extract how the bank balance from OpenTTD change over time, as in \label{fig:value-over-time}. The 
 
+\begin{itemize}
+  \item This has been created using a non-modified version of OpenTTD 13.1.
+  \item The
+\end{itemize}
 
-\section{Possible extensions to OpenTTD}
+The output of the seeds used, all settings, OpenTTD version, without modification, should make the experiments repeatable, reproducible, and ideally replicable. Thus it is an improvement in these terms over many of the results reviewed in section 4.
 
-Disable the max fast forward speed limit
+A limitation of the framework is that the AI version used doesn't seem to have a version.
 
-Maximum number of autosaves
-
-\begin{YStkyNote}
-Suggest extensions that would address the issues of the research
-\end{YStkyNote}
-
-There are limited ways in which to extract data from the game.
-Fast forward has a limit.
-Can I be a spectator?
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/value-over-time.png}
+\caption{A chart showing the balance over for 50 experiments}
+\label{fig:value-over-time}
+\end{figure}
 
 \section{Conclusion}
 
-\begin{YStkyNote}
-Briefly repeat the main points above
-\end{YStkyNote}
+The framework presented here allows experiments to be conducted with OpenTTD in a manner that is repeatable and reproducible. Reproducibility is up to the author's descriptions of the artefacts they created - they must be sufficient to recreate the artefacts, and so beyond the scope of the framework here. However, it should at least ease issues due to creating a similar enough experimental setup.
+
+The exception are the version of the AI used - these do not appear to be versioned. However, potentially it could report on some sort of hash of the code of the AI.
 
 \normalsize
 \bibliographystyle{unsrt}

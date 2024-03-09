@@ -37,7 +37,7 @@
 \date{\today}
 
 \abstract{
-OpenTTD is an open source real time strategy (RTS) business simulation game based on the 1994 game Transport Tycoon Deluxe. In spite of being designed as a recreational game, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. This paper summarises the problems, presents a framework that allows OpenTTD to be used in a way to avoid these problems in future research, and uses this framework to find some initial results showing that OpenTTD can be used in supply chain research.
+OpenTTD is an open source real time strategy (RTS) business simulation game based on the 1994 game Transport Tycoon Deluxe. In spite of being designed as a recreational game, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. This disseration summarises the problems, presents a framework that allows OpenTTD to be used in a way to avoid these problems in future research, and uses this framework to find some initial results showing that OpenTTD can be used in supply chain research.
 }
 
 \maketitle
@@ -100,6 +100,28 @@ Using OpenTTD as a tool for research is the focus of this project, and specifica
 \cite{raghothama2013review} war gaming roots, policy analysis, business simulation games, studies on human cognition and behavior, training and pedagogical tools
 
 Main point: simulation games particular suited for transportation research in general, and supply chain specifically because it's an emergent property
+
+Some features of OpenTTD realistic, but this isn't exactly justified
+
+Simutrans mentioned - described as not being realistic at all, but is extensible so could be
+
+But similuation games not used for transportation
+
+Gives lots of examples of simulation games used for research, but also mentions "Little attention has been paid to the validation of these simulation games."
+
+(But: by and large here we're not concerning ourselves with validation)
+\end{item}
+
+\begin{item}
+Basically have a list of a good range of how similuation games have been used.
+\end{item}
+
+\begin{item}
+\cite{alderliesten2019maintrain} The simulation game itself used to try to get sympathy/understanding from passengers about delays
+\end{item}
+
+\begin{item}
+\cite{cimellaro2016computational} - it lists OpenTTD alongside "real" simulators of cities in discussion for disaster reliance, with no particular mention that's it a game/for entertainment??
 \end{item}
 
 \end{itemize}
@@ -108,13 +130,41 @@ OpenTTD is part of a wider class of games: simulation games. Simulation games ha
 
 Attention is usually paid to how realistic these games are. For example, \cite{raghothama2013review} summarises how well a number of games, including OpenTTD, how well the games model the real world. It's worth noting that while the economic model of OpenTTD is not realistic, \cite{raghothama2013review} classes some aspects of the transportation model as realistic, albeit without justification.
 
-MORE
 
-There have been calls \cite{dalle2012reproducibility}, cited
-
-In terms of the existing, they don't follow
 
 \section{Repeatability, Replicatability, \& Reproducibility}
+
+\begin{itemize}
+\begin{item}
+\cite{dalle2012reproducibility} in simulation in particular "many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility" (and in my opinion the OpenTTD ones are no exception). And it gives some "levels" L1, L2, L3, L4 on how to judge "how" reproducbiel simulations are and highlights specific desirable details about simulations. I can probably judge some existing research using this, and compare to maybe output using my OpenTTDLab thing?
+
+Hidden details that prevent reproducilibty (it cites another source for this)
+
+I quite like this one! (TODO Check things that cite it especially)
+
+"Goes beyond" reproducibility into traceability...
+
+"– a simulator refers to a reusable simulation engine and its Application Programming Interface
+(API); the engine is reusable for the simulation of many models and scenarios;" OpenTTDLab I think is the "missing" simulator??
+
+"In simulation, not only the same sources of error
+exist, but the system itself can be modeled incorrectly and be a source of error"
+
+"Furthermore, as will be explained in greater details
+in the next section, simulation has many applications that are not aimed toward producing science
+and, therefore, do not necessarily require a reproducibility based on the source code availability."
+
+"• manipulation errors: These errors result from the manual handling of some of the tasks in the simulation study work-flow."
+
+OpenTTDLab I think addresses loads of the issues mentioned, in many of the ways it suggests.
+\end{item}
+
+
+\begin{item}
+\cite{monks2019strengthening} - Checklist style "STRESS" guidelines
+\end{item}
+\end{itemize}
+
 
 The terms repeatability, replicability, and reproducibility unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. To add to the confusion, the ACM have swapped their definitions reproducibility and replicability \cite{association_for_computing_machiner_new_2020}. For the avoidance of doubt, I use the ACM's definitions that are current as of October 2023 \cite{association_for_computing_machiner_artifact_2020}. For some results of an experiment conducted by a team of authors, where some computer-based artefacts were created to conduct these, these can be summarised as
 

@@ -78,7 +78,7 @@ OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation gam
 
 OpenTTD was created as a game for recreation. However, it is remarkably flexible: it has been successfully used as a tool to research artificial intelligence (AI) and machine learning (ML) algorithms \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid \cite{HansenMuprhie2018}. It allows a single player to play in a non competitive world building mode, multiple human players playing cooperatively or competitively, and allows so-called custom AI-players that each control a company via code not part of the OpenTTD, but part of extensions to it written in the Squirrel language.
 
-Using OpenTTD as a tool for research is the focus of this paper, and specifically its features for repeatable, replicable, \& reproducible research.
+Using OpenTTD as a tool for research is the focus of this project, and specifically its features for repeatable, replicable, \& reproducible research.
 
 \section{History of simulation games in research}
 
@@ -86,6 +86,10 @@ Using OpenTTD as a tool for research is the focus of this paper, and specificall
 
 \begin{item}
 \cite{jackson1959learning} first business simulation game, US Air force MONOPOLOGS pretend to be inventory managers
+\end{item}
+
+\begin{item}
+\cite{meijer2009organisation} - Studying supply chains using gaming simulation
 \end{item}
 
 \begin{item}
@@ -165,9 +169,6 @@ Beyond just supplying definitions, the ACM also provide a system of 5 badges, as
 
 It is my hope that the framework presented here will make it more likely that research using OpenTTD will be not only repeatable, reproducible and replicable, but also more likely that upon publication, given all of these badges. 
 
-
-
-
 \section{Review of research using OpenTTD}
 
 From the found published research using OpenTTD, in my opinion there is yet to be a single case that couldn't offer significant improvements in at least one of its repeatability, replicability or replicability.
@@ -189,6 +190,8 @@ The seeds of each experiements were also not supplied.
 This is the most difficult to judge without actually attempting to do it, and it is what.
 
 However, if an experiemnt isn't even reproducible, it is even more difficult to replicate it.
+
+\chapter{Existing features of OpenTTD}
 
 \section{Review of OpenTTD command line options and configuration}
 OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing. The ones that are particularly applicable to a  for repeatable, reproducible, and replicable research are reviewed below.
@@ -215,11 +218,12 @@ The specification of the random seed should mean that OpenTTD affords exact repe
 \item[keep\_all\_autosave]  A boolean value that allows all autosaves to be kept for further analysis
 \end{description}
 
+
 \section{The save game format}
 
 OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format. However, a separate Python based tool is available to extract data from save games
 
-\section{The framework}
+\chapter{The framework}
 
 The framework has two audiences. The first audience is an experimenter looking to conduct experiments with an AI, be it their own, or others, or a combination. The second is someone looking to reproduce or replicate another team's results. As such it contains separate instructions for both of these audiences.
 
@@ -238,7 +242,7 @@ This leads to the second audience. The framework contains instructions to follow
 
 The replicability of results would be more difficult to judge - the author's artefacts cannot be used in this case, which means that if a team want to role play, they have to recreate their own artefacts, without reference to their original. The system here at least means that the "boilerplate" is handled, and this can be focused on.
 
-\section{Example results using the framework}
+\chapter{Results from using the framework relating to supply chains}
 
 The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 
@@ -260,7 +264,7 @@ A limitation of the framework is that the AI version used doesn't seem to have a
 \label{fig:value-over-time}
 \end{figure}
 
-\section{Conclusion}
+\chapter{Conclusion}
 
 The framework presented here allows experiments to be conducted with OpenTTD in a manner that is repeatable and reproducible. Reproducibility is up to the author's descriptions of the artefacts they created - they must be sufficient to recreate the artefacts, and so beyond the scope of the framework here. However, it should at least ease issues due to creating a similar enough experimental setup.
 

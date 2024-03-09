@@ -28,7 +28,7 @@ jobs:
           sudo apt-get install -y ghostscript
           gs -r300 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-%03d.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
           cat /etc/ImageMagick-6/policy.xml
-          sudo echo '<policymap></policymap>' > /etc/ImageMagick-6/policy.xml
+          echo '<policymap></policymap>' | sudo tee /etc/ImageMagick-6/policy.xml
           montage -mode concatenate -geometry +0+0 michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
       - name: Upload PDF and PNG
         uses: actions/upload-artifact@v3

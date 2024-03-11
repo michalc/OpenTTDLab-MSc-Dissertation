@@ -234,6 +234,9 @@ It is my hope that the framework presented here will make it more likely that re
 \section{Review of research using OpenTTD}
 
 \begin{itemize}
+\begin{item}
+Some papers list how they found all their upstream papers, in a light meta-analysis way. Worth it here? If I'm arguing something is lacking in particular, then maybe yes, because I sort of need evidence of an exhaustive search
+\end{item}
 \begin{item} Maybe this section could be split into using using OpenTTD in experiments, and just mentioning it
 \end{item}
 \begin{item}
@@ -307,7 +310,7 @@ With reference to the the desired things from the reproducibility section, menti
 
 The framework has two audiences. The first audience is an experimenter looking to conduct experiments with an AI, be it their own, or others, or a combination. The second is someone looking to reproduce or replicate another team's results. As such it contains separate instructions for both of these audiences.
 
-\subsection{The experimenting team}
+\section{The experimenting team}
 
 It takes the command line options in code, the various options of OpenTTD, and outputs two things:
 
@@ -316,7 +319,7 @@ It takes the command line options in code, the various options of OpenTTD, and o
 \item The metadata of the experiments: the version of OpenTTD, the version of the framework itself, any commend line options, and all configuration, highlighting the configuration the differs from the defaults for that version of OpenTTD
 \end{itemize}
 
-\subsection{The reproducing or replicating team}
+\section{The reproducing or replicating team}
 
 This leads to the second audience. The framework contains instructions to follow for a separate team trying to reproduce or replicate the experiments of the first team. These instructions mean that the first team can role-play as a reproducer or replicator, and test themselves how straightforward it is to reproduce the experiments, and judge for themselves if it is possible that their results be reproduced, and their research be awarded the badges of Figure \ref{fig:acm_badges}.
 
@@ -346,9 +349,16 @@ A limitation of the framework is that the AI version used doesn't seem to have a
 
 \chapter{Conclusion}
 
+\begin{itemize}
+\begin{item}
+Maybe mention the link between this and testing here? Or should it be earlier?
+\end{item}
+\end{itemize}
+
 The framework presented here allows experiments to be conducted with OpenTTD in a manner that is repeatable and reproducible. Reproducibility is up to the author's descriptions of the artefacts they created - they must be sufficient to recreate the artefacts, and so beyond the scope of the framework here. However, it should at least ease issues due to creating a similar enough experimental setup.
 
 The exception are the version of the AI used - these do not appear to be versioned. However, potentially it could report on some sort of hash of the code of the AI.
+
 
 
 

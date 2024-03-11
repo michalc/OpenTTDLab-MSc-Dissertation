@@ -168,6 +168,8 @@ It also has a review of lots of other guidelines for reproducible simulations
 TODO: if going this way, reflect on the bits that OpenTTDLab does not do
 
 "Agent-Based Simulation (ABS), Discrete-Event Simulation (DES) and System Dynamics (SD)." - er... OpenTTD is which of these??
+
+"it is critical that author report the software version and build numbers" - this is for commercial software, but I would argue for Open Source as well
 \end{item}
 
 \begin{item}
@@ -231,6 +233,16 @@ It is my hope that the framework presented here will make it more likely that re
 
 \section{Review of research using OpenTTD}
 
+\begin{itemize}
+\begin{item} Maybe this section could be split into using using OpenTTD in experiments, and just mentioning it
+\end{item}
+\begin{item}
+\cite{fenjiro2018deep} - Mentions OpenTTD uses Deep Learning, but not partcular context or explanation. It doesn't really?? Do even any of the published AIs??
+\end{item}
+\end{itemize}
+
+TODO: If we have the more structured / formal reproducibility stuff earlier, we can more properly judge the existing research.
+
 From the found published research using OpenTTD, in my opinion there is yet to be a single case that couldn't offer significant improvements in at least one of its repeatability, replicability or replicability.
 
 \subsection{Repeatability}
@@ -283,6 +295,14 @@ The specification of the random seed should mean that OpenTTD affords exact repe
 
 OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format. However, a separate Python based tool is available to extract data from save games
 
+\section{What doesn't exist}
+
+\begin{itemize}
+\begin{item}
+With reference to the the desired things from the reproducibility section, mention things that don't exist
+\end{item}
+\end{itemize}
+
 \chapter{The framework}
 
 The framework has two audiences. The first audience is an experimenter looking to conduct experiments with an AI, be it their own, or others, or a combination. The second is someone looking to reproduce or replicate another team's results. As such it contains separate instructions for both of these audiences.
@@ -302,7 +322,7 @@ This leads to the second audience. The framework contains instructions to follow
 
 The replicability of results would be more difficult to judge - the author's artefacts cannot be used in this case, which means that if a team want to role play, they have to recreate their own artefacts, without reference to their original. The system here at least means that the "boilerplate" is handled, and this can be focused on.
 
-\chapter{Results from using the framework relating to supply chains}
+\chapter{Example results from using the framework relating to supply chains}
 
 The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 

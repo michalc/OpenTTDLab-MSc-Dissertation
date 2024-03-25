@@ -80,54 +80,13 @@ OpenTTD was created as a game for recreation. However, it is remarkably flexible
 
 Using OpenTTD as a tool for research is the focus of this project, and specifically the focus is the development of a tool that augments its existing features for repeatable, replicable, \& reproducible research.
 
-\section{A brief history of simulation games in research}
+\section{A bit about the mechanics of the game?}
 
+\section{A brief history of learning from simulation games}
 
-\begin{itemize}
+Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued to bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting further that OpenTTD's discretized simplification of space also has a long history in simulation.
 
-\begin{item}
-\cite{jackson1959learning} first business simulation game, US Air force MONOPOLOGS pretend to be inventory managers
-\end{item}
-
-\begin{item}
-\cite{meijer2009organisation} - Studying supply chains using gaming simulation
-\end{item}
-
-\begin{item}
-\cite{mayer2009gaming} - Defines simulation game as a game "experi(m)ent(i)al, rule-based, interactive environments, where players learn by taking actions and by experiencing their effects through feedback mechanisms that are deliberately built into and around the game"
-\end{item}
-
-\begin{item}
-\cite{raghothama2013review} war gaming roots, policy analysis, business simulation games, studies on human cognition and behavior, training and pedagogical tools
-
-Main point: simulation games particular suited for transportation research in general, and supply chain specifically because it's an emergent property
-
-Some features of OpenTTD realistic, but this isn't exactly justified
-
-Simutrans mentioned - described as not being realistic at all, but is extensible so could be
-
-But similuation games not used for transportation
-
-Gives lots of examples of simulation games used for research, but also mentions "Little attention has been paid to the validation of these simulation games."
-
-(But: by and large here we're not concerning ourselves with validation)
-\end{item}
-
-\begin{item}
-Basically have a list of a good range of how similuation games have been used.
-\end{item}
-
-\begin{item}
-\cite{alderliesten2019maintrain} The simulation game itself used to try to get sympathy/understanding from passengers about delays
-\end{item}
-
-\begin{item}
-\cite{cimellaro2016computational} - it lists OpenTTD alongside "real" simulators of cities in discussion for disaster reliance, with no particular mention that's it a game/for entertainment??
-\end{item}
-
-\end{itemize}
-
-Games have a long history of being used as tools beyond recreation, specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game \cite{mayer2009gaming}. Far before the advent of computers, this goes back to even ancient times where war games were used to ZZZ [REF]. These eventually moved to logistic simulations, albeit still military based MONOPOLOGS \cite{jackson1959learning} that is often credited as the first computerised logistics simulation game - SAY WHEN AND WHAT USED FOR. Then the MIT beer game - to illustrate something in supply chains. These then evolved to games that informed policy making - EXAMPLE.
+The military-style/war games eventually evolved to logistic simulations, albeit still in military context. Fore example based MONOPOLOGS \cite{jackson1959learning} that is often credited as the first computerised logistics simulation game - SAY WHEN AND WHAT USED FOR. Then the MIT beer game - to illustrate something in supply chains. These then evolved to games that informed policy making - EXAMPLE.
 
 
 This evolved [REF]
@@ -142,48 +101,6 @@ Attention is usually paid to how realistic these games are. For example, \cite{r
 
 \section{Repeatability, Replicatability, \& Reproducibility}
 
-\begin{itemize}
-\begin{item}
-\cite{dalle2012reproducibility} in simulation in particular "many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility" (and in my opinion the OpenTTD ones are no exception). And it gives some "levels" L1, L2, L3, L4 on how to judge "how" reproducbiel simulations are and highlights specific desirable details about simulations. I can probably judge some existing research using this, and compare to maybe output using my OpenTTDLab thing?
-
-Hidden details that prevent reproducilibty (it cites another source for this)
-
-I quite like this one! (TODO Check things that cite it especially)
-
-"Goes beyond" reproducibility into traceability...
-
-"– a simulator refers to a reusable simulation engine and its Application Programming Interface
-(API); the engine is reusable for the simulation of many models and scenarios;" OpenTTDLab I think is the "missing" simulator??
-
-"In simulation, not only the same sources of error
-exist, but the system itself can be modeled incorrectly and be a source of error"
-
-"Furthermore, as will be explained in greater details
-in the next section, simulation has many applications that are not aimed toward producing science
-and, therefore, do not necessarily require a reproducibility based on the source code availability."
-
-"• manipulation errors: These errors result from the manual handling of some of the tasks in the simulation study work-flow."
-
-OpenTTDLab I think addresses loads of the issues mentioned, in many of the ways it suggests.
-\end{item}
-
-
-\begin{item}
-\cite{monks2019strengthening} - Checklist style "STRESS" guidelines. Strengthening the Reporting of Empirical Simulation Studies
-
-It also has a review of lots of other guidelines for reproducible simulations
-
-TODO: if going this way, reflect on the bits that OpenTTDLab does not do
-
-"Agent-Based Simulation (ABS), Discrete-Event Simulation (DES) and System Dynamics (SD)." - er... OpenTTD is which of these??
-
-"it is critical that author report the software version and build numbers" - this is for commercial software, but I would argue for Open Source as well
-\end{item}
-
-\begin{item}
-Gass (1984) provides the earliest example of reporting guidelines for “computer based models”.
-\end{item}
-\end{itemize}
 
 
 The terms repeatability, replicability, and reproducibility unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. To add to the confusion, the ACM have swapped their definitions reproducibility and replicability \cite{association_for_computing_machiner_new_2020}. For the avoidance of doubt, I use the ACM's definitions that are current as of October 2023 \cite{association_for_computing_machiner_artifact_2020}. For some results of an experiment conducted by a team of authors, where some computer-based artefacts were created to conduct these, these can be summarised as
@@ -367,7 +284,99 @@ The framework presented here allows experiments to be conducted with OpenTTD in 
 
 The exception are the version of the AI used - these do not appear to be versioned. However, potentially it could report on some sort of hash of the code of the AI.
 
+\chapter{Notes}
 
+History
+
+\begin{itemize}
+
+\begin{item}
+\cite{jackson1959learning} first business simulation game, US Air force MONOPOLOGS pretend to be inventory managers
+\end{item}
+
+\begin{item}
+\cite{meijer2009organisation} - Studying supply chains using gaming simulation
+\end{item}
+
+\begin{item}
+\cite{mayer2009gaming} - Defines simulation game as a game "experi(m)ent(i)al, rule-based, interactive environments, where players learn by taking actions and by experiencing their effects through feedback mechanisms that are deliberately built into and around the game"
+\end{item}
+
+\begin{item}
+\cite{raghothama2013review} war gaming roots, policy analysis, business simulation games, studies on human cognition and behavior, training and pedagogical tools
+
+Main point: simulation games particular suited for transportation research in general, and supply chain specifically because it's an emergent property
+
+Some features of OpenTTD realistic, but this isn't exactly justified
+
+Simutrans mentioned - described as not being realistic at all, but is extensible so could be
+
+But similuation games not used for transportation
+
+Gives lots of examples of simulation games used for research, but also mentions "Little attention has been paid to the validation of these simulation games."
+
+(But: by and large here we're not concerning ourselves with validation)
+\end{item}
+
+\begin{item}
+Basically have a list of a good range of how similuation games have been used.
+\end{item}
+
+\begin{item}
+\cite{alderliesten2019maintrain} The simulation game itself used to try to get sympathy/understanding from passengers about delays
+\end{item}
+
+\begin{item}
+\cite{cimellaro2016computational} - it lists OpenTTD alongside "real" simulators of cities in discussion for disaster reliance, with no particular mention that's it a game/for entertainment??
+\end{item}
+
+Repeatability
+
+
+\begin{itemize}
+\begin{item}
+\cite{dalle2012reproducibility} in simulation in particular "many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility" (and in my opinion the OpenTTD ones are no exception). And it gives some "levels" L1, L2, L3, L4 on how to judge "how" reproducbiel simulations are and highlights specific desirable details about simulations. I can probably judge some existing research using this, and compare to maybe output using my OpenTTDLab thing?
+
+Hidden details that prevent reproducilibty (it cites another source for this)
+
+I quite like this one! (TODO Check things that cite it especially)
+
+"Goes beyond" reproducibility into traceability...
+
+"– a simulator refers to a reusable simulation engine and its Application Programming Interface
+(API); the engine is reusable for the simulation of many models and scenarios;" OpenTTDLab I think is the "missing" simulator??
+
+"In simulation, not only the same sources of error
+exist, but the system itself can be modeled incorrectly and be a source of error"
+
+"Furthermore, as will be explained in greater details
+in the next section, simulation has many applications that are not aimed toward producing science
+and, therefore, do not necessarily require a reproducibility based on the source code availability."
+
+"• manipulation errors: These errors result from the manual handling of some of the tasks in the simulation study work-flow."
+
+OpenTTDLab I think addresses loads of the issues mentioned, in many of the ways it suggests.
+\end{item}
+
+
+\begin{item}
+\cite{monks2019strengthening} - Checklist style "STRESS" guidelines. Strengthening the Reporting of Empirical Simulation Studies
+
+It also has a review of lots of other guidelines for reproducible simulations
+
+TODO: if going this way, reflect on the bits that OpenTTDLab does not do
+
+"Agent-Based Simulation (ABS), Discrete-Event Simulation (DES) and System Dynamics (SD)." - er... OpenTTD is which of these??
+
+"it is critical that author report the software version and build numbers" - this is for commercial software, but I would argue for Open Source as well
+\end{item}
+
+\begin{item}
+Gass (1984) provides the earliest example of reporting guidelines for “computer based models”.
+\end{item}
+\end{itemize}
+
+\end{itemize}
 
 
 \bibliographystyle{plain}

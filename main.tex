@@ -84,7 +84,7 @@ Using OpenTTD as a tool for research is the focus of this project, and specifica
 
 \section{A brief history of learning from simulation games}
 
-Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued to embody strategies that bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting further that OpenTTD's discretized simplification of space also has a long history in simulation.
+Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued, to embody strategies that bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting also that OpenTTD's discretized simplification of space also has a long history in simulation.
 
 The military-style/war games eventually evolved to logistic simulations, albeit still in military context. Fore example based MONOPOLOGS \cite{jackson1959learning} that is often credited as the first computerised logistics simulation game - SAY WHEN AND WHAT USED FOR. Then the MIT beer game - to illustrate something in supply chains. These then evolved to games that informed policy making - EXAMPLE.
 
@@ -250,7 +250,7 @@ This leads to the second audience. The framework contains instructions to follow
 
 The replicability of results would be more difficult to judge - the author's artefacts cannot be used in this case, which means that if a team want to role play, they have to recreate their own artefacts, without reference to their original. The system here at least means that the "boilerplate" is handled, and this can be focused on.
 
-\chapter{Example results from using the framework relating to supply chains}
+\chapter{Example results from using the framework}
 
 The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 
@@ -268,9 +268,55 @@ A limitation of the framework is that the AI version used doesn't seem to have a
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{assets/value-over-time.png}
-\caption{A chart showing the balance over for 50 experiments}
+\caption{A chart showing the balance over for 50 experiments (old version of OpenTTDLab - can't reproduce! Suspect because now AIs are started immediately, and so the random numbers are different? Or just realised, later experiments I ran using openTTD 13.1. Slightly different results for different versions of OpenTTD is interesting! I think justification for "exact" reproducibility?? Nice to have more comparison?)}
 \label{fig:value-over-time}
 \end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/value-over-time-2.png}
+\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
+\label{fig:value-over-time}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/end-of-30th-year-distribution.png}
+\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
+\label{fig:first-year}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/first-year.png}
+\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
+\label{fig:first-year}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/end-of-first-year-distribution.png}
+\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
+\label{fig:first-year}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/first-2-years.png}
+\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
+\label{fig:first-year}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/end-of-second-year-distribution.png}
+\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
+\label{fig:first-year}
+\end{figure}
+
+Output from an extremely basic AI
 
 \chapter{Conclusion}
 

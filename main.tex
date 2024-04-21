@@ -267,28 +267,48 @@ The output of the seeds used, all settings, OpenTTD version, without modificatio
 
 A limitation of the framework is that the AI version used doesn't seem to have a version.
 
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set xdata time
+set format x "%Y-%m-%d"
+set ylabel 'Money in the bank $\textrm{\pounds}$'
+set xlabel 'Year'
+plot 'assets/trainsai-means-standard-dev.csv' \ 
+   every ::::36 using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
+   '' every ::::36 using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
+   '' every ::::36 using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
+   '' every ::::36 using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
+\end{gnuplot}
+\caption{The mean of money in the bank for TrainsAI over the first 36 months}
+\label{fig:supplychainresiliance}
+\end{figure}
 
 \begin{figure}[h]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set tics font ",5"
-set ylabel 'Number of publications'
-set xlabel 'Year'
-set style data histograms
-set style histogram rowstacked
-set style fill pattern border -1
-set xtics nomirror
-set ytics 100
-set key invert
+set key autotitle columnhead
+set datafile separator ","
+set style fill pattern 2
 set key left top
+set key invert
 set grid ytics
-set xtics font ", 5"
-set ytics font ", 5"
-plot 'assets/supply-chain-resiliance-research.dat' \
-    using 2 t "  Without COVID-19", \
-    '' using 3:xticlabels(1) t "With COVID-19" lc rgb '#999999'
+set xdata time
+set format x "%Y"
+set ylabel 'Money in the bank $\textrm{\pounds}$'
+set xlabel 'Year'
+plot 'assets/trainsai-means-standard-dev.csv' \ 
+   using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
 \end{gnuplot}
-\caption{The number of publications indexed by Web of Science matching the topic ``supply chain resilience" between 2014 and 2022, showing the split between publications with the topic COVID-19, and publications without. Data retrieved April 2023.}
+\caption{The mean of money in the bank for TrainsAI over time over 50 experiments for 30 years}
 \label{fig:supplychainresiliance}
 \end{figure}
 

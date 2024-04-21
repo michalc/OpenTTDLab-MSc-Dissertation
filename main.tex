@@ -26,6 +26,8 @@
 \usepackage{subcaption}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{gnuplottex}
 
 \begin{document}
 \begin{preliminary}
@@ -268,6 +270,30 @@ A limitation of the framework is that the AI version used doesn't seem to have a
 
 \begin{figure}[h]
 \centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set tics font ",5"
+set ylabel 'Number of publications'
+set xlabel 'Year'
+set style data histograms
+set style histogram rowstacked
+set style fill pattern border -1
+set xtics nomirror
+set ytics 100
+set key invert
+set key left top
+set grid ytics
+set xtics font ", 5"
+set ytics font ", 5"
+plot 'assets/supply-chain-resiliance-research.dat' \
+    using 2 t "  Without COVID-19", \
+    '' using 3:xticlabels(1) t "With COVID-19" lc rgb '#999999'
+\end{gnuplot}
+\caption{The number of publications indexed by Web of Science matching the topic ``supply chain resilience" between 2014 and 2022, showing the split between publications with the topic COVID-19, and publications without. Data retrieved April 2023.}
+\label{fig:supplychainresiliance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
 \includegraphics[width=\columnwidth]{assets/first-year.png}
 \caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
 \label{fig:first-year}
@@ -312,16 +338,29 @@ A limitation of the framework is that the AI version used doesn't seem to have a
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{assets/34_small.png}
-\caption{Seed 34 - with the highest}
+\caption{Seed 34 - with the highest money at end}
 \label{fig:openttd}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{assets/19_small.png}
-\caption{Seed 19 - with the lowest}
+\caption{Seed 19 - with the lowest money at end}
 \label{fig:openttd}
 \end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{assets/stations_vs_money.png}
+\caption{Not much of a corrolation between stations and money!}
+\label{fig:openttd}
+\end{figure}
+
+Bit of a "story" - starts off 300k. Then after a time there is a bi-modal distribution on money, then all the companies have have money in a normal-ish distribution.
+
+Looks like the one with more stations/routes has more money? Can we corrolate stations with money?
+
+
 
 
 ------
@@ -338,8 +377,6 @@ A limitation of the framework is that the AI version used doesn't seem to have a
 
 
 
-
-Output from an extremely basic AI
 
 \chapter{Conclusion}
 

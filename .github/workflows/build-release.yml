@@ -22,7 +22,7 @@ jobs:
       - name: Build PDF
         # If it's not run twice (the first time to get the aux file) then the margin tick marks are not in the right place
         run: |
-          docker run --rm -v $PWD:/workdir texlive/texlive:TL2022-historic bash -c "cd /workdir && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
+          docker run --rm -v $PWD:/workdir texlive/texlive:TL2022-historic bash -c "cd /workdir && pdflatex --shell-escape main.tex && bibtex main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
       - name: Build PNG of pages
         run: |
           sudo apt-get install -y ghostscript

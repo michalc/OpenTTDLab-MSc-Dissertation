@@ -30,6 +30,7 @@
 \usepackage{gnuplottex}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
+\usepackage{svg}
 
 \begin{document}
 \begin{preliminary}
@@ -41,7 +42,7 @@
 \date{\today}
 
 \abstract{
-OpenTTD is an open source business simulation game based on the 1994 game Transport Tycoon Deluxe, and in spite of being designed for recreation, OpenTTD has been the focus of a number of academic studies. However, these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. Here I present OpenTTDLab, a framework that allows OpenTTD to be used in a way that avoids these problems, and I use this framework to find proof-of-concept results that I claim are repeatable, replicable, and reproducible; thus, giving evidence that OpenTTDLab can be a useful tool in future research.
+OpenTTD is an open source business simulation game based on the 1994 game Transport Tycoon Deluxe, and in spite of being designed for recreation, OpenTTD has been used in a number of academic studies. However, these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. In this dissertation, I present OpenTTDLab, a framework I created that allows OpenTTD to be used in a way that avoids these problems. I then show proof-of-concept results using this framework that I argue are repeatable, replicable, and reproducible; thus, giving evidence that OpenTTDLab can be a useful tool in future research.
 }
 
 \maketitle
@@ -61,6 +62,8 @@ from the Informatics Research Ethics committee.
 
 \begin{acknowledgements}
 TODO Acknowledge the other contributors to OpenTTDLab (including to the pre-forked code), stating clearly what they did.
+
+And also all the contributors to OpenTTD! Particularly Truebrain?
 \end{acknowledgements}
 
 
@@ -70,7 +73,7 @@ TODO Acknowledge the other contributors to OpenTTDLab (including to the pre-fork
 
 \chapter{Introduction}
 
-OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation game. The aim of the game is to successfully run a business by constructing networks of roads, railways, airports and ports, along with their respective vehicles, trains, planes and ships, in order to transport people and goods in exchange for money. OpenTTD is played on a simulated landscape as can be seen in Figure \ref{fig:openttd}.
+OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation game based on the 1994 game Transport Tycoon Deluxe by Chris Sawyer. The aim of the game is to successfully run a business by constructing networks of roads, railways, airports and ports, along with their respective vehicles, trains, planes and ships, in order to transport people and goods in exchange for money. OpenTTD is played on a simulated landscape as can be seen in Figure \ref{fig:openttd}.
 
 \begin{figure}[h]
 \centering

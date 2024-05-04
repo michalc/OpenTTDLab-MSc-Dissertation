@@ -19,10 +19,13 @@ jobs:
       - name: Determine release tag
         run: |
           echo "RELEASE_TAG=$(git log -1 --pretty='format:%cd' --date=format:'v%Y%m%d.%H%M%S')" >> "$GITHUB_ENV"
+      - name: Download and build Docker image
+        run: |
+          docker build . -t texlive-with-inkscape
       - name: Build PDF
         # If it's not run twice (the first time to get the aux file) then the margin tick marks are not in the right place
         run: |
-          docker run --rm -v $PWD:/workdir texlive/texlive:TL2022-historic bash -c "cd /workdir && pdflatex --shell-escape main.tex && bibtex main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
+          docker run --rm -v $PWD:/workdir texlive-with-inkscape bash -c "cd /workdir && pdflatex --shell-escape main.tex && bibtex main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
       - name: Build PNG of pages
         run: |
           sudo apt-get install -y ghostscript

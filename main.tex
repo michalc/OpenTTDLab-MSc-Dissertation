@@ -31,6 +31,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \usepackage{svg}
+\usepackage{pdfpages}
 
 \begin{document}
 \begin{preliminary}
@@ -249,7 +250,7 @@ With reference to the the desired things from the reproducibility section, menti
 \begin{figure}[h]
 \centering
 \includesvg{assets/openttdlab-logo.svg}
-\caption{The OpenTTDLab logo.}
+\caption{The OpenTTDLab logo. I created this on the existing GPLv2 licensed OpenTTDLogo, and it is displayed alongside the code of OpenTTDLab in its public documentation.}
 \label{fig:openttlab-logo}
 \end{figure}
 
@@ -932,6 +933,10 @@ after the references.
 
 Markers do not have to consider appendices. Make sure that your contributions
 are made clear in the main body of the dissertation (within the page limit).
+
+\chapter{Second}
+
+\includepdf[pages=-,scale=.8,pagecommand={}]{assets/openttdlab-github.pdf}
 
 
 \end{document}

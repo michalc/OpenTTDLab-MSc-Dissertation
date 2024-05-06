@@ -256,7 +256,7 @@ With reference to the the desired things from the reproducibility section, menti
 \label{fig:openttlab-logo}
 \end{figure}
 
-As discussed in Chapter 1, repeatability is in the domain of the original researchers, while both replicability and reproducibility are in the domain of other researchers armed with the original results. Given the different aims and audiences, it's not immediate that a single tool can be used in all of these. However, the Python framework OpenTTDLab I created attempts to be useful in all of these: to augment the existing behaviour of OpenTTD of Chapter 2 to help address at least some of the barriers detailed in Chapter 1. This Chapter details the design process I followed to create OpenTTDLab to do this, and the resulting internal behaviour and user-facing features of the framework.
+As discussed in Chapter 1, repeatability is in the domain of the original researchers, while both replicability and reproducibility are in the domain of other researchers armed with the original results. Given the different aims and audiences, it's not immediate that a single tool can be used in all of these. However, the Python framework OpenTTDLab I created attempts to be useful in all of these: to augment the existing behaviour of OpenTTD of Chapter 2 to help address at least some of the barriers detailed in Chapter 1. This chapter details the design process I followed to create OpenTTDLab to do this, and the resulting internal behaviour and user-facing features of the framework.
 
 \section{Design and creation process}
 
@@ -264,9 +264,11 @@ A lightweight and highly agile process was used to design and create OpenTTDLab,
 
 I use the term lightweight in that there were no \emph{events} that are common to \emph{Scrum}-like processes \cite{SCRUM} (often known as \emph{ceremonies} from my own experience), and with one exception, no phases planned in advance as is prescribed, for example, for UK government services \cite{GOVUKAgile}. And I describe the process as highly agile because in some cases iterations would take literally seconds, especially when writing documentation.
 
-This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preseton Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, both at the beginning and throughout the project I would usually write such documentation for code without the code first existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone (albeit with advice from others) when the other parts are less applicable.
+This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preseton Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, both at the beginning and throughout the project I would usually write such documentation for code without the code first existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone (albeit with advice from others) when the other parts are less applicable - they focus on communication between different people involved in project.
 
-This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the design process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of Chapter 4.
+I did not attempt to keep a precise record of the cycles. However, as a guide, the GitHub repository that stores the history of code changes can be used. I created over 50 releases, 150 pull requests (PRs), and over 350 commits in the repository, and each of these I evaluated against problems and desired properties of Chapter 1, and then carried on with more of the same activity, or another activity of Figure \ref{fig:solo-agile}.
+
+This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of Chapter 4.
 
 
 \begin{figure}[h]
@@ -316,9 +318,9 @@ The user facing interface consists primarily of a single function
 \item[Maximum number of processes to run] fffff
 \end{description}
 
-The function returns a list, returning the results of each experiement.
+The function returns a list, returning the results of each experiement. 
 
-It also gives feedback.
+It also gives feedback. And saves screenshots.
 
 \section{Internal Algorithm}
 

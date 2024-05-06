@@ -172,6 +172,8 @@ It is my hope that the framework presented here will make it more likely that re
 
 \section{Review of research using OpenTTD}
 
+Note - put this after the 3Rs stuff. The 3Rs stuff will have (especially for reproduciliby and replicability) barriers, and so I should be able to basically discuss the research, stating what barriers it seems to have.
+
 \begin{itemize}
 \begin{item}
 Some papers list how they found all their upstream papers, in a light meta-analysis way. Worth it here? If I'm arguing something is lacking in particular, then maybe yes, because I sort of need evidence of an exhaustive search
@@ -250,21 +252,21 @@ With reference to the the desired things from the reproducibility section, menti
 \begin{figure}[h]
 \centering
 \includesvg{assets/openttdlab-logo.svg}
-\caption{The OpenTTDLab logo. I created this on the existing GPLv2 licensed OpenTTDLogo, and it is displayed alongside the code of OpenTTDLab in its public documentation.}
+\caption{The OpenTTDLab logo. I created this on the existing GPLv2-licensed OpenTTDLogo, and it is displayed alongside the code of OpenTTDLab in its public documentation.}
 \label{fig:openttlab-logo}
 \end{figure}
 
-As discussed in Chapter 1, repeatability is in the domain of the original researchers, while both replicability and reproducibility are in the domain of other researchers armed with the original results. Given the different aims and audiences, it's not immediate that a single tool can be used in all of these. However, the Python framework OpenTTDLab I created attempts to be useful in all of these. This chapter details the design process I followed to create OpenTTDLab, and the resulting features of the framework.
+As discussed in Chapter 1, repeatability is in the domain of the original researchers, while both replicability and reproducibility are in the domain of other researchers armed with the original results. Given the different aims and audiences, it's not immediate that a single tool can be used in all of these. However, the Python framework OpenTTDLab I created attempts to be useful in all of these: to augment the existing behaviour of OpenTTD of Chapter 2 to help address at least some of the barriers detailed in Chapter 1. This Chapter details the design process I followed to create OpenTTDLab to do this, and the resulting internal behaviour and user-facing features of the framework.
 
 \section{Design and creation process}
 
 A lightweight and highly agile process was used to design and create OpenTTDLab, the high level features of which are shown figure \ref{fig:solo-agile}. After the problems to solve have were identified, as discussed in Chapter 1, there were many cycles of writing usage documentation for code, writing code, and using the code; and each of these with tight cycles of evaluating the outputs of these activities and judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
 
-I use the term lightweight in that there were no ceremonies that are common to processes like Scrum [REF], and with one exception, no phases planned in advance as per UK government services \cite{GOVUKAgile}, and not even a separate backlog/todo list. And I use the term highly agile because in some cases iterations would take literally seconds, especially when writing documentation.
+I use the term lightweight in that there were no \emph{events} that are common to \emph{Scrum}-like processes \cite{SCRUM} (often known as \emph{ceremonies} from my own experience), and with one exception, no phases planned in advance as is prescribed, for example, for UK government services \cite{GOVUKAgile}. And I describe the process as highly agile because in some cases iterations would take literally seconds, especially when writing documentation.
 
-This was in fact the one exception to not having phases planned in advance: the first phase was creating light usage documentation. Taking inspiration from Amazon's Working Backwards method, where press releases for new products are written and evaluated before the product exists, I would usually write such documentation for code without the code first existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone (albeit with advice from others).
+This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preseton Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, both at the beginning and throughout the project I would usually write such documentation for code without the code first existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone (albeit with advice from others) when the other parts are less applicable.
 
-This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the design process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of chapter 4.
+This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the design process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of Chapter 4.
 
 
 \begin{figure}[h]
@@ -301,9 +303,52 @@ This leads to the main downside of this process. While the process allowed a hig
 \label{fig:solo-agile}
 \end{figure}
 
-\section{Phases}
+\section{User facing interface}
 
-Although with the exception of the first phase, I did not plan phases up front, phases naturally emerged.
+The user facing interface consists primarily of a single function
+
+\begin{description}
+\item[Version of OpenTTDLab and OpenGFX] fffff
+\item[Random seed] fffff
+\item[Number of days] fffff
+\item[The AIs to run] Specified by local folder of the code of the AI, bananas identifier, or GitHub repository (which can contain the commit ID)
+\item[Parameters for each AI] fffff
+\item[Maximum number of processes to run] fffff
+\end{description}
+
+The function returns a list, returning the results of each experiement.
+
+It also gives feedback.
+
+\section{Internal Algorithm}
+
+\section{Repeatability}
+
+The core feature of OpenTTDLab that allows is, in my opinion, the ease at which experiments can be run, with the random seed specified and results extracted at deterministic points of time in the game.
+
+The parallelisation adds to the ability to make an experiment repeatable - simply by allowing more experiments to be run within any given amount of time.
+
+\section{Replicability}
+
+The seed, reference to specific versions of OpenTTD
+
+\section{Reproducibility}
+
+The seed, reference to specific versions of OpenTTD, but can refer to a folder for the AI.
+
+\subsection{Algorithm}
+
+Reproducing an experiment is the hardest of the 3Rs, because it does not allow usage of any artifacts from the original authors. In OpenTTD terms, if an experiment uses an AI, then the code of the AI cannot be used in reproducing results.
+
+Nevertheless, OpenTTDLab can be used to support reproducing experiments. The core functions is the localfolder function - it allow extremely fast cycles between writing AI code, and then running it over a range of random seeds or parameters.
+
+\section{Trade offs}
+
+The process I followed used my own feedback from creating the results of Chapter 4, which are essentially repeating experiments rather then replicating or reproducing the results of other teams'. As a result the design of the API is optimised for this.
+
+It's not possible, or I think useful, to detail all the alternative APIs considered - some existed in for just a few seconds, either in documentation or just in my own head, before discarding them, and so there is no record of them. However, there are records of some initial designs of the earliest APIs I considered https://github.com/michalc/OpenTTDLab/pull/8/files that I think is indicative - it contained a multi stage process that focused on different.
+
+I discarded this in favour of simpler single stage process to repeat experiments. I discovered it made simple repeating of a single experiment more frustrating that I think it should have been https://github.com/michalc/OpenTTDLab/pull/51. I realised also that also the repeating or replicating team themselves have to repeat experiments.
 
 \section{Promotion}
 
@@ -312,25 +357,6 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 \section{Automated testing and releasing}
 
 I wrote tests, has its high level behaviour tested on each change. At the time of writing there were 52 releases of OpenTTDLab.
-
-\section{High level API}
-
-\section{Algorithm}
-
-
-\section{Features - repeatability}
-
-\section{Features - replicability}
-
-\section{Features - reproducibility}
-
-Reproducing an experiment is the hardest of the 3Rs, because it does not allow usage of any artifacts from the original authors. In OpenTTD terms, if an experiment uses an AI, then the code of the AI cannot be used in reproducing results.
-
-Nevertheless, OpenTTDLab can be used to support reproducing experiments. The core functions is the localfolder function - it allow extremely fast cycles between writing AI code, and then running it over a range of random seeds or parameters.
-
-\section{Trade offs / Features not chosen}
-
-In early documentation, I made started designing a system for replicability 
 
 \section{The experimenting team}
 

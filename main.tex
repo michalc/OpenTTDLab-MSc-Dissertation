@@ -292,16 +292,16 @@ This leads to the main downside of this process. While the process allowed a hig
         (reqs) edge [] node[] {} (code)
                edge [] node[] {} (expe)
                edge [] node[] {} (docs)
-        (docs) edge [in=-150,out=-120,distance=1cm,loop] node {Evaluate} (docs)
+        (docs) edge [in=-150,out=-120,distance=1cm,loop] node[] {Evaluate} (docs)
                edge [bend left,arrows=<->] node[] {} (code)
                edge [bend right] node[left] {} (expe)
-        (code) edge [distance=1cm,loop above] node {Evaluate} (code)
+        (code) edge [distance=1cm,loop above] node[yshift=0.1cm] {Evaluate} (code)
                edge [bend left,arrows=<->] node[] {} (expe)
         (expe) edge [in=-60,out=-30,distance=1cm,loop] node {Evaluate} (expe)
                edge [bend left,arrows=<->] node[] {} (docs)
                edge [bend right,arrows=<->] node[] {} (code);
 \end{tikzpicture}
-\caption{The process I followed designing and creating OpenTTDLab. After identifying the problems that I'm trying to solve, I conducted cycles of documenting code (that may not have existed), writing the code, and using the code, all coupled with tight cycles of evaluating how it solved, or would solve, the problem of running experiments using OpenTTD that were repeatable, replicable and reproducible.}
+\caption{The process I followed designing and creating OpenTTDLab. After identifying the problems that I'm trying to address, I conducted cycles of documenting code (that may not have existed), writing the code, and using the code, all coupled with tight cycles of evaluating how it solved, or would solve, the problem of running experiments using OpenTTD that were repeatable, replicable and reproducible.}
 \label{fig:solo-agile}
 \end{figure}
 

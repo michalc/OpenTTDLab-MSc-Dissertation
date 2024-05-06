@@ -288,7 +288,7 @@ This leads to the main downside of this process. While the process allowed a hig
     \node[main node, align=center,minimum size=2.5cm] (docs) [position=-148:1cm from reqs] {Write\\[-2mm]code};
     \node[main node, align=center,minimum size=2.5cm] (expe) [position=-32:1cm from reqs] {Use\\[-2mm]code};
 
-    \path[every node/.style={font=\sffamily\small}]
+    \path[every node/.style={font=\small}]
         (reqs) edge [] node[] {} (code)
                edge [] node[] {} (expe)
                edge [] node[] {} (docs)

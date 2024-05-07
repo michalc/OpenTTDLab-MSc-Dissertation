@@ -309,6 +309,8 @@ Then, but still from very early in the process, v0.0.3, I created and maintained
 
 This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of Chapter 4.
 
+The other downside is that the process optimizes for the specific usage I chose, which as will be seen in Chapter 4, are repeating experiments, rather than reproducing or replicating them. However, as discussed in Chapter 1, repeating experiments is part of reproducing and replicating them, and so focusing on repeating experiments is a suitable way of limiting the scope of the project while still producing behaviour that should be a useful component when reproducing or replicating them.
+
 
 \section{High level architecture}
 
@@ -328,32 +330,23 @@ From running OpenTTDLab, and being frustrated by run times, I decided to make Op
 
 \section{Rejected features}
 
-I considered a number of features while creating OpenTTD
+I considered a number of features while creating OpenTTD - due to the high number of cycles of the design process, there are too many to recall or recount. However, there are three that I think are particularly relevant.
 
-Saving results to a file
+Firstly was the saving of results of experiments to a file, rather than to an ephemeral data structure in memory. If done well, I suspected this would have been a valuable feature: it could have aided analysis, made it easier to... . However.... SQLite, the most popular database in the world REF, also recommended by the US Library of Congress, would be an obvious candidate. But even after this choice, how to convert OpenTTDLab's arbitrary nested file structure into a relational model to be stored in a SQLite file is not obvious. Due to the relative permanency of any choice, in that once created, the files should be able to be interpreted in the long term, this should be done after examples of OpenTTDLab have been created.
 
-\section{User facing interface}
+Secondly, I considered some sort "verification" step built into the API - starting with v0.0.2 and removed in XXX, with at the time a vague notion of it being used in reproducing or replicating experiments. However, I found even the skeleton of this made generating the results of Chapter 4 awkward, or in more formal terms it and it seemed so far removed from what I knew of similar APIs.
 
-The user facing interface consists primarily of a single function
+Finally, I considered a file format for the configuration. This was rejected for essentially a combination of the previous two reasons - any file format must be carefully designed, and it seemed to make things awkward rather than easier.
 
-\begin{description}
-\item[Version of OpenTTDLab and OpenGFX] fffff
-\item[Random seed] fffff
-\item[Number of days] fffff
-\item[The AIs to run] Specified by local folder of the code of the AI, bananas identifier, or GitHub repository (which can contain the commit ID)
-\item[Parameters for each AI] fffff
-\item[Maximum number of processes to run] fffff
-\end{description}
+Versions of these features could well be added in future versions, but ideally in a way that does not make repeating experiments such as those in Chapter 4 significantly more awkward and so negatively affecting the repeatabilty of experiments using OpenTTDLab, and so, given that repeating experiments is part of reproducing and replicating them, in a way that also doesn't make these activities more difficult.
 
-The function returns a list, returning the results of each experiement. 
+\section{Screenshots}
 
-It also gives feedback. And saves screenshots.
+... saves screenshots! Mostly just for me
 
 
-\section{Scaling}
 
-
-\section{Internal algorithm}
+\section{Algorithm}
 
 \begin{algorithm}
 \caption{The core algorithm of OpenTTDLab}\label{alg:three}
@@ -367,56 +360,14 @@ It also gives feedback. And saves screenshots.
  }
 \end{algorithm}
 
-\section{Repeatability}
+\section{Scaling}
 
-The core feature of OpenTTDLab that allows is, in my opinion, the ease at which experiments can be run, with the random seed specified and results extracted at deterministic points of time in the game.
-
-The parallelisation adds to the ability to make an experiment repeatable - simply by allowing more experiments to be run within any given amount of time.
-
-\section{Replicability}
-
-The seed, reference to specific versions of OpenTTD
-
-\section{Reproducibility}
-
-The seed, reference to specific versions of OpenTTD, but can refer to a folder for the AI.
-
-\subsection{Algorithm}
-
-Reproducing an experiment is the hardest of the 3Rs, because it does not allow usage of any artifacts from the original authors. In OpenTTD terms, if an experiment uses an AI, then the code of the AI cannot be used in reproducing results.
-
-Nevertheless, OpenTTDLab can be used to support reproducing experiments. The core functions is the localfolder function - it allow extremely fast cycles between writing AI code, and then running it over a range of random seeds or parameters.
-
-\section{Trade offs}
-
-The process I followed used my own feedback from creating the results of Chapter 4, which are essentially repeating experiments rather then replicating or reproducing the results of other teams'. As a result the design of the API is optimised for this.
-
-It's not possible, or I think useful, to detail all the alternative APIs considered - some existed in for just a few seconds, either in documentation or just in my own head, before discarding them, and so there is no record of them. However, there are records of some initial designs of the earliest APIs I considered https://github.com/michalc/OpenTTDLab/pull/8/files that I think is indicative - it contained a multi stage process that focused on different.
-
-I discarded this in favour of simpler single stage process to repeat experiments. I discovered it made simple repeating of a single experiment more frustrating that I think it should have been https://github.com/michalc/OpenTTDLab/pull/51. I realised also that also the repeating or replicating team themselves have to repeat experiments.
+(After algorithm because it's sort of a "results" thing...)
 
 \section{Promotion}
 
-Hmmm... is this being shoehorned in?? I guess I think it's important... can I argue that?
+Hmmm... is this being shoehorned in?? I guess I think it's important... can I argue that? Why is it important in terms of the 3Rs.
 
-\section{Automated testing and releasing}
-
-I wrote tests, has its high level behaviour tested on each change. At the time of writing there were 52 releases of OpenTTDLab.
-
-\section{The experimenting team}
-
-It takes the command line options in code, the various options of OpenTTD, and outputs two things:
-
-\begin{itemize}
-\item The results of the experiments - these are as Python variable, which allows the persistance of the results to be chosen by the experimenter. For example, in a basic CSV format.
-\item The metadata of the experiments: the version of OpenTTD, the version of the framework itself, any commend line options, and all configuration, highlighting the configuration the differs from the defaults for that version of OpenTTD
-\end{itemize}
-
-\section{The reproducing or replicating team}
-
-This leads to the second audience. The framework contains instructions to follow for a separate team trying to reproduce or replicate the experiments of the first team. These instructions mean that the first team can role-play as a reproducer or replicator, and test themselves how straightforward it is to reproduce the experiments, and judge for themselves if it is possible that their results be reproduced, and their research be awarded the badges of Figure \ref{fig:acm_badges}.
-
-The replicability of results would be more difficult to judge - the author's artefacts cannot be used in this case, which means that if a team want to role play, they have to recreate their own artefacts, without reference to their original. The system here at least means that the "boilerplate" is handled, and this can be focused on.
 
 \chapter{Example results from using the framework}
 
@@ -891,7 +842,7 @@ The framework presented here allows experiments to be conducted with OpenTTD in 
 
 The exception are the version of the AI used - these do not appear to be versioned. However, potentially it could report on some sort of hash of the code of the AI.
 
-Loads of further work... reproducible: version stuff, action, file format to save for example? Parallelise, easier optimisation
+Loads of further work. Two camps: developing OpenTTDLab reproducible: version stuff, action, file format to save for example? Parallelise, easier optimisation. User research as per EXAMPLE. But then using OpenTTDLab as well! Hopefully the results chapter will show it can be used to analyse existing AIs, develop new AIs in order to explore specific concepts, which in this case is risk/benefit trade off, and also exploring ways of optimising, er, something.
 
 \chapter{Notes}
 

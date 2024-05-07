@@ -10,9 +10,9 @@
 % \documentclass[logo,msc,cyber]{infthesis}   % Cyber Sec
 % \documentclass[logo,msc,datasci]{infthesis} % Data Sci
 % \documentclass[logo,msc,di]{infthesis}      % Design Inf
-% \documentclass[logo,msc,dsti]{infthesis}    % Data Sci TI
+\documentclass[logo,msc,dsti]{infthesis}    % Data Sci TI
 % \documentclass[logo,msc,inf]{infthesis}     % Informatics
-\documentclass[logo,msc]{infthesis}           % degree unspecified, do not change except to add your degree
+% \documentclass[logo,msc]{infthesis}           % degree unspecified, do not change except to add your degree
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Understand any problems and seek approval before assuming it's ok to remove ugcheck.
 \usepackage{msccheck}
@@ -32,6 +32,7 @@
 \usetikzlibrary{arrows}
 \usepackage{svg}
 \usepackage{pdfpages}
+\usepackage[ruled]{algorithm2e}
 
 \begin{document}
 \begin{preliminary}
@@ -65,7 +66,7 @@ from the Informatics Research Ethics committee.
 
 Firstly thank you to Chris Sawyer, the original author of Transport Tycoon Deluxe: without you this project would not have existed. Then of course thank you to all the contributors of OpenTTLab over its 20 year history. And of these, thank you especially to Patric Stout (A.K.A. Truebrain), who not only gave advice and what I interpreted to be light blessing to this project, but also wrote the OpenTTD save game parser that OpenTTDLab originally forked from.
 
-Thank you also to Ian Earle (A.K.A BasicBeluga) who found an issue in the documentation of OpenTTDLab and submitted a fix for it. While this was a small change, I took it as evidence that what I was creating stood a chance of being useful, and pushed me to continue.
+Thank you also to Ian Earle (A.K.A. BasicBeluga) who found an issue in the documentation of OpenTTDLab and submitted a fix for it. While this was a small change, I took it as evidence that what I was creating stood a chance of being useful, and pushed me to continue.
 
 Thank you to my supervisor Michael Hermann. His ongoing advice throughout this project has been invaluable, and I think also pushed me to do as good a job as I can.
 
@@ -252,7 +253,7 @@ With reference to the the desired things from the reproducibility section, menti
 \begin{figure}[h]
 \centering
 \includesvg{assets/openttdlab-logo.svg}
-\caption{The OpenTTDLab logo. I created this on the existing GPLv2-licensed OpenTTDLogo, and it is displayed alongside the code of OpenTTDLab in its public documentation.}
+\caption{The OpenTTDLab logo. I created this based on the existing GPLv2-licensed OpenTTDLogo, and it is displayed alongside the code of OpenTTDLab in its public documentation.}
 \label{fig:openttlab-logo}
 \end{figure}
 
@@ -260,16 +261,7 @@ As discussed in Chapter 1, repeatability is in the domain of the original resear
 
 \section{Design and creation process}
 
-A lightweight and highly agile process was used to design and create OpenTTDLab, the high level features of which are shown figure \ref{fig:solo-agile}. After the problems to solve have were identified, as discussed in Chapter 1, there were many cycles of writing usage documentation for code, writing code, and using the code; and each of these with tight cycles of evaluating the outputs of these activities and judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
-
-I use the term lightweight in that there were no \emph{events} that are common to \emph{Scrum}-like processes \cite{SCRUM} (often known as \emph{ceremonies} from my own experience), and with one exception, no phases planned in advance as is prescribed, for example, for UK government services \cite{GOVUKAgile}. And I describe the process as highly agile because in some cases iterations would take literally seconds, especially when writing documentation.
-
-This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preseton Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, both at the beginning and throughout the project I would usually write such documentation for code without the code first existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone (albeit with advice from others) when the other parts are less applicable - they focus on communication between different people involved in project.
-
-I did not attempt to keep a precise record of the cycles. However, as a guide, the GitHub repository that stores the history of code changes can be used. I created over 50 releases, 150 pull requests (PRs), and over 350 commits in the repository, and each of these I evaluated against problems and desired properties of Chapter 1, and then carried on with more of the same activity, or another activity of Figure \ref{fig:solo-agile}.
-
-This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of Chapter 4.
-
+A lightweight and highly agile process was used to design and create OpenTTDLab, the high level features of which are shown figure \ref{fig:solo-agile}. After the problems to solve have were identified, as discussed in Chapter 1, there were many cycles of writing usage documentation for code, writing code, and using the code (including from tests), primarily to construct the results of Chapter 4; and each of these with tight cycles of evaluating the outputs of these activities and judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
 
 \begin{figure}[h]
 \centering
@@ -305,6 +297,41 @@ This leads to the main downside of this process. While the process allowed a hig
 \label{fig:solo-agile}
 \end{figure}
 
+I use the term lightweight in that there were no \emph{events} that are common to \emph{Scrum}-like processes \cite{SCRUM} (often known as \emph{ceremonies} from my own experience), and with one exception, no phases planned in advance as is prescribed, for example, for UK government services \cite{GOVUKAgile}. And I describe the process as highly agile because in some cases iterations would take literally seconds, especially when writing documentation.
+
+This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preseton Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, both at the beginning and throughout the project I would usually write such documentation for code without the code first existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone (albeit with advice from others) when the other parts are less applicable - they focus on communication between different people involved in project.
+
+I did not attempt to keep a precise record of the cycles. However, as a guide, the GitHub repository that stores the history of code changes can be used. I created 52 releases, which I labelled v0.0.1 through v0.0.52, 150 pull requests (PRs), and over 350 commits in the repository, and each of these I evaluated against problems and desired properties of Chapter 1, and then carried on with more of the same activity, or another activity of Figure \ref{fig:solo-agile}.
+
+The first version, v0.0.1, was the result of a fork from Patric Stout's \emph{OpenTTD-savegame-reader} \cite{Stout2024}, an existing project that extracts data from OpenTTD save game files - files that save the state of play in OpenTTD that allows players to exit but resume at the same point later. This could be used when using OpenTTD to run simulations, albeit in a time consuming way because the manual steps involved.
+
+Then, but still from very early in the process, v0.0.3, I created and maintained a small suite of tests for OpenTTDLab, asserting on its high level behaviour. The tests were not just for asserting on the behaviour of the code, they were also a special case of "Use code" in the design process: they allowed me to extremely quickly gauge the suitability of the design of the OpenTTDLab, because to write test tests I had to use OpenTTDLab in a way very similar to those that experimenters would have to use it.
+
+This leads to the main downside of this process. While the process allowed a high number of cycles of evaluations, all feedback and evaluation is from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time, which includes using the framework to produce the results of Chapter 4.
+
+
+\section{High level architecture}
+
+Through the design and creation process, particularly after evaluation, I made a number of high level architectural decisions: the use of Python, behaving identically where possible on different platforms, automatically downloading OpenTTD and OpenGFX, supporting both AIs in the local filesystem, and automatically downloading AIs, caching, and the use of parallelisation.
+
+I chose Python as the main language for both the internals of OpenTTDLab and its user-facing interface. I knew Python well, a savegame parser for OpenTTD was available in Python \cite{Stout2024} that the project forked from, programs written in Python are mostly platform independant, and anecdotally it's a popular language in data science and data analysis. To make sure OpenTTDLab did not depend on specific behaviour of a single Python version, which could impede repeatability and replicability of experiments, I made sure that the tests I wrote ran on multiple versions of Python.
+
+OpenTTDLab automatically downloads OpenTTD, OpenGFx, and AIs. This was a direct consequence of running 
+
+It also supports using AIs on the local filesystem. When replicating experiments that use AIs, when the experimenters do not directly use the code of the original researchers, I suspect a fast feedback is needed when writing code and running experiments using that code. While downloading AIs supports replicating experiments using published AI code, reproducing experiments would not us the AI code, and would use code on the local file system.
+
+On the request of one of the maintainers of OpenTTD, OpenTTDLab caches OpenTTD, OpenGFX, and the AIs that it downloads....
+
+I know from experience that there can be problems when a program written on one platform is used on another. While Python is meant to be platform independent, and OpenTTD runs on Linux, Windows and macOS, I discovered that not only are the OpenTTD binaries different for each platform, but also the processes of downloading, installing, and starting OpenTTD are different. So I made sure that OpenTTDLab detects the platform, and performs the appropriate steps for that platform, without the experimenter being concerned, so any Python code using OpenTTDLab written on one platform should run on another unchanged and behave identically. The tests run identically on each of these platforms, and so gives evidence of this property of OpenTTDLab.
+
+From running OpenTTDLab, and being frustrated by run times, I decided to make OpenTTDLab run its experiments in parallel, by running multiple threads, and from each of these threads triggering OpenTTD configured appropriately for that experiment. The scaling results of these are shown in Section ...
+
+\section{Rejected features}
+
+I considered a number of features while creating OpenTTD
+
+Saving results to a file
+
 \section{User facing interface}
 
 The user facing interface consists primarily of a single function
@@ -322,7 +349,23 @@ The function returns a list, returning the results of each experiement.
 
 It also gives feedback. And saves screenshots.
 
-\section{Internal Algorithm}
+
+\section{Scaling}
+
+
+\section{Internal algorithm}
+
+\begin{algorithm}
+\caption{The core algorithm of OpenTTDLab}\label{alg:three}
+\KwData{The list of experiments to run, where each is defined by the seed, number of days, list of AIs and parameters to pass to the AIs. Versions of OpenTTD and OpenGFX}
+\KwResult{The parsed save games from every month of game time for every experiment} 
+ fetch everything that needs to be fetched (not stuff that is already in cache...)\;
+ setup threaded pool for workers\;
+ \ForEach(in parallel up to {max\_workers}){experiment in experiments}{
+  run experiment by running OpenTTD\;
+  parsing all the save games\;
+ }
+\end{algorithm}
 
 \section{Repeatability}
 

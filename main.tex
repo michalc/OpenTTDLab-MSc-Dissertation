@@ -95,11 +95,9 @@ OpenTTD was created as a game for recreation. However, it is remarkably flexible
 
 Using OpenTTD as a tool for research is the focus of this project, and specifically the focus is the development of a tool that augments its existing features for repeatable, replicable, \& reproducible research.
 
-\section{A bit about the mechanics of the game?}
-
 \section{A brief history of learning from simulation games}
 
-Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued, to embody strategies that bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting also that OpenTTD's discretized simplification of space also has a long history in simulation.
+Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued to embody strategies that bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting also that OpenTTD's discretized simplification of space also has a long history in simulation.
 
 The military-style/war games eventually evolved to logistic simulations, albeit still in military context. Fore example based MONOPOLOGS \cite{jackson1959learning} that is often credited as the first computerised logistics simulation game - SAY WHEN AND WHAT USED FOR. Then the MIT beer game - to illustrate something in supply chains. These then evolved to games that informed policy making - EXAMPLE.
 
@@ -171,6 +169,8 @@ Beyond just supplying definitions, the ACM also provide a system of 5 badges, as
 
 It is my hope that the framework presented here will make it more likely that research using OpenTTD will be not only repeatable, reproducible and replicable, but also more likely that upon publication, given all of these badges. 
 
+\section{Barriers to Repeatability, Replicatability, \& Reproducibility}
+
 \section{Review of research using OpenTTD}
 
 Note - put this after the 3Rs stuff. The 3Rs stuff will have (especially for reproduciliby and replicability) barriers, and so I should be able to basically discuss the research, stating what barriers it seems to have.
@@ -208,7 +208,9 @@ This is the most difficult to judge without actually attempting to do it, and it
 
 However, if an experiemnt isn't even reproducible, it is even more difficult to replicate it.
 
-\chapter{Existing features of OpenTTD}
+\chapter{OpenTTD's behaviours and features of OpenTTD}
+
+\section{Formalism/algorithm of the game}
 
 \section{Review of OpenTTD command line options and configuration}
 OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing. The ones that are particularly applicable to a  for repeatable, reproducible, and replicable research are reviewed below.
@@ -338,6 +340,8 @@ Secondly, I considered some sort "verification" step built into the API - starti
 
 Finally, I considered a file format for the configuration. This was rejected for essentially a combination of the previous two reasons - any file format must be carefully designed, and it seemed to make things awkward rather than easier.
 
+Custom build of OpenTTD?? Local file?
+
 Versions of these features could well be added in future versions, but ideally in a way that does not make repeating experiments such as those in Chapter 4 significantly more awkward and so negatively affecting the repeatabilty of experiments using OpenTTDLab, and so, given that repeating experiments is part of reproducing and replicating them, in a way that also doesn't make these activities more difficult.
 
 \section{Screenshots}
@@ -369,7 +373,30 @@ Versions of these features could well be added in future versions, but ideally i
 Hmmm... is this being shoehorned in?? I guess I think it's important... can I argue that? Why is it important in terms of the 3Rs.
 
 
-\chapter{Example results from using the framework}
+\chapter{Example results}
+
+To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+
+\section{Simple parameterised AI}
+
+I constructed a simple parameterised AI that created a single route
+
+\begin{algorithm}
+\caption{Simple parameterised AI}\label{alg:three}
+\KwData{The number of buses to build in the AI N}
+ Fetch list of towns \;
+ Choose 2 biggest \;
+ Build route between them \;
+  \ForEach{step in route}{
+  build step\;
+ }
+ \ForEach{bus in buses}{
+  build bus\;
+  give orders to move between the 2 towns\;
+ }
+\end{algorithm}
+
+
 
 The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 
@@ -946,9 +973,8 @@ Gass (1984) provides the earliest example of reporting guidelines for “compute
 % You may delete everything from \appendix up to \end{document} if you don't need it.
 \appendix
 
-\chapter{First appendix}
+\chapter{Summary of data in OpenTTD save games}
 
-\section{First section}
 
 Any appendices, including any required ethics information, should be included
 after the references.
@@ -956,7 +982,7 @@ after the references.
 Markers do not have to consider appendices. Make sure that your contributions
 are made clear in the main body of the dissertation (within the page limit).
 
-\chapter{Second}
+\chapter{Documentation of OpenTTDLab}
 
 \includepdf[pages=-,scale=.8,pagecommand={}]{assets/openttdlab-github.pdf}
 

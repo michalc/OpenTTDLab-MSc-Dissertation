@@ -263,7 +263,7 @@ As discussed in Chapter 1, repeatability is in the domain of the original resear
 
 \section{Design and creation process}
 
-A lightweight and highly agile process was used to design and create OpenTTDLab, the high level features of which are shown figure \ref{fig:solo-agile}. After the problems to solve have were identified, as discussed in Chapter 1, there were many cycles of writing usage documentation for code, writing code, and using the code, either to construct the results of Chapter 4 or in tests; and each of these with tight cycles of evaluating the outputs of these activities and judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
+A lightweight and highly agile process was used to design and create OpenTTDLab, the high level features of which are shown figure \ref{fig:solo-agile}. After the problems to solve have were identified, as discussed in Chapter 1, there were many cycles of writing usage documentation for code, writing code, and using the code, either to construct the results of Chapter 4 or in tests; and each of these with tight cycles of evaluating the outputs of these activities and informally judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
 
 \begin{figure}[h]
 \centering
@@ -377,26 +377,112 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
-\section{Simple parameterised AI}
+\section{Analysis of existing OpenTTD AIs}
 
-I constructed a simple parameterised AI that created a single route
+...
+
+\section{Simple parameterised OpenTTD AI}
+
+From the previous section, OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences. However, this doesn't by itself allow for a more detailed analysis of the behaviour of supply chains. OpenTTDLab's feature of running experiments over a range of configuration parameters passed to an AI allows for this.
+
+So I constructed a simple parameterised AI. At runtime, the AI chooses the 2 largest towns, find a route between them, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simpleai}, with the core Squirrel code of the AI in Appendix X, with the Python code to run the experiments in Appendix Y.
+
+The number of buses varied between 1 and 16, and each run was for 50 years, with 50 runs for each configuration covering random number generator seeds between and 1 and 50 inclusive.
+
+\subsection{Results}
+
+As can be seen in Figure XX, by the end of the 50 years, there appears to be a clear winner - on average the runs with 16 buses have more money in the bank than the others. It can be seen that early in the game, on average the configurations with 16 buses had the lowest amount of money, suggesting that in this very simplified situation, and with the caveat that the economic model of OpenTTD has been argued to be unrealistic REF, it seems to be the case that \emph{you have to spend money to make money}.
+
+However, the situation is more complex. When taking into account the distributions, for example in, it's clear that while on average 16 buses are better, there is also greater risk with 16 buses than with the one - there is a higher chance of losing more money than with a single bus.
+
+There is also an interesting convergence point around 1978: all configurations on average have on average the same amount of money in the bank. At the moment the reason for this convergence point is so far unexplained. As can be seen in Figure X, this convergence it is certainly not true that every run of the game makes the same amount of money - the distributions of money for 1 and 16 buses remains wide.
 
 \begin{algorithm}
-\caption{Simple parameterised AI}\label{alg:three}
-\KwData{The number of buses to build in the AI N}
+\caption{Simple parameterised OpenTTD AI}\label{alg:three}
+\KwData {Seed, the number of buses to build in the AI N}
+ (OpenTTD generates the map deterministingly based on the seed) \;
  Fetch list of towns \;
+ Sort list of towns \;
  Choose 2 biggest \;
- Build route between them \;
+ \While{not found route}{
+  Continue to find route \;
+ }
   \ForEach{step in route}{
   build step\;
  }
+ build depot\;
+ build station\;
  \ForEach{bus in buses}{
   build bus\;
   give orders to move between the 2 towns\;
  }
+\label{algorithm:simpleai}
+\caption{Test}
 \end{algorithm}
 
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set format y "%.0s%c"
+set xtics 3600*24*365*5
+set xdata time
+set format x "%Y"
+set timefmt "%Y-%m-%d"
+set ylabel 'Money in the bank $\textrm{\pounds}$'
+set xlabel 'Date'
+set xrange ["1949-01-01":"2001-01-01"]
+plot 'assets/own-buses-means-standard_deviation.csv' \ 
+   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean 8 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean 4 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean 2 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus'
+\end{gnuplot}
+\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
+\label{fig:supplychainresiliance}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set format y "%.0s%c"
+set xtics 3600*24*365*5
+set xdata time
+set format x "%Y"
+set timefmt "%Y-%m-%d"
+set ylabel 'Money in the bank $\textrm{\pounds}$'
+set xlabel 'Date'
+set xrange ["1949-01-01":"2001-01-01"]
+plot 'assets/own-buses-means-standard_deviation.csv' \ 
+   using (timecolumn(1, '%Y-%m-%d')):($6+$10):($6-$10) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
+   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($6+$10) skip 2 with lines lc rgb '#cccccc' title '', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($6-$10) skip 2 with lines lc rgb '#cccccc' title '', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6) skip 2 with lines lc rgb '#cccccc' title '', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title ''
+\end{gnuplot}
+\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
+\label{fig:supplychainresiliance}
+\end{figure}
+
+% \subsection{Discussion}
+
+% Th
+
+
+\section{Programmatically optimising AI parameter}
 
 The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 
@@ -720,62 +806,7 @@ plot 'assets/own-buses-means-standard_deviation.csv' \
 \label{fig:supplychainresiliance}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"2001-01-01"]
-plot 'assets/own-buses-means-standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean 8 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean 4 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean 2 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus'
-\end{gnuplot}
-\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
-\label{fig:supplychainresiliance}
-\end{figure}
 
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"2001-01-01"]
-plot 'assets/own-buses-means-standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($6+$10):($6-$10) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($6+$10) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($6-$10) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
-\label{fig:supplychainresiliance}
-\end{figure}
 
 
 

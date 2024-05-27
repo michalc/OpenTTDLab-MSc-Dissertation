@@ -210,24 +210,32 @@ However, if an experiment isn't even reproducible, it is even more difficult to 
 
 \chapter{OpenTTD: its model and abilities}
 
-A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in infrastructure and vehicles.
+A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in road, rail, sea or air infrastructure and vehicles.
 
 Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, this is not a requirement: OpenTTD allows non-human players, so called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
 
 This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could extract some insights applicable to the real world.
 
-The details here have been found by reading the OpenTTD documentation, its source code, its AI API documentation, its GameScript API documentation, and by playing the game itself. Details are correct as of OpenTTD 13.4.
+The details here have been found by reading the OpenTTD Wiki \cite{OpenTTDWiki}, the OpenTTD source code \cite{OpenTTDSource}, the OpenGFX source code \cite{OpenGFXSource}, the OpenTTD AI API documentation \cite{OpenTTDAIAPIDocs}, the OpenTTD GameScript API documentation \cite{OpenTTDGSAPIDocs}, and by playing OpenTTD itself. Details are correct as of OpenTTD 13.4.
 
 \section{Field of play/simulation}
 
-OpenTTD runs on two dimensional rectangular tiled grid, with some limited three dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view; sometimes inaccurately referred to as isometrically. Each tile does not necessarily have a single object on it, but is itself split up into sections that can contain different objects. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
+OpenTTD runs on two-dimensional rectangular tiled grid representing an area of land and sea, with some limited three-dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view; sometimes inaccurately referred to as an isometric view. Each tile does not necessarily have a single object on it, but is itself split up into sections that can contain different objects. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
+
+There is some concept of height - each section of a grid can have one of X possible height levels in the game, with sloping land between each level. When going uphill vehicles slow down - the amount depending on their power and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
+
+
+\section{Startup}
+
+On game/simulation startup
 
 \section{Agents and ticks}
 
+\section{Subsidies}
 
+\section{Algorithm of each player}
 
 \section{Algorithm of the game}
-
 
 
 

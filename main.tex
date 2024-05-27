@@ -206,23 +206,48 @@ The seeds of each experiements were also not supplied.
 
 This is the most difficult to judge without actually attempting to do it, and it is what.
 
-However, if an experiemnt isn't even reproducible, it is even more difficult to replicate it.
+However, if an experiment isn't even reproducible, it is even more difficult to replicate it.
 
-\chapter{Features and behaviours of OpenTTD}
+\chapter{OpenTTD: its model and abilities}
+
+A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in infrastructure and vehicles.
+
+Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, this is not a requirement: OpenTTD allows non-human players, so called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
+
+This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could extract some insights applicable to the real world.
+
+The details here have been found by reading the OpenTTD documentation, its source code, its AI API documentation, its GameScript API documentation, and by playing the game itself. Details are correct as of OpenTTD 13.4.
+
+\section{Field of play/simulation}
+
+OpenTTD runs on two dimensional rectangular tiled grid, with some limited three dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view; sometimes inaccurately referred to as isometrically. Each tile does not necessarily have a single object on it, but is itself split up into sections that can contain different objects. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
+
+\section{Agents and ticks}
+
+
 
 \section{Algorithm of the game}
 
-OpenTTD runs in on a configurable sized grid (say range?), where each grid square(?)....
+
+
+
+
+
+(with some limited 3D 
+
+runs in on a configurable sized dimetric grid, , where each grid square(?)....
 
 OpenTTD is an agent-based system, with agents: buses, trains, planes, ships, industries and even buildings in towns to an extent running apparently independently and in real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are X ticks per in-game day. During a tick, game time progresses in a deterministic way - vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, a number of passengers are "produced" by towns wanting to travel.
 
 This makes OpenTTD particularly suitable for exactly repeatable simulations CHECK TERM. If, for example, threads were used for the various agents, they would not...
 
-\section{Startup}
-
 \section{Economic model}
 
 The economic model of OpenTTD is, as are all models, a simplified version of the real world.
+
+\section{Startup}
+
+
 
 List the goods!
 
@@ -275,7 +300,7 @@ Startup script to immedaitely load AIs
 
 \section{OpenGFX}
 
-...
+It's somewhat of a misnomer - it's not just graphics but details of vehicles, which affect gameplay, and the simulation. It's important to have the exact version
 
 \section{The save game format}
 

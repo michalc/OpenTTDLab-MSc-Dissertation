@@ -32,6 +32,7 @@
 \usetikzlibrary{arrows}
 \usepackage{svg}
 \usepackage{pdfpages}
+\usepackage{listings}
 \usepackage[ruled]{algorithm2e}
 
 \begin{document}
@@ -212,48 +213,43 @@ However, if an experiment isn't even reproducible, it is even more difficult to 
 
 A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in road, rail, sea or air infrastructure and vehicles.
 
-Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, this is not a requirement: OpenTTD allows non-human players, so called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
+Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, this is not a requirement: OpenTTD allows non-human players, so-called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
 
 This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could extract some insights applicable to the real world.
 
-The details here have been found by reading the OpenTTD Wiki \cite{OpenTTDWiki}, the OpenTTD source code \cite{OpenTTDSource}, the OpenGFX source code \cite{OpenGFXSource}, the OpenTTD AI API documentation \cite{OpenTTDAIAPIDocs}, the OpenTTD GameScript API documentation \cite{OpenTTDGSAPIDocs}, and by playing OpenTTD itself. Details are correct as of OpenTTD 13.4.
+Unless otherwise stated, the details here are from OpenTTD Wiki \cite{OpenTTDWiki}, the OpenTTD source code \cite{OpenTTDSource}, the OpenGFX source code \cite{OpenGFXSource}, the OpenTTD AI API documentation \cite{OpenTTDAIAPIDocs}, the OpenTTD GameScript API documentation \cite{OpenTTDGSAPIDocs}, or by playing OpenTTD itself. Details are correct as of OpenTTD 13.4.
 
 \section{Field of play/simulation}
 
-OpenTTD runs on two-dimensional rectangular tiled grid representing an area of land and sea, with some limited three-dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view; sometimes inaccurately referred to as an isometric view. Each tile does not necessarily have a single object on it, but is itself split up into sections that can contain different objects. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
+OpenTTD runs on two-dimensional rectangular tiled grid representing an area of land and sea, with some limited three-dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view; sometimes inaccurately referred to as an isometric view. Each tile does not necessarily have a single object on it, some objects can co-exist with each other depending on the object type. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
 
-There is some concept of height - each section of a grid can have one of X possible height levels in the game, with sloping land between each level. When going uphill vehicles slow down - the amount depending on their power and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
+There is some concept of height - each section of a grid can have one of X possible height levels in the game, with sloping land between each level. This impacts the game in more than just a visual way: when going uphill road and rail vehicles slow down - the amount depending on the type of the vehicle, and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
 
 
 \section{Startup}
 
-On game/simulation startup
+On startup of a new game/simulation, there are classes of startup. A pre-defined scenario can be started, where the map is pre-defined...
+
+In the random case, deterministically based on the seed and configuration, a pseudo-random world is generated. This is the land, height, trees, coastlines and sea. Also the sizes and positions of town, and the positions and types of industries are all pseudo-randomly generated.
+
+This determinism helps OpenTTD be used for repeatable experiments.
 
 \section{Agents and ticks}
 
-\section{Subsidies}
+OpenTTD is an agent-based system, with agents: buses, trains, planes, ships, industries and even buildings in towns to an extent running apparently independently and in accelerated real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are X ticks per in-game day. During a tick, game time progresses in a deterministic way - vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, a number of passengers are "produced" by towns wanting to travel.
 
-\section{Algorithm of each player}
-
-\section{Algorithm of the game}
-
-
-
-
-
-(with some limited 3D 
-
-runs in on a configurable sized dimetric grid, , where each grid square(?)....
-
-OpenTTD is an agent-based system, with agents: buses, trains, planes, ships, industries and even buildings in towns to an extent running apparently independently and in real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are X ticks per in-game day. During a tick, game time progresses in a deterministic way - vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, a number of passengers are "produced" by towns wanting to travel.
-
-This makes OpenTTD particularly suitable for exactly repeatable simulations CHECK TERM. If, for example, threads were used for the various agents, they would not...
+This determinism makes OpenTTD particularly suitable for exactly repeatable simulations. If, for example, instead of ticks, threads were used for the various agents, since thread scheduling is in general non deterministic, then exactly repeatable experiments would not be possible.
 
 \section{Economic model}
 
 The economic model of OpenTTD is, as are all models, a simplified version of the real world.
 
-\section{Startup}
+
+\section{The possible actions a player can take}
+
+\section{Algorithm of each player}
+
+\section{Algorithm of the game}
 
 
 
@@ -321,6 +317,8 @@ OpenTTD saves its data in a custom binary format - its so-called savegame format
 With reference to the the desired things from the reproducibility section, mention things that don't exist
 \end{item}
 \end{itemize}
+
+Running many experiments. Extracting data for analysis.
 
 \chapter{The framework}
 
@@ -402,6 +400,10 @@ I know from experience that there can be problems when a program written on one 
 
 From running OpenTTDLab, and being frustrated by run times, I decided to make OpenTTDLab run its experiments in parallel, by running multiple threads, and from each of these threads triggering OpenTTD configured appropriately for that experiment. The scaling results of these are shown in Section ...
 
+\section{API design}
+
+??
+
 \section{Rejected features}
 
 I considered a number of features while creating OpenTTD - due to the high number of cycles of the design process, there are too many to recall or recount. However, there are three that I think are particularly relevant.
@@ -415,6 +417,8 @@ Finally, I considered a file format for the configuration. This was rejected for
 Custom build of OpenTTD?? Local file?
 
 Versions of these features could well be added in future versions, but ideally in a way that does not make repeating experiments such as those in Chapter 4 significantly more awkward and so negatively affecting the repeatabilty of experiments using OpenTTDLab, and so, given that repeating experiments is part of reproducing and replicating them, in a way that also doesn't make these activities more difficult.
+
+Tidy results?
 
 \section{Screenshots}
 
@@ -449,9 +453,9 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
-\section{Analysis of existing OpenTTD AIs}
-
-...
+\section{Replicating results}
+\lstset{numbers=left,frame=tb,basicstyle=\linespread{0.7}\ttfamily\footnotesize}
+\lstinputlisting[language=Python,float,caption=A floating example]{assets/replicating_results_core.py}
 
 \section{Simple parameterised OpenTTD AI}
 

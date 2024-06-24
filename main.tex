@@ -442,7 +442,16 @@ Tidy results?
 
 \section{Scaling}
 
-(After algorithm because it's sort of a "results" thing...)
+I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes with the number of worker processes. I also did these tests when passing the full set of data back to be analysed, and also passing only a small amount of data, the company value at each date. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, running seeds 0 to 50, and Trains AI version with MD5 hash of. The full code of the experiments can be seen Appendix X.
+
+As can be seen from Figure X, runtime decreases as the number of processors increases, and so there is some useful parallelisation in terms of reducing the time for simulations. However, up to 4 processors the scaling is very almost linear, but after 4 processors the scaling is worse than linear.
+
+This can in part be explained by Amdhal's law - 
+
+Another reason why this would be the case can come from noting that the cores are not identical. According to Apple [REF] 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage).
+
+Further optimising OpenTTDLab to reduce the effects of Amdhal's law 
+
 
 \section{Promotion}
 

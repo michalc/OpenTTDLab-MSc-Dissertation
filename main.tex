@@ -442,15 +442,26 @@ Tidy results?
 
 \section{Scaling}
 
-I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes with the number of worker processes. I also did these tests when passing the full set of data back to be analysed, and also passing only a small amount of data, the company value at each date. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, running seeds 0 to 50, and Trains AI version with MD5 hash of. The full code of the experiments can be seen Appendix X.
+I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to client code, and for only passing only a small amount of data: the company value at each date. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, running for seeds 0 to 49, and trAIns version 2.1 with MD5 hash of. The full code of the experiments can be seen Appendix X.
 
-As can be seen from Figure X, runtime decreases as the number of processors increases, and so there is some useful parallelisation in terms of reducing the time for simulations. However, up to 4 processors the scaling is very almost linear, but after 4 processors the scaling is worse than linear.
+As can be seen from Figure X, runtime decreases as the number of processors increases, and so there is some useful parallelisation in terms of reducing the time for simulations. However, the speedup decreases as the number of processors increases. And more specifically, up to 4 processors the scaling is very almost linear, but after 4 processors the scaling is worse than linear. It can also be seen that the scaling is better when only a small amount of data is returned from the worker processes.
 
-This can in part be explained by Amdhal's law - 
+A reason for the noted difference when the number of processors is greater than 4 comes from noting that the cores are not identical. According to Apple [REF] 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The scaling profile found appears roughly consistent with the high performance cores being used in preference to the low performance cores.
 
-Another reason why this would be the case can come from noting that the cores are not identical. According to Apple [REF] 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage).
+Another reason comes from Amdhal's Law that describes how speedup is limited by the serial part of the program. This law is usually formulated as
 
-Further optimising OpenTTDLab to reduce the effects of Amdhal's law 
+\begin{equation}
+S_p = \frac{1}{(1-p) + \frac{p}{s}}
+\end{equation}
+%
+where $S_p$ is the speedup of the entire program, $p$ is the proportion of the program that has been parallelised, and $s$ is speedup of the parallelised part of the program. The most important consequence of this is that $\lim_{S\to\infty} S_p = \frac{1}{1-p}$. This means that example even if 95\% of a program is parallelised, then the maximum speedup is 20, even if thousands of processes are used.
+
+This means that one way of increasing speedup is to reduce the amount that is not parallelised. One part that is effectively not parallelisable is the copy of data from the worker process back to the main process. As can be seen reducing this does increase the speedup.
+
+To eliminsate this entire, the program avoiding using processes in the Python parts of OpenTTDLab, and instead use threads, which all an address space. However, Python suffers from the well-known Global Interpreter Lock (GIL) which means that even in multi-threaded code, only one thread can run at any one time, which could unfortunately increase the proportion of code that cannot be parallelised.
+
+More precise investigation, for example into the trade offs between the GIL and copying that multiple processes requires, and possible subsequent improvements to OpenTTDLab, is left to further work.
+
 
 
 \section{Promotion}

@@ -442,9 +442,26 @@ Tidy results?
 
 \section{Scaling}
 
-I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to client code, and for only passing only a small amount of data: the company value at each date. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, running for seeds 0 to 49, and trAIns version 2.1. The full code of the experiments can be seen Appendix X.
+I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to client code, and for only passing a minimal amount of data: the date, the company value at that date, and if an error occurred. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, trAIns 2.1 with MD5 hash of c4c069dc797674e545411b59867ad0c2, and running for seeds 0 to 49, and each for a total of 1465 in-game days. The Python code to run the experiments can be seen Appendix \ref{chapter:scaling-running-code}, and the code to subsequently process and visualise the results in \ref{chapter:scaling-analyis-code}.
 
-As can be seen from Figure X, runtime decreases as the number of processors increases, and so there is some useful parallelisation in terms of reducing the time for simulations. However, the amount that speedup increases as a processor is added decreases as the number of processors increases. And more specifically, up to 4 processors the scaling is just under linear, but after 4 processors the scaling is much worse. It can also be seen that the scaling is better when only a small amount of data is returned from the worker processes.
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set ylabel 'Time (seconds)'
+set xlabel 'Number of processes'
+plot 'notebooks/01_scaling_results_02_wallclock_times.csv' \ 
+   using 1:2
+\end{gnuplot}
+\caption{Wallclock time}
+\label{figure:scaling-wallclock-time}
+\end{figure}
+
+As can be seen from Figure \ref{figure:scaling-wallclock-time}, runtime decreases as the number of processors increases, and so there is some useful parallelisation in terms of reducing the time for simulations. However, the amount that speedup increases as a processor is added decreases as the number of processors increases. And more specifically, up to 4 processors the scaling is just under linear, but after 4 processors the scaling is much worse. It can also be seen that the runtime is better when only a small amount of data is returned from the worker processes, but the scaling profiles are almost identical
 
 A reason for the noted difference when the number of processors is greater than 4 comes from noting that the cores are not identical. According to Apple [REF] 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The scaling profiles found appears roughly consistent with the high/lower performance split, and suggests that the high performance cores being used in preference to the low performance cores.
 
@@ -1113,5 +1130,13 @@ are made clear in the main body of the dissertation (within the page limit).
 
 \includepdf[pages=-,scale=.8,pagecommand={}]{assets/openttdlab-github.pdf}
 
+\chapter{Scaling experiments - Python code to run experiments}
+\label{chapter:scaling-running-code}
+Include the notebook here
+
+\chapter{Scaling experiments - Python code to analyse results}
+\label{chapter:scaling-analyis-code}
+
+Include the notebook here
 
 \end{document}

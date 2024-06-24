@@ -12,7 +12,7 @@ concurrency:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,6 +28,7 @@ jobs:
           docker run --rm -v $PWD:/workdir texlive-with-inkscape bash -c "cd /workdir && pdflatex --shell-escape main.tex && bibtex main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
       - name: Build PNG of pages
         run: |
+          sudo apt update
           sudo apt-get install -y ghostscript
           gs -r300 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-%03d.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
           cat /etc/ImageMagick-6/policy.xml

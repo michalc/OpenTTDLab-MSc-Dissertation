@@ -459,7 +459,7 @@ plot 'notebooks/01_scaling_results_02_wallclock_times.csv' \
    using 1:2 with linespoints ls 1 title 'All data', \
    '' using 1:3 with linespoints ls 2 title 'Minimal data'
 \end{gnuplot}
-\caption{Total wallclock time of when running 50 experiments using OpenTTDLab over a varying number of processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Using more worker processes results in a shorter runtime: for example using 8 worker processes uses about 20\% of the runtime as using 1 worker process. Returning a minimal amount of data also results in shorter runtime: approximately 30\% faster for each number of processes in the experiment.}
+\caption{Total wallclock time of when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Using more worker processes results in a shorter runtime: for example using 8 worker processes uses about 20\% of the runtime as using 1 worker process. Returning a minimal amount of data also results in shorter runtime: approximately 30\% faster for each number of processes in the experiment.}
 \label{figure:scaling-wallclock-time}
 \end{figure}
 
@@ -483,7 +483,7 @@ plot 'notebooks/01_scaling_results_03_speedups.csv' \
    '' using 1:2 with linespoints ls 1 title 'All data', \
    '' using 1:3 with linespoints ls 2 title 'Minimal data'
 \end{gnuplot}
-\caption{Speedup}
+\caption{Speedup when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Speedup is initially linear, but becomes worse as the number of worker processes increases, especially from 5 worker processes onwards. At 8 worker processes the speedup is approximately 4.5.}
 \label{figure:scaling-speedup}
 \end{figure}
 

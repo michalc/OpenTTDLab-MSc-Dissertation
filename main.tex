@@ -218,7 +218,7 @@ A game of OpenTTD is made up of a rectangular world with one or more companies i
 
 Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, this is not a requirement: OpenTTD allows non-human players, so-called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
 
-This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could extract some insights applicable to the real world.
+This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the OpenTTDLab framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could be used to extract some insights applicable to the real world.
 
 Unless otherwise stated, the details here are from OpenTTD Wiki \cite{OpenTTDWiki}, the OpenTTD source code \cite{OpenTTDSource}, the OpenGFX source code \cite{OpenGFXSource}, the OpenTTD AI API documentation \cite{OpenTTDAIAPIDocs}, the OpenTTD GameScript API documentation \cite{OpenTTDGSAPIDocs}, or by playing OpenTTD itself. Details are correct as of OpenTTD 13.4.
 
@@ -228,14 +228,20 @@ OpenTTD runs on two-dimensional rectangular tiled grid representing an area of l
 
 There is some concept of height - each section of a grid can have one of X possible height levels in the game, with sloping land between each level. This impacts the game in more than just a visual way: when going uphill road and rail vehicles slow down - the amount depending on the type of the vehicle, and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
 
+An example field of play, also showing some of the interface that players use to interact with the field of play is show in Figure \ref{figure:openttd-field-of-play}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textheight,height=\textwidth,keepaspectratio,angle=90]{assets/openttd-field-of-play.png}
+\caption{A the interface of OpenTTD 13.4, showing an portion of an example transport network linking industries and towns.}
+\label{figure:openttd-field-of-play}
+\end{figure}
 
 \section{Startup}
 
-On startup of a new game/simulation, there are classes of startup. A pre-defined scenario can be started, where the map is pre-defined...
+On startup of a new game/simulation, there are two classes of startup. A pre-defined scenario can be started, where the map is pre-defined, or a pseudo-random world is generated. In the pseudo-random case, the world is deterministically generated based on a seed value, and the configuration of the game. Specifically, the land, height, trees, coastlines and sea, the sizes and positions of town, and the positions and types of industries are all pseudo-randomly generated. This determinism helps OpenTTD be used for repeatable experiments.
 
-In the random case, deterministically based on the seed and configuration, a pseudo-random world is generated. This is the land, height, trees, coastlines and sea. Also the sizes and positions of town, and the positions and types of industries are all pseudo-randomly generated.
-
-This determinism helps OpenTTD be used for repeatable experiments.
+Note that other than roads within towns, no transport infrastructure exists. It is the role of the player to build this.
 
 \section{Agents and ticks}
 
@@ -1166,6 +1172,8 @@ The Python notebook used to generate results for the Scaling experiments of XX i
 
 \chapter{Scaling experiments - Python code to analyse results}
 \label{chapter:scaling-analyis-code}
+
+The Python notebook used to analyse results for the Scaling experiments of XX is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/01_scaling_02_analyse_results.ipynb}
 
 \includepdf[pages=-,scale=.8,pagecommand={}]{notebooks/01_scaling_02_analyse_results.pdf}
 

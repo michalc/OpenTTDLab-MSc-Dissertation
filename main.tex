@@ -278,21 +278,31 @@ It is beyond the scope of this project to more rigorously analyse the economic m
     \node[main node, align=center,minimum size=0.75cm] (oil-wells) [position=-90:0.75cm from steel-mill] {\footnotesize Oil wells};
     \node[main node, align=center,minimum size=0.75cm] (farm) [position=90:0.75cm from steel-mill] {\footnotesize Farm};
     \node[main node, align=center,minimum size=0.75cm] (forest) [position=90:0.75cm from farm] {\footnotesize Forest};
-    \node[main node, align=center,minimum size=0.75cm] (bank) [position=180:1.5cm from forest] {\footnotesize Bank};
+    \node[main node, align=center,minimum size=0.75cm] (bank) [position=90:0.75cm from iron-ore-mine] {\footnotesize Bank};
     \node[main node, align=center,minimum size=0.75cm] (power-station) [position=-90:0.75cm from oil-wells] {\footnotesize Power station};
     \node[main node, align=center,minimum size=0.75cm] (coal-mine) [position=180:1.5cm from power-station] {\footnotesize Coal mine};
     \node[main node, align=center,minimum size=0.75cm] (sawmill) [position=0:1.5cm from forest] {\footnotesize Sawmill};
-    \node[main node, align=center,minimum size=0.75cm] (oil-refinary) [position=-90:0.75cm from factory] {\footnotesize Oil refinary};
+    \node[main node, align=center,minimum size=0.75cm] (oil-refinery) [position=-90:0.75cm from factory] {\footnotesize Oil refinery};
 
     \path[every node/.style={font=\scriptsize}]
         (forest) edge[] node[] {Wood} (sawmill)
-        (bank) edge [loop below, distance=0.5cm] node[] {Valuables} (bank)
+        (bank) edge [loop above, distance=0.5cm] node[] {Valuables} (bank)
         (coal-mine) edge[] node[] {Coal} (power-station)
-        (iron-ore-mine) edge[] node[] {Iron ore} (steel-mill);
+        (iron-ore-mine) edge[] node[] {Iron ore} (steel-mill)
+        (oil-wells) edge[] node[] {Oil} (oil-refinery)
+        (oil-rig) edge[] node[] {Oil} (oil-refinery)
+        (oil-rig) edge[] node[] {Passengers, mail} (town)
+        (oil-rig) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (oil-rig)
+        (oil-refinery) edge[] node[] {Goods} (town)
+        (factory) edge[] node[] {Goods} (town)
+        (sawmill) edge[] node[] {Goods} (town)
+        (steel-mill) edge[] node[] {Steel} (factory)
+        (farm) edge[] node[] {Livestock, grain} (factory)
+        (town) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (town);
    
 
 \end{tikzpicture}
-\caption{The supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce.}
+\caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce.}
 \label{figure:temperate-supply-chains}
 \end{figure}
 

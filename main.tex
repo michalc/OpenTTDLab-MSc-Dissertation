@@ -31,6 +31,7 @@
 \usepackage{gnuplottex}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
+\usetikzlibrary{calc}
 \usetikzlibrary{positioning}
 \usepackage{svg}
 \usepackage{pdfpages}
@@ -264,19 +265,19 @@ It is beyond the scope of this project to more rigorously analyse the economic m
 \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,thick,main node/.style={rectangle,draw}]
 
-    \node[main node, align=center,minimum size=0.75cm] (factory) {\footnotesize Factory};
-    \node[main node, align=center,minimum size=0.75cm,on grid,right=3cm of factory] (town) {\footnotesize Town};
-    \node[main node, align=center,minimum size=0.75cm,on grid,right=3cm of town] (oil-rig) {\footnotesize Oil rig};
-    \node[main node, align=center,minimum size=0.75cm,on grid,left=3cm of factory] (steel-mill) {\footnotesize Steel mill};
-    \node[main node, align=center,minimum size=0.75cm,on grid,left=3cm of steel-mill] (iron-ore-mine) {\footnotesize Iron ore mine};
-    \node[main node, align=center,minimum size=0.75cm,on grid,below=1.5cm of steel-mill] (oil-wells) {\footnotesize Oil wells};
-    \node[main node, align=center,minimum size=0.75cm,on grid,above=1.5cm of steel-mill] (farm) {\footnotesize Farm};
-    \node[main node, align=center,minimum size=0.75cm,on grid,above=1.5cm of farm] (forest) {\footnotesize Forest};
-    \node[main node, align=center,minimum size=0.75cm,on grid,above=1.5cm of iron-ore-mine] (bank) {\footnotesize Bank};
-    \node[main node, align=center,minimum size=0.75cm,on grid,below=1.5cm of oil-wells] (power-station) {\footnotesize Power station};
-    \node[main node, align=center,minimum size=0.75cm,on grid,left=3cm of power-station] (coal-mine) {\footnotesize Coal mine};
-    \node[main node, align=center,minimum size=0.75cm,on grid,right=3cm of forest] (sawmill) {\footnotesize Sawmill};
-    \node[main node, align=center,minimum size=0.75cm,on grid,below=1.5cm of factory] (oil-refinery) {\footnotesize Oil refinery};
+    \node[main node, align=center,minimum size=0.7cm] (factory) {\footnotesize Factory};
+    \node[main node, align=center,minimum size=0.7cm,on grid,right=3cm of factory] (town) {\footnotesize Town};
+    \node[main node, align=center,minimum size=0.7cm,on grid,right=3cm of town] (oil-rig) {\footnotesize Oil rig};
+    \node[main node, align=center,minimum size=0.7cm,on grid,left=3cm of factory] (steel-mill) {\footnotesize Steel mill};
+    \node[main node, align=center,minimum size=0.7cm,on grid,left=3cm of steel-mill] (iron-ore-mine) {\footnotesize Iron ore mine};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=1.5cm of steel-mill] (oil-wells) {\footnotesize Oil wells};
+    \node[main node, align=center,minimum size=0.7cm,on grid,above=1.5cm of steel-mill] (farm) {\footnotesize Farm};
+    \node[main node, align=center,minimum size=0.7cm,on grid,above=1.5cm of farm] (forest) {\footnotesize Forest};
+    \node[main node, align=center,minimum size=0.7cm,on grid,above=1.5cm of iron-ore-mine] (bank) {\footnotesize Bank};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=1.5cm of oil-wells] (power-station) {\footnotesize Power station};
+    \node[main node, align=center,minimum size=0.7cm,on grid,left=3cm of power-station] (coal-mine) {\footnotesize Coal mine};
+    \node[main node, align=center,minimum size=0.7cm,on grid,right=3cm of forest] (sawmill) {\footnotesize Sawmill};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=1.5cm of factory] (oil-refinery) {\footnotesize Oil refinery};
 
     \path[every node/.style={font=\scriptsize}]
         (forest) edge[] node[] {Wood} (sawmill)
@@ -284,8 +285,6 @@ It is beyond the scope of this project to more rigorously analyse the economic m
         (coal-mine) edge[] node[] {Coal} (power-station)
         (iron-ore-mine) edge[] node[] {Iron ore} (steel-mill)
         (oil-wells) edge[] node[] {Oil} (oil-refinery)
-        (oil-rig) edge[] node[] {Oil} (oil-refinery)
-        (oil-rig) edge[] node[] {Passengers, mail} (town)
         (oil-rig) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (oil-rig)
         (oil-refinery) edge[] node[] {Goods} (town)
         (factory) edge[] node[] {Goods} (town)
@@ -293,6 +292,12 @@ It is beyond the scope of this project to more rigorously analyse the economic m
         (steel-mill) edge[] node[] {Steel} (factory)
         (farm) edge[] node[] {Livestock, grain} (factory)
         (town) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (town);
+
+    \path[draw,->] 
+    (oil-rig.south) -- ($ (oil-rig.center) - (0,1.5) $) -- node[above] {\scriptsize Oil} (oil-refinery.east);
+
+    \path[draw,->] 
+    (oil-rig.west) -- node[above] {\scriptsize Passengers} node[below] {\scriptsize Mail} (town.east);
    
 
 \end{tikzpicture}

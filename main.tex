@@ -286,21 +286,33 @@ It is beyond the scope of this project to more rigorously analyse the economic m
         (iron-ore-mine) edge[] node[] {Iron ore} (steel-mill)
         (oil-wells) edge[] node[] {Oil} (oil-refinery)
         (oil-rig) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (oil-rig)
-        (oil-refinery) edge[] node[] {Goods} (town)
         (factory) edge[] node[] {Goods} (town)
         (sawmill) edge[] node[] {Goods} (town)
         (steel-mill) edge[] node[] {Steel} (factory)
         (town) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (town);
 
     \path[draw,->] 
-    (oil-rig.south) -- ($ (oil-rig.center) - (0,1.5) $) -- node[above] {\scriptsize Oil} (oil-refinery.east);
+    (oil-rig.south)
+    -- ($ (oil-rig.center) - (0,1.5) $)
+    -- node[above] {\scriptsize Oil}
+    (oil-refinery.east);
 
     \path[draw,->] 
-    (oil-rig.west) -- node[above] {\scriptsize Passengers} node[below] {\scriptsize Mail} (town.east);
+    (oil-rig.west)
+    -- node[above] {\scriptsize Passengers} node[below] {\scriptsize Mail} 
+    (town.east);
 
     \path[draw,->] 
-    (farm.east) -- node[above] {\scriptsize Livestock} node[below] {\scriptsize Grain} ($ (farm.center) + (3,0) $) -- (factory.north);
-   
+    (farm.east)
+    -- node[above] {\scriptsize Livestock} node[below] {\scriptsize Grain} ($ (farm.center) + (3,0) $)
+    --
+    (factory.north);
+
+   \path[draw,->] 
+    (oil-refinery.north)
+    -- ($ (oil-refinery.center) + (0,0.75) $)
+    -- node[above] {\scriptsize Goods} ++(3,0)
+    -- (town.south);
 
 \end{tikzpicture}
 \caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce.}

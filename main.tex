@@ -290,7 +290,6 @@ It is beyond the scope of this project to more rigorously analyse the economic m
         (factory) edge[] node[] {Goods} (town)
         (sawmill) edge[] node[] {Goods} (town)
         (steel-mill) edge[] node[] {Steel} (factory)
-        (farm) edge[] node[] {Livestock, grain} (factory)
         (town) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (town);
 
     \path[draw,->] 
@@ -298,6 +297,9 @@ It is beyond the scope of this project to more rigorously analyse the economic m
 
     \path[draw,->] 
     (oil-rig.west) -- node[above] {\scriptsize Passengers} node[below] {\scriptsize Mail} (town.east);
+
+    \path[draw,->] 
+    (farm.east) -- node[above] {\scriptsize Livestock} node[below] {\scriptsize Grain} ($ (farm.center) + (3,0) $) -- (factory.north);
    
 
 \end{tikzpicture}

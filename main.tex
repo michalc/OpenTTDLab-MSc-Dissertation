@@ -31,6 +31,7 @@
 \usepackage{gnuplottex}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
 \usepackage{svg}
 \usepackage{pdfpages}
 \usepackage{listings}
@@ -263,26 +264,19 @@ It is beyond the scope of this project to more rigorously analyse the economic m
 \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,thick,main node/.style={rectangle,draw}]
 
-    % https://tex.stackexchange.com/a/102266
-    \tikzset{
-        position/.style args={#1:#2 from #3}{
-            at=(#3.#1), anchor=#1+180, shift=(#1:#2)
-        }
-    }
-
     \node[main node, align=center,minimum size=0.75cm] (factory) {\footnotesize Factory};
-    \node[main node, align=center,minimum size=0.75cm] (town) [position=0:1.5cm from factory] {\footnotesize Town};
-    \node[main node, align=center,minimum size=0.75cm] (oil-rig) [position=0:1.5cm from town] {\footnotesize Oil rig};
-    \node[main node, align=center,minimum size=0.75cm] (steel-mill) [position=180:1.5cm from factory] {\footnotesize Steel mill};
-    \node[main node, align=center,minimum size=0.75cm] (iron-ore-mine) [position=180:1.5cm from steel-mill] {\footnotesize Iron ore mine};
-    \node[main node, align=center,minimum size=0.75cm] (oil-wells) [position=-90:0.75cm from steel-mill] {\footnotesize Oil wells};
-    \node[main node, align=center,minimum size=0.75cm] (farm) [position=90:0.75cm from steel-mill] {\footnotesize Farm};
-    \node[main node, align=center,minimum size=0.75cm] (forest) [position=90:0.75cm from farm] {\footnotesize Forest};
-    \node[main node, align=center,minimum size=0.75cm] (bank) [position=90:0.75cm from iron-ore-mine] {\footnotesize Bank};
-    \node[main node, align=center,minimum size=0.75cm] (power-station) [position=-90:0.75cm from oil-wells] {\footnotesize Power station};
-    \node[main node, align=center,minimum size=0.75cm] (coal-mine) [position=180:1.5cm from power-station] {\footnotesize Coal mine};
-    \node[main node, align=center,minimum size=0.75cm] (sawmill) [position=0:1.5cm from forest] {\footnotesize Sawmill};
-    \node[main node, align=center,minimum size=0.75cm] (oil-refinery) [position=-90:0.75cm from factory] {\footnotesize Oil refinery};
+    \node[main node, align=center,minimum size=0.75cm,on grid,right=3cm of factory] (town) {\footnotesize Town};
+    \node[main node, align=center,minimum size=0.75cm,on grid,right=3cm of town] (oil-rig) {\footnotesize Oil rig};
+    \node[main node, align=center,minimum size=0.75cm,on grid,left=3cm of factory] (steel-mill) {\footnotesize Steel mill};
+    \node[main node, align=center,minimum size=0.75cm,on grid,left=3cm of steel-mill] (iron-ore-mine) {\footnotesize Iron ore mine};
+    \node[main node, align=center,minimum size=0.75cm,on grid,below=1.5cm of steel-mill] (oil-wells) {\footnotesize Oil wells};
+    \node[main node, align=center,minimum size=0.75cm,on grid,above=1.5cm of steel-mill] (farm) {\footnotesize Farm};
+    \node[main node, align=center,minimum size=0.75cm,on grid,above=1.5cm of farm] (forest) {\footnotesize Forest};
+    \node[main node, align=center,minimum size=0.75cm,on grid,above=1.5cm of iron-ore-mine] (bank) {\footnotesize Bank};
+    \node[main node, align=center,minimum size=0.75cm,on grid,below=1.5cm of oil-wells] (power-station) {\footnotesize Power station};
+    \node[main node, align=center,minimum size=0.75cm,on grid,left=3cm of power-station] (coal-mine) {\footnotesize Coal mine};
+    \node[main node, align=center,minimum size=0.75cm,on grid,right=3cm of forest] (sawmill) {\footnotesize Sawmill};
+    \node[main node, align=center,minimum size=0.75cm,on grid,below=1.5cm of factory] (oil-refinery) {\footnotesize Oil refinery};
 
     \path[every node/.style={font=\scriptsize}]
         (forest) edge[] node[] {Wood} (sawmill)
@@ -327,11 +321,7 @@ For the purpose of the above, industries include towns, which produce passengers
 
 It is beyond the scope of this project to analyse this model in any formal way, and to work out exactly how results gleamed by using OpenTTD can be applied to the real world.
 
-\section{Industry types}
-
-\section{Transportation types}
-
-\section{Station types}
+\section{Transportation and station types}
 
 \section{OpenTTD AIs}
 

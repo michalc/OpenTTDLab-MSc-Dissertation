@@ -287,7 +287,6 @@ It is beyond the scope of this project to more rigorously analyse the economic m
         (oil-wells) edge[] node[] {Oil} (oil-refinery)
         (oil-rig) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (oil-rig)
         (factory) edge[] node[] {Goods} (town)
-        (sawmill) edge[] node[] {Goods} (town)
         (steel-mill) edge[] node[] {Steel} (factory)
         (town) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (town);
 
@@ -308,11 +307,16 @@ It is beyond the scope of this project to more rigorously analyse the economic m
     --
     (factory.north);
 
-   \path[draw,->] 
+   \path[draw,-] 
     (oil-refinery.north)
     -- ($ (oil-refinery.center) + (0,0.75) $)
-    -- node[above] {\scriptsize Goods} ++(3,0)
-    -- (town.south);
+    -- ++(1,0)
+    -- ++(0,0.75);
+
+    \path[draw,-] 
+    (sawmill.east)
+    -- ($ (sawmill.center) + (1,0) $)
+    -- ++(0,-3);
 
 \end{tikzpicture}
 \caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce.}

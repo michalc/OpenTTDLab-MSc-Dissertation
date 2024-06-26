@@ -281,14 +281,14 @@ It is beyond the scope of this project to more rigorously analyse the economic m
 
     \path[every node/.style={font=\scriptsize}]
         (forest) edge[] node[] {Wood} (sawmill)
-        (bank) edge [loop above, distance=0.5cm] node[] {Valuables} (bank)
+        (bank) edge [loop above, distance=0.6cm] node[] {Valuables} (bank)
         (coal-mine) edge[] node[] {Coal} (power-station)
         (iron-ore-mine) edge[] node[] {Iron ore} (steel-mill)
         (oil-wells) edge[] node[] {Oil} (oil-refinery)
-        (oil-rig) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (oil-rig)
-        (factory) edge[] node[] {Goods} (town)
+        (oil-rig) edge[loop above, distance=0.6cm] node[] {Passengers, mail} (oil-rig)
+        (factory) edge[] node[] {} (town)
         (steel-mill) edge[] node[] {Steel} (factory)
-        (town) edge[loop above, distance=0.5cm] node[] {Passengers, mail} (town);
+        (town) edge[loop above, distance=0.6cm] node[] {Passengers, mail} (town);
 
     \path[draw,->] 
     (oil-rig.south)
@@ -307,16 +307,18 @@ It is beyond the scope of this project to more rigorously analyse the economic m
     --
     (factory.north);
 
-   \path[draw,-] 
+   \path[draw,->] 
     (oil-refinery.north)
     -- ($ (oil-refinery.center) + (0,0.75) $)
     -- ++(1,0)
-    -- ++(0,0.75);
+    -- ++(0,0.55)
+    -- ($ (town.west) - (0,0.2) $);
 
-    \path[draw,-] 
+    \path[draw,->] 
     (sawmill.east)
     -- ($ (sawmill.center) + (1,0) $)
-    -- ++(0,-3);
+    -- ++(0,-2.8)
+    -- node[above] {\scriptsize Goods} ($ (town.west) + (0,0.2) $);
 
 \end{tikzpicture}
 \caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce.}

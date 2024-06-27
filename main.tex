@@ -589,7 +589,7 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 \chapter{Example results}
 
-To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+To get evidence of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
 \section{Replicating trAIns AI versus Admiral AI}
 
@@ -597,15 +597,16 @@ To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
 set datafile separator ","
-set style fill pattern 2
 set grid ytics
 set format y "%.0s%c"
+set xlabel "Experiment"
 set style data boxplot
-set ylabel 'Company value $\textrm{\pounds}$'
+set ylabel 'Company value $\textrm{\pounds}$' offset -1.5,0
 
-plot 'notebooks/02_trains_ai_vs_admiral_ai_results_02_openttdlab_final_company_values.csv' \ 
-   using (1):1 skip 2 notitle, \
-   '' using (1):1 skip 2 notitle
+mylabel(name,terrain,source) = sprintf("%s, %s, %s", name, terrain, source)
+
+plot 'notebooks/02_trains_ai_vs_admiral_ai_results_01_combined_final.csv' \ 
+   using (1):3:(0.3):(mylabel(stringcolumn(2),stringcolumn(4),stringcolumn(6))) title 'This'
 \end{gnuplot}
 \caption{Results of attempting to replicate the results from trAIns}
 \label{figure:trains-ai-vs-admiral-ai-final-distributions}

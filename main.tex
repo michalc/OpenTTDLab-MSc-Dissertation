@@ -75,7 +75,7 @@ Firstly thank you to Chris Sawyer, the original author of Transport Tycoon Delux
 
 Thank you also to Ian Earle (A.K.A. BasicBeluga) who found an issue in the documentation of OpenTTDLab and submitted a fix for it. While this was a small change, I took it as evidence that what I was creating stood a chance of being useful, and pushed me to continue.
 
-Thank you to my supervisor Michael Hermann. His ongoing advice throughout this project has been invaluable, and I think also pushed me to do as good a job as I can, including making sure that I have some results to show and discuss, and didn't get too lost in just making OpenTTDLab. This project had a few incarnations, and I think him especially for keeping any frustrations with me inside!
+Thank you to my supervisor Michael Hermann. His ongoing advice throughout this project has been invaluable, and I think also pushed me to do as good a job as I can, including making sure that I have some results to show and discuss, and didn't get too lost in just making OpenTTDLab. This project had a few incarnations, and I thank him especially for keeping in any frustrations with me!
 
 Of course thank you to my husband Matthew Beach, an amazingly loving and supportive partner, and whose support and advice throughout this project has been beyond invaluable. And finally, thank you to our dog, Elliot: he's a good boy.
 
@@ -590,6 +590,35 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 \chapter{Example results}
 
 To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+
+\section{Replicating trAIns AI versus Admiral AI}
+
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set format y "%.0s%c"
+set xtics 3600*24*365*5
+set xdata time
+set format x "%Y"
+set timefmt "%Y-%m-%d"
+set ylabel 'Money in the bank $\textrm{\pounds}$'
+set xlabel 'Date'
+set xrange ["1949-01-01":"2001-01-01"]
+plot 'assets/own-buses-means-standard_deviation.csv' \ 
+   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean 8 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean 4 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean 2 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus'
+\end{gnuplot}
+\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
+\label{figure:trains-ai-vs-admiral-ai-final-distributions}
+\end{figure}
 
 \section{Replicating results}
 \lstset{numbers=left,frame=tb,basicstyle=\linespread{0.7}\ttfamily\footnotesize}

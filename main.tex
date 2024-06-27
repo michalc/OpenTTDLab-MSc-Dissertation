@@ -595,28 +595,19 @@ To get evidence of OpenTTD's usefulness in terms of repeatable, reproducible and
 
 \begin{figure}[h]
 \centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
 set datafile separator ","
 set style fill pattern 2
-set key left top
-set key invert
 set grid ytics
 set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"2001-01-01"]
-plot 'assets/own-buses-means-standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean 8 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean 4 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean 2 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus'
+set style data boxplot
+set ylabel 'Company value $\textrm{\pounds}$'
+
+plot 'notebooks/02_trains_ai_vs_admiral_ai_results_02_openttdlab_final_company_values.csv' \ 
+   using (1):1 skip 2 notitle, \
+   '' using (1):1 skip 2 notitle
 \end{gnuplot}
-\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
+\caption{Results of attempting to replicate the results from trAIns}
 \label{figure:trains-ai-vs-admiral-ai-final-distributions}
 \end{figure}
 

@@ -590,9 +590,19 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 \chapter{Example results}
 
-To get evidence of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to perform a more in-depth analysis of 2 existing OpenTTD AIs than seems to have been performed already, even by their authors. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to replicate existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
-\section{Replicating trAIns AI versus Admiral AI}
+\section{Replicating existing results}
+
+\subsection{Setup}
+
+The setup was as close as possible as to what was described as the setup in \cite{rios2009trains}. In all cases the map was configured to be 512x512 tiles, with a very low amount of seas, vehicle breakdowns were disabled and the starting year set to 1960.
+
+However, it was not possible to completely recreate the setup in several ways. The version of OpenTTD was given as 16724 - referring to a revision number in what was OpenTTD's SVN setup. However, OpenTTDLab does not currently support this version because of the older format of savegame files it outputs. Instead, I used OpenTTD version 13.4. This also resulted
+
+Also the version of trAIns was not specified, nor the version of Admiral AI, nor the version of what is currently its singular dependency. Finally, the original experiments were not conducted for the exact same amount of in game time: varying from 15 years and 2 days to 15 years and 11 months. The results presented here are for exactly 15 years of in-game time.
+
+
 
 \begin{figure}[h]
 \centering

@@ -235,7 +235,8 @@ An example field of play, also showing some of the interface that players use to
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textheight,height=\textwidth,keepaspectratio,angle=90]{assets/openttd-field-of-play.png}
+\includegraphics[width=\textheight,height=\textwidth,keepaspectratio,angle=90]{assets/openttd-field-of-play.pngNOT}
+TO PUT BACK IN
 \caption{A the interface of OpenTTD 13.4, showing an portion of an example transport network linking industries and towns.}
 \label{figure:openttd-field-of-play}
 \end{figure}
@@ -596,17 +597,42 @@ To get evidence of OpenTTDLab's usefulness in terms of repeatable, reproducible 
 \begin{figure}[h]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
+file = "notebooks/02_trains_ai_vs_admiral_ai_results_01_combined_final.csv"
 set datafile separator ","
 set grid ytics
 set format y "%.0s%c"
-set xlabel "Experiment"
-set style data boxplot
+set style data boxplot 
+set style boxplot outliers pointtype 2 medianlinewidth 2
 set ylabel 'Company value $\textrm{\pounds}$' offset -1.5,0
+set key right top
 
-mylabel(name,terrain,source) = sprintf("%s, %s, %s", name, terrain, source)
+mylabel(name) = sprintf("%s", name)
+set style fill pattern 2 border lt -1
 
-plot 'notebooks/02_trains_ai_vs_admiral_ai_results_01_combined_final.csv' \ 
-   using (1):3:(0.3):(mylabel(stringcolumn(2),stringcolumn(4),stringcolumn(6))) title 'This'
+set multiplot layout 1,2
+set yrange [-2500000:50000000]
+set ytic 5000000
+
+set xlabel "Flat"
+set lmargin at screen 0.15; set rmargin at screen 0.55
+set xtics ("trAIns" 1.5, "Admiral" 3.5)
+plot file \ 
+   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc 2 fs pattern 0 notitle, \
+   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) lc 2 fs pattern 0 notitle
+
+set xlabel "Mountainous"
+unset ylabel
+set format y ''
+set lmargin at screen 0.55; set rmargin at screen 0.95
+plot file \ 
+   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' notitle, \
+   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc 2 fs pattern 0 notitle, \
+   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) pointsize 0.5 lc 2 fs pattern 0 notitle, \
+   keyentry with boxplot lc rgb '#aaaaaa' fs pattern 2 title "\\footnotesize \\vspace*{0.1cm} Original paper", \
+   keyentry with boxplot lc 2 fs pattern 0 title "\\footnotesize \\vspace*{0.1cm}OpenTTDLab"
 \end{gnuplot}
 \caption{Results of attempting to replicate the results from trAIns}
 \label{figure:trains-ai-vs-admiral-ai-final-distributions}

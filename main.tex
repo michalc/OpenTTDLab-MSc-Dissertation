@@ -75,7 +75,7 @@ Firstly thank you to Chris Sawyer, the original author of Transport Tycoon Delux
 
 Thank you also to Ian Earle (A.K.A. BasicBeluga) who found an issue in the documentation of OpenTTDLab and submitted a fix for it. While this was a small change, I took it as evidence that what I was creating stood a chance of being useful, and pushed me to continue.
 
-Thank you to my supervisor Michael Hermann. His ongoing advice throughout this project has been invaluable, and I think also pushed me to do as good a job as I can, including making sure that I have some results to show and discuss, and didn't get too lost in just making OpenTTDLab. This project had a few incarnations, and I thank him especially for keeping in any frustrations with me!
+Thank you to my supervisor Michael Hermann. His ongoing advice throughout this project has been invaluable, and I think also pushed me to do as good a job as I can, including making sure that I have some results to show and discuss, and didn't get too lost in just making OpenTTDLab.
 
 Of course thank you to my husband Matthew Beach, an amazingly loving and supportive partner, and whose support and advice throughout this project has been beyond invaluable. And finally, thank you to our dog, Elliot: he's a good boy.
 
@@ -235,7 +235,7 @@ An example field of play, also showing some of the interface that players use to
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textheight,height=\textwidth,keepaspectratio,angle=90]{assets/openttd-field-of-play.pngNOT}
+\includegraphics[width=\textheight,height=\textwidth,keepaspectratio,angle=90]{assets/openttd-field-of-play.png}
 TO PUT BACK IN
 \caption{A the interface of OpenTTD 13.4, showing an portion of an example transport network linking industries and towns.}
 \label{figure:openttd-field-of-play}
@@ -600,10 +600,10 @@ To get evidence of OpenTTDLab's usefulness in terms of repeatable, reproducible 
 file = "notebooks/02_trains_ai_vs_admiral_ai_results_01_combined_final.csv"
 set datafile separator ","
 set grid ytics
-set format y "%.0s%c"
+set format y "\\footnotesize %.0s%c"
 set style data boxplot 
 set style boxplot outliers pointtype 2 medianlinewidth 2
-set ylabel 'Company value $\textrm{\pounds}$' offset -1.5,0
+set ylabel '\footnotesize Company value $\textrm{\pounds}$'
 set key right top
 
 mylabel(name) = sprintf("%s", name)
@@ -613,24 +613,24 @@ set multiplot layout 1,2
 set yrange [-2500000:50000000]
 set ytic 5000000
 
-set xlabel "Flat"
-set lmargin at screen 0.15; set rmargin at screen 0.55
-set xtics ("trAIns" 1.5, "Admiral" 3.5)
+set xlabel "\\footnotesize Flat"
+set lmargin at screen 0.11; set rmargin at screen 0.53
+set xtics ("\\footnotesize trAIns" 1.5, "\\footnotesize Admiral" 3.5)
 plot file \ 
-   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' fs pattern 2 notitle, \
-   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc 2 fs pattern 0 notitle, \
-   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' fs pattern 2 notitle, \
-   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) lc 2 fs pattern 0 notitle
+   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle, \
+   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle
 
-set xlabel "Mountainous"
+set xlabel "\\footnotesize Mountainous"
 unset ylabel
 set format y ''
-set lmargin at screen 0.55; set rmargin at screen 0.95
+set lmargin at screen 0.53; set rmargin at screen 0.95
 plot file \ 
-   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' notitle, \
-   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.3) lc 2 fs pattern 0 notitle, \
-   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) lc rgb '#aaaaaa' fs pattern 2 notitle, \
-   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.3) pointsize 0.5 lc 2 fs pattern 0 notitle, \
+   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' notitle, \
+   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle, \
+   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) pointsize 0.5 lc 2 fs pattern 0 notitle, \
    keyentry with boxplot lc rgb '#aaaaaa' fs pattern 2 title "\\footnotesize \\vspace*{0.1cm} Original paper", \
    keyentry with boxplot lc 2 fs pattern 0 title "\\footnotesize \\vspace*{0.1cm}OpenTTDLab"
 \end{gnuplot}

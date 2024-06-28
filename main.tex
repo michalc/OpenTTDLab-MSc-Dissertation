@@ -590,23 +590,30 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 \chapter{Example results}
 
-To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to replicate existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to reproduce existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
-\section{Replicating existing results}
+\section{Reproduce existing results}
 
-The first situation is an attempt to replicate the results of \cite{rios2009trains}, namely a set of matches between the trAIns [sic] AI being presented, and the pre-existing Admiral AI.
+The first situation is an attempt to replicate some of the results of \cite{rios2009trains}, specifically a set of matches between the trAIns [sic] AI being presented, and the pre-existing Admiral AI, and comparing their performance in terms of company value.
 
-\subsection{Experiment setup and differences from the original setup}
+\subsection{Experimental setup}
 
-The setup was a best effort attempt to what was described as the setup of the experiments in the original trAIns paper \cite{rios2009trains}. In the experiments presented here, the starting year was set to 1960, the map was configured to be 512x512 tiles with a very low amount of seas, industry density and number of towns set to normal, the economy set to be able to fluctuate, subsidy multiplier of x2, disasters enabled, tolerance of town councils to changes set as tolerant, both vehicle running costs and construction costs set to medium, vehicle breakdowns disabled, the maximum initial loan was set to £300,000, and initial interest rate set to 3\%.
+The setup was a best effort attempt to what was described as the setup of the experiments in the original trAIns paper \cite{rios2009trains}. In the experiments presented here, the starting year was set to 1960, the map was configured to be 512x512 tiles with a very low amount of seas, industry density and number of towns set to normal, the economy set to be able to fluctuate, subsidy multiplier of x2, disasters enabled, tolerance of town councils to changes set as tolerant, both vehicle running costs and construction costs set to medium, vehicle breakdowns disabled, trains set to only be able to turn around at the end of the line as opposed to also at stations, and the maximum initial loan was set to £300,000, and initial interest rate set to 3\%.
 
 Note that these settings were not all explicitly mentioned in the original paper: it described running OpenTTD revision 16724 using \emph{medium} difficulty level with some overrides. However, OpenTTDLab does not work under this version (due to savegame format differences), and the recent versions of OpenTTD that do work under OpenTTDLab no longer have the concept of difficulty level. However, the historical meaning of the medium difficulty level is documented, and so the explicit list of aforementioned settings recreated, and run under OpenTTD 13.4 and OpenGFX 7.1 that OpenTTDLab does work under.
 
-There is one exception to basing off the medium difficulty level. The medium difficulty level was documented to have a maximum initial loan of £150,000. However, using this level in pilot experiments resulted in extremely poor performance of Admiral AI - it appeared to be virtually unable to function in all experiments.
+There is one exception to basing off the medium difficulty level. The medium difficulty level was documented to have a maximum initial loan of £150,000. However, using this level in pilot experiments resulted in extremely poor performance of Admiral AI - it appeared to be virtually unable to function.
 
-The version of trAIns was not specified in the original paper, nor the version of Admiral AI, and nor the version of what is currently its singular dependency. The results presented here are for exactly 15 years of in-game time, while in the original experiments the time varied from 15 years and 2 days to 15 years and 11 months.
+The version of trAIns was 2.1 with MD5 of c4c069dc797674e545411b59867ad0c2,  the version of Admiral AI 25 4ccd92fb8f8f01045145be99a28e14a6. Admiral AI 25 has a single dependency: Queue.FibonacciHeap, which is pinned to version 2 by Admiral AI 25 code. None of the versions were specified in the original paper. These were all retrieved from the BaNaNaS - as discussed in the previous chapter, to download an exact version from BaNaNaS the full MD5 is is needed.
 
-There are 2 sets of experiments performed: one using the \emph{flat} terrain type, and one for the \emph{mountainous} terrain type. Here is is repeated 64 times, and in the original paper each of these was repeated 7 times. Here random seeds 0 to 64 were used for each set of experiments, but in the original paper the random seeds are unknown.
+The results presented here are for exactly 15 years of in-game time, while in the original experiments the time varied from 15 years and 2 days to 15 years and 11 months.
+
+In both the original paper and here, there were two sets of experiments performed: one using the \emph{flat} terrain type, and one for the \emph{mountainous} terrain type. Here it is repeated 64 times, and in the original paper each of these was repeated 7 times. Here random seeds 0 to 64 were used for each set of experiments, but in the original paper the random seeds are unknown.
+
+The experiments here were run on mac OS 14.5 running on a 2020 M1 and Python 3.11.0 and OpenTTDLab 0.0.72. The OS and CPU of the original experiments are unknown. The experiments here were run with the default number of workers, which on the CPU would be 8.
+
+The Python code used to run the experiments is in Appendix REPLACEME, and the code to subsequently analyse the results in Appendix REPLACEME.
+
 
 \begin{figure}[h]
 \centering

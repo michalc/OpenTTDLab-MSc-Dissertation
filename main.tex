@@ -594,15 +594,19 @@ To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible 
 
 \section{Replicating existing results}
 
-\subsection{Setup}
+The first situation is an attempt to replicate the results of \cite{rios2009trains}, namely a set of matches between the trAIns [sic] AI being presented, and the pre-existing Admiral AI.
 
-The setup was as close as possible as to what was described as the setup in \cite{rios2009trains}. In all cases the map was configured to be 512x512 tiles, with a very low amount of seas, vehicle breakdowns were disabled and the starting year set to 1960.
+\subsection{Experiment setup and differences from the original setup}
 
-However, it was not possible to completely recreate the setup in several ways. The version of OpenTTD was given as 16724 - referring to a revision number in what was OpenTTD's SVN setup. However, OpenTTDLab does not currently support this version because of the older format of savegame files it outputs. Instead, I used OpenTTD version 13.4. This also resulted
+The setup was a best effort attempt to what was described as the setup of the experiments in the original trAIns paper \cite{rios2009trains}. In the experiments presented here, the starting year was set to 1960, the map was configured to be 512x512 tiles with a very low amount of seas, industry density and number of towns set to normal, the economy set to be able to fluctuate, subsidy multiplier of x2, disasters enabled, tolerance of town councils to changes set as tolerant, both vehicle running costs and construction costs set to medium, vehicle breakdowns disabled, the maximum initial loan was set to £300,000, and initial interest rate set to 3\%.
 
-Also the version of trAIns was not specified, nor the version of Admiral AI, nor the version of what is currently its singular dependency. Finally, the original experiments were not conducted for the exact same amount of in game time: varying from 15 years and 2 days to 15 years and 11 months. The results presented here are for exactly 15 years of in-game time.
+Note that these settings were not all explicitly mentioned in the original paper: it described running OpenTTD revision 16724 using \emph{medium} difficulty level with some overrides. However, OpenTTDLab does not work under this version (due to savegame format differences), and the recent versions of OpenTTD that do work under OpenTTDLab no longer have the concept of difficulty level. However, the historical meaning of the medium difficulty level is documented, and so the explicit list of aforementioned settings recreated, and run under OpenTTD 13.4 and OpenGFX 7.1 that OpenTTDLab does work under.
 
+There is one exception to basing off the medium difficulty level. The medium difficulty level was documented to have a maximum initial loan of £150,000. However, using this level in pilot experiments resulted in extremely poor performance of Admiral AI - it appeared to be virtually unable to function in all experiments.
 
+The version of trAIns was not specified in the original paper, nor the version of Admiral AI, and nor the version of what is currently its singular dependency. The results presented here are for exactly 15 years of in-game time, while in the original experiments the time varied from 15 years and 2 days to 15 years and 11 months.
+
+There are 2 sets of experiments performed: one using the \emph{flat} terrain type, and one for the \emph{mountainous} terrain type. Here is is repeated 64 times, and in the original paper each of these was repeated 7 times. Here random seeds 0 to 64 were used for each set of experiments, but in the original paper the random seeds are unknown.
 
 \begin{figure}[h]
 \centering
@@ -612,7 +616,8 @@ set datafile separator ","
 set grid ytics
 set format y "\\footnotesize %.0s%c"
 set style data boxplot 
-set style boxplot outliers pointtype 2 medianlinewidth 2
+set style boxplot outliers pointtype 1 medianlinewidth 2
+set style boxplot fraction 1.00
 set ylabel '\footnotesize Company value $\textrm{\pounds}$'
 set key right top
 
@@ -637,9 +642,9 @@ unset ylabel
 set format y ''
 set lmargin at screen 0.53; set rmargin at screen 0.95
 plot file \ 
-   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' notitle, \
-   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle, \
-   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
+   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) pointsize 0.5 lc rgb '#aaaaaa' notitle, \
+   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) pointsize 0.5 lc 2 fs pattern 0 notitle, \
+   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) pointsize 0.5 lc rgb '#aaaaaa' fs pattern 2 notitle, \
    '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) pointsize 0.5 lc 2 fs pattern 0 notitle, \
    keyentry with boxplot lc rgb '#aaaaaa' fs pattern 2 title "\\footnotesize \\vspace*{0.1cm} Original paper", \
    keyentry with boxplot lc 2 fs pattern 0 title "\\footnotesize \\vspace*{0.1cm}OpenTTDLab"

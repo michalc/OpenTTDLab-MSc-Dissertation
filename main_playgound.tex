@@ -50,55 +50,66 @@
 
 \begin{figure}[h]
 \centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
-file = "notebooks/02_trains_ai_vs_admiral_ai_results_01_combined_final.csv"
-set datafile separator ","
-set grid ytics
-set format y "\\footnotesize %.0s%c"
-set style data boxplot 
-set style boxplot outliers pointtype 1 medianlinewidth 2
-set style boxplot fraction 1.00
-set ylabel '\footnotesize Company value $\textrm{\pounds}$'
-set key right top
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,thick,main node/.style={rectangle,draw}]
 
-mylabel(name) = sprintf("%s", name)
-set style fill pattern 2 border lt -1
+    \node[main node, align=center,minimum size=0.7cm] (factory) {\footnotesize Factory};
+    \node[main node, align=center,minimum size=0.7cm,on grid,right=3cm of factory] (town) {\footnotesize Town};
+    \node[main node, align=center,minimum size=0.7cm,on grid,right=3cm of town] (oil-rig) {\footnotesize Oil rig};
+    \node[main node, align=center,minimum size=0.7cm,on grid,left=3cm of factory] (steel-mill) {\footnotesize Steel mill};
+    \node[main node, align=center,minimum size=0.7cm,on grid,left=3cm of steel-mill] (iron-ore-mine) {\footnotesize Iron ore mine};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=1.5cm of steel-mill] (oil-wells) {\footnotesize Oil wells};
+    \node[main node, align=center,minimum size=0.7cm,on grid,above=1.5cm of steel-mill] (farm) {\footnotesize Farm};
+    \node[main node, align=center,minimum size=0.7cm,on grid,above=1.5cm of farm] (forest) {\footnotesize Forest};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=3cm of oil-rig] (bank) {\footnotesize Bank};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=1.5cm of oil-wells] (power-station) {\footnotesize Power station};
+    \node[main node, align=center,minimum size=0.7cm,on grid,left=3cm of power-station] (coal-mine) {\footnotesize Coal mine};
+    \node[main node, align=center,minimum size=0.7cm,on grid,right=3cm of forest] (sawmill) {\footnotesize Sawmill};
+    \node[main node, align=center,minimum size=0.7cm,on grid,below=1.5cm of factory] (oil-refinery) {\footnotesize Oil refinery};
 
-set multiplot layout 1,2
-set yrange [-2500000:50000000]
-set ytic 5000000
+    \path[every node/.style={font=\scriptsize}]
+        (forest) edge[] node[] {Wood} (sawmill)
+        (bank) edge [loop above, distance=0.6cm] node[] {Valuables} (bank)
+        (coal-mine) edge[] node[] {Coal} (power-station)
+        (iron-ore-mine) edge[] node[] {Iron ore} (steel-mill)
+        (oil-wells) edge[] node[] {Oil} (oil-refinery)
+        (oil-rig) edge[loop above, distance=0.6cm] node[] {Passengers, mail} (oil-rig)
+        (factory) edge[] node[] {} (town)
+        (steel-mill) edge[] node[] {Steel} (factory)
+        (town) edge[loop above, distance=0.6cm] node[] {Passengers, mail} (town);
 
-set xlabel "\\footnotesize Flat"
-set lmargin at screen 0.11; set rmargin at screen 0.53
-set xtics ("\\footnotesize trAIns" 1.5, "\\footnotesize Admiral" 3.5)
-plot file \ 
-   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
-   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle, \
-   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
-   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle
+    \path[draw,->] 
+    (oil-rig.south)
+    -- ($ (oil-rig.center) - (0,1.5) $)
+    -- node[above] {\scriptsize Oil}
+    (oil-refinery.east);
 
-set xlabel "\\footnotesize Mountainous"
-unset ylabel
-set format y ''
-set lmargin at screen 0.53; set rmargin at screen 0.95
-plot file \ 
-   using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) pointsize 0.5 lc rgb '#aaaaaa' notitle, \
-   '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) pointsize 0.5 lc 2 fs pattern 0 notitle, \
-   '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) pointsize 0.5 lc rgb '#aaaaaa' fs pattern 2 notitle, \
-   '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) pointsize 0.5 lc 2 fs pattern 0 notitle, \
-   keyentry with boxplot lc rgb '#aaaaaa' fs pattern 2 title "\\footnotesize \\vspace*{0.1cm} Original paper", \
-   keyentry with boxplot lc 2 fs pattern 0 title "\\footnotesize \\vspace*{0.1cm}OpenTTDLab"
-\end{gnuplot}
-\caption{Results of attempting to replicate the results from trAIns}
-\label{figure:trains-ai-vs-admiral-ai-final-distributions}
-\end{figure}
+    \path[draw,<->] 
+    (oil-rig.west)
+    -- node[above] {\scriptsize Passengers} node[below] {\scriptsize Mail} 
+    (town.east);
 
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
-test
-\end{gnuplot}
-\caption{Results of attempting to replicate the results from trAIns}
+    \path[draw,->] 
+    (farm.east)
+    -- node[above] {\scriptsize Livestock} node[below] {\scriptsize Grain} ($ (farm.center) + (3,0) $)
+    --
+    (factory.north);
+
+   \path[draw,->] 
+    (oil-refinery.north)
+    -- ($ (oil-refinery.center) + (0,0.75) $)
+    -- ++(1,0)
+    -- ++(0,0.55)
+    -- ($ (town.west) - (0,0.2) $);
+
+    \path[draw,->] 
+    (sawmill.east)
+    -- ($ (sawmill.center) + (1,0) $)
+    -- ++(0,-2.8)
+    -- node[above] {\scriptsize Goods} ($ (town.west) + (0,0.2) $);
+
+\end{tikzpicture}
+\caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce. Adapted from \cite{TemperateFlowChart}.}
+\label{figure:temperate-supply-chains}
 \end{figure}
 
 

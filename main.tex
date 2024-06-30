@@ -714,6 +714,60 @@ plot 'notebooks/02_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_q
 \label{figure:trains-ai-vs-admiral-ai-over-time}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,3}]
+set datafile separator ","
+set style fill pattern 2
+set grid ytics
+set format y "%.1s%c"
+set timefmt "%Y-%m-%d"
+set xdata time
+set xtics "1960-01-01",3600*24*365*5,"1974-12-01"
+
+
+set ylabel 'Company value $\textrm{\pounds}$' offset 1.5
+
+set xrange ["1960-01-01":"1975-06-01"]
+set yrange [-200000:4000000]
+
+set multiplot layout 1,2
+
+set ytics ("\\footnotesize 0" 0, "\\footnotesize 0.5M" 500000, "\\footnotesize 1.0M" 1000000, "\\footnotesize 1.5M" 1500000, "\\footnotesize 2.0M" 2000000, "\\footnotesize 2.5M" 2500000, "\\footnotesize 3.0M" 3000000, "\\footnotesize 3.5M" 3500000, "\\footnotesize 4.0M" 4000000)
+set mytics 100000
+
+unset key
+set lmargin at screen 0.11; set rmargin at screen 0.53
+set xlabel '\footnotesize Date'
+set format x "\\footnotesize %Y"
+
+set label 1 '\footnotesize Flat' at graph 0.03,1.05
+plot 'notebooks/02_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
+   using (timecolumn(1, '%Y-%m-%d')):2:4 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
+   '' using (timecolumn(1, '%Y-%m-%d')):6:5:7 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
+   '' using (timecolumn(1, '%Y-%m-%d')):6 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
+
+set lmargin at screen 0.53; set rmargin at screen 0.95
+
+set key right top
+set key invert
+set label 1 '\footnotesize Mountainous' at graph 0.03,1.05
+set ylabel ''
+set ytics ("" 0, "" 500000, "" 1000000, "" 1500000, "" 2000000, "" 2500000, "" 3000000, "" 3500000, "" 4000000)
+set xtics "1960-01-01",3600*24*365*5,"1975-01-01"
+
+plot 'notebooks/02_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
+   using (timecolumn(1, '%Y-%m-%d')):8:10 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
+   '' using (timecolumn(1, '%Y-%m-%d')):9 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
+   '' using (timecolumn(1, '%Y-%m-%d')):12:11:13 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
+   '' using (timecolumn(1, '%Y-%m-%d')):12 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
+
+\end{gnuplot}
+\caption{Reproducing company value over time}
+\label{figure:trains-ai-vs-admiral-ai-over-time}
+\end{figure}
+
 \section{Replicating results}
 \lstset{numbers=left,frame=tb,basicstyle=\linespread{0.7}\ttfamily\footnotesize}
 \lstinputlisting[language=Python,float,caption=A floating example]{assets/replicating_results_core.py}
@@ -834,374 +888,7 @@ The output of the seeds used, all settings, OpenTTD version, without modificatio
 
 A limitation of the framework is that the AI version used doesn't seem to have a version.
 
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set xtics 3600*24*365
-set mxtics 12
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1950-01-01":"1953-02-01"]
-plot 'assets/trainsai-means-standard-dev.csv' \ 
-   every ::::36 using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' every ::::36 using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' every ::::36 using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' every ::::36 using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of money in the bank for TrainsAI over the first 36 months}
-\label{fig:supplychainresiliance}
-\end{figure}
 
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1981-01-01"]
-plot 'assets/trainsai-means-standard-dev.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of money in the bank for TrainsAI over time over 50 experiments for 30 years}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set xtics 3600*24*365
-set mxtics 12
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1950-01-01":"1954-02-01"]
-plot 'assets/pathzilla-means-standard-dev.csv' \ 
-   every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of money in the bank for Pathzilla over the first 48 months}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1981-01-01"]
-plot 'assets/pathzilla-means-standard-dev.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of money in the bank for Pathzilla over time over 50 experiments for 30 years}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set xtics 3600*24*365
-set mxtics 12
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1950-01-01":"1954-02-01"]
-plot 'assets/pathzilla-means-standard-dev.csv' \ 
-   every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title '', \
-    'assets/trainsai-means-standard-dev.csv' \ 
-   every :::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' every :::: using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of money in the bank for Pathzilla over the first 48 months}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1981-01-01"]
-plot 'assets/pathzilla-means-standard-dev.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean pathzilla', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title '', \
-   'assets/trainsai-means-standard-dev.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean trainsai', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of money in the bank for Pathzilla and TrainsAI over time over 50 experiments for 30 years}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set xtics 3600*24*365
-set mxtics 12
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1950-01-01":"1954-02-01"]
-plot 'assets/pathzilla-company-value-means-standard-dev.csv' \ 
-   every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' every ::::48 using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of company value for Pathzilla over the first 48 months}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set key autotitle columnhead
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1981-01-01"]
-plot 'assets/pathzilla-company-value-means-standard-dev.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($2+$3):($2-$3) with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 with lines title 'Mean', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$3) with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$3) with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{The mean of company value for Pathzilla over time over 50 experiments for 30 years}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1961-01-01"]
-plot 'assets/own-buses-means-standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{Money in the bank for my own simple AI: one bus}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1961-01-01"]
-plot 'assets/own-buses-means-standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($3+$7):($3-$7) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($3+$7) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($3-$7) skip 2 with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{Money in the bank for my own simple AI: two buses}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set format y "%.0s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x "%Y"
-set timefmt "%Y-%m-%d"
-set ylabel 'Money in the bank $\textrm{\pounds}$'
-set xlabel 'Date'
-set xrange ["1949-01-01":"1961-01-01"]
-plot 'assets/own-buses-means-standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($4+$8):($4-$8) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($4+$8) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($4-$8) skip 2 with lines lc rgb '#cccccc' title ''
-\end{gnuplot}
-\caption{Money in the bank for my own simple AI: 4 buses}
-\label{fig:supplychainresiliance}
-\end{figure}
-
-
-
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/end-of-first-year-distribution.png}
-\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
-\label{fig:first-year}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/first-2-years.png}
-\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
-\label{fig:first-year}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/end-of-second-year-distribution.png}
-\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
-\label{fig:first-year}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/value-over-time-2.png}
-\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
-\label{fig:value-over-time}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/end-of-30th-year-distribution.png}
-\caption{A chart showing the balance over for 50 experiments (current OpenTTDLab )}
-\label{fig:first-year}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/34_small.png}
-\caption{Seed 34 - with the highest money at end}
-\label{fig:openttd}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/19_small.png}
-\caption{Seed 19 - with the lowest money at end}
-\label{fig:openttd}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/stations_vs_money.png}
-\caption{Not much of a corrolation between stations and money!}
-\label{fig:openttd}
-\end{figure}
 
 Bit of a "story" - starts off 300k. Then after a time there is a bi-modal distribution on money, then all the companies have have money in a normal-ish distribution.
 
@@ -1209,15 +896,6 @@ Looks like the one with more stations/routes has more money? Can we corrolate st
 
 
 
-
-------
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\columnwidth]{assets/value-over-time.png}
-\caption{A chart showing the balance over for 50 experiments (old version of OpenTTDLab - can't reproduce! Suspect because now AIs are started immediately, and so the random numbers are different? Will check on older OpenTTDLab)}
-\label{fig:value-over-time}
-\end{figure}
 
 
 

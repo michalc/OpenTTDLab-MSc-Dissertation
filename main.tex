@@ -77,7 +77,7 @@ Thank you also to Ian Earle (A.K.A. BasicBeluga) who found an issue in the docum
 
 Thank you to my supervisor Michael Hermann. His ongoing advice throughout this project has been invaluable, and I think also pushed me to do as good a job as I can, including making sure that I have some results to show and discuss, and didn't get too lost in just making OpenTTDLab.
 
-Of course thank you to my husband Matthew Beach, an amazingly loving and supportive partner, and whose support and advice throughout this project has been beyond invaluable. And finally, thank you to our dog, Elliot: he's a good boy.
+And finally thank you to my husband Matthew Beach, an amazingly loving partner, and whose support throughout this project has been beyond invaluable. 
 
 \end{acknowledgements}
 
@@ -88,42 +88,26 @@ Of course thank you to my husband Matthew Beach, an amazingly loving and support
 
 \chapter{Introduction}
 
-OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation game based on the 1994 game Transport Tycoon Deluxe by Chris Sawyer. The aim of the game is to successfully run a business by constructing networks of roads, railways, airports and ports, along with their respective vehicles, trains, planes and ships, in order to transport people and goods in exchange for money. OpenTTD is played on a simulated landscape as can be seen in Figure \ref{fig:openttd}.
+OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation game based on  Chris Sawyer's 1994 game Transport Tycoon Deluxe. The aim of the game is to successfully run a business by constructing networks of roads, railways, airports and ports, along with their respective vehicles, trains, planes and ships, in order to transport people and goods in exchange for money. OpenTTD is played on a simulated landscape as can be seen in Figure \ref{figure:introduction-screenshot}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{assets/openttd-screenshot.png}
-\caption{A small section of an OpenTTD (version 12.2) game at the moment when income is received for delivering goods by road. Also shown is part of a railway network, a port for ships, an oil refinery, and a sawmill.}
-\label{fig:openttd}
+\includegraphics[width=\columnwidth]{assets/01_introduction_01_screenshot.png}
+\caption{A small section of an OpenTTD version 13.4 game showing parts of a rail, road, and sea transportation network, as well as several industries. At the top is the control bar through which the player takes actions or see more details on the state of the game, such as finances.}
+\label{figure:introduction-screenshot}
 \end{figure}
 
+OpenTTD was created as a game for recreation: it allows a single player to play in a non-competitive world building mode; multiple human players playing cooperatively or competitively; and so-called AI-players, that each control a company via code not part of OpenTTD, which provide opponents for humans to play against. However, it is remarkably flexible: it has been successfully used as a tool to research algorithms including artificial intelligence (AI) and machine learning (ML) algorithms \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving, lakomy2020railroad}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid for concurrency in computer programs \cite{HansenMuprhie2018, marmorstein2015teaching}\footnote{\cite{HansenMuprhie2018} refers to an \emph{OpenTTD lab}, which is a set of scenarios and exercises for students to follow. It is not directly related to the OpenTTDLab presented here.} and for supply chain and logistics management \cite{doi:10.1080/10494820.2016.1242503}.
 
-OpenTTD was created as a game for recreation. However, it is remarkably flexible: it has been successfully used as a tool to research artificial intelligence (AI) and machine learning (ML) algorithms \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid \cite{HansenMuprhie2018}. It allows a single player to play in a non competitive world building mode, multiple human players playing cooperatively or competitively, and allows so-called custom AI-players that each control a company via code not part of the OpenTTD, but part of extensions to it written in the Squirrel language.
+Simulation games have a long history of being used to inform government policies, see \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some aspects of it networks are realistic, its economic model is not.
 
-Using OpenTTD as a tool for research is the focus of this project, and specifically the focus is the development of a tool that augments its existing features for repeatable, replicable, \& reproducible research.
-
-\section{A brief history of learning from simulation games}
-
-Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued to embody strategies that bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting also that OpenTTD's discretized simplification of space also has a long history in simulation.
-
-The military-style/war games eventually evolved to logistic simulations, albeit still in military context. Fore example based MONOPOLOGS \cite{jackson1959learning} that is often credited as the first computerised logistics simulation game - SAY WHEN AND WHAT USED FOR. Then the MIT beer game - to illustrate something in supply chains. These then evolved to games that informed policy making - EXAMPLE.
-
-
-This evolved [REF]
-
-----
-
-OpenTTD is part of a wider class of games: simulation games. Simulation games have been frequently used in various fields to explore scenarios in an effort to inform policies. PUT IN LIST.
-
-Attention is usually paid to how realistic these games are. For example, \cite{raghothama2013review} summarises how well a number of games, including OpenTTD, how well the games model the real world. It's worth noting that while the economic model of OpenTTD is not realistic, \cite{raghothama2013review} classes some aspects of the transportation model as realistic, albeit without justification.
-
-
+Of all these, using OpenTTD as a tool for researching algorithms is the primary focus of this project, and specifically the focus is the development of a tool that augments its existing features for repeatable, replicable, \& reproducible research. As a secondary and more speculative aim, it is hoped that the work here allows for OpenTTD to be investigated as a tool to simulate supply chain or transportation networks that could ultimately inform government policies.
 
 \section{Repeatability, Replicatability, \& Reproducibility}
 
 
 
-The terms repeatability, replicability, and reproducibility unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. To add to the confusion, the ACM have swapped their definitions reproducibility and replicability \cite{association_for_computing_machiner_new_2020}. For the avoidance of doubt, I use the ACM's definitions that are current as of October 2023 \cite{association_for_computing_machiner_artifact_2020}. For some results of an experiment conducted by a team of authors, where some computer-based artefacts were created to conduct these, these can be summarised as
+The terms repeatability, replicability, and reproducibility unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018} and to add to the confusion, the Association for Computing Machinery (ACM) have swapped their definitions reproducibility and replicability \cite{association_for_computing_machiner_new_2020}. For the avoidance of doubt, I use the ACM's definitions that are current as of October 2023 \cite{association_for_computing_machiner_artifact_2020}. For some results of an experiment conducted by a team of authors, where some computer-based artefacts were created to conduct these, these can be summarised as
 
 \begin{description}
 \item[Repeatability] The authors can obtain the results again, using the same artefacts.
@@ -214,6 +198,22 @@ The seeds of each experiements were also not supplied.
 This is the most difficult to judge without actually attempting to do it, and it is what.
 
 However, if an experiment isn't even reproducible, it is even more difficult to replicate it.
+
+\section{A brief history of learning from simulation games}
+
+Games have a long history of being used as tools beyond recreation, and specifically as tools to simulate the real world in order to take conclusions about the game environment and apply them to the world outside of the game, with war games doing this as far back even to ancient periods \cite{mayer2009gaming}. One of the world's oldest board game, Go (the `game of encircling territories' to literally translate its Mandarin name), originating in China approximately 4000 years ago and popular since, has been argued to embody strategies that bear a striking resemblance to Chinese strategies of war and diplomacy, and these arguments have been paired with suggestions that Americans could better understand current (as of 2004) real-world Chinese strategies by learning Go \cite{lai2004learning}. Go is played on a grid, much like OpenTTD, suggesting also that OpenTTD's discretized simplification of space also has a long history in simulation.
+
+The military-style/war games eventually evolved to logistic simulations, albeit still in military context. Fore example based MONOPOLOGS \cite{jackson1959learning} that is often credited as the first computerised logistics simulation game - SAY WHEN AND WHAT USED FOR. Then the MIT beer game - to illustrate something in supply chains. These then evolved to games that informed policy making - EXAMPLE.
+
+
+This evolved [REF]
+
+----
+
+OpenTTD is part of a wider class of games: simulation games. Simulation games have been frequently used in various fields to explore scenarios in an effort to inform policies. PUT IN LIST.
+
+Attention is usually paid to how realistic these games are. For example, \cite{raghothama2013review} summarises how well a number of games, including OpenTTD, how well the games model the real world. It's worth noting that while the economic model of OpenTTD is not realistic, \cite{raghothama2013review} classes some aspects of the transportation model as realistic, albeit without justification.
+
 
 \chapter{OpenTTD: its model and abilities}
 

@@ -99,7 +99,7 @@ OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation gam
 \label{figure:introduction-screenshot}
 \end{figure}
 
-OpenTTD was created as a game for recreation: it allows a single player to play in a non-competitive world building mode; multiple human players playing cooperatively or competitively; and so-called AI-players, that each control a company via custom code, which provide opponents for humans to play against. However, it is remarkably flexible: it has been successfully used as a tool to research algorithms including artificial intelligence (AI), machine learning (ML), and anomaly detection algorithms where AI(s) play without human player involvement \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving, lakomy2020railroad, beuneker2019autonomous}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid for concurrency in computer programs \cite{HansenMuprhie2018, marmorstein2015teaching}\footnote{\cite{HansenMuprhie2018} refers to an \emph{OpenTTD lab}, which is a set of scenarios and exercises for students to follow. It is not directly related to the OpenTTDLab presented here.} and for supply chain and logistics management \cite{doi:10.1080/10494820.2016.1242503}.
+OpenTTD was created as a game for recreation: it allows a single player to play in a non-competitive world building mode; multiple human players playing cooperatively or competitively; and so-called AI-players, that each control a company via custom code, which provide opponents for humans to play against. However, it is remarkably flexible: it has been successfully used as a tool to research algorithms including artificial intelligence (AI), machine learning (ML), and anomaly detection algorithms where AI(s) play without human player involvement \cite{beuneker2019autonomous, bijlsma2014evolving, lakomy2020railroad, rios2009trains, wisniewski2011artificial, konijnendijk2015mcts}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid for concurrency in computer programs \cite{HansenMuprhie2018, marmorstein2015teaching}\footnote{\cite{HansenMuprhie2018} refers to an \emph{OpenTTD lab}, which is a set of scenarios and exercises for students to follow. It is not directly related to the OpenTTDLab presented here.} and for supply chain and logistics management \cite{doi:10.1080/10494820.2016.1242503}.
 
 Simulation games have a long history of being used to inform government policies, see Raghothama \& Meije \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some of the transportation aspects of the networks in OpenTTD are realistic, its economic model is not. In addition, if using OpenTTD as a simulator, any correspondence between OpenTTD and what it is simulating has not been determined: it has not been \emph{validated}, a required step before applying simulation results. \cite{doi:10.1177/1046878198291003}.
 
@@ -164,22 +164,22 @@ High cost is suggested, together . but the project here suggests an alternative:
 
 \section{3Rs issues of existing OpenTTD research}
 
-The focus of OpenTTDLab is to help studies that run OpenTTD to generate results without a human player; 5 existing studies have been found that do this \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving, lakomy2020railroad, beuneker2019autonomous}. Informally reviewing these in terms of how they have seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), keeping in mind the barriers of the previous section and my own knowledge of the capabilities of OpenTTD, I found 8 problems. Against each is list which of the 3Rs that this effects is listed, but as discussed earlier this would then cascade: repeatability problems affect reproducibiliy and replicabiliy, and reproducibiliy problems affect replicabiliy.
+The aim of OpenTTDLab is to help studies that run OpenTTD to generate results without a human player; 6 existing studies have been found that do this: the work of Geert Beuneker et al \cite{beuneker2019autonomous}, Frank Bijlsma \cite{bijlsma2014evolving}, Geert Konijnendijk \cite{konijnendijk2015mcts}, Ond{\v{r}}ej {Lakom{\`y} \cite{lakomy2020railroad}, Luis Henrique Oliveira Rios and Luiz Chaimowicz \cite{rios2009trains}, and Maciej Wisniewski and Carsten Witt \cite{wisniewski2011artificial}. Informally reviewing these in terms of how they have seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), keeping in mind the barriers of the previous section and my own knowledge of the capabilities of OpenTTD, I found 8 problems. Against each is list which of the 3Rs that this effects is listed, but as discussed earlier this would then cascade: repeatability problems affect reproducibiliy and replicabiliy, and reproducibiliy problems affect replicabiliy.
 
 \begin{enumerate}
 \begin{descitem}{Low number of repetitions - repeatability}
 Where there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. The 2 experiments in \cite{rios2009trains} were run 7 times each, and the experiments of \cite{wisniewski2011artificial} were run just 3 times for example.
 \end{descitem}
 \begin{descitem}{Non-comparable repetitions - repeatability}
-The experiments of \cite{rios2009trains} were run 14 times, but not for the same amount of in-game time. This calls into question whether these were even meaningful repetitions of the experiment.
+The experiments of \cite{rios2009trains} were run 14 times, but not for the same amount of in-game time. This calls into question whether these were even meaningful repetitions of the same experiment.
 \end{descitem}
 \begin{descitem}{Manual repetitions of experiments - repeatability}
 
 \end{descitem}
-\begin{descitem}{Insufficient artifacts supplied}
-There were references to modified OpenTTD in \cite{wisniewski2011artificial}
+\begin{descitem}{Insufficient artifacts supplied - Repeatability}
+One of the most complex and impressive studies is \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total it seems that there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually. The study does not explain how this was done, and so I suspect there were artifacts created not even mentioned in the study. Although far fewer iterations in its final experiments, I suspect \cite{konijnendijk2015mcts} must also have created artifacts when it compared its AI with existing AIs over 100 runs of an experiment.
 
-One of the most complex and impressive studies is \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total it seems that there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually. The study does not explain how this was done, and so I suspect there were artifacts created not even mentioned in the study.
+\cite{konijnendijk2015mcts} more directly suggests artifacts were created - additions to OpenTTD itself. Although described, these are not available.
 \end{descitem}
 
 \begin{descitem}{Insufficient detail on the version of configuration of OpenTTD - reproducibiliy}
@@ -188,15 +188,15 @@ One of the most complex and impressive studies is \cite{bijlsma2014evolving}, us
 OpenTTD has a wide array of configuration options that can affect results.
 \end{descitem}
 \begin{descitem}{No random seeds reported - repeatability}
-Possible a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, \cite{beuneker2019autonomous}, including a discussion of them. Although listed as repeatability, this has particular concern with bitwise reproducibility: random seeds are crucial for this.
+Possible a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, \cite{beuneker2019autonomous}, including a discussion of them. This impacts repeatability, but specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
 \end{descitem}
 
-\begin{descitem}{Insufficient detail of the high level algorithms}
+\begin{descitem}{Insufficient detail of the high level algorithms - replicability}
 \end{descitem}
 
 \end{enumerate}
 
-Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a manuscript has been given as a recommendation to find issues with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to base further actions off of such a review.
+Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions off of such a review.
 
 \section{Conclusion}
 

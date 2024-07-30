@@ -110,7 +110,7 @@ As a secondary and more speculative aim, it is hoped that the work here allows f
 
 The terms \emph{repeatability}, \emph{replicability}, and \emph{reproducibility}, the so-called \emph{3Rs}, unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. Even the highly-cited 2016 Nature survey \cite{baker20161}, which reported that around 50\% of scientist believe there is a substantial reproducibility crisis, uses the terms reproducible and replicable seemingly interchangeably. And both helpfully and confusingly, the Association for Computing Machinery (ACM) in order to reduce confusion in 2020 swapped their definitions reproducibility and replicability to align with the broader scientific community \cite{association_for_computing_machiner_new_2020}.
 
-Choosing what I believe to be a reasonable authoritative source, I primarily use the ACM definitions \emph{Artifact Review and Badging Version 1.1} \cite{association_for_computing_machiner_artifact_2020}, after this swap. The definition is given in terms of artifacts:
+Choosing what I believe to be a reasonable authoritative source, I primarily use the post-swap ACM definitions \emph{Artifact Review and Badging Version 1.1} \cite{association_for_computing_machiner_artifact_2020}. The definition is given in terms of artifacts:
 
 \begin{quote}
 \begin{description}
@@ -140,11 +140,11 @@ These are not independent properties: reproducibility is unlikely to be achieved
 
 While ACM's definitions are clear in some respects, there is vagueness, especially in terms of what \emph{same result} means \cite{hill2022reproducibility}. In general, results can be said to be reproduced even if they are not exactly the same, i.e. not \emph{bitwise} identical. For example, in simulation studies if the original random seeds are not available but all other artifacts are, then results can still be said to be replicated \cite{luijken2024replicability} if statistical results are the same. Where appropriate I make a distinction between bitwise and non-bitwise reproducibility.
 
-I also note that the definition of artifact is limited to objects created by the authors; if research uses OpenTTD then it appears the research can be deemed replicated without OpenTTD itself having to be developed independently, simply because the it was already available; to me this seems an unexpected loophole in the definitions. Similarly to how reproducibility can be bitwise or non-bitwise, there appears to be degrees of replication that depend on how much of the original software used to run the simulation has been developed independently. It is beyond the scope of this project to deal with these issues in general, other than to ensure clarity as to what is or can be developed independently when discussing replication. In spite of the crisis being well known for over a decade, even as of May 2024 the replication of simulation studies is a "novel endeavor", and there are other unknowns such as "no set criteria to assess the alignment of replicated simulation results with the original results" \cite{luijken2024replicability} and so I argue a reasonable limitation to the scope of this project.
+I also note that the definition of artifact is limited to objects created by the authors; if research uses OpenTTD then it appears the research can be deemed replicated without OpenTTD itself having to be developed independently, simply because the it was already available; to me this seems an unexpected loophole in the definitions. Similarly to how reproducibility can be bitwise or non-bitwise, there appears to be degrees of replication that depend on how much of the original software used to run the simulation has been developed independently, even if that software does not strictly meet ACM's definition of artifact. It is beyond the scope of this project to deal with these issues in general, other than to ensure clarity as to what is or can be developed independently when discussing replication. In spite of the crisis being well known for over a decade, even as of May 2024 the replication of simulation studies is a "novel endeavor", and there are other unknowns such as "no set criteria to assess the alignment of replicated simulation results with the original results" \cite{luijken2024replicability} and so I argue a reasonable limitation to the scope of this project.
 
 \section{Recommendations to achieve the 3Rs}
 
-In spite of the historical confusion and vagueness of even the most recent definitions of the 3Rs, there are a number of relevant recommendations that in general can be followed.
+In spite of the historical confusion and vagueness of even the most recent definitions of the 3Rs, there are a number of relevant recommendations that in general can be followed to help authors achieve the 3Rs.
 
 \subsection{Repeatability}
 
@@ -185,7 +185,7 @@ Repeatability should be the easiest of the 3Rs to achieve, especially with compu
 
 \subsection{Reproducibility}
 
-For reproducibility the author-supplied artifacts must be clear and available. There were references to modified OpenTTD in \cite{wisniewski2011artificial}, but the modified versions does not seem to be available. Potentially the authors could be contacted to supply their own artefacts, but this is not ideal, nor offers a strong guarantee that the artefacts supplied were exactly as they were that generated the results.
+For reproducibility the author-supplied artifacts must be clear and available. There were references to modified OpenTTD in \cite{wisniewski2011artificial}, but the modified versions does not seem to be available. Potentially the authors could be contacted to supply their own artifacts, but this is not ideal, nor offers a strong guarantee that the artifacts supplied were exactly as they were that generated the results.
 
 Also, the version of OpenTTD is not mentioned
 
@@ -896,7 +896,7 @@ Maybe mention the link between this and testing here? Or should it be earlier?
 \end{item}
 \end{itemize}
 
-The framework presented here allows experiments to be conducted with OpenTTD in a manner that is repeatable and reproducible. Reproducibility is up to the author's descriptions of the artefacts they created - they must be sufficient to recreate the artefacts, and so beyond the scope of the framework here. However, it should at least ease issues due to creating a similar enough experimental setup.
+The framework presented here allows experiments to be conducted with OpenTTD in a manner that is repeatable and reproducible. Reproducibility is up to the author's descriptions of the artifacts they created - they must be sufficient to recreate the artifacts, and so beyond the scope of the framework here. However, it should at least ease issues due to creating a similar enough experimental setup.
 
 The exception are the version of the AI used - these do not appear to be versioned. However, potentially it could report on some sort of hash of the code of the AI.
 

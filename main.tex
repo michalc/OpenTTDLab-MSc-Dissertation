@@ -40,18 +40,20 @@
 
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
 
+\newcommand\descitem[1]{\item{\bfseries #1}\\}
+
 
 \begin{document}
 \begin{preliminary}
 
-\title{OpenTTDLab: A framework for repeatable, Replicable, \& Reproducible experiments using OpenTTD}
+\title{OpenTTDLab: A Python framework for repeatable, Replicable, \& Reproducible experiments using OpenTTD}
 
 \author{Michal Charemza}
 
 \date{\today}
 
 \abstract{
-OpenTTD is an open source business simulation game based on the 1994 game Transport Tycoon Deluxe, and in spite of being designed for recreation, OpenTTD has been used in a number of academic studies. However, many of these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. In this dissertation, I present OpenTTDLab, a framework I created that allows OpenTTD to be used in a way that avoids these problems. I show proof-of-concept results using this framework that I argue are repeatable, replicable, and reproducible; thus, giving evidence that OpenTTDLab can be a useful tool in future research.
+OpenTTD is an open source business simulation game based on the 1994 game Transport Tycoon Deluxe, and in spite of being designed for recreation, OpenTTD has been used in a number of academic studies. However, many of these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. In this dissertation, I present OpenTTDLab, a Python framework I created that allows OpenTTD to be used in a way that avoids these problems. I show proof-of-concept results using this framework that I argue are repeatable, replicable, and reproducible; thus, giving evidence that OpenTTDLab can be a useful tool in future research.
 }
 
 \maketitle
@@ -99,11 +101,11 @@ OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation gam
 
 OpenTTD was created as a game for recreation: it allows a single player to play in a non-competitive world building mode; multiple human players playing cooperatively or competitively; and so-called AI-players, that each control a company via custom code, which provide opponents for humans to play against. However, it is remarkably flexible: it has been successfully used as a tool to research algorithms including artificial intelligence (AI), machine learning (ML), and anomaly detection algorithms where AI(s) play without human player involvement \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving, lakomy2020railroad, beuneker2019autonomous}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid for concurrency in computer programs \cite{HansenMuprhie2018, marmorstein2015teaching}\footnote{\cite{HansenMuprhie2018} refers to an \emph{OpenTTD lab}, which is a set of scenarios and exercises for students to follow. It is not directly related to the OpenTTDLab presented here.} and for supply chain and logistics management \cite{doi:10.1080/10494820.2016.1242503}.
 
-Simulation games have a long history of being used to inform government policies, see Raghothama & Meije \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some of the transportation aspects of the networks in OpenTTD are realistic, its economic model is not. In addition, if using OpenTTD as a simulator, any correspondence between OpenTTD and what it is simulating has not been determined: it has not been \emph{validated}, a required step before applying simulation results. \cite{doi:10.1177/1046878198291003}.
+Simulation games have a long history of being used to inform government policies, see Raghothama \& Meije \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some of the transportation aspects of the networks in OpenTTD are realistic, its economic model is not. In addition, if using OpenTTD as a simulator, any correspondence between OpenTTD and what it is simulating has not been determined: it has not been \emph{validated}, a required step before applying simulation results. \cite{doi:10.1177/1046878198291003}.
 
 Of all these, using OpenTTD as a tool for researching algorithms is the primary focus of this project, and specifically the focus is the development of a tool, OpenTTDLab, that augments the existing features of OpenTTD to improve its ability to be used in repeatable, replicable, \& reproducible research where AI(s) play without human player involvement. Given what is now the well-known replication crisis/replicability crisis/reproducibility crisis \cite{ioannidis2005most, baker20161}, including in computer science \cite{CollbergChristianProebsting2016}, if there are problems with how such research has been conducted using OpenTTD, as I will argue, then the potential usefulness of such a tool is clear.
 
-As a secondary and more speculative aim, it is hoped that the work here allows for OpenTTD to be investigated as a tool to simulate supply chain or transportation networks that could ultimately inform government policies, although a validation exercise would be required to do this, which is not part of the current work.
+As a secondary and more speculative aim, it is hoped that the work here allows for OpenTTD to be investigated as a tool to simulate supply chain or transportation networks that could ultimately inform government policies. A validation exercise would be one of the first steps of this investigation, which is not part of the current work.
 
 \section{The 3Rs: Repeatability, Replicatability, \& Reproducibility}
 \label{section:define-3rs}
@@ -136,67 +138,69 @@ The measurement can be obtained with stated precision by a different team, a dif
 \end{description}
 \end{quote}
 
-These are not independent properties: reproducibility is unlikely to be achieved without repeatability \cite{hill2022reproducibility}, and replicability would be difficult to interpret in the absence of reproducibility \cite{nuijten2018verify}. While this highlights how the definitions are intertwined and therefore complex, it also means that a tool that eases repeatability indirectly eases reproducibility, and similarly a tool that eases reproducibility indirectly eases replication.
+These are not independent properties: reproducibility is unlikely to be achieved without repeatability \cite{hill2022reproducibility}, and replicability would be difficult to interpret in the absence of reproducibility \cite{nuijten2018verify}. While this highlights how the definitions are intertwined and therefore complex, it also means that a tool that eases repeatability eases reproducibility, a tool that eases reproducibility eases replication, and transitively a tool that eases repeatability indirectly eases replicability.
 
 While ACM's definitions are clear in some respects, there is vagueness, especially in terms of what \emph{same result} means \cite{hill2022reproducibility}. In general, results can be said to be reproduced even if they are not exactly the same, i.e. not \emph{bitwise} identical. For example, in simulation studies if the original random seeds are not available but all other artifacts are, then results can still be said to be replicated \cite{luijken2024replicability} if statistical results are the same. Where appropriate I make a distinction between bitwise and non-bitwise reproducibility.
 
 I also note that the definition of artifact is limited to objects created by the authors; if research uses OpenTTD then it appears the research can be deemed replicated without OpenTTD itself having to be developed independently, simply because the it was already available; to me this seems an unexpected loophole in the definitions. Similarly to how reproducibility can be bitwise or non-bitwise, there appears to be degrees of replication that depend on how much of the original software used to run the simulation has been developed independently, even if that software does not strictly meet ACM's definition of artifact. It is beyond the scope of this project to deal with these issues in general, other than to ensure clarity as to what is or can be developed independently when discussing replication. In spite of the crisis being well known for over a decade, even as of May 2024 the replication of simulation studies is a "novel endeavor", and there are other unknowns such as "no set criteria to assess the alignment of replicated simulation results with the original results" \cite{luijken2024replicability} and so I argue a reasonable limitation to the scope of this project.
 
-\section{Recommendations to achieve the 3Rs}
+\section{Barriers in achieving the 3Rs}
 
-In spite of the historical confusion and vagueness of even the most recent definitions of the 3Rs, there are a number of relevant recommendations that in general can be followed to help authors achieve the 3Rs.
+The aim of OpenTTDLab is to help researchers achieve the 3Rs when using OpenTTD to research algorithms or, possibly, use OpenTTD to simulate transportation or logistic networks. As such it's important to note in general what barriers have been noted in similar research to achieving these.  Since the 3Rs are linked, de facto building on one another, it is unsurprising that barriers to achieving them are similarly linked, i.e. something that prevents one can prevent another. Here I summarise relateven barriers to achieving the 3Rs.
 
-\subsection{Repeatability}
-
-Note a given:
-
-\subsection{Reproducibility}
+Manual steps.
 
 
 
-\subsection{Replicability}
+Repeatability of computer simulations on the face of it should be the easiest to achieve, a researcher should \emph{reliably} repeat here own computation accor
 
-In spite of the aforementioned crisis, there are currently no set criteria to determine if a simulation study has been successfully replicated \cite{luijken2024replicability}. At the moment, it seems a qualitative comparison is the most reasonable.
+In terms or reproducing
 
+Through attempts to replicate statistical simulation studies, Luijken K et al. \cite{luijken2024replicability} construct a number of barriers to replication of studies. These 
 
+Why these barriers have not been overcome, especially in terms of the barriers to ensuring research is replicatable and repeatable, is usually due to a combination of their cost \cite{hernandez2023repeatability} and not sufficient reward. Reproducibility as a service has been.
 
-\section{Review of research using OpenTTD}
+High cost is suggested, together . but the project here suggests an alternative: a tool to reduce that cost. Interestingly the tools used seems to be not studied. The closest things are preferring open source to prioprietry, and so-called reproducibility as a service. An Open Source framework for reproducible research appears to be novel.
 
-Note - put this after the 3Rs stuff. The 3Rs stuff will have (especially for reproduciliby and replicability) barriers, and so I should be able to basically discuss the research, stating what barriers it seems to have.
+\section{3Rs issues of existing OpenTTD research}
 
-\begin{itemize}
-\begin{item}
-Some papers list how they found all their upstream papers, in a light meta-analysis way. Worth it here? If I'm arguing something is lacking in particular, then maybe yes, because I sort of need evidence of an exhaustive search
-\end{item}
-\begin{item} Maybe this section could be split into using using OpenTTD in experiments, and just mentioning it
-\end{item}
-\begin{item}
-\cite{fenjiro2018deep} - Mentions OpenTTD uses Deep Learning, but not partcular context or explanation. It doesn't really?? Do even any of the published AIs??
-\end{item}
-\end{itemize}
+The focus of OpenTTDLab is to help studies that run OpenTTD to generate results without a human player; 5 existing studies have been found that do this \cite{wisniewski2011artificial, rios2009trains, bijlsma2014evolving, lakomy2020railroad, beuneker2019autonomous}. Informally reviewing these in terms of how they have seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), keeping in mind the barriers of the previous section and my own knowledge of the capabilities of OpenTTD, I found 8 problems. Against each is list which of the 3Rs that this effects is listed, but as discussed earlier this would then cascade: repeatability problems affect reproducibiliy and replicabiliy, and reproducibiliy problems affect replicabiliy.
 
-TODO: If we have the more structured / formal reproducibility stuff earlier, we can more properly judge the existing research.
+\begin{enumerate}
+\begin{descitem}{Low number of repetitions - repeatability}
+Where there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. The 2 experiments in \cite{rios2009trains} were run 7 times each, and the experiments of \cite{wisniewski2011artificial} were run just 3 times for example.
+\end{descitem}
+\begin{descitem}{Non-comparable repetitions - repeatability}
+The experiments of \cite{rios2009trains} were run 14 times, but not for the same amount of in-game time. This calls into question whether these were even meaningful repetitions of the experiment.
+\end{descitem}
+\begin{descitem}{Manual repetitions of experiments - repeatability}
 
-From the found published research using OpenTTD, in my opinion there is yet to be a single case that couldn't offer significant improvements in at least one of its repeatability, replicability or replicability.
+\end{descitem}
+\begin{descitem}{Insufficient artifacts supplied}
+There were references to modified OpenTTD in \cite{wisniewski2011artificial}
 
-\subsection{Repeatability}
+One of the most complex and impressive studies is \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total it seems that there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually. The study does not explain how this was done, and so I suspect there were artifacts created not even mentioned in the study.
+\end{descitem}
 
-Repeatability should be the easiest of the 3Rs to achieve, especially with computer based simulation. However, much of the existing research using OpenTTD uses a low number of repeated experiments, with little or no statistical analysis, suggesting that it was not straightforward. The experiments of \cite{wisniewski2011artificial} were run just 3 times for example. The experiments in \cite{rios2009trains} were run 14 times, but not even for the same amount of in-game time.
+\begin{descitem}{Insufficient detail on the version of configuration of OpenTTD - reproducibiliy}
+\cite{bijlsma2014evolving} does not mention the version of OpenTTD (or the version of OpenGFX - as will be discussed a component that affects screenshots)
 
-\subsection{Reproducibility}
+OpenTTD has a wide array of configuration options that can affect results.
+\end{descitem}
+\begin{descitem}{No random seeds reported - repeatability}
+Possible a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, \cite{beuneker2019autonomous}, including a discussion of them. Although listed as repeatability, this has particular concern with bitwise reproducibility: random seeds are crucial for this.
+\end{descitem}
 
-For reproducibility the author-supplied artifacts must be clear and available. There were references to modified OpenTTD in \cite{wisniewski2011artificial}, but the modified versions does not seem to be available. Potentially the authors could be contacted to supply their own artifacts, but this is not ideal, nor offers a strong guarantee that the artifacts supplied were exactly as they were that generated the results.
+\begin{descitem}{Insufficient detail of the high level algorithms}
+\end{descitem}
 
-Also, the version of OpenTTD is not mentioned
+\end{enumerate}
 
-The seeds of each experiements were also not supplied.
+Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a manuscript has been given as a recommendation to find issues with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to base further actions off of such a review.
 
-\subsection{Replicability}
+\section{Conclusion}
 
-This is the most difficult to judge without actually attempting to do it, and it is what.
-
-However, if an experiment isn't even reproducible, it is even more difficult to replicate it.
-
+It can be costly to repeat experiments, or to make it reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement, I identified 7 issues on this front, with no research completely issue-free. A framework to reduce the cost of these should help similar future research avoid adding to the well-known replication crisis, as will be discussed in the following chapters.
 
 \chapter{OpenTTD: its model and abilities}
 

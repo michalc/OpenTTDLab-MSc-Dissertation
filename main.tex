@@ -162,7 +162,7 @@ I also note that the definition of artifact is limited to objects created by the
 
 \section{3Rs issues of existing OpenTTD research}
 
-The aim of OpenTTDLab is to help studies that run OpenTTD to generate results without a human player; 7 existing studies have been found that do this: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 8 problems. For brevity not all problems for all studies are listed.
+The aim of OpenTTDLab is to help studies that run OpenTTD to generate results by writing and running AIs without a human player; 7 existing studies have been found that do this\footnote{Found from the fist 100 results of a search for "OpenTTD" in Google Scholar in July 2024}: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 8 problems. For brevity not all problems for all studies are listed.
 
 \begin{enumerate}
 \begin{descitem}{Low or unknown number of repetitions}
@@ -196,12 +196,12 @@ Possible a special case of configuration, but it merits special attention since 
 \begin{descitem}{Insufficient or unclear detail of the algorithms to replicate results}
 All of the studies included some high level detail of the algorithms implemented, but I found it difficult to judge if it was sufficient within the time constraints of the current work.
 
-However, even if there is sufficient detail, in all cases bar one they are not presented in a way that I would argue is ideal for replication: the detail is spread throughout the work, and not presented as one or algorithms that be replicated. The exception is the work of {Lakom{\`y}} \cite{lakomy2020railroad}: it includes many algorithms each of them explained and discussed, although they are presented as code rather than pseudo-code, and so if used could muddy the water between reproducing and replicating the results.
+However, even if there is sufficient detail, in all cases bar one they are not presented in a way that I would argue is ideal for replication: the detail is spread throughout the work, and not presented as a clear set of algorithms that be replicated. The exception is the work of {Lakom{\`y}} \cite{lakomy2020railroad}: it includes many algorithms each of them explained and discussed, although they are presented as code rather than pseudo-code, and so if used could muddy the water between reproducing and replicating the results.
 \end{descitem}
 
 \end{enumerate}
 
-Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions off of such a review.
+Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review.
 
 \section{The 4\textsuperscript{th} R: reusability}
 
@@ -213,11 +213,11 @@ There is a 4\textsuperscript{th} concept given alongside ACM's definitions \cite
 The artifacts associated with the paper are of a quality that significantly exceeds minimal functionality. [...] they are very carefully documented and well-structured to the extent that reuse and repurposing is facilitated. In particular, norms and standards of the research community for artifacts of this type are strictly adhered to. 
 \end{description}
 \end{quote}
-Repeatability, reproducibility and replicability are all in the realm of a single result. However, reusability concerns itself with the use of the artifact to generate different results in future, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}.
+Repeatability, reproducibility and replicability are all in the realm of a single result, but reusability concerns itself with the use of the artifact to generate different results in future, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}. It is clear that a framework that helps with the 3Rs should itself be reusable and encourage reusable artefacts in work that uses it.
 
 \section{Conclusion}
 
-It can be costly to repeat experiments, or to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course by researchers or by publishers. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement, I identified 7 issues on this front, with no research completely issue-free. A framework to reduce the cost of these, ideally in a reusable way, should help similar future research avoid adding to the well-known replication crisis. Such a framework is OpenTTDLab, as will be discussed in the following chapters.
+It can be costly in terms of time to repeat experiments, or even to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course by researchers or by publishers \cite{benureau2018re}. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement, I identified 7 issues on this front, with no research completely issue-free. In this work I present a framework, OpenTTDLab, to reduce the cost, and ideally in a reusable way.
 
 \chapter{OpenTTD: its model and abilities}
 \label{chapter:openttd-model-and-abilities}

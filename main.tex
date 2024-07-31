@@ -99,9 +99,9 @@ OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation gam
 \label{figure:introduction-screenshot}
 \end{figure}
 
-OpenTTD was created as a game for recreation: it allows a single player to play in a non-competitive world building mode; multiple human players playing cooperatively or competitively; and so-called AI-players, that each control a company via custom code, which provide opponents for humans to play against. However, it is remarkably flexible: it has been successfully used as a tool to research algorithms including artificial intelligence (AI), machine learning (ML), and anomaly detection algorithms where AI(s) play without human player involvement \cite{beuneker2019autonomous, bijlsma2014evolving, lakomy2020railroad, rios2009trains, wisniewski2011artificial, konijnendijk2015mcts}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid for concurrency in computer programs \cite{HansenMuprhie2018, marmorstein2015teaching}\footnote{\cite{HansenMuprhie2018} refers to an \emph{OpenTTD lab}, which is a set of scenarios and exercises for students to follow. It is not directly related to the OpenTTDLab presented here.} and for supply chain and logistics management \cite{doi:10.1080/10494820.2016.1242503}.
+OpenTTD was created as a game for recreation: it allows a single player to play in a non-competitive world building mode; multiple human players playing cooperatively or competitively; and so-called AI-players, that each control a company via custom code, which provide opponents for humans to play against. However, it is remarkably flexible: it has been successfully used as a tool to research algorithms including artificial intelligence (AI), machine learning (ML), and anomaly detection algorithms where AI(s) play without human player involvement \cite{beuneker2019autonomous, bijlsma2014evolving, konijnendijk2015mcts, lakomy2020railroad, rios2009trains, wisniewski2011artificial, volna2017fuzzy}, scalability and mobile applications \cite{jiang2018mirroring}, and as a teaching aid for concurrency in computer programs \cite{HansenMuprhie2018, marmorstein2015teaching}\footnote{\cite{HansenMuprhie2018} refers to an \emph{OpenTTD lab}, which is a set of scenarios and exercises for students to follow. It is not directly related to the OpenTTDLab presented here.} and for supply chain and logistics management \cite{doi:10.1080/10494820.2016.1242503}.
 
-Simulation games have a long history of being used to inform government policies, see Raghothama \& Meije \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some of the transportation aspects of the networks in OpenTTD are realistic, its economic model is not. In addition, if using OpenTTD as a simulator, any correspondence between OpenTTD and what it is simulating has not been determined: it has not been \emph{validated}, a required step before applying simulation results. \cite{doi:10.1177/1046878198291003}.
+Simulation games have a long history of being used to inform government policies, see Raghothama \& Meije \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some of the transportation aspects of the networks in OpenTTD are realistic, its economic model is not. In addition, if using OpenTTD as a simulator, any correspondence between OpenTTD and what it is simulating has not been determined: it has not been \emph{validated}, a required step before applying simulation results \cite{doi:10.1177/1046878198291003}.
 
 Of all these, using OpenTTD as a tool for researching algorithms is the primary focus of this project, and specifically the focus is the development of a tool, OpenTTDLab, that augments the existing features of OpenTTD to improve its ability to be used in repeatable, replicable, \& reproducible research where AI(s) play without human player involvement. Given what is now the well-known replication crisis/replicability crisis/reproducibility crisis \cite{ioannidis2005most, baker20161}, including in computer science \cite{CollbergChristianProebsting2016}, if there are problems with how such research has been conducted using OpenTTD, as I will argue, then the potential usefulness of such a tool is clear.
 
@@ -164,22 +164,26 @@ High cost is suggested, together . but the project here suggests an alternative:
 
 \section{3Rs issues of existing OpenTTD research}
 
-The aim of OpenTTDLab is to help studies that run OpenTTD to generate results without a human player; 6 existing studies have been found that do this: the work of Geert Beuneker et al \cite{beuneker2019autonomous}, Frank Bijlsma \cite{bijlsma2014evolving}, Geert Konijnendijk \cite{konijnendijk2015mcts}, Ond{\v{r}}ej {Lakom{\`y} \cite{lakomy2020railroad}, Luis Henrique Oliveira Rios and Luiz Chaimowicz \cite{rios2009trains}, and Maciej Wisniewski and Carsten Witt \cite{wisniewski2011artificial}. Informally reviewing these in terms of how they have seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), keeping in mind the barriers of the previous section and my own knowledge of the capabilities of OpenTTD, I found 8 problems. Against each is list which of the 3Rs that this effects is listed, but as discussed earlier this would then cascade: repeatability problems affect reproducibiliy and replicabiliy, and reproducibiliy problems affect replicabiliy.
+The aim of OpenTTDLab is to help studies that run OpenTTD to generate results without a human player; 7 existing studies have been found that do this: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), keeping in mind the barriers of the previous section and my own knowledge of the capabilities of OpenTTD, I found 8 problems. For brevity not all problems for all studies are listed.
 
 \begin{enumerate}
-\begin{descitem}{Low number of repetitions - repeatability}
-Where there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. The 2 experiments in \cite{rios2009trains} were run 7 times each, and the experiments of \cite{wisniewski2011artificial} were run just 3 times for example.
-\end{descitem}
-\begin{descitem}{Non-comparable repetitions - repeatability}
-The experiments of \cite{rios2009trains} were run 14 times, but not for the same amount of in-game time. This calls into question whether these were even meaningful repetitions of the same experiment.
-\end{descitem}
-\begin{descitem}{Manual repetitions of experiments - repeatability}
+\begin{descitem}{Low or unknown number of repetitions}
+Where there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. The 2 experiments of Rios and Chaimowicz \cite{rios2009trains} were run 7 times each, and the experiments of Wisniewski and Witt \cite{wisniewski2011artificial} were run just 3 times for example.
 
+The work of Volna \cite{volna2017fuzzy} is particularly of note: it does not list the number of repetitions, or even suggest there was more than one.
 \end{descitem}
-\begin{descitem}{Insufficient artifacts supplied - Repeatability}
-One of the most complex and impressive studies is \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total it seems that there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually. The study does not explain how this was done, and so I suspect there were artifacts created not even mentioned in the study. Although far fewer iterations in its final experiments, I suspect \cite{konijnendijk2015mcts} must also have created artifacts when it compared its AI with existing AIs over 100 runs of an experiment.
+\begin{descitem}{Non-comparable repetitions}
+Rios and Chaimowicz \cite{rios2009trains} ran a total of 14 repetitions over 2 experiments, but not for the same amount of in-game time. This calls into question whether these were actually repetitions of the experiment.
+\end{descitem}
+\begin{descitem}{Manual repetitions of experiments and extraction of results}
+No study explicitly stated that their experiments were run in an automated mechanism, and given the low number and non-comparable repetitions of some of the works, I suspect they were run manually, in that OpenTTD was run through the graphical interface and configured through its graphical user interface, which I suspect is tedious and error prone.
 
-\cite{konijnendijk2015mcts} more directly suggests artifacts were created - additions to OpenTTD itself. Although described, these are not available.
+However, the study of {Lakom{\`y} \cite{lakomy2020railroad} explicitly describes the manual mechanism uses to install and configure OpenTTD an experiment. Having a description is excellent in terms of supporting reproduction of result, but the fact it is manual is high cost in terms of time to try to replicate its reported 50 repetitions.
+\end{descitem}
+\begin{descitem}{Insufficient artifacts supplied to reproduce results}
+One of the most complex and impressive studies is the work of Bijlsma \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total it seems that there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually. The study does not explain how this was done, and so I suspect there were artifacts created not even mentioned in the study.
+
+The work of Konijnendijk \cite{konijnendijk2015mcts} more directly suggests artifacts were created - additions to the source code of OpenTTD itself. Although described in a high level, the code of these is not available.
 \end{descitem}
 
 \begin{descitem}{Insufficient detail on the version of configuration of OpenTTD - reproducibiliy}
@@ -187,11 +191,11 @@ One of the most complex and impressive studies is \cite{bijlsma2014evolving}, us
 
 OpenTTD has a wide array of configuration options that can affect results.
 \end{descitem}
-\begin{descitem}{No random seeds reported - repeatability}
+\begin{descitem}{No random seeds to bitwise reproduce results}
 Possible a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, \cite{beuneker2019autonomous}, including a discussion of them. This impacts repeatability, but specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
 \end{descitem}
 
-\begin{descitem}{Insufficient detail of the high level algorithms - replicability}
+\begin{descitem}{Insufficient detail of the algorithms to replicate results}
 \end{descitem}
 
 \end{enumerate}
@@ -200,7 +204,7 @@ Informally reviewing by reading the papers is certainly not as strong evidence a
 
 \section{Conclusion}
 
-It can be costly to repeat experiments, or to make it reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement, I identified 7 issues on this front, with no research completely issue-free. A framework to reduce the cost of these should help similar future research avoid adding to the well-known replication crisis, as will be discussed in the following chapters.
+It can be costly to repeat experiments, or to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement, I identified 7 issues on this front, with no research completely issue-free. A framework to reduce the cost of these should help similar future research avoid adding to the well-known replication crisis, as will be discussed in the following chapters.
 
 \chapter{OpenTTD: its model and abilities}
 
@@ -507,85 +511,22 @@ Tidy results?
  }
 \end{algorithm}
 
-\section{Scaling}
-
-I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to the controlling process, and for only passing a minimal amount of data: the date, the company value at that date, and if an error occurred. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, trAIns 2.1 retrieved from the BaNaNaS content service with MD5 hash of c4c069dc797674e545411b59867ad0c2, and running for seeds 0 to 49, and each for a total of 1465 in-game days (just over 4 in-game years). The Python code to run the experiments can be seen in Appendix \ref{chapter:scaling-running-code}, and the code to subsequently process and visualise the results in Appendix \ref{chapter:scaling-analyis-code}.
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set ylabel 'Time (seconds)'
-set yrange [0:]
-set xlabel 'Number of worker processes'
-plot 'notebooks/01_scaling_results_02_wallclock_times.csv' \ 
-   using 1:2 with linespoints ls 1 title 'All data', \
-   '' using 1:3 with linespoints ls 2 title 'Minimal data'
-\end{gnuplot}
-\caption{Total wallclock time of when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Using more worker processes results in a shorter runtime: for example using 8 worker processes uses about 20\% of the runtime as using 1 worker process. Returning a minimal amount of data also results in shorter runtime: approximately 30\% faster for each number of processes in the experiment.}
-\label{figure:scaling-wallclock-time}
-\end{figure}
-
-As can be seen from Figure \ref{figure:scaling-wallclock-time}, wallclock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in an approximately 30\% reduction in time. One can conclude that it's worth running them on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
-
-However, Figure \ref{figure:scaling-wallclock-time} also suggest that that there is an aspect of diminishing returns: for example the difference in runtime between 1 and 4 processes is much greater than the difference between 5 and 8. To better show this effect, we investigate \emph{speedup}: how many times faster the program runs for a given number of worker processes compared to the time it takes running on a single worker process. The speedup for the experiments, together with a theoretical linear speedup can be seen in Figure \ref{figure:scaling-speedup}.
-
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
-set datafile separator ","
-set style fill pattern 2
-set key left top
-set key invert
-set grid ytics
-set ylabel 'Speedup'
-set yrange [1:]
-set xlabel 'Number of worker processes'
-plot 'notebooks/01_scaling_results_03_speedups.csv' \ 
-   using 1:4 with linespoints ls 3 title 'Linear scaling', \
-   '' using 1:2 with linespoints ls 1 title 'All data', \
-   '' using 1:3 with linespoints ls 2 title 'Minimal data'
-\end{gnuplot}
-\caption{Speedup when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Speedup is initially linear, but becomes worse as the number of worker processes increases, especially from 5 worker processes onwards. At 8 worker processes the speedup is approximately 4.5. The scaling profiles for both sets of experiments are almost identical. Given that wallclock time is reduced when returning less data from worker to controlling process, as can be seen in Figure \ref{figure:scaling-wallclock-time} this suggests that returning less data to the controlling process reduces both parallel and serial runtime of the code.}
-\label{figure:scaling-speedup}
-\end{figure}
-
-It can be seen that up to 4 processors the scaling is just under linear, but after 4 processors the scaling is much worse. It can also be seen that the scaling profiles of returning all data and minimal data from the worker processes is almost identical.
-
-A reason for the greater-difference-from-linear scaling when the number of processors is greater than 4 could come from that the cores are not identical. According to Apple \cite{AppleM1Overview} 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The scaling profiles found appears roughly consistent with the high/lower performance split, and suggests that the high performance cores being used in preference to the low performance cores.
-
-Another reason for the deviation from linear speedup is Amdhal's Law that describes how speedup is related to proportion of the program that runs in serial. This law is usually formulated as
-
-\begin{equation}
-S_p = \frac{1}{(1-p) + \frac{p}{s}}
-\end{equation}
-%
-where $S_p$ is the speedup of the entire program, $p$ is the proportion of the program that has been parallelised, and $s$ is speedup of the parallelised part of the program. The most relevant consequence of this is that $\lim_{S\to\infty} S_p = \frac{1}{1-p}$. This means that for example, even if 95\% of a program is parallelised, then the maximum speedup is $\frac{1}{1-0.95}=20$, even if thousands of processes are used.
-
-This suggests that a way of increasing this limit is to reduce proportion of runtime in serial code. However, in light of Amdhal's law the identical scaling profiles in Figure \ref{figure:scaling-speedup} suggest that changing the amount of data returned from the worker processes does not change the overall proportion of runtime in serial code. Given wallclock time reduces with less data transferred, it's reasonable to suspect that reducing the data transferred reduces parallel and serial runtimes in the same proportions, possibly from the serialisation and deserialisation involved. Thus removing all data transfer is not likely to improve scaling. Also, one way to remove all data transfer is to use threads rather than processes, but threads in Python are subject to the Global Intepreter Lock (GIL), and so in many cases increases the proportion of serial code compared to using processes, there is a strong reason to suspect that this will make scaling worse, not better.
-
-So a reasonable next step would be to investigate what else in the program could be running serially. This is potentially not a trivial project - for example it might be from what appears to be parallel sections of the code when examining the algorithm or the Python code, but it accesses a shared resource under contention from the other processes, perhaps even indirectly. As examples, in general there some types of memory caches are shared between cores, or reading or writing to disk  may also effectively be done serially, or at least not fully parallel up to the number of cores. To understand and improve upon the current behaviour this would need a more in-depth understanding of the computer architecture being run on, and profiling of the Python code to understand where time is being spent. This is beyond the scope of the project and so is left to further work.
-
-However the conclusions we can draw here are that OpenTTDLab can utilise multiple cores to reduce runtime of simulations, albeit imperfectly, and that even though reducing the amount of data returned from the workers does not improve scaling, it can be an effective way to reduce wallclock runtime, and so these features of OpenTTDLab are justified and should be leveraged when running experiments.
 
 \section{Promotion}
 
 Hmmm... is this being shoehorned in?? I guess I think it's important... can I argue that? Why is it important in terms of the 3Rs.
 
 
-\chapter{Example results}
 
-To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to reproduce existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+% \chapter{Example results}
 
-\section{Reproduce existing results}
+% To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to reproduce existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
+
+\chapter{Experiments 1 - Attempt at reproducing existing results}
 
 The first situation is an attempt to replicate some of the results of \cite{rios2009trains}, specifically a set of matches between the trAIns [sic] AI being presented, and the pre-existing Admiral AI, and comparing their performance in terms of company value.
 
-\subsection{Experimental setup}
+\section{Experimental setup}
 
 The setup was a best effort attempt to what was described as the setup of the experiments in the original trAIns paper \cite{rios2009trains}. In the experiments presented here, the starting year was set to 1960, the map was configured to be 512x512 tiles with a very low amount of seas, industry density and number of towns set to normal, the economy set to be able to fluctuate, subsidy multiplier of x2, disasters enabled, tolerance of town councils to changes set as tolerant, both vehicle running costs and construction costs set to medium, vehicle breakdowns disabled, trains set to only be able to turn around at the end of the line as opposed to also at stations, and the maximum initial loan was set to £300,000, and initial interest rate set to 3\%.
 
@@ -603,7 +544,7 @@ The experiments here were run on mac OS 14.5 running on a 2020 M1 and Python 3.1
 
 The Python code used to run the experiments is in Appendix REPLACEME, and the code to subsequently analyse the results in Appendix REPLACEME.
 
-\subsection{Results}
+\section{Results}
 
 \begin{figure}[h]
 \centering
@@ -761,7 +702,7 @@ plot 'notebooks/02_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_q
 \lstset{numbers=left,frame=tb,basicstyle=\linespread{0.7}\ttfamily\footnotesize}
 \lstinputlisting[language=Python,float,caption=A floating example]{assets/replicating_results_core.py}
 
-\section{Simple parameterised OpenTTD AI}
+\chapter{Experiments 2 - Simple parameterised OpenTTD AI}
 
 From the previous section, OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences. However, this doesn't by itself allow for a more detailed analysis of the behaviour of supply chains. OpenTTDLab's feature of running experiments over a range of configuration parameters passed to an AI allows for this.
 
@@ -769,7 +710,7 @@ So I constructed a simple parameterised AI. At runtime, the AI chooses the 2 lar
 
 The number of buses varied between 1 and 16, and each run was for 50 years, with 50 runs for each configuration covering random number generator seeds between and 1 and 50 inclusive.
 
-\subsection{Results}
+\section{Results}
 
 As can be seen in Figure XX, by the end of the 50 years, there appears to be a clear winner - on average the runs with 16 buses have more money in the bank than the others. It can be seen that early in the game, on average the configurations with 16 buses had the lowest amount of money, suggesting that in this very simplified situation, and with the caveat that the economic model of OpenTTD has been argued to be unrealistic REF, it seems to be the case that \emph{you have to spend money to make money}.
 
@@ -886,25 +827,91 @@ Looks like the one with more stations/routes has more money? Can we corrolate st
 
 
 
+\chapter{Experiments 3 - scaling}
 
+I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to the controlling process, and for only passing a minimal amount of data: the date, the company value at that date, and if an error occurred. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, trAIns 2.1 retrieved from the BaNaNaS content service with MD5 hash of c4c069dc797674e545411b59867ad0c2, and running for seeds 0 to 49, and each for a total of 1465 in-game days (just over 4 in-game years). The Python code to run the experiments can be seen in Appendix \ref{chapter:scaling-running-code}, and the code to subsequently process and visualise the results in Appendix \ref{chapter:scaling-analyis-code}.
 
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set ylabel 'Time (seconds)'
+set yrange [0:]
+set xlabel 'Number of worker processes'
+plot 'notebooks/01_scaling_results_02_wallclock_times.csv' \ 
+   using 1:2 with linespoints ls 1 title 'All data', \
+   '' using 1:3 with linespoints ls 2 title 'Minimal data'
+\end{gnuplot}
+\caption{Total wallclock time of when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Using more worker processes results in a shorter runtime: for example using 8 worker processes uses about 20\% of the runtime as using 1 worker process. Returning a minimal amount of data also results in shorter runtime: approximately 30\% faster for each number of processes in the experiment.}
+\label{figure:scaling-wallclock-time}
+\end{figure}
 
+As can be seen from Figure \ref{figure:scaling-wallclock-time}, wallclock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in an approximately 30\% reduction in time. One can conclude that it's worth running them on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
 
+However, Figure \ref{figure:scaling-wallclock-time} also suggest that that there is an aspect of diminishing returns: for example the difference in runtime between 1 and 4 processes is much greater than the difference between 5 and 8. To better show this effect, we investigate \emph{speedup}: how many times faster the program runs for a given number of worker processes compared to the time it takes running on a single worker process. The speedup for the experiments, together with a theoretical linear speedup can be seen in Figure \ref{figure:scaling-speedup}.
+
+\begin{figure}[h]
+\centering
+\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
+set datafile separator ","
+set style fill pattern 2
+set key left top
+set key invert
+set grid ytics
+set ylabel 'Speedup'
+set yrange [1:]
+set xlabel 'Number of worker processes'
+plot 'notebooks/01_scaling_results_03_speedups.csv' \ 
+   using 1:4 with linespoints ls 3 title 'Linear scaling', \
+   '' using 1:2 with linespoints ls 1 title 'All data', \
+   '' using 1:3 with linespoints ls 2 title 'Minimal data'
+\end{gnuplot}
+\caption{Speedup when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Speedup is initially linear, but becomes worse as the number of worker processes increases, especially from 5 worker processes onwards. At 8 worker processes the speedup is approximately 4.5. The scaling profiles for both sets of experiments are almost identical. Given that wallclock time is reduced when returning less data from worker to controlling process, as can be seen in Figure \ref{figure:scaling-wallclock-time} this suggests that returning less data to the controlling process reduces both parallel and serial runtime of the code.}
+\label{figure:scaling-speedup}
+\end{figure}
+
+It can be seen that up to 4 processors the scaling is just under linear, but after 4 processors the scaling is much worse. It can also be seen that the scaling profiles of returning all data and minimal data from the worker processes is almost identical.
+
+A reason for the greater-difference-from-linear scaling when the number of processors is greater than 4 could come from that the cores are not identical. According to Apple \cite{AppleM1Overview} 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The scaling profiles found appears roughly consistent with the high/lower performance split, and suggests that the high performance cores being used in preference to the low performance cores.
+
+Another reason for the deviation from linear speedup is Amdhal's Law that describes how speedup is related to proportion of the program that runs in serial. This law is usually formulated as
+
+\begin{equation}
+S_p = \frac{1}{(1-p) + \frac{p}{s}}
+\end{equation}
+%
+where $S_p$ is the speedup of the entire program, $p$ is the proportion of the program that has been parallelised, and $s$ is speedup of the parallelised part of the program. The most relevant consequence of this is that $\lim_{S\to\infty} S_p = \frac{1}{1-p}$. This means that for example, even if 95\% of a program is parallelised, then the maximum speedup is $\frac{1}{1-0.95}=20$, even if thousands of processes are used.
+
+This suggests that a way of increasing this limit is to reduce proportion of runtime in serial code. However, in light of Amdhal's law the identical scaling profiles in Figure \ref{figure:scaling-speedup} suggest that changing the amount of data returned from the worker processes does not change the overall proportion of runtime in serial code. Given wallclock time reduces with less data transferred, it's reasonable to suspect that reducing the data transferred reduces parallel and serial runtimes in the same proportions, possibly from the serialisation and deserialisation involved. Thus removing all data transfer is not likely to improve scaling. Also, one way to remove all data transfer is to use threads rather than processes, but threads in Python are subject to the Global Intepreter Lock (GIL), and so in many cases increases the proportion of serial code compared to using processes, there is a strong reason to suspect that this will make scaling worse, not better.
+
+So a reasonable next step would be to investigate what else in the program could be running serially. This is potentially not a trivial project - for example it might be from what appears to be parallel sections of the code when examining the algorithm or the Python code, but it accesses a shared resource under contention from the other processes, perhaps even indirectly. As examples, in general there some types of memory caches are shared between cores, or reading or writing to disk  may also effectively be done serially, or at least not fully parallel up to the number of cores. To understand and improve upon the current behaviour this would need a more in-depth understanding of the computer architecture being run on, and profiling of the Python code to understand where time is being spent. This is beyond the scope of the project and so is left to further work.
+
+However the conclusions we can draw here are that OpenTTDLab can utilise multiple cores to reduce runtime of simulations, albeit imperfectly, and that even though reducing the amount of data returned from the workers does not improve scaling, it can be an effective way to reduce wallclock runtime, and so these features of OpenTTDLab are justified and should be leveraged when running experiments.
 
 
 \chapter{Conclusion}
 
-\begin{itemize}
-\begin{item}
-Maybe mention the link between this and testing here? Or should it be earlier?
-\end{item}
-\end{itemize}
+OpenTTD has been used to run experiments to help research algorithms in a variety of fields. However from my own review from reading the studies, not a single study has been found that does not appear to have problems in at least one of the 3Rs of repeatability, reproducibility or replicability. Given the wider replication crisis in many fields of science, this is a trend that should not continue, and a need to address this in future research using OpenTTD seems clear.
 
-The framework presented here allows experiments to be conducted with OpenTTD in a manner that is repeatable and reproducible. Reproducibility is up to the author's descriptions of the artifacts they created - they must be sufficient to recreate the artifacts, and so beyond the scope of the framework here. However, it should at least ease issues due to creating a similar enough experimental setup.
+As shown in Chapter X OpenTTD provides a rich and flexible environment.
 
-The exception are the version of the AI used - these do not appear to be versioned. However, potentially it could report on some sort of hash of the code of the AI.
+The development of
 
-Loads of further work. Two camps: developing OpenTTDLab reproducible: version stuff, action, file format to save for example? Parallelise, easier optimisation. User research as per EXAMPLE. But then using OpenTTDLab as well! Hopefully the results chapter will show it can be used to analyse existing AIs, develop new AIs in order to explore specific concepts, which in this case is risk/benefit trade off, and also exploring ways of optimising, er, something.
+From the first set of experiments in Chapter X I have further shown the difficulty in - attempting to reproduce existing results and failing. However, using OpenTTDLab and providing the artifacts for running an analysing results, I have shown that it is straightforward to repeat experiments, for others to reproduce my work.
+
+The second set of experiments in Chapter X have shown again that OpenTTDLab can be used to easily repeat experiments, and again. Going further in this case, the experiments hint that OpenTTD could be used to simulate more complex world properties relating to transportation, business, or logistics; obtaining results that appear to show risk-benefit trade offs.
+
+The third set of experiments show that OpenTTDLab can run experiments in parallel, leveraging multiple CPUs on a single commodity computer, albeit with scaling that should be able to be improved. While this might at first glance to not be important in terms of the 3Rs, it allows for more experiments to be repeated within the same time constraints, and so give more evidential weight to conclusions based on the results.
+
+In all of these experiments the artifacts both in terms of running the experiments and analysing the results are included in appendices and are relatively short in terms of lines of code, showing that it should be feasible to include these in studies, or at least provide links to them as has been suggested.
+
+However, the biggest limitation in all of this work is that while I developed the framework in a highly agile mechanism in parallel with conducting the experiments of Chapters X-X, with a view to avoiding the issues of existing research discussed in Chapter 1, reproducibility and replicability is the domain of multiple sets of authors - those originally conducting the research and those then attempting to reproduce or replicate it. To fully validate that OpenTTDLab can be a useful tool in this, studies. I have provided 3 sets of experiments, but it remains to be seen if these are truly reproducible or replicable.
+
+Finally there are numerous thing in OpenTTDLab itself that can be improved upon. Improving sclability has already been mentioned, but there are features. While screenshots can be generated of the map, this cannot currently be extracted in a way suitable for analysis. While in many ways the format is self-documenting, it is not fully documented in terms of what can be extracted and how - the examples just touch the service. Should the format be converted into a way suitable for more straightforward analysis, for example to convert experiments into a SQLite file?
 
 \chapter{Notes}
 

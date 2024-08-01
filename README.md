@@ -9,8 +9,7 @@
 
 # OpenTTDLab-MSc-Dissertation
 
-MSc dissertation presenting [OpenTTDLab](https://github.com/michalc/OpenTTDLab): A reusable Python framework for repeatable, replicable, & reproducible
-experiments using OpenTTD
+MSc dissertation presenting [OpenTTDLab](https://github.com/michalc/OpenTTDLab): A reusable Python framework for repeatable, replicable, & reproducible experiments using OpenTTD
 
 
 ## Latest version

@@ -25,22 +25,22 @@ jobs:
       - name: Build PDF
         # If it's not run twice (the first time to get the aux file) then the margin tick marks are not in the right place
         run: |
-          docker run --rm -v $PWD:/workdir texlive-with-inkscape bash -c "cd /workdir && pdflatex --shell-escape main.tex && bibtex main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
+          docker run --rm -v $PWD:/workdir texlive-with-inkscape bash -c "cd /workdir && pdflatex --shell-escape main.tex && bibtex main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
       - name: Build PNG of pages
         run: |
           sudo apt update
           sudo apt-get install -y ghostscript
-          gs -r150 -sDEVICE=png16m -o michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-%03d.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+          gs -r150 -sDEVICE=png16m -o michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}-%03d.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
           cat /etc/ImageMagick-6/policy.xml
           echo '<policymap></policymap>' | sudo tee /etc/ImageMagick-6/policy.xml
-          montage -mode concatenate -geometry +0+0 michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
+          montage -mode concatenate -geometry +0+0 michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
       - name: Upload PDF and PNG
         uses: actions/upload-artifact@v3
         with:
-          name: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}
+          name: michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}
           path: |
-            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
-            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
 
   release:
     name: Release
@@ -58,12 +58,12 @@ jobs:
       - name: Download PDF and PNG
         uses: actions/download-artifact@v3
         with:
-          name: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}
-          path: michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}
+          name: michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}
+          path: michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}
       - name: Create assets without the tag in their names (for /latest redirects)
         run: |
-          cp michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.pdf
-          cp michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.png
+          cp michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.pdf
+          cp michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
       - name: Create release tag
         uses: actions/github-script@v5
         with:
@@ -78,15 +78,15 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
-            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png
-            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.pdf
-            michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation.png
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.pdf
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           body: |
             **Montage of all pages** (click to download PDF):
-            <a href="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.pdf">
-              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttd-msc-dissertation-${{ env.RELEASE_TAG }}.png">
+            <a href="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf">
+              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png">
             </a>
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

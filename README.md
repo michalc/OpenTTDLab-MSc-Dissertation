@@ -1,7 +1,7 @@
 ----
 
-<a href="https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttdlab-msc-dissertation.pdf" title="Download PDF of latest version">
-    <img src="https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttdlab-msc-dissertation.png">
+<a href="https://github.com/michalc/openttdlab-msc-dissertation/releases/latest/download/michal-charemza-openttdlab-msc-dissertation.pdf" title="Download PDF of latest version">
+    <img src="https://github.com/michalc/openttdlab-msc-dissertation/releases/latest/download/michal-charemza-openttdlab-msc-dissertation.png">
 </a>
 
 
@@ -14,11 +14,11 @@ MSc dissertation presenting [OpenTTDLab](https://github.com/michalc/OpenTTDLab):
 
 ## Latest version
 
-[↓ PDF of latest version](https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttdlab-msc-dissertation.pdf)
+[↓ PDF of latest version](https://github.com/michalc/openttdlab-msc-dissertation/releases/latest/download/michal-charemza-openttdlab-msc-dissertation.pdf)
 
 ## Previous versions
 
-Previous versions can be found on the [releases page](https://github.com/michalc/openttd-msc-dissertation/releases)
+Previous versions can be found on the [releases page](https://github.com/michalc/openttdlab-msc-dissertation/releases)
 
 
 ## Build PDF locally

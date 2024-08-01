@@ -86,7 +86,7 @@ jobs:
           name: ${{ env.RELEASE_TAG }}
           body: |
             **Montage of all pages** (click to download PDF):
-            <a href="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf">
-              <img src="https://github.com/michalc/openttd-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png">
+            <a href="https://github.com/michalc/openttdlab-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf">
+              <img src="https://github.com/michalc/openttdlab-msc-dissertation/releases/download/${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png">
             </a>
           tag_name: refs/tags/${{ env.RELEASE_TAG }}

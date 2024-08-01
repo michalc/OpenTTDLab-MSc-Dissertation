@@ -24,6 +24,7 @@ o % MSc dissertation example file, February 2022
 \usepackage{microtype} % recommended, but you can remove if it causes problems
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{float}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{graphicx}
@@ -548,13 +549,19 @@ The results presented here are for exactly 15 years of in-game time, while in th
 
 In both the original paper and here, there were two sets of experiments performed: one using the \emph{flat} terrain type, and one for the \emph{mountainous} terrain type. Here it is repeated 64 times, and in the original paper each of these was repeated 7 times. Here random seeds 0 to 64 were used for each set of experiments, but in the original paper the random seeds are unknown.
 
-The experiments here were run on mac OS 14.5 running on a 2020 M1 and Python 3.11.0 and OpenTTDLab 0.0.72. The OS and CPU of the original experiments are unknown. The experiments here were run with the default number of workers, which on the CPU would be 8.
+The experiments here were run on mac OS 14.5 running on a 2020 M1 and Python 3.11.0 and OpenTTDLab 0.0.72. The OS and CPU of the original experiments are unknown. The experiments here were run with OpenTTDLab's default number of workers, the number of cores on the machine, which in this case were 8.
 
-The Python code used to run the experiments is in Appendix REPLACEME, and the code to subsequently analyse the results in Appendix REPLACEME.
+The Python code used to run the experiments is in Appendix \ref{chapter:trains-vs-admiral-run-experiments}, and the code to subsequently analyse the results in Appendix \ref{chapter:trains-vs-admiral-analyse-results}.
 
 \section{Results}
 
-\begin{figure}[h]
+The results of the experiments can be seen in Figure \ref{figure:trains-ai-vs-admiral-ai-final-distributions}, showing the final distributions of company value for the two sets of experiments for both trAInS and Admiral, comparing the results using OpenTTDLab to the results of the original paper; and in Figure \ref{figure:trains-ai-vs-admiral-ai-over-time}, showing how the distribution of company value changes over time for the two sets of experiments and two AIs, but not comparing them with the original paper because it did not include sufficient data.
+
+From \ref{figure:trains-ai-vs-admiral-ai-final-distributions} it is clear that while trAIns performed better than Admiral in both the OpenTTDLab and original experiments, the difference between the two AIs in the current experiments is slight, as opposed to the original paper when the difference was remarkable. While Admiral AI's performance is similar or slightly worse than what was originally reported, especially in the mountainous configuration, trAIns AI can be characterised as approximately an order of magnitude worse.
+
+The results over time of \ref{figure:trains-ai-vs-admiral-ai-over-time} show that for both trAIns and Admiral the distribution of company value becomes wider as time goes on. It also shows that while the median value for both AIs is similar, the distribution of company value for trAIns AI is much wider than that for AdmiralAI, especially for the flat configuration.
+
+\begin{figure}[H]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
 file = "notebooks/01_trains_ai_vs_admiral_ai_results_02_combined_final.csv"
@@ -600,59 +607,59 @@ plot file \
 \end{figure}
 
 
-\begin{figure}[h]
-\centering
-\begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,6}]
-set datafile separator ","
-set style fill pattern 2
-set key right top
-set key invert
-set grid ytics
-set format y "%.1s%c"
-set xtics 3600*24*365*5
-set xdata time
-set format x ""
-set timefmt "%Y-%m-%d"
-set ylabel 'Company value $\textrm{\pounds}$' offset 1.5
+% \begin{figure}[h]
+% \centering
+% \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,6}]
+% set datafile separator ","
+% set style fill pattern 2
+% set key right top
+% set key invert
+% set grid ytics
+% set format y "%.1s%c"
+% set xtics 3600*24*365*5
+% set xdata time
+% set format x ""
+% set timefmt "%Y-%m-%d"
+% set ylabel 'Company value $\textrm{\pounds}$' offset 1.5
 
-set xrange ["1960-01-01":"1975-06-01"]
-set yrange [-100000:4000000]
+% set xrange ["1960-01-01":"1975-06-01"]
+% set yrange [-100000:4000000]
 
-set multiplot layout 2,1
+% set multiplot layout 2,1
 
-set ytics ("\\footnotesize 0" 0, "\\footnotesize 0.5M" 500000, "\\footnotesize 1.0M" 1000000, "\\footnotesize 1.5M" 1500000, "\\footnotesize 2.0M" 2000000, "\\footnotesize 2.5M" 2500000, "\\footnotesize 3.0M" 3000000, "\\footnotesize 3.5M" 3500000)
-set mytics 100000
+% set ytics ("\\footnotesize 0" 0, "\\footnotesize 0.5M" 500000, "\\footnotesize 1.0M" 1000000, "\\footnotesize 1.5M" 1500000, "\\footnotesize 2.0M" 2000000, "\\footnotesize 2.5M" 2500000, "\\footnotesize 3.0M" 3000000, "\\footnotesize 3.5M" 3500000)
+% set mytics 100000
 
-set lmargin at screen 0.11; set rmargin at screen 0.95
-set bmargin at screen 0.55
-set tmargin at screen 1.0
+% set lmargin at screen 0.11; set rmargin at screen 0.95
+% set bmargin at screen 0.55
+% set tmargin at screen 1.0
 
-set label 1 'Mountainous' at graph 0.05,0.92
-plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):8:10 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
-   '' using (timecolumn(1, '%Y-%m-%d')):9 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
-   '' using (timecolumn(1, '%Y-%m-%d')):12:11:13 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
-   '' using (timecolumn(1, '%Y-%m-%d')):12 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
+% set label 1 'Mountainous' at graph 0.05,0.92
+% plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
+%    using (timecolumn(1, '%Y-%m-%d')):8:10 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
+%    '' using (timecolumn(1, '%Y-%m-%d')):9 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
+%    '' using (timecolumn(1, '%Y-%m-%d')):12:11:13 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
+%    '' using (timecolumn(1, '%Y-%m-%d')):12 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
 
-unset key
-set xlabel '\footnotesize Date'
-set format x "\\footnotesize %Y"
-set bmargin at screen 0.1
-set tmargin at screen 0.55
-set label 1 'Flat' at graph 0.05,0.92
+% unset key
+% set xlabel '\footnotesize Date'
+% set format x "\\footnotesize %Y"
+% set bmargin at screen 0.1
+% set tmargin at screen 0.55
+% set label 1 'Flat' at graph 0.05,0.92
 
-plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):2:4 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
-   '' using (timecolumn(1, '%Y-%m-%d')):6:5:7 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
-   '' using (timecolumn(1, '%Y-%m-%d')):6 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
+% plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
+%    using (timecolumn(1, '%Y-%m-%d')):2:4 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
+%    '' using (timecolumn(1, '%Y-%m-%d')):3 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
+%    '' using (timecolumn(1, '%Y-%m-%d')):6:5:7 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
+%    '' using (timecolumn(1, '%Y-%m-%d')):6 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
 
-\end{gnuplot}
-\caption{Reproducing company value over time}
-\label{figure:trains-ai-vs-admiral-ai-over-time}
-\end{figure}
+% \end{gnuplot}
+% \caption{Reproducing company value over time}
+% \label{figure:trains-ai-vs-admiral-ai-over-time}
+% \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,3}]
 set datafile separator ","
@@ -706,9 +713,11 @@ plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_q
 \label{figure:trains-ai-vs-admiral-ai-over-time}
 \end{figure}
 
-\section{Replicating results}
-\lstset{numbers=left,frame=tb,basicstyle=\linespread{0.7}\ttfamily\footnotesize}
-\lstinputlisting[language=Python,float,caption=A floating example]{assets/replicating_results_core.py}
+% \section{Replicating results}
+% \lstset{numbers=left,frame=tb,basicstyle=\linespread{0.7}\ttfamily\footnotesize}
+% \lstinputlisting[language=Python,float,caption=A floating example]{assets/replicating_results_core.py}
+
+\section{Discussion}
 
 \chapter{Experiments 2 - Simple parameterised OpenTTD AI}
 \label{chapter:experiments-simple-parameterised-ai}
@@ -1047,6 +1056,7 @@ The Python notebook used to generate results for the Scaling experiments of XX i
 \includepdf[pages=-,scale=.8,pagecommand={}]{notebooks/03_scaling_01_run_experiment.pdf}
 
 \chapter{Scaling experiments - Python code to analyse results}
+
 \label{chapter:scaling-analyis-code}
 
 The Python notebook used to analyse results for the Scaling experiments of XX is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/03_scaling_02_analyse_results.ipynb}
@@ -1061,6 +1071,7 @@ The Python notebook used to run the trAIns vs Admiral experiments of XX is below
 \includepdf[pages=-,scale=.8,pagecommand={}]{notebooks/01_trains_ai_vs_admiral_ai_01_run_experiments.pdf}
 
 \chapter{trAIns versus Admiral - analyse results}
+\label{chapter:trains-vs-admiral-analyse-results}
 
 The Python notebook used to analyse results for the trAIns vs Admiral experiments of XX is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/01_trains_ai_vs_admiral_ai_01_analyse_results.ipynb}
 

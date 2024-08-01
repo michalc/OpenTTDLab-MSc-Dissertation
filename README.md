@@ -9,13 +9,13 @@
 
 # OpenTTDLab-MSc-Dissertation
 
-MSc dissertation presenting OpenTTDLab: A reusable Python framework for repeatable, replicable, & reproducible
+MSc dissertation presenting [OpenTTDLab](https://github.com/michalc/OpenTTDLab): A reusable Python framework for repeatable, replicable, & reproducible
 experiments using OpenTTD
 
 
 ## Latest version
 
-[↓ PDF of latest version](https://github.com/michalc/openttd-msc-dissertation/releases/latest)
+[↓ PDF of latest version](https://github.com/michalc/openttd-msc-dissertation/releases/latest/download/michal-charemza-openttd-msc-dissertation.pdf)
 
 ## Previous versions
 

@@ -102,7 +102,7 @@ OpenTTD was created as a game for recreation: it allows a single player to play 
 
 Simulation games have a long history of being used to inform government policies, see Raghothama \& Meije \cite{raghothama2013review} for a summary that focuses on logistics and simulation. In spite of this, no reference of using OpenTTD in this way has been found. A reason in \cite{raghothama2013review} is suggested: while some of the transportation aspects of the networks in OpenTTD are realistic, its economic model is not.
 
-Of all these possible uses for OpenTTD, using OpenTTD as a tool for researching algorithms is the primary focus of the current work, and specifically the focus is the development of a reusable tool, OpenTTDLab, that augments the existing features of OpenTTD to improve its ability to be used in repeatable, replicable, \& reproducible research where AI(s) play without human player involvement. Given what is now the well-known replication crisis\footnote{The replication crisis is also known as the replicability crisis, the reproducibility crisis, and the credibility crisis.} \cite{ioannidis2005most, baker20161}, including in computer science \cite{CollbergChristianProebsting2016}, if there are problems with how such research has been conducted using OpenTTD, as I will argue, then the potential usefulness of such a tool for future research is clear.
+Of all these possible uses for OpenTTD, using OpenTTD as a tool for researching algorithms is the primary focus of the current work, and specifically the focus is the development of a reusable tool, OpenTTDLab, that augments the existing features of OpenTTD to improve its ability to be used in repeatable, replicable, \& reproducible research where AI(s) play without human player involvement. Given what is now the well-known replication crisis\footnote{The replication crisis is also known as the replicability crisis, the reproducibility crisis, and the credibility crisis.} \cite{ioannidis2005most, baker20161}, including in computer science \cite{dalle2012reproducibility, CollbergChristianProebsting2016}, if there are problems with how such research has been conducted using OpenTTD, as I will argue, then the potential usefulness of such a tool for future research is clear.
 
 As a secondary and more speculative aim, it is hoped that the work here allows for OpenTTD to be investigated as a tool to simulate supply chain or transportation networks that could ultimately inform government policies. However, the nature of the correspondence between OpenTTD and what it is simulating must be determined, or in other words it must be \emph{validated} \cite{doi:10.1177/1046878198291003}.
 
@@ -201,7 +201,7 @@ However, even if there is sufficient detail, in all cases bar one they are not p
 
 \end{enumerate}
 
-Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review.
+Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review. While my review focused on OpenTTD, it appears to be related wider problem in simulations in general: ``many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility'' \cite{dalle2012reproducibility}.
 
 \section{The 4\textsuperscript{th} R: reusability}
 
@@ -217,7 +217,7 @@ Repeatability, reproducibility and replicability are all in the realm of a singl
 
 \section{Conclusion}
 
-It can be costly in terms of time to repeat experiments, or even to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course by researchers or by publishers \cite{benureau2018re}. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement, I identified 7 issues on this front, with no research completely issue-free. In this work I present a framework, OpenTTDLab, to reduce the cost, and ideally in a reusable way.
+It can be costly to repeat experiments, or even to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course by researchers or by publishers \cite{benureau2018re}. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement I identified 7 issues on this front, with no research completely issue-free. In this work I present a framework, OpenTTDLab, to reduce the cost, and ideally in a reusable way.
 
 \chapter{OpenTTD: its model and abilities}
 \label{chapter:openttd-model-and-abilities}
@@ -836,7 +836,7 @@ Looks like the one with more stations/routes has more money? Can we corrolate st
 
 
 
-\chapter{Experiments 3 - scaling}
+\chapter{Experiments 3 - Scaling}
 \label{chapter:experiments-scaling}
 
 I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to the controlling process, and for only passing a minimal amount of data: the date, the company value at that date, and if an error occurred. All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, trAIns 2.1 retrieved from the BaNaNaS content service with MD5 hash of c4c069dc797674e545411b59867ad0c2, and running for seeds 0 to 49, and each for a total of 1465 in-game days (just over 4 in-game years). The Python code to run the experiments can be seen in Appendix \ref{chapter:scaling-running-code}, and the code to subsequently process and visualise the results in Appendix \ref{chapter:scaling-analyis-code}.
@@ -924,99 +924,99 @@ Finally there are numerous features in OpenTTDLab itself that can be improved up
 
 While there are many improvements that can be made in OpenTTDLab and further investigations performed in terms of whether it does in fact achieve its aims, through this work I have provided evidence that OpenTTDLab at least provides the foundations of a good framework for conducting repeatable, reproducible and replicable research using OpenTTD. I sincerely hope it will be both used and improved upon.
 
-\chapter{Notes}
+% \chapter{Notes}
 
-History
+% History
 
-\begin{itemize}
+% \begin{itemize}
 
-\begin{item}
-\cite{jackson1959learning} first business simulation game, US Air force MONOPOLOGS pretend to be inventory managers
-\end{item}
+% \begin{item}
+% \cite{jackson1959learning} first business simulation game, US Air force MONOPOLOGS pretend to be inventory managers
+% \end{item}
 
-\begin{item}
-\cite{meijer2009organisation} - Studying supply chains using gaming simulation
-\end{item}
+% \begin{item}
+% \cite{meijer2009organisation} - Studying supply chains using gaming simulation
+% \end{item}
 
-\begin{item}
-\cite{mayer2009gaming} - Defines simulation game as a game "experi(m)ent(i)al, rule-based, interactive environments, where players learn by taking actions and by experiencing their effects through feedback mechanisms that are deliberately built into and around the game"
-\end{item}
+% \begin{item}
+% \cite{mayer2009gaming} - Defines simulation game as a game "experi(m)ent(i)al, rule-based, interactive environments, where players learn by taking actions and by experiencing their effects through feedback mechanisms that are deliberately built into and around the game"
+% \end{item}
 
-\begin{item}
-\cite{raghothama2013review} war gaming roots, policy analysis, business simulation games, studies on human cognition and behavior, training and pedagogical tools
+% \begin{item}
+% \cite{raghothama2013review} war gaming roots, policy analysis, business simulation games, studies on human cognition and behavior, training and pedagogical tools
 
-Main point: simulation games particular suited for transportation research in general, and supply chain specifically because it's an emergent property
+% Main point: simulation games particular suited for transportation research in general, and supply chain specifically because it's an emergent property
 
-Some features of OpenTTD realistic, but this isn't exactly justified
+% Some features of OpenTTD realistic, but this isn't exactly justified
 
-Simutrans mentioned - described as not being realistic at all, but is extensible so could be
+% Simutrans mentioned - described as not being realistic at all, but is extensible so could be
 
-But similuation games not used for transportation
+% But similuation games not used for transportation
 
-Gives lots of examples of simulation games used for research, but also mentions "Little attention has been paid to the validation of these simulation games."
+% Gives lots of examples of simulation games used for research, but also mentions "Little attention has been paid to the validation of these simulation games."
 
-(But: by and large here we're not concerning ourselves with validation)
-\end{item}
+% (But: by and large here we're not concerning ourselves with validation)
+% \end{item}
 
-\begin{item}
-Basically have a list of a good range of how similuation games have been used.
-\end{item}
+% \begin{item}
+% Basically have a list of a good range of how similuation games have been used.
+% \end{item}
 
-\begin{item}
-\cite{alderliesten2019maintrain} The simulation game itself used to try to get sympathy/understanding from passengers about delays
-\end{item}
+% \begin{item}
+% \cite{alderliesten2019maintrain} The simulation game itself used to try to get sympathy/understanding from passengers about delays
+% \end{item}
 
-\begin{item}
-\cite{cimellaro2016computational} - it lists OpenTTD alongside "real" simulators of cities in discussion for disaster reliance, with no particular mention that's it a game/for entertainment??
-\end{item}
+% \begin{item}
+% \cite{cimellaro2016computational} - it lists OpenTTD alongside "real" simulators of cities in discussion for disaster reliance, with no particular mention that's it a game/for entertainment??
+% \end{item}
 
-Repeatability
-
-
-\begin{itemize}
-\begin{item}
-\cite{dalle2012reproducibility} in simulation in particular "many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility" (and in my opinion the OpenTTD ones are no exception). And it gives some "levels" L1, L2, L3, L4 on how to judge "how" reproducbiel simulations are and highlights specific desirable details about simulations. I can probably judge some existing research using this, and compare to maybe output using my OpenTTDLab thing?
-
-Hidden details that prevent reproducilibty (it cites another source for this)
-
-I quite like this one! (TODO Check things that cite it especially)
-
-"Goes beyond" reproducibility into traceability...
-
-"– a simulator refers to a reusable simulation engine and its Application Programming Interface
-(API); the engine is reusable for the simulation of many models and scenarios;" OpenTTDLab I think is the "missing" simulator??
-
-"In simulation, not only the same sources of error
-exist, but the system itself can be modeled incorrectly and be a source of error"
-
-"Furthermore, as will be explained in greater details
-in the next section, simulation has many applications that are not aimed toward producing science
-and, therefore, do not necessarily require a reproducibility based on the source code availability."
-
-"• manipulation errors: These errors result from the manual handling of some of the tasks in the simulation study work-flow."
-
-OpenTTDLab I think addresses loads of the issues mentioned, in many of the ways it suggests.
-\end{item}
+% Repeatability
 
 
-\begin{item}
-\cite{monks2019strengthening} - Checklist style "STRESS" guidelines. Strengthening the Reporting of Empirical Simulation Studies
+% \begin{itemize}
+% \begin{item}
+% \cite{dalle2012reproducibility} in simulation in particular "many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility" (and in my opinion the OpenTTD ones are no exception). And it gives some "levels" L1, L2, L3, L4 on how to judge "how" reproducbiel simulations are and highlights specific desirable details about simulations. I can probably judge some existing research using this, and compare to maybe output using my OpenTTDLab thing?
 
-It also has a review of lots of other guidelines for reproducible simulations
+% Hidden details that prevent reproducilibty (it cites another source for this)
 
-TODO: if going this way, reflect on the bits that OpenTTDLab does not do
+% I quite like this one! (TODO Check things that cite it especially)
 
-"Agent-Based Simulation (ABS), Discrete-Event Simulation (DES) and System Dynamics (SD)." - er... OpenTTD is which of these??
+% "Goes beyond" reproducibility into traceability...
 
-"it is critical that author report the software version and build numbers" - this is for commercial software, but I would argue for Open Source as well
-\end{item}
+% "– a simulator refers to a reusable simulation engine and its Application Programming Interface
+% (API); the engine is reusable for the simulation of many models and scenarios;" OpenTTDLab I think is the "missing" simulator??
 
-\begin{item}
-Gass (1984) provides the earliest example of reporting guidelines for “computer based models”.
-\end{item}
-\end{itemize}
+% "In simulation, not only the same sources of error
+% exist, but the system itself can be modeled incorrectly and be a source of error"
 
-\end{itemize}
+% "Furthermore, as will be explained in greater details
+% in the next section, simulation has many applications that are not aimed toward producing science
+% and, therefore, do not necessarily require a reproducibility based on the source code availability."
+
+% "• manipulation errors: These errors result from the manual handling of some of the tasks in the simulation study work-flow."
+
+% OpenTTDLab I think addresses loads of the issues mentioned, in many of the ways it suggests.
+% \end{item}
+
+
+% \begin{item}
+% \cite{monks2019strengthening} - Checklist style "STRESS" guidelines. Strengthening the Reporting of Empirical Simulation Studies
+
+% It also has a review of lots of other guidelines for reproducible simulations
+
+% TODO: if going this way, reflect on the bits that OpenTTDLab does not do
+
+% "Agent-Based Simulation (ABS), Discrete-Event Simulation (DES) and System Dynamics (SD)." - er... OpenTTD is which of these??
+
+% "it is critical that author report the software version and build numbers" - this is for commercial software, but I would argue for Open Source as well
+% \end{item}
+
+% \begin{item}
+% Gass (1984) provides the earliest example of reporting guidelines for “computer based models”.
+% \end{item}
+% \end{itemize}
+
+% \end{itemize}
 
 
 \bibliographystyle{plain}

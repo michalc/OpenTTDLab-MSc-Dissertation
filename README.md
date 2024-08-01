@@ -7,9 +7,10 @@
 
 ---
 
-# openttd-msc-dissertation
+# OpenTTDLab-MSc-Dissertation
 
-MSc dissertation on OpenTTD, reproducible research, and supply chain resilience
+MSc dissertation presenting OpenTTDLab: A reusable Python framework for repeatable, replicable, & reproducible
+experiments using OpenTTD
 
 
 ## Latest version

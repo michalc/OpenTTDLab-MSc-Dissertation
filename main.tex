@@ -220,7 +220,7 @@ Repeatability, reproducibility and replicability are all in the realm of a singl
 
 It can be costly to repeat experiments, or even to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course by researchers or by publishers \cite{benureau2018re}. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement I identified 7 issues on this front, with no research completely issue-free. In this work I present a framework, OpenTTDLab, to reduce the cost, and ideally in a reusable way.
 
-\chapter{OpenTTD: its model and abilities}
+\chapter{OpenTTD: Its Model and Abilities}
 \label{chapter:openttd-model-and-abilities}
 
 A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in road, rail, sea or air infrastructure and vehicles.
@@ -398,7 +398,7 @@ With reference to the the desired things from the reproducibility section, menti
 
 Running many experiments. Extracting data for analysis.
 
-\chapter{The framework}
+\chapter{The Framework}
 \label{chapter:openttdlab-design-process-and-features}
 
 \begin{figure}[h]
@@ -530,7 +530,7 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 % To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to reproduce existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
-\chapter{Experiments 1 - Attempt at reproducing existing results}
+\chapter{Experiments 1: Attempt at Reproducing Existing Results}
 \label{chapter:experiments-attempt-at-reproducing}
 
 To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to replicate some of the results of \cite{rios2009trains}: a set of matches between the trAIns [sic] AI being presented, and the pre-existing Admiral AI, and comparing their performance in terms of company value.
@@ -733,7 +733,7 @@ However, the most likely cause of differences are not deliberate, but in fact du
 
 It is beyond the scope of the current work to go beyond speculation and fully explain the results found. However, these experiments have shown two things. Firstly, they give stronger evidence to the claims of Chapter \ref{chapter:introduction} that existing research that uses OpenTTD cannot be replicated. Secondly that OpenTTDLab can be used to extract rich information from OpenTTD, and can be seen Appendices X-X, with a small amount of code that should be bitwise replicable, and so could not just confirm the results, but further them through more in-depth analysis without even the full results being shared. The results here were also for a single metric: company value. However, as discussed briefly in Chapter \ref{chapter:openttdlab-design-process-and-features}, there is a wealth of further information available in OpenTTDLab.
 
-\chapter{Experiments 2 - Simple parameterised OpenTTD AI}
+\chapter{Experiments 2: Simple Parameterised OpenTTD AI}
 \label{chapter:experiments-simple-parameterised-ai}
 
 From the previous section, OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences. However, this doesn't by itself allow for a more detailed analysis of the behaviour of supply chains. OpenTTDLab's feature of running experiments over a range of configuration parameters passed to an AI allows for this.
@@ -917,7 +917,7 @@ Looks like the one with more stations/routes has more money? Can we corrolate st
 
 
 
-\chapter{Experiments 3 - Scaling}
+\chapter{Experiments 3: Scaling}
 \label{chapter:experiments-scaling}
 
 I conducted a brief investigation into how well OpenTTDLab scales with the number of worker processes by running the same set of 50 simulations, but distributing the work between 1 to 8 worker processes, and seeing how the runtime changes. I also did these tests when passing the full set of results back to the controlling process, and for only passing a minimal amount of data: the date, the company value at that date, and if an error occurred.
@@ -1118,15 +1118,6 @@ While there are many improvements that can be made in OpenTTDLab and further inv
 
 % You may delete everything from \appendix up to \end{document} if you don't need it.
 \appendix
-
-\chapter{Summary of data in OpenTTD save games}
-
-
-Any appendices, including any required ethics information, should be included
-after the references.
-
-Markers do not have to consider appendices. Make sure that your contributions
-are made clear in the main body of the dissertation (within the page limit).
 
 \chapter{Documentation of OpenTTDLab}
 

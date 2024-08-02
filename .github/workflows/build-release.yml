@@ -59,7 +59,7 @@ jobs:
       - name: Determine release tag
         run: |
           echo "RELEASE_TAG=$(git log -1 --pretty='format:%cd' --date=format:'v%Y%m%d.%H%M%S')" >> "$GITHUB_ENV"
-      - name: Download PDF and PNG
+      - name: Download PDF, PNG, and project materials
         uses: actions/download-artifact@v3
         with:
           name: michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}
@@ -68,6 +68,11 @@ jobs:
         run: |
           cp michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.pdf
           cp michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
+      - name: Find MD5 of project materials
+        run: |
+          echo "PROJECT_MATERIALIS_MD5=$(md5 ./project.tgz | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
+      - name: Move project materials file to have MD5-specific name
+          mv michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project.tgz michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project-{{ env.PROJECT_MATERIALIS_MD5 }}.tgz
       - name: Create release tag
         uses: actions/github-script@v5
         with:
@@ -78,7 +83,7 @@ jobs:
               ref: 'refs/tags/${{ env.RELEASE_TAG }}',
               sha: context.sha
             })
-      - name: Release PDF and PNG under release tag
+      - name: Release PDF, PNG, and project materials under release tag
         uses: softprops/action-gh-release@v1
         with:
           files: |
@@ -86,7 +91,7 @@ jobs:
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.pdf
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
-            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project.tgz
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project-{{ env.PROJECT_MATERIALIS_MD5 }}.tgz.tgz
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           body: |

@@ -34,6 +34,10 @@ jobs:
           cat /etc/ImageMagick-6/policy.xml
           echo '<policymap></policymap>' | sudo tee /etc/ImageMagick-6/policy.xml
           montage -mode concatenate -geometry +0+0 michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
+      - name: Generate project materials file
+        run: |
+          PROJECT_MATERIALS_MD5=$(./project/generate.sh)
+          echo "PROJECT_MATERIALS_MD5=$PROJECT_MATERIALS_MD5" >> "$GITHUB_ENV"
       - name: Upload PDF and PNG
         uses: actions/upload-artifact@v3
         with:

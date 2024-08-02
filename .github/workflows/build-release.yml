@@ -34,17 +34,17 @@ jobs:
           cat /etc/ImageMagick-6/policy.xml
           echo '<policymap></policymap>' | sudo tee /etc/ImageMagick-6/policy.xml
           montage -mode concatenate -geometry +0+0 michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
-      - name: Generate project materials file
-        run: |
-          PROJECT_MATERIALS_MD5=$(./project/generate.sh)
-          echo "PROJECT_MATERIALS_MD5=$PROJECT_MATERIALS_MD5" >> "$GITHUB_ENV"
-      - name: Upload PDF and PNG
+      - name: Generate project materials archive
+        run:
+          ./project/generate.sh
+      - name: Upload PDF, PNG, and project materials
         uses: actions/upload-artifact@v3
         with:
           name: michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}
           path: |
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
+            project.tgz
 
   release:
     name: Release
@@ -86,6 +86,7 @@ jobs:
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.pdf
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project.tgz
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           body: |

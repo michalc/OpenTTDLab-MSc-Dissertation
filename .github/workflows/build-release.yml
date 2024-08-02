@@ -92,7 +92,7 @@ jobs:
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.pdf
             michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
-            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project-{{ env.PROJECT_MATERIALIS_MD5 }}.tgz.tgz
+            michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project-${{ env.PROJECT_MATERIALIS_MD5 }}.tgz
           generate_release_notes: true
           name: ${{ env.RELEASE_TAG }}
           body: |

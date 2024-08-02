@@ -72,6 +72,7 @@ jobs:
         run: |
           echo "PROJECT_MATERIALIS_MD5=$(md5 ./project.tgz | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
       - name: Move project materials file to have MD5-specific name
+        run: |
           mv michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project.tgz michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project-{{ env.PROJECT_MATERIALIS_MD5 }}.tgz
       - name: Create release tag
         uses: actions/github-script@v5

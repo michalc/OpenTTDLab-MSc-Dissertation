@@ -10,8 +10,8 @@ cd project
 cp ../README.md .
 mkdir Notebooks
 cp ../../notebooks/* ./Notebooks
-git clone git@github.com:michalc/ParameterisedAI.git
-git clone git@github.com:michalc/OpenTTDLab.git
+git clone https://github.com/michalc/ParameterisedAI.git
+git clone https://github.com/michalc/OpenTTDLab.git
 cd ..
 
 tar zcvf project.tgz project

@@ -70,7 +70,7 @@ jobs:
           cp michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/michal-charemza-openttdlab-msc-dissertation.png
       - name: Find MD5 of project materials
         run: |
-          PROJECT_MATERIALS_MD5=$(md5 michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project.tgz | cut -d ' ' -f 1)
+          PROJECT_MATERIALS_MD5=$(md5sum michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}/project.tgz | cut -d ' ' -f 1)
           echo "PROJECT_MATERIALS_MD5=$PROJECT_MATERIALS_MD5"
           echo "PROJECT_MATERIALS_MD5=$PROJECT_MATERIALS_MD5" >> "$GITHUB_ENV"
       - name: Move project materials file to have MD5-specific name

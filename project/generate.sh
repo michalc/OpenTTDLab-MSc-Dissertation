@@ -16,7 +16,7 @@ function generate() {
     cd ..
 
     tar zcvf project.tgz project
-    md5=$(md5sum ./project.tgz | cut -d ' ' -f 1)
+    md5=$(md5 ./project.tgz | cut -d ' ' -f 1)
 
     rm -r -f project
     mv project.tgz ..

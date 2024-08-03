@@ -38,8 +38,11 @@
 \usepackage{pdfpages}
 \usepackage{listings}
 \usepackage[ruled]{algorithm2e}
+\usepackage{biblatex}
+
 
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
+\addbibresource{main.bib}
 
 \newcommand\descitem[1]{\item{\bfseries #1}\\}
 
@@ -1054,8 +1057,7 @@ While there are many improvements that can be made in OpenTTDLab and further inv
 % \end{itemize}
 
 
-\bibliographystyle{plain}
-\bibliography{main}
+\printbibliography
 
 
 % You may delete everything from \appendix up to \end{document} if you don't need it.

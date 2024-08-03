@@ -25,7 +25,7 @@ jobs:
       - name: Build PDF
         # If it's not run twice (the first time to get the aux file) then the margin tick marks are not in the right place
         run: |
-          docker run --rm -v $PWD:/workdir texlive-with-inkscape bash -c "cd /workdir && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
+          docker run --rm -v $PWD:/workdir texlive-with-inkscape bash -c "cd /workdir && pdflatex --shell-escape main.tex && biber main && pdflatex --shell-escape main.tex && pdflatex --shell-escape main.tex && mv main.pdf michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.pdf"
       - name: Build PNG of pages
         run: |
           sudo apt update

@@ -38,10 +38,25 @@
 \usepackage{pdfpages}
 \usepackage{listings}
 \usepackage[ruled]{algorithm2e}
-\usepackage[backend=biber]{biblatex}
+\usepackage[british]{babel}
+\usepackage[backend=biber,urldate=long,dateabbrev=false]{biblatex}
 
 
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
+
+\DeclareFieldFormat{eprint:urn}{%
+	\textsc{urn\addcolon\space}
+	\ifhyperref
+	{\href{http://www.nbn-resolving.org/#1}{\nolinkurl{#1}}}
+	{\nolinkurl{#1}}}
+\DeclareFieldFormat{eprint:hal}{%
+	\textsc{hal\addcolon\space}
+	\ifhyperref
+	{\href{https://uca.hal.science/#1}{\nolinkurl{#1}}}
+	{\nolinkurl{#1}}}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
 \addbibresource{main.bib}
 
 \newcommand\descitem[1]{\item{\bfseries #1}\\}
@@ -207,7 +222,7 @@ However, even if there is sufficient detail, in all cases bar one they are not p
 
 Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review. While my review focused on OpenTTD, it appears to be related wider problem in simulations in general: ``many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility'' \cite{dalle2012reproducibility}.
 
-\section{The 4\textsuperscript{th} R: reusability}
+\section{The 4\texorpdfstring{\textsuperscript{th}}{th} R: reusability}
 
 There is a 4\textsuperscript{th} concept given alongside ACM's definitions \cite{association_for_computing_machiner_new_2020}, not so much property of the results that the 3Rs focus on, but a property of the artifacts used to generate the results.
 

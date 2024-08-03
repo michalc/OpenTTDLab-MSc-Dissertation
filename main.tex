@@ -54,6 +54,11 @@
 	\ifhyperref
 	{\href{https://uca.hal.science/#1}{\nolinkurl{#1}}}
 	{\nolinkurl{#1}}}
+ \DeclareFieldFormat{eprint:hdl}{%
+	\textsc{hdl\addcolon\space}
+	\ifhyperref
+	{\href{https://hdl.handle.net/#1}{\nolinkurl{#1}}}
+	{\nolinkurl{#1}}}
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 

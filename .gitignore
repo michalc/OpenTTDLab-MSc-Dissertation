@@ -2,4 +2,7 @@
 /*.aux
 /*.log
 /*.png
+.DS_Store
+.ipynb_checkpoints
+project.tgz
 

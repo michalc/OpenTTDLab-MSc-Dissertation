@@ -240,7 +240,7 @@ OpenTTD runs on two-dimensional rectangular tiled grid representing an area of l
 
 There is some concept of height - each section of a grid can have one of X possible height levels in the game, with sloping land between each level. This impacts the game in more than just a visual way: when going uphill road and rail vehicles slow down - the amount depending on the type of the vehicle, and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
 
-An example field of play, also showing some of the interface that players use to interact with the field of play is show in Figure \ref{figure:openttd-field-of-play}.
+An example field of play, also showing some of the interface that players use to interact with the field of play is show in Figure \ref{figure:introduction-screenshot}.
 
 \section{Startup}
 
@@ -511,7 +511,7 @@ Tidy results?
 \section{Algorithm}
 
 \begin{algorithm}
-\caption{The core algorithm of OpenTTDLab}\label{alg:three}
+\caption{The core algorithm of OpenTTDLab}\label{alg:openttd}
 \KwData{The list of experiments to run, where each is defined by the seed, number of days, list of AIs and parameters to pass to the AIs. Versions of OpenTTD and OpenGFX}
 \KwResult{The parsed save games from every month of game time for every experiment} 
  fetch everything that needs to be fetched (not stuff that is already in cache...)\;
@@ -754,7 +754,7 @@ However, the situation is more complex. When taking into account the distributio
 There is also an interesting convergence point around 1978: all configurations on average have on average the same amount of money in the bank. At the moment the reason for this convergence point is so far unexplained. As can be seen in Figure X, this convergence it is certainly not true that every run of the game makes the same amount of money - the distributions of money for 1 and 16 buses remains wide.
 
 \begin{algorithm}
-\caption{Simple parameterised OpenTTD AI}\label{alg:three}
+\caption{Simple parameterised OpenTTD AI}\label{alg:simple-parameterised-ai}
 \KwData {Seed, the number of buses to build in the AI N}
  (OpenTTD generates the map deterministingly based on the seed) \;
  Fetch list of towns \;
@@ -800,7 +800,7 @@ plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation
    '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus'
 \end{gnuplot}
 \caption{Money in the bank for my own simple AI: 1 vs 16 buses}
-\label{fig:supplychainresiliance}
+\label{fig:simple-parameterised-ai-means}
 \end{figure}
 
 \begin{figure}[H]
@@ -830,7 +830,7 @@ plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation
    '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title ''
 \end{gnuplot}
 \caption{Money in the bank for my own simple AI: 1 vs 16 buses}
-\label{fig:supplychainresiliance}
+\label{fig:simple-parameterised-ai-distributions}
 \end{figure}
 
 % \subsection{Discussion}

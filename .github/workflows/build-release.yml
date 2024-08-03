@@ -36,7 +36,7 @@ jobs:
           montage -mode concatenate -geometry +0+0 michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}-*.png michal-charemza-openttdlab-msc-dissertation-${{ env.RELEASE_TAG }}.png
       - name: Generate project materials archive
         run:
-          ./project/generate.sh
+          bash ./project/generate.sh
       - name: Upload PDF, PNG, and project materials
         uses: actions/upload-artifact@v3
         with:

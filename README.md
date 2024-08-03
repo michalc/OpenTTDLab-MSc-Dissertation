@@ -33,5 +33,5 @@ docker run --rm -v $PWD:/workdir texlive/texlive:TL2022-historic bash -c "cd /wo
 These are to be submitted along with the PDF of the dissertation. See [the project materials README](./project/README.md) for details of what it contains.
 
 ```bash
-./project/generate.sh
+bash ./project/generate.sh
 ```

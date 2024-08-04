@@ -80,7 +80,10 @@
 % A "descitem" item for a bold "mini heading" component
 \newcommand\descitem[1]{\item{\bfseries #1}\\}
 
-\newcommand{\singlespacedfootnote}[1]{\singlespace\footnote{#1}}
+% Footnotes should be single spaced, but infthesis redefines \footnote which
+% then causes biblatex to throw a warning. So we have commended out that
+% redefinition, but use our own command to enfore the singlespacing
+\newcommand{\singlespacedfootnote}[1]{{\singlespace\footnote{#1}}}
 
 \begin{document}
 \begin{preliminary}

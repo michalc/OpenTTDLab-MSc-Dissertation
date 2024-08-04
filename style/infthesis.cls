@@ -45,7 +45,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
-\ProvidesClass{infthesis}[2013/02/07 v3.7 School of Informatics Thesis Class]
+\ProvidesClass{style/infthesis}[2013/02/07 v3.7 School of Informatics Thesis Class]
 
 
 %%

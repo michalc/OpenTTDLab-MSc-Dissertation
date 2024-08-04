@@ -3,16 +3,16 @@
 % Leave one of the documentclass lines uncommented to match your degree.
 % You may remove the logo option if it causes problems.
 % Do not change any other options.
-% \documentclass[logo,msc,adi]{infthesis}     % Adv Design Inf
-% \documentclass[logo,msc,ai]{infthesis}      % AI
-% \documentclass[logo,msc,cogsci]{infthesis}  % Cognitive Sci
-% \documentclass[logo,msc,cs]{infthesis}      % Computer Sci
-% \documentclass[logo,msc,cyber]{infthesis}   % Cyber Sec
-% \documentclass[logo,msc,datasci]{infthesis} % Data Sci
-% \documentclass[logo,msc,di]{infthesis}      % Design Inf
+% \documentclass[logo,msc,adi]{infthesis}         % Adv Design Inf
+% \documentclass[logo,msc,ai]{infthesis}          % AI
+% \documentclass[logo,msc,cogsci]{infthesis}      % Cognitive Sci
+% \documentclass[logo,msc,cs]{infthesis}          % Computer Sci
+% \documentclass[logo,msc,cyber]{infthesis}       % Cyber Sec
+% \documentclass[logo,msc,datasci]{infthesis}     % Data Sci
+% \documentclass[logo,msc,di]{infthesis}          % Design Inf
 \documentclass[logo,msc,dsti]{style/infthesis}    % Data Sci TI
-% \documentclass[logo,msc,inf]{infthesis}     % Informatics
-% \documentclass[logo,msc]{infthesis}           % degree unspecified, do not change except to add your degree
+% \documentclass[logo,msc,inf]{infthesis}         % Informatics
+% \documentclass[logo,msc]{infthesis}             % degree unspecified, do not change except to add your degree
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Understand any problems and seek approval before assuming it's ok to remove ugcheck.
 \usepackage{style/msccheck}
@@ -20,12 +20,11 @@
 % Include any packages you need below, but don't include any that change the page
 % layout or style of the dissertation. By including the ugcheck package above,
 % you should catch most accidental changes of page layout though.
-
 \usepackage{microtype} % recommended, but you can remove if it causes problems
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage{url}
+\usepackage{xurl}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -41,9 +40,12 @@
 \usepackage[british]{babel}
 \usepackage[backend=biber,urldate=long,dateabbrev=false]{biblatex}
 
-
+% More nicely style url/xurl links
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
 
+% Adding urn, hal, and hdl nice links to the biliography that show the identifier but
+% not the https://.../ part while still linking to the appropriate https://.../<id>
+% part, in a similar way that Biblatex automatically handles DOI links
 \DeclareFieldFormat{eprint:urn}{%
 	\textsc{urn\addcolon\space}
 	\ifhyperref
@@ -54,18 +56,21 @@
 	\ifhyperref
 	{\href{https://uca.hal.science/#1}{\nolinkurl{#1}}}
 	{\nolinkurl{#1}}}
- \DeclareFieldFormat{eprint:hdl}{%
+\DeclareFieldFormat{eprint:hdl}{%
 	\textsc{hdl\addcolon\space}
 	\ifhyperref
 	{\href{https://hdl.handle.net/#1}{\nolinkurl{#1}}}
 	{\nolinkurl{#1}}}
+
+% Allow more line breaks in long links in the Bibliography
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 
+% The one and only biliography file
 \addbibresource{main.bib}
 
+% A "descitem" item for a bold "mini heading" component
 \newcommand\descitem[1]{\item{\bfseries #1}\\}
-
 
 \begin{document}
 \begin{preliminary}
@@ -88,14 +93,12 @@
 This project was planned in accordance with the Informatics Research
 Ethics policy. It did not involve any aspects that required approval
 from the Informatics Research Ethics committee.
-
 \standarddeclaration
 \end{ethics}
 
-
 \begin{acknowledgements}
 
-Firstly thank you to Chris Sawyer, the original author of Transport Tycoon Deluxe: without you this project would not have existed. Then of course thank you to all the contributors of OpenTTLab over its 20 year history. And of these, thank you especially to Patric Stout (A.K.A. TrueBrain), who not only gave advice and what I interpreted to be light blessing to this project, but also wrote the OpenTTD save game parser that OpenTTDLab originally forked from.
+Firstly thank you to Chris Sawyer, the original author of Transport Tycoon Deluxe: without you this project would not have existed. Then of course thank you to all the contributors of OpenTTDLab over its 20 year history. And of these, thank you especially to Patric Stout (A.K.A. TrueBrain), who not only gave advice and what I interpreted to be light blessing to this project, but also wrote the OpenTTD save game parser that OpenTTDLab originally forked from.
 
 Thank you also to Ian Earle (A.K.A. BasicBeluga) who found an issue in the documentation of OpenTTDLab and submitted a fix for it. While this was a small change, I took it as evidence that what I was creating stood a chance of being useful, and pushed me to continue.
 
@@ -105,8 +108,8 @@ And of course thank you to my husband Matthew Beach, an amazingly loving partner
 
 \end{acknowledgements}
 
-
 \tableofcontents
+
 \end{preliminary}
 
 
@@ -704,7 +707,7 @@ set yrange [-200000:4000000]
 set multiplot layout 1,2
 
 set ytics ("\\footnotesize 0" 0, "\\footnotesize 0.5M" 500000, "\\footnotesize 1.0M" 1000000, "\\footnotesize 1.5M" 1500000, "\\footnotesize 2.0M" 2000000, "\\footnotesize 2.5M" 2500000, "\\footnotesize 3.0M" 3000000, "\\footnotesize 3.5M" 3500000, "\\footnotesize 4.0M" 4000000)
-set mytics 100000
+set mytics 5
 
 unset key
 set lmargin at screen 0.11; set rmargin at screen 0.53

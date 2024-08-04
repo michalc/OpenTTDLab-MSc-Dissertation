@@ -497,10 +497,11 @@ Computer Science}}
 %%
 %% Footnotes should also be single-spaced.
 %%
-
-\let\tmp@footnotetext=\@footnotetext
-\renewcommand{\@footnotetext}[1]%
-    {{\singlespace\tmp@footnotetext{#1}}}
+% Replaced in main.bib by \singlespacedfootnote command to avoid
+% conflicts with biblatex
+% \let\tmp@footnotetext=\@footnotetext
+% \renewcommand{\@footnotetext}[1]%
+%     {{\singlespace\tmp@footnotetext{#1}}}
 
 %% "preliminary" environment to control numbering of pages between title and
 %% first chapter. This will only kick in if romanprepages is specificed (the

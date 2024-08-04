@@ -1,4 +1,4 @@
-FROM texlive/texlive:TL2022-historic
+FROM texlive/texlive:TL2023-historic
 
 RUN apt-get update && \
     apt-get install -y \

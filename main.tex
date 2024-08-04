@@ -67,6 +67,13 @@
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 
+% Without this we get BIBLIOGRAPHY in all caps in page headings, which is
+% inconsistent with the rest of the styles (probably since they're designed
+% for bibtex rather than biblatex which we use here
+\defbibheading{bibliography}[\bibname]{%
+\chapter*{#1}\addcontentsline{toc}{chapter}{\bibname}%
+\markboth{#1}{#1}}
+
 % The one and only biliography file
 \addbibresource{main.bib}
 
@@ -1080,10 +1087,17 @@ While there are many improvements that can be made in OpenTTDLab and further inv
 
 % \end{itemize}
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{Bibliography}
-\printbibliography
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Bibliography}
+% \printbibliography[heading=bibintoc]
+% \markboth{Bibliographysdff}{}
+
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Bibliographysdf}
+
+\printbibliography[heading=bibliography,title={Bibliography}]
 
 
 % You may delete everything from \appendix up to \end{document} if you don't need it.

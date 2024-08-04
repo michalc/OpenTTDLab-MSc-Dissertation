@@ -673,11 +673,11 @@ Computer Science}}
 %%
 %% However the bibliography is defined, this will append the \addcontentsline
 %% statement to it. Also, it will put the bibname into the page headers.
-\AtBeginDocument{%
-    \expandafter\def\expandafter\thebibliography\expandafter
-        #\expandafter1\expandafter{\thebibliography{#1}%
-        {\addcontentsline{toc}{chapter}{\bibname}}
-        \markboth{\bibname}{\bibname}}}
+% \AtBeginDocument{%
+%     \expandafter\def\expandafter\thebibliography\expandafter
+%         #\expandafter1\expandafter{\thebibliography{#1}%
+%         {\addcontentsline{toc}{chapter}{\bibname}}
+%         \markboth{\bibname}{\bibname}}}
 
 %% Do what is requested with headings and captions... can't include these
 %% packages above because sectsty won't work except from within report.cls

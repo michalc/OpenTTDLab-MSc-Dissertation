@@ -21,6 +21,7 @@
 % layout or style of the dissertation. By including the ugcheck package above,
 % you should catch most accidental changes of page layout though.
 \usepackage{microtype} % recommended, but you can remove if it causes problems
+\usepackage{nolbreaks}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
@@ -94,7 +95,7 @@
 
 \date{\today}
 
-\abstract{OpenTTD is an open source business simulation game based on the 1994 game Transport Tycoon Deluxe, and in spite of being designed for recreation, OpenTTD has been used in a number of academic studies. However, many of these studies have problems regarding the repeatability, replicability, \& reproducibility of their experiments. In this dissertation, I present OpenTTDLab, a reusable Python framework I created that allows OpenTTD to be used in a way that avoids many of these problems. I show proof-of-concept results using this framework that I argue are repeatable, replicable, and reproducible; thus, giving evidence that OpenTTDLab can be a useful tool in future research.}
+\abstract{OpenTTD is an open source business simulation game based on the 1994 game Transport Tycoon Deluxe, and in spite of being designed for recreation, OpenTTD has been used in a number of academic studies. However, many of these studies have problems regarding the repeatability, replicability, or reproducibility of their experiments. In this dissertation, I present OpenTTDLab, a reusable Python framework I created that allows OpenTTD to be used in a way that avoids many of these problems. I show proof-of-concept results using this framework that I argue are repeatable, replicable, and reproducible; thus, giving evidence that OpenTTDLab can be a useful tool in future research.}
 
 \maketitle
 
@@ -115,9 +116,9 @@ Firstly thank you to Chris Sawyer, the original author of Transport Tycoon Delux
 
 Thank you also to Ian Earle (A.K.A. BasicBeluga) who found an issue in the documentation of OpenTTDLab and submitted a fix for it. While this was a small change, I took it as evidence that what I was creating stood a chance of being useful, and pushed me to continue.
 
-Thank you to my supervisor Michael Hermann; his ongoing advice throughout this project has been invaluable. I thank him especially for making sure that I have some results to show and discuss rather than getting too lost in just making OpenTTDLab, and I thank him for guiding me towards what I hope is now a reasonable written dissertation. And I would say he rolled with the changes to the project especially well: I shifted its focus several times between proposal and final output, and I felt supported every step of the way.
+Thank you to my supervisor, Michael Hermann; his ongoing advice throughout this project has been invaluable. I thank him especially for making sure that I have some results to show and discuss rather than getting too lost in just making OpenTTDLab, and I thank him for guiding me towards what I hope is now a reasonable written dissertation. And I would say he rolled with the changes to the project especially well: I shifted its focus several times between proposal and final output, and I felt supported every step of the way.
 
-And of course thank you to my husband Matthew Beach, an amazingly loving partner, and whose support throughout this project has been beyond invaluable.
+And of course thank you to my husband, Matthew Beach, an amazingly loving partner, and whose support throughout this project has been beyond invaluable.
 
 \end{acknowledgements}
 
@@ -131,7 +132,7 @@ And of course thank you to my husband Matthew Beach, an amazingly loving partner
 
 OpenTTD \cite{openttd} is an open source real time strategy (RTS) simulation game based on  Chris Sawyer's 1994 game Transport Tycoon Deluxe. The aim of the game is to successfully run a business by constructing networks of roads, railways, airports and ports, along with their respective vehicles, trains, planes and ships, in order to transport people and goods in exchange for money. OpenTTD is played on a simulated landscape as can be seen in Figure \ref{figure:introduction-screenshot}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=\columnwidth]{assets/openttd_screenshot.png}
 \caption{A small section of an OpenTTD version 13.4 game showing parts of a rail, road, and sea transportation network, as well as several industries. At the top is the control bar through which the player takes actions or see more details on the state of the game, such as finances.}
@@ -146,12 +147,14 @@ Of all these possible uses for OpenTTD, using OpenTTD as a tool for researching 
 
 As a secondary and more speculative aim, it is hoped that the work here allows for OpenTTD to be investigated as a tool to simulate supply chain or transportation networks that could ultimately inform government policies. However, the nature of the correspondence between OpenTTD and what it is simulating must be determined, or in other words it must be \emph{validated} \cite{doi:10.1177/1046878198291003}.
 
-\section{The 3Rs: Repeatability, Replicatability, \& Reproducibility}
+\section{Repeatability, Replicatability, \& Reproducibility: The 3Rs}
 \label{section:define-3rs}
 
-The terms \emph{repeatability}, \emph{replicability}, and \emph{reproducibility}, the so-called \emph{3Rs}, unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. Even the highly-cited 2016 Nature survey \cite{baker20161}, which reported that around 50\% of scientist believe there is a substantial reproducibility crisis, uses the terms reproducible and replicable seemingly interchangeably. And both helpfully and confusingly, the Association for Computing Machinery (ACM) in order to reduce confusion in 2020 swapped their definitions reproducibility and replicability to align with the broader scientific community \cite{association_for_computing_machiner_new_2020}.
+The terms \emph{repeatability}, \emph{replicability}, and \emph{reproducibility}, the so-called \emph{3Rs}, unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. Even the highly-cited 2016 Nature survey \cite{baker20161}, which reported that around 50\% of scientist believe there is a substantial reproducibility crisis, uses the terms reproducible and replicable seemingly interchangeably. And both helpfully and confusingly, the Association for Computing Machinery (ACM) in 2020 swapped their definitions reproducibility and replicability to align with the broader scientific community \cite{association_for_computing_machiner_new_2020}.
 
-Choosing what I believe to be a reasonable authoritative source, I primarily use the post-swap ACM definitions \emph{Artifact Review and Badging Version 1.1} \cite{association_for_computing_machiner_artifact_2020}. The definition is given in terms of artifacts:
+Choosing what I believe to be an authoritative source, I primarily use the post-swap ACM definitions from its \emph{Artifact Review and Badging Version 1.1} \cite{association_for_computing_machiner_artifact_2020}; these appear to broadly align with the definitions of \emph{The Turing Way} \cite{turingway2022}, a collaborative guide to reproducible data science, spearheaded by the UK's national institute for data science and artificial intelligence, a similarly authoritative source.
+
+The ACM definition is given in terms of artifacts:
 
 \begin{quote}
 \begin{description}
@@ -179,10 +182,10 @@ The measurement can be obtained with stated precision by a different team, a dif
 
 These are not independent properties: reproducibility is unlikely to be achieved without repeatability \cite{hill2022reproducibility}, and replicability would be difficult to interpret in the absence of reproducibility \cite{nuijten2018verify}. While this highlights how the definitions are intertwined and therefore complex, it also means that a tool that eases repeatability eases reproducibility, a tool that eases reproducibility eases replication, and transitively a tool that eases repeatability indirectly eases replicability.
 
-While ACM's definitions are clear in some respects, there is vagueness, especially in terms of what \emph{same result} means \cite{hill2022reproducibility}. In general, results can be said to be reproduced even if they are not exactly the same, i.e. not \emph{bitwise} identical. For example, in simulation studies if the original random seeds are not available but all other artifacts are, then results can still be said to be replicated \cite{luijken2024replicability} if statistical results are the same. Where appropriate I make a distinction between bitwise and non-bitwise reproducibility.
+While ACM's definitions are clear in some respects, there is vagueness, especially in terms of what \emph{same result} means \cite{hill2022reproducibility}. In general, results can be said to be reproduced even if they are not exactly the same, i.e. not \emph{bitwise} identical. For example, in simulation studies if the original random seeds are not available but all other artifacts are, then results can still be said to be replicated if statistical results are the same \cite{luijken2024replicability}. Where appropriate I make a distinction between bitwise and non-bitwise reproducibility.
 
-I also note that the definition of artifact is limited to objects created by the authors; if research uses OpenTTD then it appears the research can be deemed replicated without OpenTTD itself having to be developed independently, simply because the it was already available; to me this seems an unexpected loophole in the definitions. Similarly to how reproducibility can be bitwise or non-bitwise, there appears to be degrees of replication that depend on how much of the original software used to run the simulation has been developed independently, even if that software does not strictly meet ACM's definition of artifact. It is beyond the scope of this project to deal with these issues in general, other than to ensure clarity as to what is or can be developed independently when discussing replication. In spite of the crisis being well known for over a decade, even as of May 2024 the replication of simulation studies is a ``novel endeavor'', and there are other unknowns such as ``no set criteria to assess the alignment of replicated simulation results with the original results'' \cite{luijken2024replicability} and so I argue a reasonable limitation to the scope of this project.
-
+Note that the definition of artifact is limited to objects created by the authors; if research uses OpenTTD then it appears the research can be deemed replicated without OpenTTD itself having to be developed independently, simply because the it was already available; to me this seems an unexpected loophole in the definitions. Similarly to how reproducibility can be bitwise or non-bitwise, if we extend the ACM definition of artifact to include other software used to generate the results, as I would argue we should, there appears to be degrees of replication that depend on how much of the original software used to run the simulation has been developed independently. It is beyond the scope of this project to deal with these issues in general, other than to ensure clarity as to what is or can be developed independently when discussing replication. In spite of the crisis being well known for over a decade, even as of May 2024 the replication of simulation studies is a ``novel endeavor'', 
+and there are ``no set criteria to assess the alignment of replicated simulation results with the original results'' \cite{luijken2024replicability}; so I argue this a reasonable limitation to the scope of this project.
 
 % \section{Barriers in achieving the 3Rs}
 
@@ -202,7 +205,7 @@ I also note that the definition of artifact is limited to objects created by the
 
 \section{3Rs issues of existing OpenTTD research}
 
-The aim of OpenTTDLab is to help studies that run OpenTTD to generate results by writing and running AIs without a human player; 7 existing studies have been found that do this\singlespacedfootnote{Found from the fist 100 results of a search for "OpenTTD" in Google Scholar in July 2024}: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 8 problems. For brevity not all problems for all studies are listed.
+The aim of OpenTTDLab is to help studies that run OpenTTD to generate results by writing and running AIs without a human player; 7 existing studies have been found that do this\singlespacedfootnote{Found from the fist 100 results of a search for "OpenTTD" in Google Scholar in July 2024}: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 7 problems. For brevity not all problems for all studies are listed.
 
 \begin{enumerate}
 \begin{descitem}{Low or unknown number of repetitions}
@@ -253,11 +256,11 @@ There is a 4\textsuperscript{th} concept given alongside ACM's definitions \cite
 The artifacts associated with the paper are of a quality that significantly exceeds minimal functionality. [...] they are very carefully documented and well-structured to the extent that reuse and repurposing is facilitated. In particular, norms and standards of the research community for artifacts of this type are strictly adhered to. 
 \end{description}
 \end{quote}
-Repeatability, reproducibility and replicability are all in the realm of a single result, but reusability concerns itself with the use of the artifact to generate different results in future, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}. It is clear that a framework that helps with the 3Rs should itself be reusable and encourage reusable artefacts in work that uses it.
+Repeatability, reproducibility and replicability are all in the realm of a single result, but reusability concerns itself with the use of the artifact to generate different results in future, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}. It is clear that a framework that helps with the 3Rs should itself be reusable and encourage reusable artifacts in work that uses it.
 
-\section{Conclusion}
+\section{Outline}
 
-It can be costly to repeat experiments, or even to make it easily reproducible and replicable; and there is unfortunately insufficient incentive to address these issues as a matter of course by researchers or by publishers \cite{benureau2018re}. Indeed, in all of the found research that uses OpenTTD to run experiments without human involvement I identified 7 issues on this front, with no research completely issue-free. In this work I present a framework, OpenTTDLab, to reduce the cost, and ideally in a reusable way.
+The following chapters explain how OpenTTDLab helps experiments avoid issues with the 3Rs, especially the 7 issues listed, and in a reusable way. Chapter \ref{chapter:openttd-model-and-abilities} gives more background into OpenTTD: specifically what properties of OpenTTD make it suitable and interesting enough to research, what limitations it has, and at a high level how a framework could overcome at least some of these limitations. Chapter \ref{chapter:openttdlab-design-process-and-features} explains the design process I followed to create OpenTTDLab---the process itself provides an argument that it achieves its aims; and gives an overview of how its features help experiments be repeatable, reproducible, and albeit maybe indirectly, replicable. Chapters \ref{chapter:experiments-attempt-at-reproducing}-\ref{chapter:experiments-scaling} are the experimental chapters that contain results of using OpenTTDLab: providing more evidence that there is a problem with existing OpenTTD research, and providing more direct evidence that OpenTTDLab can help with the 3Rs. Specifically, Chapter \ref{chapter:experiments-attempt-at-reproducing} explains how I attempted to reproduce existing published results, and while I did extract results, they did not match the ones originally published. Chapter \ref{chapter:experiments-attempt-at-reproducing} also shows that it is relatively straightforward to use OpenTTDLab to run experiments and extract results from them, and argues that these should be repeatable and reproducible. Chapter \ref{chapter:experiments-simple-parameterised-ai} gives the details of a basic OpenTTD AI that I constructed, and easily used with OpenTTDLab to extract results that appear to have real-world meanings, thus giving some evidence that by using OpenTTDLab, OpenTTD could be used to simulate the real world as part of the secondary aim of this work as mentioned earlier. \nolbreaks{Chapter \ref{chapter:experiments-simple-parameterised-ai}} also contains a clear description of the AI, and so should be replicable in the sense that another author should be able to construct a similar enough OpenTTD AI to replicate the results, possibly using OpenTTDLab. Chapter \ref{chapter:experiments-scaling} contains the results of a basic exploration of the performance of OpenTTD, showing how features added help repeatability. Chapter \ref{chapter:discussion} contains a discussion of what was found, summarises the limitations of the work, and explores the possible next steps. This dissertation finishes with a few concluding remarks in \nolbreaks{Chapter \ref{chapter:conclusion}}.
 
 \chapter{OpenTTD: Its Model and Abilities}
 \label{chapter:openttd-model-and-abilities}
@@ -300,7 +303,7 @@ Informally, there are a number immediate absurdities to the economic model. For 
 
 It is beyond the scope of this project to more rigorously analyse the economic model of OpenTTD, and to so work out how much any insights generated by OpenTTD simulations can be applied to the real world. It has been suggested that while the economic model is not realistic, the network effects of OpenTTD are somewhat realistic \cite{raghothama2013review} - it is the aim of this project that the OpenTTDLab framework presented in the next chapter offers a mechanism to better study these.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,thick,main node/.style={rectangle,draw}]
 
@@ -453,7 +456,7 @@ As discussed in Chapter 1, repeatability is in the domain of the original resear
 
 A lightweight and highly agile process was used to design and create OpenTTDLab, the high level features of which are shown figure \ref{fig:solo-agile}. After the problems to solve have were identified, as discussed in Chapter 1, there were many cycles of writing usage documentation for code, writing code, and using the code, either to construct the results of Chapter 4 or in tests; and each of these with tight cycles of evaluating the outputs of these activities and informally judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
                     thick,main node/.style={circle,draw}]
@@ -572,13 +575,13 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 \chapter{Experiments 1: Attempt at Reproducing Existing Results}
 \label{chapter:experiments-attempt-at-reproducing}
 
-To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to replicate some of the results of \cite{rios2009trains}: a set of matches between the trAIns [sic] AI being presented, and the pre-existing Admiral AI, and comparing their performance in terms of company value.
+To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to replicate some of the results of \cite{rios2009trains}: a set of matches between the trAIns [sic] AI being presented in the work, and the pre-existing Admiral AI, and comparing their performance in terms of company value.
 
 \section{Experimental setup}
 
 The setup was a best effort attempt to what was described as the setup of the experiments in the original trAIns paper \cite{rios2009trains}. In the experiments presented here, the starting year was set to 1960, the map was configured to be 512x512 tiles with a very low amount of seas, industry density and number of towns set to normal, the economy set to be able to fluctuate, subsidy multiplier of x2, disasters enabled, tolerance of town councils to changes set as tolerant, both vehicle running costs and construction costs set to medium, vehicle breakdowns disabled, trains set to only be able to turn around at the end of the line as opposed to also at stations, and the maximum initial loan was set to £300,000, and initial interest rate set to 3\%.
 
-Note that these settings were not all explicitly mentioned in the original paper: it described running OpenTTD revision 16724 using \emph{medium} difficulty level with some overrides. However, OpenTTDLab does not work under this version (due to savegame format differences), and the recent versions of OpenTTD that do work under OpenTTDLab no longer have the concept of difficulty level. However, the historical meaning of the medium difficulty level is documented, and so the explicit list of aforementioned settings recreated, and run under OpenTTD 13.4 and OpenGFX 7.1 that OpenTTDLab does work under.
+Note that these settings were not all explicitly mentioned in the original paper: it described running OpenTTD revision 16724 using \emph{medium} difficulty level with some overrides. However, OpenTTDLab does not work under this version (due to savegame format differences), and the recent versions of OpenTTD that do work under OpenTTDLab no longer have the concept of difficulty level. However, the historical meaning of the medium difficulty level is documented \cite{OpenTTDDifficultyLevels}, and so the explicit list of aforementioned settings recreated, and run under OpenTTD 13.4 and OpenGFX 7.1 that OpenTTDLab does work under.
 
 There is one exception to basing off the medium difficulty level. The medium difficulty level was documented to have a maximum initial loan of £150,000. However, using this level in pilot experiments resulted in extremely poor performance of Admiral AI - it appeared to be virtually unable to function.
 
@@ -602,7 +605,7 @@ The results over time of Figure \ref{figure:trains-ai-vs-admiral-ai-over-time} s
 
 From both Figure \ref{figure:trains-ai-vs-admiral-ai-final-distributions} and Firegure \ref{figure:trains-ai-vs-admiral-ai-over-time} it can be seen that in both the original an current experiments, both AIs appeared to perform better on flat terrain than on mountainous.
 
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.5,3}]
 file = "notebooks/01_trains_ai_vs_admiral_ai_results_02_combined_final.csv"
@@ -700,7 +703,7 @@ plot file \
 % \label{figure:trains-ai-vs-admiral-ai-over-time}
 % \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,3}]
 set datafile separator ","
@@ -812,7 +815,7 @@ There is also an interesting convergence point around 1978: all configurations o
 \caption{Test}
 \end{algorithm}
 
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
 set datafile separator ","
@@ -839,7 +842,7 @@ plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation
 \label{fig:simple-parameterised-ai-means}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
 set datafile separator ","
@@ -911,7 +914,7 @@ The number of worker processes was varied between 1 and 8, and the amount of dat
 
 \section{Results}
 
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
 set datafile separator ","
@@ -926,15 +929,11 @@ plot 'notebooks/03_scaling_results_02_wallclock_times.csv' \
    using 1:2 with linespoints ls 1 title 'All data', \
    '' using 1:3 with linespoints ls 2 title 'Minimal data'
 \end{gnuplot}
-\caption{Total wallclock time of when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Using more worker processes results in a shorter runtime: for example using 8 worker processes uses about 20\% of the runtime as using 1 worker process. Returning a minimal amount of data also results in shorter runtime: approximately 30\% faster for each number of processes in the experiment.}
+\caption{Total wallclock time of when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data.}
 \label{figure:scaling-wallclock-time}
 \end{figure}
 
-As can be seen from Figure \ref{figure:scaling-wallclock-time}, wallclock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in an approximately 30\% reduction in time. One can conclude that it's worth running them on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
-
-However, Figure \ref{figure:scaling-wallclock-time} also suggest that that there is an aspect of diminishing returns: for example the difference in runtime between 1 and 4 processes is much greater than the difference between 5 and 8. To better show this effect, we investigate \emph{speedup}: how many times faster the program runs for a given number of worker processes compared to the time it takes running on a single worker process. The speedup for the experiments, together with a theoretical linear speedup can be seen in Figure \ref{figure:scaling-speedup}.
-
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5,3}]
 set datafile separator ","
@@ -950,11 +949,15 @@ plot 'notebooks/03_scaling_results_03_speedups.csv' \
    '' using 1:2 with linespoints ls 1 title 'All data', \
    '' using 1:3 with linespoints ls 2 title 'Minimal data'
 \end{gnuplot}
-\caption{Speedup when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data. Speedup is initially linear, but becomes worse as the number of worker processes increases, especially from 5 worker processes onwards. At 8 worker processes the speedup is approximately 4.5. The scaling profiles for both sets of experiments are almost identical. Given that wallclock time is reduced when returning less data from worker to controlling process, as can be seen in Figure \ref{figure:scaling-wallclock-time} this suggests that returning less data to the controlling process reduces both parallel and serial runtime of the code.}
+\caption{Speedup when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data.}
 \label{figure:scaling-speedup}
 \end{figure}
 
-It can be seen that up to 4 processors the scaling is just under linear, but after 4 processors the scaling is much worse. It can also be seen that the scaling profiles of returning all data and minimal data from the worker processes is almost identical.
+As can be seen from Figure \ref{figure:scaling-wallclock-time}, wallclock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in an approximately 30\% reduction in time. One can conclude that it's worth running them on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
+
+However, Figure \ref{figure:scaling-wallclock-time} also suggest that that there is an aspect of diminishing returns: for example the difference in runtime between 1 and 4 processes is much greater than the difference between 5 and 8. To better show this effect, we investigate \emph{speedup}: how many times faster the program runs for a given number of worker processes compared to the time it takes running on a single worker process. The speedup for the experiments, together with a theoretical linear speedup can be seen in Figure \ref{figure:scaling-speedup}.
+
+It can be seen that the speedup does increase with each addition of a process. However, the greater the number of processes, the greater the deviation from linear speedup. It gets especially worse from 5 processes onwards, ending with a speedup of approximately 4.5 with 8 processes. It can also be seen that the speedup profiles of returning all data and minimal data from the worker processes is almost identical.
 
 \section{Discussion}
 
@@ -991,7 +994,7 @@ The third set of experiments in Chapter \ref{chapter:experiments-scaling} show t
 
 These three sets of experiments are different: one attempts to replicate an existing study, one parameterises an newly written AI, and investigats the scaling properties of OpenTTDLab itself. This provides evidence that OpenTTDLab is indeed reusable, and by being reusable increases the reproducibility of studies that use it \cite{benureau2018re}. Also for all 3 of the experiments, the artifacts both those to run the experiments and those to analyse their results are included in appendices, and because the delegate to OpenTTDLab, are relatively short in terms of lines of code. This shows that it should be feasible to include these in studies, or at least provide permanent links to them published separately, again showing that OpenTTDLab should be able to be used in future reproducible work.
 
-I developed OpenTTDLab using the highly agile mechanism as described in Chapter \ref{chapter:openttdlab-design-process-and-features}, iteratively writing and using the framework to create the results of Chapters \ref{chapter:experiments-attempt-at-reproducing}-\ref{chapter:experiments-scaling} while attempting to avoid the issues described in Chapter \ref{chapter:introduction}; this provides a good reasons to believe it is fit for purpose and achieves the aims of helping to achieve the 3Rs. However, according to ACM's definitions, reproducibility and replicability are each the domain of multiple sets of authors: those originally conducting the research and those then attempting to reproduce or replicate it. To fully validate that OpenTTDLab can be a useful tool in these endeavors, studies that use OpenTTDLab will have to be attempted to be reproduced and replicated, much like the systematic attempts reported by Luijken et al. \cite{luijken2024replicability}. I have provided 3 sets of experiments in this work, and argued that they should be reproducible and replicable, but the true test of these properties are real attempts by other authors.
+I developed OpenTTDLab using the highly agile mechanism as described in Chapter \ref{chapter:openttdlab-design-process-and-features}, iteratively writing and using the framework to create the results of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} while attempting to avoid the issues described in Chapter \ref{chapter:introduction}; this provides a good reasons to believe it is fit for purpose and achieves the aims of helping to achieve the 3Rs. However, according to ACM's definitions, reproducibility and replicability are each the domain of multiple sets of authors: those originally conducting the research and those then attempting to reproduce or replicate it. To fully validate that OpenTTDLab can be a useful tool in these endeavors, studies that use OpenTTDLab will have to be attempted to be reproduced and replicated, much like the systematic attempts reported by Luijken et al. \cite{luijken2024replicability}. I have provided 3 sets of experiments in this work, and argued that they should be reproducible and replicable, but the true test of these properties are real attempts by other authors.
 
 Finally there are numerous features in OpenTTDLab itself that can be improved upon. Improving scalability has already been suggested, but there are non-performance features as well. For example, while OpenTTD can generate screenshots of the map of the field of play, these screenshots cannot currently be used in a way suitable for analysis: the map, which includes how roads and railways are connected connected, I suspect would be important in order to use OpenTTD to study network effects. And while in many ways the format is  self-documenting, beyond the examples that extract company value, loan amount and money in the bank, there are many other values, but no standalone exhaustive documentation of what can be extracted from OpenTTD using OpenTTDLab currently exists. In addition, the results from OpenTTDLab are ephemeral: they exist only in memory and designing a format to persisting them to disk I deemed outside the scope of the project, because how to do so is not trivial.
 

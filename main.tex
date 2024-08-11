@@ -565,9 +565,7 @@ Note that these settings were not all explicitly mentioned in the original paper
 
 None of the versions of the AIs or their dependencies were specified in the original paper. In the current experiments, the version of trAIns is 2.1,  the version of AdmiralAI is 25, and the version of AdmiralAI's single dependency, Queue.FibonacciHeap, is 2. All the AIs and their dependencies these were retrieved from BaNaNaS.
 
-The results presented here are for exactly 15 years of in-game time, while in the original work the time varied from 15 years and 2 days to 15 years and 11 months.
-
-In both the original paper and here, there were two sets of experiments performed: one using the \emph{flat} terrain type, and one for the \emph{mountainous} terrain type. Here it is repeated 64 times, and in the original paper each of these was repeated 7 times. Here random seeds 0 to 64 were used for each set of experiments, but in the original paper the random seeds are unknown.
+The results presented here are for exactly 15 years of in-game time, while in the original work the time varied from 15 years and 2 days to 15 years and 11 months. In both the original paper and here, there were two sets of experiments performed: one using the \emph{flat} terrain type, and one for the \emph{mountainous} terrain type. Here it is repeated 64 times, and in the original paper each of these was repeated 7 times. Here random seeds 0 to 64 were used for each set of experiments, but in the original paper the random seeds are unknown.
 
 The experiments here were run on mac OS 14.5 running on a 2020 M1 and Python 3.11.0 and OpenTTDLab 0.0.72. The OS and CPU of the original experiments are unknown. The experiments here were run with OpenTTDLab's default number of workers, the number of cores on the machine, which in this case were 8.
 
@@ -699,7 +697,7 @@ However, the most likely cause of differences are not deliberate, but in fact du
 
 \section{Conclusion}
 
-It is beyond the scope of the current work to go beyond speculation and fully explain the results found. However, these experiments have shown two things. Firstly, they give stronger evidence to the claims of Chapter \ref{chapter:introduction} that existing research that uses OpenTTD cannot be replicated. Secondly that OpenTTDLab can be used to extract rich information from OpenTTD, and can be seen in Appendices \ref{chapter:trains-vs-admiral-run-experiments} \& \ref{chapter:trains-vs-admiral-analyse-results}, with a small amount of code that should be bitwise replicable, and so could not just confirm the results, but further them through more in-depth analysis without even the full results being shared. The results here were also for a single metric: company value. However, as discussed briefly in Chapter \ref{chapter:openttdlab-design-process-and-features}, there is a wealth of further information available in OpenTTDLab.
+It is beyond the scope of the current work to go beyond speculation and fully explain the results. However, these experiments have shown two things. Firstly, they give stronger evidence to the claims of Chapter \ref{chapter:introduction} that existing research that uses OpenTTD cannot be replicated. Secondly that OpenTTDLab can be used to extract rich information from OpenTTD, and can be seen in Appendices \ref{chapter:trains-vs-admiral-run-experiments} \& \ref{chapter:trains-vs-admiral-analyse-results}, with a small amount of code that should be bitwise replicable, and so could not just confirm the results, but further them through more in-depth analysis without even the full results being shared. The results here were also for a single metric: company value. However, as discussed briefly in Chapter \ref{chapter:openttdlab-design-process-and-features}, there is a wealth of further information available in OpenTTDLab.
 
 \chapter{Experiments 2: Simple Parameterised OpenTTD AI}
 \label{chapter:experiments-simple-parameterised-ai}

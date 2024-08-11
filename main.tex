@@ -387,23 +387,19 @@ This AI system is the core feature that allows OpenTTD to be used to experiment 
 
 \section{Configurability}
 
-OpenTTD has over 400 options that allows the game to be customised; it is not useful to review them all here, see \cite{OpenTTDWiki} for the complete list. However, there are several that are particularly relevant to using OpenTTD to conduct repeatable, reproducible or replicable experiments.
+OpenTTD has over 400 options that allows the game to be customised; it is not useful to review them all here, see \cite{OpenTTDWiki} for the complete list and their defaults. However, there are several that are particularly relevant to using OpenTTD to conduct repeatable, reproducible or replicable experiments.
 
 \begin{itemize}
 \begin{descitem}{Properties of the pseudo-randomly generated world}
-As suggested earlier in the current chapter, OpenTTD allows the configuration of the dimensions of the world, between  64x64 and 4096x4096 tiles.
-
-It also allows the specification of other properties, such as if the generated world is flat or mountainous. Flat and mountainous worlds are compared in the experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing}.
-
-Not all properties must be specified explicitly---each value has a default.
+As suggested earlier in the current chapter, OpenTTD allows the configuration of the dimensions of the world, between  64x64 and 4096x4096 tiles. It also allows the specification of other properties, such as if the generated world is flat or mountainous. Flat and mountainous worlds are compared in the experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing}.
 \end{descitem}
 \begin{descitem}{Total number of ticks}
-OpenTTD allows the specification of the maximum number of ticks taken before it exits. This allows experiments to run for a fixed amount of in game time, rather than indefinitely. All of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
+OpenTTD allows the specification of the maximum number of ticks taken before it exits. This allows experiments to run for a fixed amount of in-game time, rather than the default of indefinitely. All of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
 \end{descitem}
 \begin{descitem}{Random seed}
-As described earlier in this chapter, random.
+As described earlier in this chapter, OpenTTD allows the specification of random seed which controls how the world is generated at the start of play.
 
-Keeping track of what random seeds you run experiments on should help keep them bitwise repeatable, and including the random seeds in the descriptions of experiments when published should help them be bitwise reproducible. All the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
+Keeping track of the random seeds allows experiments to be bitwise repeatable, and including the random seeds with published results should help them be (bitwise) reproducible, such as the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
 \end{descitem}
 
 \end{itemize}
@@ -414,15 +410,15 @@ It should be noted that while OpenTTD has a wide range of options, there is noth
 
 \section{Savegames}
 
-OpenTTD 13.4 can be configured to automatically save the state of the game in intervals of in-game time in files of a custom binary format. These \emph{savegames} are designed to be able to pick the game for when they left off. However, they are also rich sources of information, containing for example how much each company is worth or how much money it has in the bank. Although there is no evidence that the savegames were used to extract this, these metrics were often used in the OpenTTD research mentioned in the previous chapter, and are similarly used in the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
+OpenTTD 13.4 and earlier can be configured to automatically save the state of the game in intervals of in-game time in files of a custom binary format. These \emph{savegames} are designed to be able to pick the game for when they left off. However, they are also rich sources of information for analysis, containing for example the complete transportation network each company has constructed, and how much each company is worth or how much money it has in the bank. OpenTTD 14.0 no longer has deterministic saving, but there is a way to restore this ready for OpenTTD 15.0.\footnote{OpenTTD 14.0 changed how games were saved from intervals of in-game time to intervals of wallclock time, which makes the savegames non-deterministic, and so makes it virtually impossible to use them to extract information from OpenTTD for bitwise repeatable experiments. However, as part of this project I successfully submitted a change to OpenTTD that allows the scheduling of so-called \emph{console scripts} that can be used to restore the behaviuor of OpenTTD 13.4 \cite{OpenTTDScheduleScript}. This change is scheduled for release in OpenTTD 15.0.}
 
-However, there is no built-in ability in OpenTTD to extract information from these savegames, or indeed aggregate such informatino over multiple savegames in order to see changes over in-game time.
+It is notable that no version of OpenTTD has a built-in ability in OpenTTD to extract detailed information from these savegames in a form suitable for analysis, or indeed aggregate such information over multiple savegames in order to see changes over in-game time. Also in spite of their deterministic nature and richness, so far there is no evidence of existing research using savegames to extract information from OpenTTD.
 
 \section{Conclusion}
 
-OpenTTD presents an extremely rich landscape for investigation, and because of the tick model, and the fact it accepts a random seed, this landscape is deterministic and so suitable for bitwise repeatable research. While its economic model is simplified or even absurd in parts, rough back of the envelope calculations suggest that, depending on the map size, there are hundreds of millions of possible actions an OpenTTD AI can take on any given tick of the game; the existing research has only begun to explore this space.
+OpenTTD presents an extremely rich landscape for investigation, and because of the tick model, and the fact it accepts a random seed, this landscape is deterministic and so especially suitable for repeatable research. While its economic model is simplified or even absurd in parts, depending on the map size, there are hundreds of millions of possible actions an OpenTTD AI can take on any given tick of the game, and the existing research has only begun to explore this space.
 
-However, if viewing OpenTTD not as a game for which it was designed, but as a tool for running repeatable, reproducible, and hopefully replicable, research, there are three core features that are not present in OpenTTD. Firstly, there is no way to configure OpenTTD so it runs over a range of avaiable configurations, for example over a range of random seeds. And secondly while it saves information to its savegame files, there is no way to extract and combine this information into a structured form ready for analysis. And thirdly, while OpenTTD is largely single-threaded, which contributes to its determinism and bitwise repeatability/reproducibiliy, it means there is no way to leverage multiple CPU cores. These are the core features that OpenTTDLab, as described in the next chapter, effectively add to OpenTTD.
+If viewing OpenTTD not as a game for which it was designed, but as a tool for running repeatable, reproducible, and hopefully replicable, research, there are three core features that are not present in OpenTTD. Firstly, there is no way to configure OpenTTD so it runs over a range of available configurations, for example over a range of random seeds. And secondly while it saves information to its savegame files, there is no way to extract and combine this information into a form ready for analysis. And thirdly, while OpenTTD is largely single-threaded, which contributes to its determinism and bitwise repeatability/reproducibiliy, it means there is no way to leverage multiple CPU cores. These are the core features that OpenTTDLab, as described in the next chapter, effectively add to OpenTTD.
 
 \chapter{The Framework}
 \label{chapter:openttdlab-design-process-and-features}

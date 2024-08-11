@@ -555,7 +555,7 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 \chapter{Experiments 1: Attempt at Reproducing Existing Results}
 \label{chapter:experiments-attempt-at-reproducing}
 
-To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to reproduce some of the results of Rios and Chaimowicz \cite{rios2009trains}: a set of experiments running two AIs, trAIns [sic] being presented in the aforementioned work and the pre-existing AdmiralAI, and comparing their company values. I generated results, but they did not match the original work.
+To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to reproduce some of the results of Rios and Chaimowicz \cite{rios2009trains}: a set of experiments running two AIs, trAIns [sic] being presented in the aforementioned work and the pre-existing AdmiralAI, and comparing their company values. I generated results, and while trAIns does appear to perform better than AdmiralAI, the performance of trAIns does not match the original work.
 
 \section{Experimental setup}
 
@@ -605,7 +605,7 @@ set ytic 5000000
 
 set xlabel ""
 set lmargin at screen 0.11; set rmargin at screen 0.53
-set xtics ("\\footnotesize trAIns" 1.5, "\\footnotesize Admiral" 3.5)
+set xtics ("\\footnotesize trAIns" 1.5, "\\footnotesize AdmiralAI" 3.5)
 set label 1 '\footnotesize Flat' at graph 0.03,1.05
 plot file \ 
    using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
@@ -626,7 +626,7 @@ plot file \
    keyentry with boxplot lc rgb '#aaaaaa' fs pattern 2 title "\\footnotesize \\vspace*{0.1cm} Original paper", \
    keyentry with boxplot lc 2 fs pattern 0 title "\\footnotesize \\vspace*{0.1cm}OpenTTDLab"
 \end{gnuplot}
-\caption{Results of attempting to replicate the results from trAIns}
+\caption{Distributions of company values for trAIns and AdmiralAI at the end of experiments on flat and mountainous terrain, comparing the results as reported by the original work of Rios and Chaimowicz \cite{rios2009trains}, and those from experiments run with OpenTTDLab configured to attempt to replicate the original work. The boxes show the median and upper and lower quartiles, and the whiskers show the maxima and minima.}
 \label{figure:trains-ai-vs-admiral-ai-final-distributions}
 \end{figure}
 
@@ -658,8 +658,8 @@ set format x "\\footnotesize %Y"
 
 set label 1 '\footnotesize Flat' at graph 0.03,1.05
 plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):2:4 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
+   using (timecolumn(1, '%Y-%m-%d')):2:4 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize AdmiralAI Q1-Q3', \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize AdmiralAI median', \
    '' using (timecolumn(1, '%Y-%m-%d')):6:5:7 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
    '' using (timecolumn(1, '%Y-%m-%d')):6 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
 
@@ -673,13 +673,13 @@ set ytics ("" 0, "" 500000, "" 1000000, "" 1500000, "" 2000000, "" 2500000, "" 3
 set xtics "1960-01-01",3600*24*365*5,"1975-01-01"
 
 plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):8:10 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
-   '' using (timecolumn(1, '%Y-%m-%d')):9 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
+   using (timecolumn(1, '%Y-%m-%d')):8:10 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize AdmiralAI Q1-Q3', \
+   '' using (timecolumn(1, '%Y-%m-%d')):9 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize AdmiralAI median', \
    '' using (timecolumn(1, '%Y-%m-%d')):12:11:13 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
    '' using (timecolumn(1, '%Y-%m-%d')):12 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
 
 \end{gnuplot}
-\caption{Reproducing company value over time}
+\caption{How the distributions of company value for trAIns and AdmiralAI change over time for experiments on flat and mountainous terrain using OpenTTLab, configured to attempt to replicate the results of Rios and Chaimowicz \cite{rios2009trains}.}
 \label{figure:trains-ai-vs-admiral-ai-over-time}
 \end{figure}
 
@@ -695,7 +695,7 @@ The other aspects of the results are currently unexplained, but I speculate reas
 
 In terms of the seemingly increased prevalence of catastrophic results, it is has been suggested that one of the barriers to reproducibility of simulations is the under reporting of errors \cite{luijken2024replicability}; indeed, there are no mention of errors in the original study. It could also be that the number of repetitions in the original study are much lower, 7 per configuration rather than 64, and so just by chance resulted in better results than found here; although this does seem unlikely given the distributions of results between the original and current work in most cases did not overlap. Unfortunately, because the random seeds were not included in the original study, the possibility of \emph{seed hacking}\singlespacedfootnote{Seed hacking in this context would be an example of p-hacking or data dredging.} cannot be excluded from the list of possibilities for the reasons of the different results.
 
-However, the most likely cause of differences are not deliberate, but in fact due the the differences in version of OpenTTD, its configuration, and the AIs. If this is indeed the case, then the results here suggest that trainsAI is less robust than Admiral to whatever differences these introduced.
+However, the most likely cause of differences are not deliberate, but in fact due to the differences in version of OpenTTD, its configuration, and the AIs. If this is indeed the case, then the results here suggest that trainsAI is less robust than Admiral to whatever differences these introduced.
 
 \section{Conclusion}
 

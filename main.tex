@@ -271,41 +271,33 @@ Chapter \ref{chapter:discussion} contains a discussion of what was found, summar
 
 A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in road, rail, sea or air infrastructure and vehicles.
 
-Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, this is not a requirement: OpenTTD allows non-human players, so-called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
+Usually when using OpenTTD for recreation there would be one or more human players that each control a company. However, as mentioned at the beginning of Chapter \ref{chapter:introduction}, this is not a requirement: OpenTTD allows non-human players, so-called AI players, fully controlled by custom code supplied by the player/researcher. If there are no human players, as discussed later in the current chapter, OpenTTD also then runs deterministically - using a seed value on startup that controls all pseudo-random behavior of the game. These abilities are the core abilities that allows OpenTTD to be used in repeatable, reproducible and, hopefully, replicable simulations.
 
-This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the OpenTTDLab framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could be used to extract some insights applicable to the real world.
+This chapter explores this model and these abilities in more detail, as well other related existing features that allow OpenTTD to be controlled programatically and ultimately used, through the OpenTTDLab framework presented in the next chapter, to run simulations. This chapter also shows that the environment of OpenTTD is a rich one; while there are clearly some unrealistic aspects, it is at least a tempting target for running simulations that could be used to extract  insights about the real world.
 
 Unless otherwise stated, the details here are from OpenTTD Wiki \cite{OpenTTDWiki}, the OpenTTD source code \cite{OpenTTDSource}, the OpenGFX source code \cite{OpenGFXSource}, the OpenTTD AI API documentation \cite{OpenTTDAIAPIDocs}, the OpenTTD GameScript API documentation \cite{OpenTTDGSAPIDocs}, or by playing OpenTTD itself. Details are correct as of OpenTTD 13.4.
 
-\section{Field of play/simulation}
+\section{Field of play}
 
-OpenTTD runs on two-dimensional rectangular tiled grid representing an area of land and sea, with some limited three-dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view; sometimes inaccurately referred to as an isometric view. Each tile does not necessarily have a single object on it, some objects can co-exist with each other depending on the object type. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
+OpenTTD runs on two-dimensional rectangular tiled grid representing an area of land and sea, with some limited three-dimensional aspects. The grid size is configurable on startup between 64x64 and 4096x4096 tiles. Each tile is square, albeit presented to the user in a dimetric view as can be seen in Figure \ref{figure:introduction-screenshot}\footnote{A \emph{dimetric} view is sometimes inaccurately referred to as an \emph{isometric} view.}. Each tile does not necessarily have a single object on it, some objects can co-exist with each other depending on the object type. The positions of vehicles that carry goods and passengers, which are the main mechanism for making money in the game, are even more granular - they move and take positions at what appear to be any position on their path between destinations.
 
-There is some concept of height - each section of a grid can have one of X possible height levels in the game, with sloping land between each level. This impacts the game in more than just a visual way: when going uphill road and rail vehicles slow down - the amount depending on the type of the vehicle, and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
+There is some concept of height: each section of a grid can have one of X possible height levels in the game, with sloping land between each level. This impacts the game in more than just a visual way: when going uphill road and rail vehicles slow down - the amount depending on the type of the vehicle, and how laden they are with goods. As discussed later, the amount they slow can have an impact on money made. Rail and road tunnels can be built by the companies, which can avoid this, but they have their downsides: they typically cost the company more to build, depending on their type have their own speed restrictions, and they can have no bends, or go up or down in terms of their height - entry and exit must be on the same level.
 
 An example field of play, also showing some of the interface that players use to interact with the field of play is show in Figure \ref{figure:introduction-screenshot}.
 
 \section{Startup}
 
-On startup of a new game/simulation, there are two classes of startup. A pre-defined scenario can be started, where the map is pre-defined, or a pseudo-random world is generated. In the pseudo-random case, the world is deterministically generated based on a seed value, and the configuration of the game. Specifically, the land, height, trees, coastlines and sea, the sizes and positions of town, and the positions and types of industries are all pseudo-randomly generated. This determinism helps OpenTTD be used for repeatable experiments.
+There are two classes of startup: a pre-defined scenario can be started, where the map is pre-defined; and a pseudo-random world. In the pseudo-random case, which is the case of all experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}, the world is deterministically generated from  the configuration of the game and an integer seed to the built-in random number generator, referred to as the \emph{random seed}. Specifically, the land, height, trees, coastlines and sea, the sizes and positions of towns, and the positions and types of industries are all deterministically generated. This determinism helps OpenTTD be used for bitwise repeatable experiments.
 
-Note that other than roads within towns, no transport infrastructure exists. It is the role of the player to build this.
+Other than roads within towns, on startup no transport infrastructure exists. It is the role of the player, which includes AI players, to build these to connect towns and/or industries in order to earn revenue. At the beginning of the game each company has a loan with which to begin building the infrastructure.
 
-\section{Agents and ticks}
+\section{Climates}
 
-OpenTTD is an agent-based system, with agents: buses, trains, planes, ships, industries and even buildings in towns to an extent running apparently independently and in accelerated real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are 74 ticks per in-game day. During a tick, game time progresses in a deterministic way - vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, a number of passengers are "produced" by towns wanting to travel.
+OpenTTD has four different \emph{climates}: \emph{temperate}, \emph{sub-arctic}, \emph{sub-tropical} and \emph{toyland}. A climate is fixed on game startup and effects a variety of properties of the game such as what transportation types are available, and what industries and supply chains are possible. For conciseness all descriptions are limited to the temperate climate, as are the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
 
-This determinism makes OpenTTD particularly suitable for exactly repeatable simulations. If, for example, instead of ticks, threads were used for the various agents, since thread scheduling is in general non deterministic, then exactly repeatable experiments would not be possible.
+\section{Economic and transportation model}
 
-\section{Economic model and supply chains}
-
-The companies in OpenTTD receive money for transporting cargo and passengers between sources and destinations. The amount of money is dependant on a number of factors: the amount of cargo, the cargo type, the time taken - a shorter time results in more money - and the distance taken - a longer distance results in more money.
-
-Industries each produce and accept certain types of cargo, depending on their industry. For example, a steel mill accepts iron ore, and produces steel. A factory accepts steel, and produces goods. The range of industries depends on the \emph{climate} that the game is started in: temperate, sub-arctic, tropical and toyland. In the temperate climate, the default, there are 12 possible industries, plus towns, which produce and accept a total of 12 types of cargo, including passengers and mail. How much each industry or town depends on on how much input cargo it has received, a hidden property of its total (pseudo-randomly chosen in pseudo-randomly generated worlds), which can also change during the game similarly pseudo randomly. The full supply chain of the temperate climate can be seen in Figure \ref{figure:temperate-supply-chains}.
-
-Informally, there are a number immediate absurdities to the economic model. For example, as long as an industry's type can accept that type of cargo, it can accept any amount of that cargo type - for which the company that transported it receives money. This includes passengers: for example when a passenger arrives as a bus station, that particular passenger has no particular destination in mind in the game - the company will receive money for taking them anyway, but more money if they are taken further. In a similar vein, there is nothing more granular than a type of cargo: factories and oil refineries both produce so-called \emph{goods} which are accepted by all towns.
-
-It is beyond the scope of this project to more rigorously analyse the economic model of OpenTTD, and to so work out how much any insights generated by OpenTTD simulations can be applied to the real world. It has been suggested that while the economic model is not realistic, the network effects of OpenTTD are somewhat realistic \cite{raghothama2013review} - it is the aim of this project that the OpenTTDLab framework presented in the next chapter offers a mechanism to better study these.
+The possible supply chains in the temperate climate of OpenTTD can be seen in Figure \ref{figure:temperate-supply-chains}. In total there are 13 different types of industries that can produce or receive cargo: iron ore mines, coal mines, forests, farms, steel mills, oil wells, power stations, sawmills, factories, oil refineries, oil rigs, banks and towns; and 11 types of cargo: iron ore, coal, wood, livestock, grain, steel, oil, goods, valuables, mail and passengers. Towns and passengers are maybe not technically industries and cargo, but I include them because in terms of the economic model of OpenTTD they are.
 
 \begin{figure}[ht]
 \centering
@@ -367,82 +359,70 @@ It is beyond the scope of this project to more rigorously analyse the economic m
     -- node[above] {\scriptsize Goods} ($ (town.west) + (0,0.2) $);
 
 \end{tikzpicture}
-\caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce. Adapted from \cite{TemperateFlowChart}.}
+\caption{The possible supply chains of the temperate climate of OpenTTD 13.4, showing what types of cargo industries and towns accept and produce. Adapted from `Flow chart for Temperate Cargo' in the \emph{OpenTTD Wiki} \cite{TemperateFlowChart}.}
 \label{figure:temperate-supply-chains}
 \end{figure}
 
-\section{The possible actions a player can take}
+The companies in OpenTTD, controlled by either human or AI players, receive money for transporting the 11 cargo types between the 13 industry types. The amount of money is dependant on a number of
+factors: the amount of cargo, the cargo type, and the time taken--a shorter time results in more money, and the distance between source and destination---longer distance results in more money. How much each
+industry or town depends on on how much input cargo it has received, a hidden property of its total (pseudo-randomly chosen in pseudo-randomly generated worlds), which can also change during the game similarly pseudo randomly.
 
-\section{Algorithm of each player}
+The 11 cargo types can be transported by 4 classes of transportation: road, rail, sea and air; and each of these have further sub classes. With the exception of oil rigs that have built-in stations, none of the industries have stations for the transportation to pick up or drop of cargo, and so companies must build them at a cost. Stations can also be only built on flat or almost flat land, which requires earth works which also costs. Companies must also build the road or rail networks to connect the stations. Road and rail networks cannot be built arbitrarily on sloping land: there are often earth works required to shape it which costs the company. This fact explains some of the results in Chapter \ref{chapter:experiments-attempt-at-reproducing}. Depots must also be built in order to then build the vehicles that can transport the caxrgo; with the exception of some airports. Once built, the company configures each vehicle with a route: a set of stations to travel between to pick up and drop off cargo. The minimum useful route would be 2 stations long, but they can be longer.
 
-\section{Algorithm of the game}
+There are a number of obvious absurdities to the economic model. The number of good for example: there are 11 in OpenTTD, but the UK Tariff, the listing of all rules that govern imports into the UK, refers to over 25,000 different commodities \cite{uktariff}. Also, as long as an industry's type can accept that type of cargo, it can accept any amount of that cargo and will pay the company that transported it. It also doesn't matter which specific example of an industry any particular piece of cargo goes, which includes passengers; for example when a passenger arrives at a station, that particular passenger has no particular destination in mind in the game - the company will receive money for taking them anyway, but more money if they are taken further.
 
+It is beyond the scope of this project to more rigorously analyse or validate the economic model of OpenTTD, and to so work out how much any insights generated by OpenTTD simulations can be applied to the real world. As briefly mentioned in the previous chapter, it has been suggested that some of OpenTTD's network effects, presumably involving the supply chains of Figure \ref{figure:temperate-supply-chains}, could be realistic. I hold out hope that OpenTTD could be used as a valid simulator for investigating network effects, and specifically by using OpenTTDLab presented in the next chapter.
 
+\section{Agents, ticks, and threads}
 
-List the goods!
+OpenTTD is an agent-based system, with agents: buses, trains, planes, ships, industries and even buildings in towns to an extent running apparently independently and in accelerated real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are 74 ticks per in-game day. During a tick, game time progresses in a deterministic way - vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, a number of passengers are "produced" by towns wanting to travel.
 
-\begin{itemize}
-\begin{item}Industries produce a certain amount of goods per tick based on a "how good" they are, combined with a pseudo-random varience\end{item}
-\begin{item}Industries will accept any amount of the range of goods they accept, and pay\end{item}
-\begin{item}The amount of money the industries pay increases with the distance they travelled according to a fixed formula for each good type\end{item}
-\begin{item}The amount of money the industries pay decreases with the amount of time it took\end{item}
-\end{itemize}
-
-For the purpose of the above, industries include towns, which produce passengers and mail.
-
-It is beyond the scope of this project to analyse this model in any formal way, and to work out exactly how results gleamed by using OpenTTD can be applied to the real world.
-
-\section{Transportation and station types}
+This determinism makes OpenTTD particularly suitable for exactly repeatable simulations. If, for example, instead of ticks, threads were used for the various agents, since thread scheduling is in general non deterministic, then exactly repeatable experiments would not be possible. OpenTTD does use threads in secondary activities, such as showing progress bars or saving games, but with these exceptions the core of OpenTTD can be described as \emph{single-threaded}.
 
 \section{OpenTTD AIs}
 
-OpenTTD AIs are scripts that can be plugged into OpenTTD at runtime that allows it to control a company. It has a rich API, with approximately X functions in total.
+OpenTTD AIs are scripts, written using the Squirrel language, that can be plugged into OpenTTD at runtime that allows it to control a company. OpenTTD offers AI a rich API, with 545 functions to control the game or inquire into its state \cite{OpenTTDAIAPIDocs} - many of the functions working on specific tile(s) of the field of play. It works within the "tick" framework - every tick of the game a certain amount of the script can progress. OpenTTD AIs can also be parameterised - accepting parameters set before the onset of a game. For example, the AI created for the experiments of Chapter \ref{chapter:experiments-simple-parameterised-ai} accepts a single parameter that controls how many buses to create.
 
-It work within "tick" framework - every tick of the game a certain amount of the script can progress.
-
-This is the core feature that allows OpenTTD to be used to experiment how different strategies of AIs affect the outcome, and so, to an extent, simulate properties of the real world.
+This AI system is the core feature that allows OpenTTD to be used to experiment how different strategies of AIs affect the outcome, and so, to an extent, simulate properties of the real world. The framework described in Chapter \ref{chapter:openttdlab-design-process-and-features} was designed to make it straightfoward to source, configure, and run such AIs, and all of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} use them.
 
 \section{Configurability}
 
-There are a number of configuration - it's not useful to list them all. However, there are 
-
-OpenTTD as of version 13.4 has over X command line options and Y configuration options that allow the player to customise how it behaves when playing - it is not useful to review them all here. However the ones that are particularly applicable to a for repeatable, reproducible, and replicable research, and leveraged by OpenTTDLab are below
+OpenTTD has over 400 options that allows the game to be customised; it is not useful to review them all here, see \cite{OpenTTDWiki} for the complete list. However, there are several that are particularly relevant to using OpenTTD to conduct repeatable, reproducible or replicable experiments.
 
 \begin{itemize}
-\begin{item}
-OpenTTD accepts a random seed as input. This is used to then generate the initial world in a deterministic way, and then also affect any other pseudo-random behaviour. If there is no user input duing the game, which is the case if only playing with AIs, this makes the entire game deterministic based on the input
-\end{item}
-\begin{item}
-OpenTTD does not have an end
-\end{item}
-\begin{item}
-Autosave
-\end{item}
-\begin{item}
-Startup script to immedaitely load AIs 
-\end{item}
+\begin{descitem}{Properties of the pseudo-randomly generated world}
+As suggested earlier in the current chapter, OpenTTD allows the configuration of the dimensions of the world, between  64x64 and 4096x4096 tiles.
+
+It also allows the specification of other properties, such as if the generated world is flat or mountainous. Flat and mountainous worlds are compared in the experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing}.
+
+Not all properties must be specified explicitly---each value has a default.
+\end{descitem}
+\begin{descitem}{Total number of ticks}
+OpenTTD allows the specification of the maximum number of ticks taken before it exits. This allows experiments to run for a fixed amount of in game time, rather than indefinitely. All of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
+\end{descitem}
+\begin{descitem}{Random seed}
+As described earlier in this chapter, random.
+
+Keeping track of what random seeds you run experiments on should help keep them bitwise repeatable, and including the random seeds in the descriptions of experiments when published should help them be bitwise reproducible. All the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
+\end{descitem}
+
 \end{itemize}
 
+OpenTTD also requires what's known as a \emph{base graphics set}. While this does not affect gameplay, it affects the visuals of the game. OpenGFX \cite{OpenGFXSource} is an open source base graphics set that is easily installable through the OpenTTD interface.
 
-\section{OpenGFX}
+It should be noted that while OpenTTD has a wide range of options, there is nothing in OpenTTD to help run it over a specific range of configurations, for example over two different configurations of worlds, or over a range of random seeds.
 
-It's somewhat of a misnomer - it's not just graphics but details of vehicles, which affect gameplay, and the simulation. It's important to have the exact version
+\section{Savegames}
 
-\section{The save game format}
+OpenTTD 13.4 can be configured to automatically save the state of the game in intervals of in-game time in files of a custom binary format. These \emph{savegames} are designed to be able to pick the game for when they left off. However, they are also rich sources of information, containing for example how much each company is worth or how much money it has in the bank. Although there is no evidence that the savegames were used to extract this, these metrics were often used in the OpenTTD research mentioned in the previous chapter, and are similarly used in the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
 
-OpenTTD saves its data in a custom binary format - its so-called savegame format. OpenTTD offers an extremely basic tool for extracting some data from this format. However, a separate Python based tool is available to extract data from save games
+However, there is no built-in ability in OpenTTD to extract information from these savegames, or indeed aggregate such informatino over multiple savegames in order to see changes over in-game time.
 
-?? Put something about desyncs and floating points - avoided
+\section{Conclusion}
 
-\section{What doesn't exist}
+OpenTTD presents an extremely rich landscape for investigation, and because of the tick model, and the fact it accepts a random seed, this landscape is deterministic and so suitable for bitwise repeatable research. While its economic model is simplified or even absurd in parts, rough back of the envelope calculations suggest that, depending on the map size, there are hundreds of millions of possible actions an OpenTTD AI can take on any given tick of the game; the existing research has only begun to explore this space.
 
-\begin{itemize}
-\begin{item}
-With reference to the the desired things from the reproducibility section, mention things that don't exist
-\end{item}
-\end{itemize}
-
-Running many experiments. Extracting data for analysis.
+However, if viewing OpenTTD not as a game for which it was designed, but as a tool for running repeatable, reproducible, and hopefully replicable, research, there are three core features that are not present in OpenTTD. Firstly, there is no way to configure OpenTTD so it runs over a range of avaiable configurations, for example over a range of random seeds. And secondly while it saves information to its savegame files, there is no way to extract and combine this information into a structured form ready for analysis. And thirdly, while OpenTTD is largely single-threaded, which contributes to its determinism and bitwise repeatability/reproducibiliy, it means there is no way to leverage multiple CPU cores. These are the core features that OpenTTDLab, as described in the next chapter, effectively add to OpenTTD.
 
 \chapter{The Framework}
 \label{chapter:openttdlab-design-process-and-features}

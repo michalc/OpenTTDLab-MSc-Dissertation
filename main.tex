@@ -258,7 +258,7 @@ The artifacts associated with the paper are of a quality that significantly exce
 \end{quote}
 Repeatability, reproducibility and replicability are all in the realm of a single result, but reusability concerns itself with the use of the artifact to generate different results in future, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}. It is clear that a framework that helps with the 3Rs should itself be reusable and encourage reusable artifacts in work that uses it.
 
-\section{Outline}
+\section{Chapter outline}
 
 The following chapters explain how OpenTTDLab helps experiments avoid issues with the 3Rs, especially the 7 issues listed, and in a reusable way. Chapter \ref{chapter:openttd-model-and-abilities} gives more background into OpenTTD: specifically what properties of OpenTTD make it suitable and interesting enough to research, what limitations it has, and at a high level how a framework could overcome at least some of these limitations. Chapter \ref{chapter:openttdlab-design-process-and-features} explains the design process I followed to create such a framework---the process itself provides an argument that it achieves its aims; and gives an overview of how its features help experiments be repeatable, reproducible, and albeit maybe indirectly, replicable. 
 
@@ -426,7 +426,7 @@ If viewing OpenTTD not as a game for which it was designed, but as a tool for ru
 \begin{figure}[H]
 \centering
 \includesvg{assets/openttdlab-logo.svg}
-\caption{The OpenTTDLab logo. I created this based on the existing GPLv2-licensed OpenTTDLogo, and it is displayed alongside the code of OpenTTDLab in its public documentation.}
+\caption{The OpenTTDLab logo. I created this based on the existing GPLv2-licensed OpenTTDLogo \cite{OpenTTDLogo}, and it is displayed alongside the code of OpenTTDLab in its public documentation as can be seen in Appendix \ref{chapter:openttdlab-documentation}.}
 \label{fig:openttlab-logo}
 \end{figure}
 
@@ -555,7 +555,7 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 \chapter{Experiments 1: Attempt at Reproducing Existing Results}
 \label{chapter:experiments-attempt-at-reproducing}
 
-To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to reproduce some of the results of Rios and Chaimowicz \cite{rios2009trains}: a set of experiments running two AIs, trAIns [sic] being presented in the aforementioned work and the pre-existing AdmiralAI, and comparing their company values.
+To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to reproduce some of the results of Rios and Chaimowicz \cite{rios2009trains}: a set of experiments running two AIs, trAIns [sic] being presented in the aforementioned work and the pre-existing AdmiralAI, and comparing their company values. I generated results, but they did not match the original work.
 
 \section{Experimental setup}
 
@@ -563,7 +563,7 @@ The setup was a best effort attempt to what was described as the setup of the ex
 
 Note that these settings were not all explicitly mentioned in the original paper: it described running OpenTTD revision 16724 using \emph{medium} difficulty level with some overrides. However, OpenTTDLab does not work under this version (due to savegame format differences), and the recent versions of OpenTTD that do work under OpenTTDLab no longer have the concept of difficulty level. However, the historical meaning of the medium difficulty level is documented \cite{OpenTTDDifficultyLevels}, and so the explicit list of aforementioned settings recreated, and run under OpenTTD 13.4 and OpenGFX 7.1 that OpenTTDLab does work under. There is one exception to basing off the medium difficulty level: the medium difficulty level was documented to have a maximum initial loan of £150,000, but using this level in pilot experiments resulted in extremely poor performance of AdmiralAI - it appeared to be virtually unable to function.
 
-The version of trAIns was 2.1,  the version of AdmiralAI  25. AdmiralAI 25 has a single dependency: Queue.FibonacciHeap, which is pinned to version 2 by AdmiralAI 25 code. None of the versions were specified in the original paper. All the AIs and their dependencies these were all retrieved from BaNaNaS---as discussed in the previous chapter.
+None of the versions of the AIs or their dependencies were specified in the original paper. In the current experiments, the version of trAIns is 2.1,  the version of AdmiralAI is 25, and the version of AdmiralAI's single dependency, Queue.FibonacciHeap, is 2. All the AIs and their dependencies these were retrieved from BaNaNaS.
 
 The results presented here are for exactly 15 years of in-game time, while in the original work the time varied from 15 years and 2 days to 15 years and 11 months.
 
@@ -603,19 +603,21 @@ set multiplot layout 1,2
 set yrange [-2500000:50000000]
 set ytic 5000000
 
-set xlabel "\\footnotesize Flat"
+set xlabel ""
 set lmargin at screen 0.11; set rmargin at screen 0.53
 set xtics ("\\footnotesize trAIns" 1.5, "\\footnotesize Admiral" 3.5)
+set label 1 '\footnotesize Flat' at graph 0.03,1.05
 plot file \ 
    using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
    '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle, \
    '' using (3):(strcol(6) eq "Original paper" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc rgb '#aaaaaa' fs pattern 2 notitle, \
    '' using (4):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Flat" && strcol(2) eq "Admiral AI" ? $3 : NaN):(0.5) lc 2 fs pattern 0 notitle
 
-set xlabel "\\footnotesize Mountainous"
+set xlabel ""
 unset ylabel
 set format y ''
 set lmargin at screen 0.53; set rmargin at screen 0.95
+set label 1 '\footnotesize Mountainous' at graph 0.03,1.05
 plot file \ 
    using (1):(strcol(6) eq "Original paper" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) pointsize 0.5 lc rgb '#aaaaaa' notitle, \
    '' using (2):(strcol(6) eq "OpenTTDLab" && strcol(4) eq "Mountainous" && strcol(2) eq "trAIns AI" ? $3 : NaN):(0.5) pointsize 0.5 lc 2 fs pattern 0 notitle, \
@@ -628,59 +630,6 @@ plot file \
 \label{figure:trains-ai-vs-admiral-ai-final-distributions}
 \end{figure}
 
-
-% \begin{figure}[h]
-% \centering
-% \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,6}]
-% set datafile separator ","
-% set style fill pattern 2
-% set key right top
-% set key invert
-% set grid ytics
-% set format y "%.1s%c"
-% set xtics 3600*24*365*5
-% set xdata time
-% set format x ""
-% set timefmt "%Y-%m-%d"
-% set ylabel 'Company value $\textrm{\pounds}$' offset 1.5
-
-% set xrange ["1960-01-01":"1975-06-01"]
-% set yrange [-100000:4000000]
-
-% set multiplot layout 2,1
-
-% set ytics ("\\footnotesize 0" 0, "\\footnotesize 0.5M" 500000, "\\footnotesize 1.0M" 1000000, "\\footnotesize 1.5M" 1500000, "\\footnotesize 2.0M" 2000000, "\\footnotesize 2.5M" 2500000, "\\footnotesize 3.0M" 3000000, "\\footnotesize 3.5M" 3500000)
-% set mytics 100000
-
-% set lmargin at screen 0.11; set rmargin at screen 0.95
-% set bmargin at screen 0.55
-% set tmargin at screen 1.0
-
-% set label 1 'Mountainous' at graph 0.05,0.92
-% plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
-%    using (timecolumn(1, '%Y-%m-%d')):8:10 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
-%    '' using (timecolumn(1, '%Y-%m-%d')):9 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
-%    '' using (timecolumn(1, '%Y-%m-%d')):12:11:13 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
-%    '' using (timecolumn(1, '%Y-%m-%d')):12 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
-
-% unset key
-% set xlabel '\footnotesize Date'
-% set format x "\\footnotesize %Y"
-% set bmargin at screen 0.1
-% set tmargin at screen 0.55
-% set label 1 'Flat' at graph 0.05,0.92
-
-% plot 'notebooks/01_trains_ai_vs_admiral_ai_results_03_openttdlab_company_value_quartiles.csv' \ 
-%    using (timecolumn(1, '%Y-%m-%d')):2:4 skip 4 with filledcurves lc rgb '#dddddd' fillstyle solid title '\footnotesize Admiral Q1-Q3', \
-%    '' using (timecolumn(1, '%Y-%m-%d')):3 every 6 skip 4 with points pt 5 lw 8 lc 2 ps 0.4 title '\footnotesize Admiral median', \
-%    '' using (timecolumn(1, '%Y-%m-%d')):6:5:7 every 6 skip 4 with yerrorbars lc 1 ps 0 title '\footnotesize trAIns Q1-Q3', \
-%    '' using (timecolumn(1, '%Y-%m-%d')):6 every 6 skip 4 with points lc 1 pt 7 ps 0.7 title '\footnotesize trAIns median'
-
-% \end{gnuplot}
-% \caption{Reproducing company value over time}
-% \label{figure:trains-ai-vs-admiral-ai-over-time}
-% \end{figure}
-
 \begin{figure}[p]
 \centering
 \begin{gnuplot}[terminal=cairolatex,terminaloptions={size 5.3,3}]
@@ -692,8 +641,7 @@ set timefmt "%Y-%m-%d"
 set xdata time
 set xtics "1960-01-01",3600*24*365*5,"1974-12-01"
 
-
-set ylabel 'Company value $\textrm{\pounds}$' offset 1.5
+set ylabel '\footnotesize  Company value $\textrm{\pounds}$' offset 1.5
 
 set xrange ["1960-01-01":"1975-06-01"]
 set yrange [-200000:4000000]
@@ -964,7 +912,7 @@ As discussed in Chapter \ref{chapter:introduction}, OpenTTD has been used to run
 
 OpenTTD itself provides a rich and interesting setting for studies of algorithms. Its Squirrel-based AI framework, coupled with its tick-based and so deterministic simulator as described in Chapter \ref{chapter:openttd-model-and-abilities}, provides an excellent foundation for bitwise repeatable studies and bitwise reproducible studies, and if presented with sufficient detail, replicable studies as well. While OpenTTD's limited supply chain is clearly a simplification of reality, and its economic model is unrealistic, it has been suggested there are realistic aspects to OpenTTD in terms of network effects \cite{raghothama2013review}; while I did not attempt to validate OpenTTD as a simulator, I have found nothing to contradict that. If OpenTTDLab indeed provides a good framework for the 3Rs as I claim it does, it puts further research that uses OpenTTD as a simulator of real world networks in good stead.
 
-From the first set of experiments, those in Chapter \ref{chapter:experiments-attempt-at-reproducing}, I have given stronger evidence that at least one set of results of an existing study using OpenTTD cannot be reproduced: I generated results, but they did not match the ones originally reported. However, by providing the artifacts for running experiments and analysing their results, I have shown that by using OpenTTDLab it is straightforward to repeat experiments, and argue that that others should be able to reproduce the same results I have.
+From the first set of experiments, those in Chapter \ref{chapter:experiments-attempt-at-reproducing}, I have given stronger evidence that at least one set of results of an existing study using OpenTTD cannot be reproduced: I successfully generated results, but they did not match the ones originally reported. However, by providing the artifacts for running experiments and analysing their results, I have shown that by using OpenTTDLab it is straightforward to repeat experiments, and argue that that others should be able to reproduce the same results I have.
 
 The second set of experiments, in Chapter \ref{chapter:experiments-simple-parameterised-ai}, I have again shown again that OpenTTDLab can be used to easily repeat experiments. But going further in this case, the results of these experiments hint that OpenTTD could be used to simulate real-world properties relating to transportation, business, or logistics: in this specific case, by parameterising the AI written for the experiments, obtaining results that appear to show risk-benefit trade offs and the suggestion that more money initially invested can result in higher returns later.
 
@@ -1092,6 +1040,7 @@ While there are many improvements that can be made in OpenTTDLab and further inv
 \appendix
 
 \chapter{Documentation of OpenTTDLab}
+\label{chapter:openttdlab-documentation}
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0, pagecommand={},frame]{assets/openttdlab-github.pdf}
 

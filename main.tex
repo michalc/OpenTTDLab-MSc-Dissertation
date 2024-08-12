@@ -100,7 +100,7 @@
 \maketitle
 
 \newenvironment{ethics}
-   {\begin{frontenv}{Research Ethics Approval}{\LARGE}}
+   {\begin{frontenv}{Research ethics approval}{\LARGE}}
    {\end{frontenv}\newpage}
 
 \begin{ethics}
@@ -266,7 +266,7 @@ Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experime
 
 Chapter \ref{chapter:discussion} contains a discussion of what was found, summarises the limitations of the work, and explores the possible next steps. This dissertation finishes with a few concluding remarks in \nolbreaks{Chapter \ref{chapter:conclusion}}.
 
-\chapter{OpenTTD: Its Model and Abilities}
+\chapter{OpenTTD: Its model and abilities}
 \label{chapter:openttd-model-and-abilities}
 
 A game of OpenTTD is made up of a rectangular world with one or more companies in it, typically working in competition against each other. A company is paid for transporting goods and passengers between certain combinations of industries and towns, and in order to do so it needs to invest in road, rail, sea or air infrastructure and vehicles.
@@ -420,7 +420,7 @@ OpenTTD presents an extremely rich landscape for investigation, and because of t
 
 If viewing OpenTTD not as a game for which it was designed, but as a tool for running repeatable, reproducible, and hopefully replicable, research, there are three core features that are not present in OpenTTD. Firstly, there is no way to configure OpenTTD so it runs over a range of available configurations, for example over a range of random seeds. And secondly while it saves information to its savegame files, there is no way to extract and combine this information into a form ready for analysis. And thirdly, while OpenTTD is largely single-threaded, which contributes to its determinism and bitwise repeatability/reproducibiliy, it means there is no way to leverage multiple CPU cores. These are the core features that OpenTTDLab, as described in the next chapter, effectively add to OpenTTD.
 
-\chapter{The Framework}
+\chapter{OpenTTDLab: Its design and features}
 \label{chapter:openttdlab-design-process-and-features}
 
 \begin{figure}[H]
@@ -552,7 +552,7 @@ Hmmm... is this being shoehorned in?? I guess I think it's important... can I ar
 
 % To get validate of OpenTTDLab's usefulness in terms of repeatable, reproducible and replicable experiments, I used OpenTTD in 3 different situations. Firstly, to attempt to reproduce existing results from authors of an existing OpenTTD AI, and even in one respect go further in terms of showing what results are possible to extract and analyse. Secondly, to explore how a single parameter can change how a new simple AI performs, and shows that OpenTTDLab can be used to explore risk-benefit trade offs in basic supply chains. And finally to show how OpenTTDLab can be used to programmatically optimize this parameter using a basic algorithm.
 
-\chapter{Experiments 1: Attempt at Reproducing Existing Results}
+\chapter{Experiments 1: Reproducing results}
 \label{chapter:experiments-attempt-at-reproducing}
 
 To attempt to validate OpenTTDLab as a useful framework, I used it to attempt to reproduce some of the results of Rios and Chaimowicz \cite{rios2009trains}: a set of experiments running two AIs, trAIns [sic] being presented in the aforementioned work and the pre-existing AdmiralAI, and comparing their company values. I generated results, and while trAIns does appear to perform better than AdmiralAI, the performance of trAIns does not match the original work.
@@ -697,16 +697,18 @@ However, the most likely cause of differences are not deliberate, but in fact du
 
 \section{Conclusion}
 
-It is beyond the scope of the current work to go beyond speculation and fully explain the results. However, these experiments have shown two things. Firstly, they give stronger evidence to the claims of Chapter \ref{chapter:introduction} that existing research that uses OpenTTD cannot be replicated. Secondly that OpenTTDLab can be used to extract rich information from OpenTTD, and can be seen in Appendices \ref{chapter:trains-vs-admiral-run-experiments} \& \ref{chapter:trains-vs-admiral-analyse-results}, with a small amount of code that should be bitwise replicable, and so could not just confirm the results, but further them through more in-depth analysis without even the full results being shared. The results here were also for a single metric: company value. However, as discussed briefly in Chapter \ref{chapter:openttdlab-design-process-and-features}, there is a wealth of further information available in OpenTTDLab.
+It is beyond the scope of the current work to go beyond speculation and fully explain the results. However, these experiments have shown two things. Firstly, they give stronger evidence to the claims of Chapter \ref{chapter:introduction} that existing research that uses OpenTTD cannot be replicated. Secondly that OpenTTDLab can be used to extract rich information from OpenTTD, richer than that extracted than that in existing OpenTTD research; and as can be seen in Appendices \ref{chapter:trains-vs-admiral-run-experiments} \& \ref{chapter:trains-vs-admiral-analyse-results}, with a small amount of code that should be bitwise reproducible, and so could not just confirm the results, but further them through more in-depth analysis without even the full results being shared. The results here were also for a single metric: company value. However, as discussed briefly in Chapter \ref{chapter:openttdlab-design-process-and-features}, there is a wealth of further information available in OpenTTDLab.
 
-\chapter{Experiments 2: Simple Parameterised OpenTTD AI}
+\chapter{Experiments 2: Simulating a network}
 \label{chapter:experiments-simple-parameterised-ai}
 
-From the previous section, OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences. However, this doesn't by itself allow for a more detailed analysis of the behaviour of supply chains. OpenTTDLab's feature of running experiments over a range of configuration parameters passed to an AI allows for this.
+The previous chapter showed that OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences, and all in what I claim to be a bitwise repeatable and reproducible way. However, this doesn't give much evidence that OpenTTD, run using OpenTTDLab can be used a a simulator to explore real world effects. In this chapter I present results of running a simple parameterised AI designed to explore how it behaves as the parameter changes. I find that, perhaps just informally or intuitively, OpenTTD shows some effects that align with expectations of the real world, and suggest that further world for validate OpenTTD as a simulator would be valuable. And by providing a high level algorithm for this AI, I argue that the results should not only be repeatable and reproducible, but also replicable.
 
-So I constructed a simple parameterised AI. At runtime, the AI chooses the 2 largest towns, find a route between them, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simpleai}, with the core Squirrel code of the AI in Appendix X, with the Python code to run the experiments in Appendix Y.
+\section{Experimental setup}
 
-The number of buses varied between 1 and 16, and each run was for 50 years, with 50 runs for each configuration covering random number generator seeds between and 1 and 50 inclusive.
+The AI chooses the 2 largest towns, find a route between them, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simpleai}, with the core Squirrel code of the AI in Appendix X.
+
+The Python code to run the experiments in Appendix Y. The number of buses varied between 1 and 16, and each run was for 50 years, with 50 runs for each configuration covering random number generator seeds between and 1 and 50 inclusive.
 
 \section{Results}
 

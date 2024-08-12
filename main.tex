@@ -702,11 +702,11 @@ It is beyond the scope of the current work to go beyond speculation and fully ex
 \chapter{Experiments 2: Simulating a network}
 \label{chapter:experiments-simple-parameterised-ai}
 
-The previous chapter showed that OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences, and all in what I claim to be a bitwise repeatable and reproducible way. However, this doesn't give much evidence that OpenTTD, run using OpenTTDLab can be used a a simulator to explore real world effects. In this chapter I present results of running a simple parameterised AI designed to explore how it behaves as the parameter changes. I find that, perhaps just informally or intuitively, OpenTTD shows some effects that align with expectations of the real world, and suggest that further world for validate OpenTTD as a simulator would be valuable. And by providing a high level algorithm for this AI, I argue that the results should not only be repeatable and reproducible, but also replicable.
+The previous chapter showed that OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences, and all in what I claim to be a bitwise repeatable and reproducible way. However, this doesn't give much evidence that OpenTTD, run using OpenTTDLab can be used a a simulator to explore real world effects. In this chapter I present results of running a simple parameterised AI designed to explore how it behaves as the parameter changes. I find that, just informally or intuitively, OpenTTD shows some effects that align with expectations of the real world, and suggest that further work to validate OpenTTD as a simulator would be valuable. And by providing a high level algorithm for this AI, I argue that the results should not only be repeatable and reproducible, but also replicable.
 
 \section{Experimental setup}
 
-The AI chooses the 2 largest towns, find a route between them, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simpleai}, with the core Squirrel code of the AI in Appendix X.
+The AI chooses the 2 largest towns, find a route between them, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simple-parameterised-ai}, with the core Squirrel code of the AI in Appendix X.
 
 The Python code to run the experiments in Appendix Y. The number of buses varied between 1 and 16, and each run was for 50 years, with 50 runs for each configuration covering random number generator seeds between and 1 and 50 inclusive.
 
@@ -719,7 +719,8 @@ However, the situation is more complex. When taking into account the distributio
 There is also an interesting convergence point around 1978: all configurations on average have on average the same amount of money in the bank. At the moment the reason for this convergence point is so far unexplained. As can be seen in Figure X, this convergence it is certainly not true that every run of the game makes the same amount of money - the distributions of money for 1 and 16 buses remains wide.
 
 \begin{algorithm}
-\caption{Simple parameterised OpenTTD AI}\label{alg:simple-parameterised-ai}
+\caption{Simple parameterised OpenTTD AI}
+\label{algorithm:simple-parameterised-ai}
 \KwData {Seed, the number of buses to build in the AI N}
  (OpenTTD generates the map deterministingly based on the seed) \;
  Fetch list of towns \;
@@ -737,8 +738,6 @@ There is also an interesting convergence point around 1978: all configurations o
   build bus\;
   give orders to move between the 2 towns\;
  }
-\label{algorithm:simpleai}
-\caption{Test}
 \end{algorithm}
 
 \begin{figure}[p]
@@ -803,7 +802,7 @@ plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation
 % Th
 
 
-\section{Programmatically optimising AI parameter}
+\section{Conclusion}
 
 The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
 
@@ -1057,6 +1056,12 @@ The Python notebook used to run the trAIns vs Admiral experiments of Chapter \re
 The Python notebook used to analyse results for the trAIns vs Admiral experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing} is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/01_trains_ai_vs_admiral_ai_01_analyse_results.ipynb}
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/01_trains_ai_vs_admiral_ai_02_analyse_results.pdf}
+
+\chapter{Simple parameterised AI: Core squirrel code}
+
+\lstinputlisting{assets/parameterised-ai/info.nut}
+
+\chapter{Simple parameterised AI: Core squirrel code}
 
 \chapter{Simple parameterised AI: Python code to run experiments}
 \label{chapter:own-parameterised-ai-run-experiments}

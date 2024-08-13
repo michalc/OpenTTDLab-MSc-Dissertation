@@ -738,7 +738,7 @@ workers, the number of cores on the machine, which in this case were 8. The Pyth
 
 \section{Results}
 
-As can be seen in Figure XX, by the end of the 50 years, there appears to be a clear winner - on average the runs with 16 buses have more money in the bank than the others. It can be seen that early in the game, on average the configurations with 16 buses had the lowest amount of money, suggesting that in this very simplified situation, and with the caveat that the economic model of OpenTTD has been argued to be unrealistic REF, it seems to be the case that \emph{you have to spend money to make money}.
+As can be seen in Figure \ref{fig:simple-parameterised-ai-means}, there appears to be a clear trend in terms of mean money in the bank at the end of the 50 years: the more buses, the more money in the bank. However, before approximately 1975 the trend was approximately other way around: from starting at £100k in the bank, the money in the bank decreased for all configurations, but the more buses the less money in the bank. Interestingly at approximately 1975 there is what seems to be a rough convergence point: all configurations have approximately the same amount of money in the bank.
 
 \begin{figure}[p]
 \centering
@@ -797,12 +797,15 @@ plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation
 \label{fig:simple-parameterised-ai-distributions}
 \end{figure}
 
-However, the situation is more complex. When taking into account the distributions, for example in, it's clear that while on average 16 buses are better, there is also greater risk with 16 buses than with the one - there is a higher chance of losing more money than with a single bus.
-
-There is also an interesting convergence point around 1978: all configurations on average have on average the same amount of money in the bank. At the moment the reason for this convergence point is so far unexplained. As can be seen in Figure X, this convergence it is certainly not true that every run of the game makes the same amount of money - the distributions of money for 1 and 16 buses remains wide.
-
+How the distributions of money in the bank change over time for the experiments with one bus compared with 16 buses can be seen in Figure \ref{fig:simple-parameterised-ai-distributions}. For the majority of the time range the distribution for 16 buses is strictly wider than that for 1 buses; although towards the end of the time range the lower end converge.
 
 \section{Discussion}
+
+The results appear to show two things. Firstly, the apparently flip of trends between 1975 and after 1975 suggest that in this situation, it shows that investing money in the short term can lead to more money in the bank longer term. Secondly, the overlapping distributions suggest that the situation is more complex: while the mean for 16 buses is higher, the lower side of the distribution is lower than for 1 buses, which can be interpreted as there being a greater risk of making less money with 16 buses than on 1. These mean that OpenTTD, via OpenTTDLab, can be used to investigate the longer term consequences of shorter term investments, and can be used to investigate risk-benefit trade offs.
+
+Unfortunately the convergence point around 1975 is so far unexplained. It is a convergence of only 4 experiments, maybe not enough to conclude it really is a convergence point. However, further investigation with the data that is available in OpenTTDLab may suggest answers.
+
+These are of course limited results, with no reference or comparison to any formal economic models. The AI constructed is extremely simple, and the infrastructure it creates and uses borderline does not meet the definition of a transport network. But in spite of this simplicity, the results show some interesting effects, and I would argue interesting enough for further research. And research where, with quite a small amount of code as can be seen in Appendices \ref{chapter:own-parameterised-ai-run-experiments} \& \ref{chapter:own-parameterised-ai-analyse-results}, OpenTTDLab should be able to be used.
 
 \section{Conclusion}
 

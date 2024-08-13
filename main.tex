@@ -702,43 +702,43 @@ It is beyond the scope of the current work to go beyond speculation and fully ex
 \chapter{Experiments 2: Simulating a network}
 \label{chapter:experiments-simple-parameterised-ai}
 
-The previous chapter showed that OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences, and all in what I claim to be a bitwise repeatable and reproducible way. However, this doesn't give much evidence that OpenTTD, run using OpenTTDLab can be used a a simulator to explore real world effects. In this chapter I present results of running a simple parameterised AI designed to explore how it behaves as the parameter changes. I find that, just informally or intuitively, OpenTTD shows some effects that align with expectations of the real world, and suggest that further work to validate OpenTTD as a simulator would be valuable. And by providing a high level algorithm for this AI, I argue that the results should not only be repeatable and reproducible, but also replicable.
+The previous chapter showed that OpenTTDLab makes it straightforward to compare existing AIs, and its richness of output allows informed speculation as to the reasons for their behaviour differences, and all in what I claim to be a bitwise repeatable and reproducible way. However, this doesn't give much evidence that OpenTTD, run using OpenTTDLab, can be used a a simulator to explore real world effects. In this chapter I present results of running a simple parameterised AI designed to explore the effects of that parameter changing. I find that, just informally or intuitively, OpenTTD shows some effects that align with intuitive expectations of the real world, and suggest that further work to validate OpenTTD as a simulator would be valuable. And by using OpenTTDLab the results are repeatable, by providing the code of the AI the results should be replicable, and I argue that by providing a high level algorithm for this AI, the results should be replicable.
 
 \section{Experimental setup}
 
-The AI chooses the 2 largest towns, find a route between them, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simple-parameterised-ai}, with the core Squirrel code of the AI in Appendix X.
-
-The Python code to run the experiments in Appendix Y. The number of buses varied between 1 and 16, and each run was for 50 years, with 50 runs for each configuration covering random number generator seeds between and 1 and 50 inclusive.
-
-\section{Results}
-
-As can be seen in Figure XX, by the end of the 50 years, there appears to be a clear winner - on average the runs with 16 buses have more money in the bank than the others. It can be seen that early in the game, on average the configurations with 16 buses had the lowest amount of money, suggesting that in this very simplified situation, and with the caveat that the economic model of OpenTTD has been argued to be unrealistic REF, it seems to be the case that \emph{you have to spend money to make money}.
-
-However, the situation is more complex. When taking into account the distributions, for example in, it's clear that while on average 16 buses are better, there is also greater risk with 16 buses than with the one - there is a higher chance of losing more money than with a single bus.
-
-There is also an interesting convergence point around 1978: all configurations on average have on average the same amount of money in the bank. At the moment the reason for this convergence point is so far unexplained. As can be seen in Figure X, this convergence it is certainly not true that every run of the game makes the same amount of money - the distributions of money for 1 and 16 buses remains wide.
+I constructed an OpenTTD AI specifically for the purposes of this experiment. At the start of the game, the AI chooses the 2 largest towns, find a route between them using the A* algorithm, builds a road over this route, a depot and station at each end, and builds a configurable number of buses that carry between the two stations. The algorithm in more detail can be seen in Algorithm \ref{algorithm:simple-parameterised-ai}, with the Squirrel code of the AI in Appendices \ref{chapter:simulating-a-network-squirrel-info} \& \ref{chapter:simulating-a-network-squirrel-main}, with a basic Python regression test that uses OpenTTDLab in Appendix \ref{chapter:simulating-a-network-python-regression-test}.
 
 \begin{algorithm}
 \caption{Simple parameterised OpenTTD AI}
 \label{algorithm:simple-parameterised-ai}
-\KwData {Seed, the number of buses to build in the AI N}
- (OpenTTD generates the map deterministingly based on the seed) \;
- Fetch list of towns \;
- Sort list of towns \;
- Choose 2 biggest \;
+\KwData {Random seed, the number of buses to build in the AI N}
+ (OpenTTD generates the map deterministingly based on the random seed) \;
+ Obtain the list of towns \;
+ Sort the list of towns by size \;
+ Choose 2 biggest towns \;
  \While{not found route}{
   Continue to find route \;
  }
   \ForEach{step in route}{
   build step\;
  }
- build depot\;
- build station\;
+ build a depot at each end of the route\;
+ build a station at each end of the route;
  \ForEach{bus in buses}{
   build bus\;
-  give orders to move between the 2 towns\;
+  give the bus orders to move between the 2 towns\;
  }
 \end{algorithm}
+
+The number of buses varied between 1 and 16, and each run was for 50 years, and each confuration run for each integer random seed between 0 and 50 inclusive.
+
+The experiments here were run on mac OS 14.5 running on a 2020 M1 and Python
+3.11.0 and OpenTTDLab 0.0.72 and OpenTTD 13.4. The experiments here were run with OpenTTDLab’s default number of
+workers, the number of cores on the machine, which in this case were 8. The Python code to run the experiments is in Appendix \ref{chapter:own-parameterised-ai-run-experiments} and to analyse the results in Appendix \ref{chapter:own-parameterised-ai-analyse-results}.
+
+\section{Results}
+
+As can be seen in Figure XX, by the end of the 50 years, there appears to be a clear winner - on average the runs with 16 buses have more money in the bank than the others. It can be seen that early in the game, on average the configurations with 16 buses had the lowest amount of money, suggesting that in this very simplified situation, and with the caveat that the economic model of OpenTTD has been argued to be unrealistic REF, it seems to be the case that \emph{you have to spend money to make money}.
 
 \begin{figure}[p]
 \centering
@@ -749,21 +749,21 @@ set key left top
 set key invert
 set grid ytics
 set format y "%.0s%c"
-set xtics 3600*24*365*5
+set xtics 3600*24*365.25*5
 set xdata time
 set format x "%Y"
 set timefmt "%Y-%m-%d"
 set ylabel 'Money in the bank $\textrm{\pounds}$'
 set xlabel 'Date'
-set xrange ["1949-01-01":"2001-01-01"]
+set xrange ["1949-04-01":"2000-12-01"]
 plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean 8 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean 4 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean 2 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus'
+   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean for 8 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean for 4 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean for 2 buses', \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus'
 \end{gnuplot}
-\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
+\caption{How the mean money in the bank changes over time for the AI of Algorithm \ref{algorithm:simple-parameterised-ai} when run for 1, 2, 4, 8 and 16 buses.}
 \label{fig:simple-parameterised-ai-means}
 \end{figure}
 
@@ -776,55 +776,37 @@ set key left top
 set key invert
 set grid ytics
 set format y "%.0s%c"
-set xtics 3600*24*365*5
+set xtics 3600*24*365.25*5
 set xdata time
 set format x "%Y"
 set timefmt "%Y-%m-%d"
 set ylabel 'Money in the bank $\textrm{\pounds}$'
 set xlabel 'Date'
-set xrange ["1949-01-01":"2001-01-01"]
+set xrange ["1949-04-01":"2000-12-01"]
 plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($6+$10):($6-$10) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean 16 buses', \
+   using (timecolumn(1, '%Y-%m-%d')):($6+$10):($6-$10) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 std. dev.}$", \
+   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses', \
    '' using (timecolumn(1, '%Y-%m-%d')):($6+$10) skip 2 with lines lc rgb '#cccccc' title '', \
    '' using (timecolumn(1, '%Y-%m-%d')):($6-$10) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 Standard deviation}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean 1 bus', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 std. dev.}$", \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus', \
    '' using (timecolumn(1, '%Y-%m-%d')):($2+$6) skip 2 with lines lc rgb '#cccccc' title '', \
    '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title ''
 \end{gnuplot}
-\caption{Money in the bank for my own simple AI: 1 vs 16 buses}
+\caption{How the distribution of money in the bank changes over time for the AI of Algorithm \ref{algorithm:simple-parameterised-ai} when run for 1 and 16 buses.}
 \label{fig:simple-parameterised-ai-distributions}
 \end{figure}
 
-% \subsection{Discussion}
+However, the situation is more complex. When taking into account the distributions, for example in, it's clear that while on average 16 buses are better, there is also greater risk with 16 buses than with the one - there is a higher chance of losing more money than with a single bus.
 
-% Th
+There is also an interesting convergence point around 1978: all configurations on average have on average the same amount of money in the bank. At the moment the reason for this convergence point is so far unexplained. As can be seen in Figure X, this convergence it is certainly not true that every run of the game makes the same amount of money - the distributions of money for 1 and 16 buses remains wide.
 
+
+\section{Discussion}
 
 \section{Conclusion}
 
-The framework has been used to extract how the bank balance from OpenTTD change over time for a company controlled by the TrainAI as in \label{fig:value-over-time}. The 
-
-\begin{itemize}
-  \item This has been created using a non-modified version of OpenTTD 13.1.
-  \item The exact random seeds are shown
-  \item There are 50 experiments run
-  \item Each is run for the same amount of in game time
-\end{itemize}
-
-The output of the seeds used, all settings, OpenTTD version, without modification, should make the experiments repeatable, reproducible, and ideally replicable. Thus it is an improvement in these terms over many of the results reviewed in section 4.
-
-A limitation of the framework is that the AI version used doesn't seem to have a version.
-
-
-
-Bit of a "story" - starts off 300k. Then after a time there is a bi-modal distribution on money, then all the companies have have money in a normal-ish distribution.
-
-Looks like the one with more stations/routes has more money? Can we corrolate stations with money?
-
-
-
+Through simulating basic transportation networks using OpenTTDLab, OpenTTD can produce some compelling results that appear to have real-world meanings. As described in Chapter \ref{chapter:openttd-model-and-abilities} OpenTTD's economic and transportation models are limited, so it remains to be seen if these can offer any real-world insight. However, even if this is not the case, OpenTTDLab can be used to research algorithms: in this case the effects of changing a single parameter of an algorithm has interesting effects in the world of OpenTTD. And finally, OpenTTDLab can at the very least be used to run regression tests of OpenTTD AIs, which lends weight to it being a reusable tool.
 
 \chapter{Experiments 3: Scaling}
 \label{chapter:experiments-scaling}
@@ -1043,34 +1025,43 @@ While there are many improvements that can be made in OpenTTDLab and further inv
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0, pagecommand={},frame]{assets/openttdlab-github.pdf}
 
-\chapter{trAIns versus AdmiralAI: Python code to run experiments}
+\chapter{Reproducing results: Python code to run experiments}
 \label{chapter:trains-vs-admiral-run-experiments}
 
 The Python notebook used to run the trAIns vs Admiral experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing} is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/01_trains_ai_vs_admiral_ai_01_run_experiments.ipynb}
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/01_trains_ai_vs_admiral_ai_01_run_experiments.pdf}
 
-\chapter{trAIns versus AdmiralAI: Python code to analyse results}
+\chapter{Reproducing results: Python code to analyse results}
 \label{chapter:trains-vs-admiral-analyse-results}
 
 The Python notebook used to analyse results for the trAIns vs Admiral experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing} is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/01_trains_ai_vs_admiral_ai_01_analyse_results.ipynb}
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/01_trains_ai_vs_admiral_ai_02_analyse_results.pdf}
 
-\chapter{Simple parameterised AI: Core squirrel code}
+\chapter{Simulating a network: Squirrel `info'}
+\label{chapter:simulating-a-network-squirrel-info}
 
-\lstinputlisting{assets/parameterised-ai/info.nut}
+\lstinputlisting[language=Java]{assets/parameterised-ai/info.nut}
 
-\chapter{Simple parameterised AI: Core squirrel code}
+\chapter{Simulating a network: Squirrel `main'}
+\label{chapter:simulating-a-network-squirrel-main}
 
-\chapter{Simple parameterised AI: Python code to run experiments}
+\lstinputlisting[language=Java]{assets/parameterised-ai/main.nut}
+
+\chapter{Simulating a network: Python regression test}
+\label{chapter:simulating-a-network-python-regression-test}
+
+\lstinputlisting[language=Python]{assets/parameterised-ai/test_parameterised_ai.py}
+
+\chapter{Simulating a network: Python code to run experiments}
 \label{chapter:own-parameterised-ai-run-experiments}
 
 The Python notebook used to run the simple parameterised AI experiments of Chapter \ref{chapter:experiments-simple-parameterised-ai} is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/02_own_parameterised_ai_01_run_experiments.ipynb}.
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/02_own_parameterised_ai_01_run_experiments.pdf}
 
-\chapter{Simple parameterised AI: Python code to analyse results}
+\chapter{Simulating a network: Python code to analyse results}
 \label{chapter:own-parameterised-ai-analyse-results}
 
 The Python notebook used to analyse results for the simple parameterised AI experiments of Chapter \ref{chapter:experiments-simple-parameterised-ai} is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/02_own_parameterised_ai_02_analyse_results.ipynb}.
@@ -1078,14 +1069,14 @@ The Python notebook used to analyse results for the simple parameterised AI expe
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/02_own_parameterised_ai_02_analyse_results.pdf}
 
 
-\chapter{Scaling experiments: Python code to run experiments}
+\chapter{Scaling: Python code to run experiments}
 \label{chapter:scaling-running-code}
 
 The Python notebook used to generate results for the Scaling experiments of XX is below. This latest version is also available at \url{https://github.com/michalc/openttd-msc-dissertation/blob/main/notebooks/03_scaling_01_run_experiment.ipynb}
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/03_scaling_01_run_experiment.pdf}
 
-\chapter{Scaling experiments: Python code to analyse results}
+\chapter{Scaling: Python code to analyse results}
 
 \label{chapter:scaling-analyis-code}
 

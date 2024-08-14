@@ -256,7 +256,7 @@ There is a 4\textsuperscript{th} concept given alongside ACM's definitions \cite
 The artifacts associated with the paper are of a quality that significantly exceeds minimal functionality. [...] they are very carefully documented and well-structured to the extent that reuse and repurposing is facilitated. In particular, norms and standards of the research community for artifacts of this type are strictly adhered to. 
 \end{description}
 \end{quote}
-Repeatability, reproducibility and replicability are all in the realm of a single result, but reusability concerns itself with the use of the artifact to generate different results in future, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}. It is clear that a framework that helps with the 3Rs should itself be reusable and encourage reusable artifacts in work that uses it.
+Repeatability, reproducibility and replicability are all in the realm of a single result, but \emph{reusability} concerns itself with the use of the artifact to generate results of different-but-related experiments, possibly by other researchers. It is unfortunately often an afterthought in scientific software as it does not directly concern the current results the software is used to generate; but it has been argued that it can help reproducibility, and even increase the impact of the original work \cite{benureau2018re}. It is clear that a framework that helps with the 3Rs should itself be reusable and encourage reusable artifacts in work that uses it.
 
 \section{Chapter outline}
 
@@ -426,7 +426,7 @@ If viewing OpenTTD not as a game for which it was designed, but as a tool for ru
 \begin{figure}[H]
 \centering
 \includesvg{assets/openttdlab-logo.svg}
-\caption{The OpenTTDLab logo. I created this based on the existing GPLv2-licensed OpenTTDLogo \cite{OpenTTDLogo}, and it is displayed alongside the code of OpenTTDLab in its public documentation as can be seen in Appendix \ref{chapter:openttdlab-documentation}.}
+\caption{The OpenTTDLab logo. I created this based on the existing OpenTTDLogo (licensed under GPLv2) \cite{OpenTTDLogo}, and it is displayed alongside the code of OpenTTDLab in its public documentation as can be seen in Appendix \ref{chapter:openttdlab-documentation}.}
 \label{fig:openttlab-logo}
 \end{figure}
 
@@ -434,7 +434,7 @@ As discussed in Chapter~\ref{chapter:introduction}, repeatability is the domain 
 
 \section{Design and creation process}
 
-I used a lightweight and highly-agile process to design and create OpenTTDLab, the high level features of which are shown Figure \ref{fig:solo-agile}. After I identified the problems to solve, as discussed in Chapter~\ref{chapter:introduction}, I conducted many cycles of writing usage documentation for code, writing code, and using the code, either to construct the results of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} or in tests; and each of these with tight cycles of evaluating the outputs of these activities and informally judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
+I used a lightweight and highly-agile process to design and create OpenTTDLab, the high level features of which are shown Figure \ref{fig:solo-agile}. After I identified the problems to address, as discussed in Chapter~\ref{chapter:introduction}, I conducted many cycles of writing usage documentation for code, writing code, and using the code, either to construct the results of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} or in tests; and each of these with tight cycles of evaluating the outputs of these activities and informally judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
 
 \begin{figure}[ht]
 \centering
@@ -478,9 +478,9 @@ I did not attempt to keep a precise record of the cycles. However, as a guide, t
 
 The first version, v0.0.1, was the result of a fork from Patric Stout's \emph{OpenTTD-savegame-reader} \cite{Stout2024}, an existing Python project that extracts data from OpenTTD savegame files---as described in Chapter~\ref{chapter:openttd-model-and-abilities} these are files that save the state of play in OpenTTD that allows players to exit but resume at the same point later. This project could be be used to extract data from OpenTTD, and seemed a reasonably place to start; but, as mentioned at the end of the same chapter, even with this code there was still no way to easily run OpenTTD over a range of configurations, or extract information from the savegame files in bulk, and no way to leverage multiple CPU cores.
 
-Then, but still from very early in the process, v0.0.3, I created and maintained a small suite of tests for OpenTTDLab, asserting on its high level behaviour. However, the tests were not just for asserting on the behaviour of the code, they were also a special case of ``Use code'' in the design process of Figure~\ref{fig:solo-agile}: they allowed me to extremely quickly gauge the suitability of the design of the OpenTTDLab, because to write tests I had to use OpenTTDLab in a way very similar to those that experimenters would have to use it. I also configured these test to run automatically on every change, a ```very helpful'' property for software used in reproducible research according to \emph{The Turing Way}~\cite{turingway2022}.
+Then, but still from very early in the process, v0.0.3, I created and maintained a small suite of tests for OpenTTDLab, asserting on its high level behaviour. However, the tests were not just for asserting on the behaviour of the code, they were also a special case of ``Use code'' in the design process of Figure~\ref{fig:solo-agile}: they allowed me to extremely quickly gauge the suitability of the design of the OpenTTDLab, because to write tests I had to use OpenTTDLab in a way very similar to those that experimenters would have to use it. I also configured these test to run automatically on every change: a ```very helpful'' property for software used in reproducible research according to \emph{The Turing Way}~\cite{turingway2022}.
 
-This leads to the main downside of this process; while the process allowed a high number of cycles of evaluations, all evaluation was from myself, from either running the code or, even worse, just imagining running the code. Being the designer I know it extremely well and so am ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. This is true when writing any code, but in this case this is especially true as are different groups of people that are the target audience: original researchers, reproducers, and replicators. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time. However, I did use OpenTTDLab to conduct the three different experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} in which I played multiple roles: I conducted original research and used OpenTTD to attempt to reproduce existing research, and so mitigating this downside slightly.
+This leads to the main downside of this process: while the process allowed a high number of cycles of evaluations, all evaluation was from myself, from either running the code or, even worse, just imagining running the code. Being the creator I knew it extremely well and so was ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. This is true when writing any code, but in this case this is especially true as are different groups of people that are the target audience: original researchers, reproducers, and replicators. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time. However, while making OpenTTDLab I conducted (initial versions of) the three different experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} in which I played multiple roles: I conducted original research and used OpenTTDLab to attempt to reproduce existing research, and so slightly mitigating this downside.
 
 \section{High level architecture}
 
@@ -497,10 +497,6 @@ On the request of one of the maintainers of OpenTTD, OpenTTDLab caches OpenTTD, 
 I know from experience that there can be problems when a program written on one platform is used on another. While Python is meant to be platform independent, and OpenTTD runs on Linux, Windows and macOS, I discovered that not only are the OpenTTD binaries different for each platform, but also the processes of downloading, installing, and starting OpenTTD are different. So I made sure that OpenTTDLab detects the platform, and performs the appropriate steps for that platform, without the experimenter being concerned, so any Python code using OpenTTDLab written on one platform should run on another unchanged and behave identically. The tests run identically on each of these platforms, and so gives evidence of this property of OpenTTDLab.
 
 From running OpenTTDLab, and being frustrated by run times, I decided to make OpenTTDLab run its experiments in parallel, by running multiple threads, and from each of these threads triggering OpenTTD configured appropriately for that experiment. The scaling results of these are shown in Section ...
-
-\section{API design}
-
-??
 
 \section{Rejected features}
 
@@ -523,7 +519,6 @@ Tidy results?
 ... saves screenshots! Mostly just for me
 
 
-
 \section{Algorithm}
 
 \begin{algorithm}
@@ -543,7 +538,15 @@ Tidy results?
 
 Hmmm... is this being shoehorned in?? I guess I think it's important... can I argue that? Why is it important in terms of the 3Rs.
 
+\section{The 7 issues of existing OpenTTD research}
 
+The 
+
+\section{Conclusion}
+
+OpenTTDLab offers three core features through a single Python function: it allows a researcher to easily run OpenTTD over a range of configurations; it returns results from these experiments in a way that's suitable for analysis, including visualisation; and it leverage multiple CPU cores which allows more experiments to be run in a given amount of time using commodity hardware. These are all useful for repeating experiments; and if artifacts are shared, then replicating experiments; and if the algorithm of any OpenTTD AIs created is shared, also replicating experiments.
+
+The following chapters give more direct evidence of OpenTTDLab's usefulness in repeating and replicating by using OpenTTDLab in experiments. In Chapter~\ref{chapter:experiments-attempt-at-reproducing} I play the role of replicator, using OpenTTDLab to attempt to replicate existing research. In Chapter~\ref{chapter:experiments-simple-parameterised-ai} I play the role of original researcher, creating a simple OpenTTD AI; also suggesting that OpenTTD is a compelling landscape for simulation and worthy of further research. In Chapter~\ref{chapter:experiments-scaling} I provide evidence that the parallelism features added actually work, and argue that this helps repeatability.
 
 % \chapter{Example results}
 

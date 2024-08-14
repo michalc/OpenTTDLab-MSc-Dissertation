@@ -496,36 +496,27 @@ It also supports using AIs on the local filesystem. When replicating experiments
 
 On the request of one of the maintainers of OpenTTD, OpenTTDLab caches OpenTTD, OpenGFX, and the AIs that it downloads....
 
+
+Finally, I considered a file format for the configuration. This was rejected for essentially a combination of the previous two reasons - any file format must be carefully designed, and it seemed to make things awkward rather than easier.
+
+
+Custom build of OpenTTD?? Local file?
+
 \section{Feature 2: Output as lists and dictionaries}
-
-\section{Feature 3: Leveraging multiple cores}
-
-From running OpenTTDLab, and being frustrated by run times, I decided to make OpenTTDLab run its experiments in parallel, by running multiple threads, and from each of these threads triggering OpenTTD configured appropriately for that experiment. The scaling results of these are shown in Section ...
-
-
-
-
-
-\section{Rejected features}
-
-I considered a number of features while creating OpenTTD - due to the high number of cycles of the design process, there are too many to recall or recount. However, there are three that I think are particularly relevant.
 
 Firstly was the saving of results of experiments to a file, rather than to an ephemeral data structure in memory. If done well, I suspected this would have been a valuable feature: it could have aided analysis, made it easier to... . However.... SQLite, the most popular database in the world REF, also recommended by the US Library of Congress, would be an obvious candidate. But even after this choice, how to convert OpenTTDLab's arbitrary nested file structure into a relational model to be stored in a SQLite file is not obvious. Due to the relative permanency of any choice, in that once created, the files should be able to be interpreted in the long term, this should be done after examples of OpenTTDLab have been created.
 
 Secondly, I considered some sort "verification" step built into the API - starting with v0.0.2 and removed in XXX, with at the time a vague notion of it being used in reproducing or replicating experiments. However, I found even the skeleton of this made generating the results of Chapter 4 awkward, or in more formal terms it and it seemed so far removed from what I knew of similar APIs.
 
-Finally, I considered a file format for the configuration. This was rejected for essentially a combination of the previous two reasons - any file format must be carefully designed, and it seemed to make things awkward rather than easier.
+Mention again the novel endeavor thing?
 
-Custom build of OpenTTD?? Local file?
+\section{Feature 3: Leveraging multiple cores}
 
-Versions of these features could well be added in future versions, but ideally in a way that does not make repeating experiments such as those in Chapter 4 significantly more awkward and so negatively affecting the repeatabilty of experiments using OpenTTDLab, and so, given that repeating experiments is part of reproducing and replicating them, in a way that also doesn't make these activities more difficult.
-
-Tidy results?
+From running OpenTTDLab, and being frustrated by run times, I decided to make OpenTTDLab run its experiments in parallel, by running multiple threads, and from each of these threads triggering OpenTTD configured appropriately for that experiment. The scaling results of these are shown in Section ...
 
 \section{Screenshots}
 
-... saves screenshots! Mostly just for me
-
+... saves screenshots! Mostly just for me. I'm actually not sure how to link this to the main arguments... hmmm
 
 \section{Algorithm}
 

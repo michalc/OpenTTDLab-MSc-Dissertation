@@ -540,8 +540,8 @@ results = run_experiments(
     ),
 )
 \end{lstlisting}
-
-Keeping to one line of Python code and so with no steps required ahead of time I found extremely convenient for repeatability, and I argue is important for reproducibility because it means only Python code can be shared as artifacts, with no additional information required other than the version of Python and OpenTTDLab, although as discussed the version of Python should not affect the results.
+%
+Keeping to one line of Python code and so with no steps required ahead of time I found extremely convenient for repeatability, and I argue is important for reproducibility because it means only Python code can be shared as artifacts, with no additional information required other than the version of Python and OpenTTDLab; although as discussed the version of Python should not affect the results.
 
 \section{Feature 2: Output as lists and dictionaries}
 
@@ -562,20 +562,22 @@ df = pd.DataFrame(
 )
 \end{lstlisting}
 
-An alternative would be to output Pandas data frame(s) directly from OpenTTDLab. However, the main downside of this approach is that I would have to design a structure for the DataFrame(s), but as described OpenTTD savegame data is hierarchical, and there is no unique or one-size-fits-all approach to convert hierarchical data into two dimensional data frames: any approach would have pros and cons, and to investigate these I decided was out of scope of the current work. For similar reasons I rejected saving the results to non-ephemeral file such as SQLite: a tempting target since SQLite is is a recommended format by the US Library of Congress. While this would avoid the downside of the ephemeral nature in-memory Pythion lists and dictionaries in memory, it does not forbid the users from saving data, for example as simple CSV files as I chose to in Chapters..., it would require choices to be made on how to conversion of the hierarchical data to the relational of SQLite.
+An alternative would be to output Pandas data frame(s) directly from OpenTTDLab. However, the main downside of this approach is that I would have to design a structure for the data frame(s), but since OpenTTD savegame data is hierarchical there is no unique or one-size-fits-all approach to convert such data into two such data frames: any approach would have pros and cons, and to investigate these I decided was out of scope of the current work. For similar reasons I rejected saving the results to non-ephemeral file such as SQLite: a tempting target since SQLite is a preferred format by the US Library of Congress. How to save data non-ephemerally is left to client code; for example a simple CSV format can be chosen to save a subset of the output, which is the approach I chose to persist the results of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
 
 Early on in the design process, in v0.0.2, I considered structuring both the API and the output to have a \emph{verification} step to make it easier to confirm that both configuration and results were bitwise identical to previous experiments. While this might have been particularly useful to use OpenTTDLab for knowing if results have been bitwise reproduced, it made generating the results of Chapters  particularl awkward---it seemed like this would reusability of OpenTTDLab. For this reason I abandoned this approach.
 
 
 \section{Feature 3: Leveraging multiple CPU cores}
 
-OpenTTDLab leverages multiple CPU cores: it starts a process per experiment to run OpenTTD and to extract data from its savegame files and then aggregate all the results back to the starting process. By default the number of processes as the number of CPU cores on the system, but this can be configured.
+OpenTTDLab leverages multiple CPU cores by implementing simple task-based parallelism: it starts a process per experiment to run OpenTTD and to extract data from its savegame files and then aggregate all the results back to the starting process. By default the number of processes is the number of CPU cores on the system.  To further reduce time, a mechanism to reduce the amount of data copied between processes is offered by OpenTTDLab. These features was added to OpenTTDLab to help repeatability: specifically to run more repetitions of experiments in a given amount of time.
 
-This was done due to my being frustrated by run times when iterating over the features of OpenTTDLab and running initial versions of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing} \& \ref{chapter:experiments-simple-parameterised-ai}.
+On a more emotional note, I felt frustrated by waiting for experiments to run, and this frustration encouraged me to reduce the number of repetitions rather than increase them. I also suspected that others using OpenTTDLab would feel similar frustration, and result in them repeating experiments less rather than more.
 
 \section{Documentation}
 
-... saves screenshots! Mostly just for me. I'm actually not sure how to link this to the main arguments... hmmm. Maybe mention the logo here?
+As discussed, writing documentation was part of the design process. However, since documentation is especially important for reusable software used for reproducible research \cite{turingway2022}, so this documentation I repeatedly extended and is published and made available with OpenTTDLab, as it can be seen in Appendix \ref{chapter:openttdlab-documentation}. In addition to usage instructions, examples, and API documentation, it includes recommendations relating to the repeatability, reproducibilty and replicability of work that uses OpenTTDLab; replicability is addressed by encouraging authors to include details of the algorithms used in OpenTTD AIs created as part of the work.
+
+As part of this process, I made a logo for OpenTTDLab as can be seen in Figure \ref{fig:openttlab-logo} based on the OpenTTD logo. I did not have a rigorous justification for this, but I suspected that creating such an identity for OpenTTDLab, and especially one that was related to the identity of OpenTTD itself, would encourage the reuse of the OpenTTDLab, and even encourage contributions to it.
 
 % \section{Algorithm}
 
@@ -595,7 +597,7 @@ This was done due to my being frustrated by run times when iterating over the fe
 
 The three features of OpenTTDLab address 6 of the 7 issues in existing OpenTTD research described in Chapter~\ref{chapter:introduction}. Because of the low amount of Python code needed to run experiments and analyse results, it should be straightforward to include these artifacts in published work, or at least make the code available separately and link to from the published work (Issue 1). OpenTTDLab leverages multiple cores and so supports running more repetitions in a given amount of time, and sharing the Python artifacts shares how many repetitions were run (Issue 2). As can be seen from Listing \ref{listing:openttdlab}, it is straightforward to run multiple experiments  over the exact same amount of in-game time (Issue 3). There are no manual steps involved to download, configure, or run OpenTTD or extract data (Issue 4). The versions of of OpenTTD, OpenGFX, and details of OpenTTD configuration are included in the artifacts (Issue 5), which also includes the random seeds used (Issue 6).
 
-The issue of difficuly of replicating results is not directly addressed by features of OpenTTDLab and relates to how existing research does not have information to replicate results. However, to mitigate this, how to address this is mentioned in the documentation of OpenTTDLab, as well as suggestions how how to use OpenTTDLab and publish results to ensure both repeatability and reproducibility of results.
+The issue of difficulty of replicating results (Issue 7) is not directly addressed by features of OpenTTDLab. However, as mentioned in the previous section, the documentation of OpenTTDLab encourages authors to include details of the explicit algorithms created when publishing.
 
 \section{Conclusion}
 

@@ -36,6 +36,7 @@
 \usetikzlibrary{positioning}
 \usepackage{svg}
 \usepackage{pdfpages}
+\usepackage{caption}
 \usepackage{listings}
 \usepackage[ruled]{algorithm2e}
 \usepackage{csquotes}
@@ -77,6 +78,33 @@
 
 % The one and only biliography file
 \addbibresource{main.bib}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{  
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\bfseries\footnotesize\linespread{0},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                               
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=lines,
+    aboveskip=20pt,
+    belowskip=15pt
+}
+
+\lstset{style=mystyle}
+\captionsetup[lstlisting]{font={stretch=1.5,sf}}
 
 % A "descitem" item for a bold "mini heading" component
 \newcommand\descitem[1]{\item{\bfseries #1}\\}
@@ -207,42 +235,44 @@ and there are ``no set criteria to assess the alignment of replicated simulation
 
 The aim of OpenTTDLab is to help studies that run OpenTTD to generate results by writing and running AIs without a human player; 7 existing studies have been found that do this\singlespacedfootnote{Found from the fist 100 results of a search for "OpenTTD" in Google Scholar in July 2024}: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 7 problems. For brevity not all problems for all studies are listed.
 
-\begin{enumerate}
-\begin{descitem}{Low or unknown number of repetitions}
-Where there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. The 2 experiments of Rios and Chaimowicz \cite{rios2009trains} were run 7 times each, and the experiments of Wisniewski and Witt \cite{wisniewski2011artificial} were run just 3 times for example.
+\begin{itemize}
 
-The work of Volna \cite{volna2017fuzzy} is particularly of note: it does not list the number of repetitions, or even suggest there was more than one.
-\end{descitem}
-\begin{descitem}{Non-comparable repetitions}
-Rios and Chaimowicz \cite{rios2009trains} ran a total of 14 repetitions over 2 experiments, but not for the same amount of in-game time. This calls into question whether these were actually repetitions of the experiment.
-\end{descitem}
-\begin{descitem}{Manual repetitions of experiments and extraction of results}
-No study explicitly stated that their experiments were run in an automated mechanism, and given the low number and non-comparable repetitions of some of the works, I suspect they were run manually, in that OpenTTD was run through the graphical interface and configured through its graphical user interface, which I suspect is tedious and error prone.
-
-However, the study of {Lakom{\`y}} \cite{lakomy2020railroad} explicitly describes the manual mechanism uses to install and configure OpenTTD an experiment. Having a description is excellent in terms of supporting reproduction of results, but the fact it is manual is high cost in terms of time to try to replicate its reported 50 repetitions.
-\end{descitem}
-\begin{descitem}{Insufficient artifacts supplied to reproduce results}
+\begin{descitem}{Issue 1: Insufficient artifacts supplied to reproduce or analyse results}
 One of the most complex and impressive studies is the work of Bijlsma \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total it seems that there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually, especially because the AI code would be different each generation. The study does not explain how this was done, and so I suspect there were artifacts created not even mentioned in the study.
 
 The work of Konijnendijk \cite{konijnendijk2015mcts} more directly suggests artifacts were created: additions to the source code of OpenTTD itself. Although described in a high level, the code of these is not available.
 \end{descitem}
 
-\begin{descitem}{Insufficient detail on the version or configuration of OpenTTD}
+\begin{descitem}{Issue 2: Low or unknown number of repetitions}
+Where there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. The 2 experiments of Rios and Chaimowicz \cite{rios2009trains} were run 7 times each, and the experiments of Wisniewski and Witt \cite{wisniewski2011artificial} were run just 3 times for example.
+
+The work of Volna \cite{volna2017fuzzy} is particularly of note: it does not list the number of repetitions, or even suggest there was more than one.
+\end{descitem}
+\begin{descitem}{Issue 3: Non-comparable repetitions}
+Rios and Chaimowicz \cite{rios2009trains} ran a total of 14 repetitions over 2 experiments, but not for the same amount of in-game time. This calls into question whether these were actually repetitions of the experiment.
+\end{descitem}
+\begin{descitem}{Issue 4: Manual repetitions of experiments and extraction of results}
+No study explicitly stated that their experiments were run in an automated mechanism, and given the low number and non-comparable repetitions of some of the works, I suspect they were run manually, in that OpenTTD was run through the graphical interface and configured through its graphical user interface, which I suspect is tedious and error prone.
+
+However, the study of {Lakom{\`y}} \cite{lakomy2020railroad} explicitly describes the manual mechanism uses to install and configure OpenTTD an experiment. Having a description is excellent in terms of supporting reproduction of results, but the fact it is manual is high cost in terms of time to try to replicate its reported 50 repetitions.
+\end{descitem}
+
+\begin{descitem}{Issue 5: Insufficient detail on the version or configuration of OpenTTD}
 Bijlsma \cite{bijlsma2014evolving} does not mention the version of OpenTTD (or the version of OpenGFX - as will be discussed a component that affects screenshots)
 
 OpenTTD has a wide array of configuration options that can affect results.
 \end{descitem}
-\begin{descitem}{No random seeds to bitwise reproduce results}
+\begin{descitem}{Issue 6: No random seeds to bitwise reproduce results}
 Possible a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, Beuneker et al. \cite{beuneker2019autonomous}, including a discussion of them. This impacts repeatability, but specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
 \end{descitem}
 
-\begin{descitem}{Insufficient or unclear detail of the algorithms to replicate results}
+\begin{descitem}{Issue 7: Insufficient or unclear detail of the algorithms to replicate results}
 All of the studies included some high level detail of the algorithms implemented, but I found it difficult to judge if it was sufficient within the time constraints of the current work.
 
 However, even if there is sufficient detail, in all cases bar one they are not presented in a way that I would argue is ideal for replication: the detail is spread throughout the work, and not presented as a clear set of algorithms that be replicated. The exception is the work of {Lakom{\`y}} \cite{lakomy2020railroad}: it includes many algorithms each of them explained and discussed, although they are presented as code rather than pseudo-code, and so if used could muddy the water between reproducing and replicating the results.
 \end{descitem}
 
-\end{enumerate}
+\end{itemize}
 
 Informally reviewing by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review. While my review focused on OpenTTD, it appears to be related wider problem in simulations in general: ``many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility'' \cite{dalle2012reproducibility}.
 
@@ -486,60 +516,84 @@ This leads to the main downside of this process: while the process allowed a hig
 
 % Through the design and creation process, particularly after evaluation, I made a number of high level architectural decisions: the use of Python, behaving identically where possible on different platforms, automatically downloading OpenTTD and OpenGFX, supporting both AIs in the local filesystem, and automatically downloading AIs, caching, and the use of parallelisation.
 
-I chose Python as the main language for both the internals of OpenTTDLab and its user-facing interface. I knew Python well, as mentioned earlier in this chapter a savegame parser for OpenTTD was available in Python \cite{Stout2024}, programs written in Python are mostly platform independent, and anecdotally it's a popular language in data science and data analysis---data analysis and visualisation can be performed in Python through libraries such as Pandas and Plotly. To make sure OpenTTDLab did not depend on specific behaviour of a single Python version or a single platform, which would impede reproducibility of experiments especially \cite{turingway2022}, I made OpenTTDLab \emph{portable}--hiding platform-specific details, and making sure that the tests mentioned in the previous section, than ran on every change of OpenTTDLab, run and pass on multiple version of Python, but also on Linux, Windows and macOS. While OpenTTD itself is classed as portable, downloading, uncompressing, configuring, and starting OpenTTD are slightly different on each platform, so running tests on each is particularly valuable.
+I chose Python as the main language for both the internals of OpenTTDLab and its user-facing interface. I knew Python well, as mentioned earlier in this chapter a savegame parser for OpenTTD was available in Python \cite{Stout2024}, programs written in Python are mostly platform independent, and anecdotally it's a popular language in data science and data analysis---data analysis and visualisation can be performed in Python through libraries such as Pandas \cite{mckinney-proc-scipy-2010,reback2020pandas,} and Plotly \cite{plotly}. To make sure OpenTTDLab did not depend on specific behaviour of a single Python version or a single platform, which would impede reproducibility of experiments especially \cite{turingway2022}, I made OpenTTDLab \emph{portable}--hiding platform-specific details, and making sure that the tests mentioned in the previous section, than ran on every change of OpenTTDLab, run and pass on multiple version of Python, but also on Linux, Windows and macOS. While OpenTTD itself is classed as portable, downloading, uncompressing, configuring, and starting OpenTTD are slightly different on each platform, so running tests on each is particularly valuable.
 
 \section{Feature 1: Running over a range of configurations}
 
-OpenTTDLab automatically downloads OpenTTD, OpenGFx, and AIs. This was a direct consequence of running 
+OpenTTDLab can run OpenTTD over a range of configurations, e.g. a range of random seeds and range of other configurations, and a range of OpenTTD AIs and their parameters with the numbers of runs clear. This is deliberately through a single line of Python code, with no steps ahead of time needed other than the installation of Python and OpenTTDLab. This means that under the hood OpenTTDLab downloads, and caches, OpenTTD, OpenGFX, and OpenTTD AIs and libraries they depend on published on GitHub or OpenTTD's TCP-based BaNaNaS [sic] content publishing service \cite{OpenTTDBaNaNaS}, or on the local filesystem. All files downloaded from OpenTTD servers are cached at the request of Patric Stout, a core OpenTTD maintainer. An example use of OpenTTDLab can be seen in Listing \ref{listing:openttdlab}.
 
-It also supports using AIs on the local filesystem. When replicating experiments that use AIs, when the experimenters do not directly use the code of the original researchers, I suspect a fast feedback is needed when writing code and running experiments using that code. While downloading AIs supports replicating experiments using published AI code, reproducing experiments would not us the AI code, and would use code on the local file system.
+\begin{lstlisting}[label=listing:openttdlab,language=Python, caption={Example usage of OpenTTDLab that runs the trAIns AI for a single year of in-game time for random seeds 0 to 9.}]
+from openttdlab import run_experiments, bananas_ai
 
-On the request of one of the maintainers of OpenTTD, OpenTTDLab caches OpenTTD, OpenGFX, and the AIs that it downloads....
+results = run_experiments(
+    openttd_version='13.4',
+    opengfx_version='7.1',
+    experiments=(
+       {
+         'seed': seed,
+         'ais': (
+             bananas_ai('54524149', 'trAIns', ai_params=()),
+         ),
+         'days': 365 * 4 + 1,
+       }
+       for seed in range(0, 10)
+    ),
+)
+\end{lstlisting}
 
-
-Finally, I considered a file format for the configuration. This was rejected for essentially a combination of the previous two reasons - any file format must be carefully designed, and it seemed to make things awkward rather than easier.
-
-
-Custom build of OpenTTD?? Local file?
+Keeping to one line of Python code and so with no steps required ahead of time I found extremely convenient for repeatability, and I argue is important for reproducibility because it means only Python code can be shared as artifacts, with no additional information required other than the version of Python and OpenTTDLab, although as discussed the version of Python should not affect the results.
 
 \section{Feature 2: Output as lists and dictionaries}
 
-Firstly was the saving of results of experiments to a file, rather than to an ephemeral data structure in memory. If done well, I suspected this would have been a valuable feature: it could have aided analysis, made it easier to... . However.... SQLite, the most popular database in the world REF, also recommended by the US Library of Congress, would be an obvious candidate. But even after this choice, how to convert OpenTTDLab's arbitrary nested file structure into a relational model to be stored in a SQLite file is not obvious. Due to the relative permanency of any choice, in that once created, the files should be able to be interpreted in the long term, this should be done after examples of OpenTTDLab have been created.
+As noted one of the missing features of OpenTTD, if viewing it as a simulator rather than a game, was the fact that data output was in a series of binary savegame files of a custom format: not in a format immediately suitable for analysis. I decided to convert all the savegame files from all the runs of OpenTTD into a single self-descriptive data structure: a Python list of dictionaries. 
 
-Secondly, I considered some sort "verification" step built into the API - starting with v0.0.2 and removed in XXX, with at the time a vague notion of it being used in reproducing or replicating experiments. However, I found even the skeleton of this made generating the results of Chapter 4 awkward, or in more formal terms it and it seemed so far removed from what I knew of similar APIs.
+The this means that OpenTTDLab is agnostic to the specific way of how a user would prefer to analyse output; or in the language of Chapter~\ref{chapter:introduction} it is reusable in this respect. But as can be seen in Listing~\ref{listing:openttdlab-analyse}, only a single line of code is required to convert a subset of the output into a Pandas \emph{data frame}, a common first step when using Pandas to analyse data.
 
-Mention again the novel endeavor thing?
+\begin{lstlisting}[label=listing:openttdlab-analyse,language=Python, caption={Example usage of the results of OpenTTDLab, such as those generated in \ref{listing:openttdlab}, converting them to a Pandas DataFrame.}]
+import pandas as pd
+
+df = pd.DataFrame(
+    {
+        'seed': row['experiment']['seed'],
+        'date': row['date'],
+        'money': row['chunks']['PLYR']['0']['money'],
+    }
+    for row in results
+)
+\end{lstlisting}
+
+An alternative would be to output Pandas data frame(s) directly from OpenTTDLab. However, the main downside of this approach is that I would have to design a structure for the DataFrame(s), but as described OpenTTD savegame data is hierarchical, and there is no unique or one-size-fits-all approach to convert hierarchical data into two dimensional data frames: any approach would have pros and cons, and to investigate these I decided was out of scope of the current work. For similar reasons I rejected saving the results to non-ephemeral file such as SQLite: a tempting target since SQLite is is a recommended format by the US Library of Congress. While this would avoid the downside of the ephemeral nature in-memory Pythion lists and dictionaries in memory, it does not forbid the users from saving data, for example as simple CSV files as I chose to in Chapters..., it would require choices to be made on how to conversion of the hierarchical data to the relational of SQLite.
+
+Early on in the design process, in v0.0.2, I considered structuring both the API and the output to have a \emph{verification} step to make it easier to confirm that both configuration and results were bitwise identical to previous experiments. While this might have been particularly useful to use OpenTTDLab for knowing if results have been bitwise reproduced, it made generating the results of Chapters  particularl awkward---it seemed like this would reusability of OpenTTDLab. For this reason I abandoned this approach.
+
 
 \section{Feature 3: Leveraging multiple cores}
 
-From running OpenTTDLab, and being frustrated by run times, I decided to make OpenTTDLab run its experiments in parallel, by running multiple threads, and from each of these threads triggering OpenTTD configured appropriately for that experiment. The scaling results of these are shown in Section ...
+OpenTTDLab leverages multiple cores: it starts a process per experiment to run OpenTTD and to extract data from its savegame files and then aggregate all the results back to the starting process. By default the number of processes as the number of CPU cores on the system, but this can be configured.
 
-\section{Screenshots}
+\section{Documentation}
 
-... saves screenshots! Mostly just for me. I'm actually not sure how to link this to the main arguments... hmmm
+... saves screenshots! Mostly just for me. I'm actually not sure how to link this to the main arguments... hmmm. Maybe mention the logo here?
 
-\section{Algorithm}
+% \section{Algorithm}
 
-\begin{algorithm}
-\caption{The core algorithm of OpenTTDLab}\label{alg:openttd}
-\KwData{The list of experiments to run, where each is defined by the seed, number of days, list of AIs and parameters to pass to the AIs. Versions of OpenTTD and OpenGFX}
-\KwResult{The parsed save games from every month of game time for every experiment} 
- fetch everything that needs to be fetched (not stuff that is already in cache...)\;
- setup threaded pool for workers\;
- \ForEach(in parallel up to {max\_workers}){experiment in experiments}{
-  run experiment by running OpenTTD\;
-  parsing all the save games\;
- }
-\end{algorithm}
-
-
-\section{Promotion}
-
-Hmmm... is this being shoehorned in?? I guess I think it's important... can I argue that? Why is it important in terms of the 3Rs.
+% \begin{algorithm}
+% \caption{The core algorithm of OpenTTDLab}\label{alg:openttd}
+% \KwData{The list of experiments to run, where each is defined by the seed, number of days, list of AIs and parameters to pass to the AIs. Versions of OpenTTD and OpenGFX}
+% \KwResult{The parsed save games from every month of game time for every experiment} 
+%  fetch everything that needs to be fetched (not stuff that is already in cache...)\;
+%  setup threaded pool for workers\;
+%  \ForEach(in parallel up to {max\_workers}){experiment in experiments}{
+%   run experiment by running OpenTTD\;
+%   parsing all the save games\;
+%  }
+% \end{algorithm}
 
 \section{The 7 issues of existing OpenTTD research}
 
-The 
+The three features of OpenTTDLab address 6 of the 7 issues in existing OpenTTD research described in Chapter~\ref{chapter:introduction}. Because of the low amount of Python code needed to run experiments and analyse results, it should be straightforward to include these artifacts in published work, or at least make the code available separately and link to from the published work (Issue 1). OpenTTDLab leverages multiple cores and so supports running more repetitions in a given amount of time, and sharing the Python artifacts shares how many repetitions were run (Issue 2). As can be seen from Listing \ref{listing:openttdlab}, it is straightforward to run multiple experiments  over the exact same amount of in-game time (Issue 3). There are no manual steps involved to download, configure, or run OpenTTD or extract data (Issue 4). The versions of of OpenTTD, OpenGFX, and details of OpenTTD configuration are included in the artifacts (Issue 5), which also includes the random seeds used (Issue 6).
+
+The issue of difficuly of replicating results is not directly addressed by features of OpenTTDLab and relates to how existing research does not have information to replicate results. However, to mitigate this, how to address this is mentioned in the documentation of OpenTTDLab, as well as suggestions how how to use OpenTTDLab and publish results to ensure both repeatability and reproducibility of results.
 
 \section{Conclusion}
 

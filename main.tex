@@ -567,9 +567,11 @@ An alternative would be to output Pandas data frame(s) directly from OpenTTDLab.
 Early on in the design process, in v0.0.2, I considered structuring both the API and the output to have a \emph{verification} step to make it easier to confirm that both configuration and results were bitwise identical to previous experiments. While this might have been particularly useful to use OpenTTDLab for knowing if results have been bitwise reproduced, it made generating the results of Chapters  particularl awkward---it seemed like this would reusability of OpenTTDLab. For this reason I abandoned this approach.
 
 
-\section{Feature 3: Leveraging multiple cores}
+\section{Feature 3: Leveraging multiple CPU cores}
 
-OpenTTDLab leverages multiple cores: it starts a process per experiment to run OpenTTD and to extract data from its savegame files and then aggregate all the results back to the starting process. By default the number of processes as the number of CPU cores on the system, but this can be configured.
+OpenTTDLab leverages multiple CPU cores: it starts a process per experiment to run OpenTTD and to extract data from its savegame files and then aggregate all the results back to the starting process. By default the number of processes as the number of CPU cores on the system, but this can be configured.
+
+This was done due to my being frustrated by run times when iterating over the features of OpenTTDLab and running initial versions of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing} \& \ref{chapter:experiments-simple-parameterised-ai}.
 
 \section{Documentation}
 

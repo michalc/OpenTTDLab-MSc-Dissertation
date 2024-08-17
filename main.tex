@@ -465,7 +465,7 @@ As discussed in Chapter~\ref{chapter:introduction}, repeatability is the domain 
 \section{Design and creation process}
 
 I used a lightweight and highly-agile process to design and create OpenTTDLab, the high level features of which are shown Figure \ref{fig:solo-agile}. After I identified the problems to address, as discussed in Chapter~\ref{chapter:introduction}, I conducted many cycles of writing usage documentation for code, writing code, and using the code, either to construct the results of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} or in tests; and each of these with tight cycles of evaluating the outputs of these activities and informally judging if the code does (or would if it existed) help produce research that was repeatable, replicable and reproducible. Each of these activities would inform each other in tight cycles.
-
+%
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -499,7 +499,7 @@ I used a lightweight and highly-agile process to design and create OpenTTDLab, t
 \caption{The process I followed designing and creating OpenTTDLab. After identifying the problems that I'm trying to address, I conducted cycles of documenting code (that may not have existed), writing the code, and using the code, all coupled with tight cycles of evaluating how it solved, or would solve, the problem of running experiments using OpenTTD that were repeatable, replicable and reproducible.}
 \label{fig:solo-agile}
 \end{figure}
-
+%
 I use the term lightweight in that there were no \emph{events} that are common to \emph{Scrum}-like processes \cite{SCRUM}\footnote{From my own experience Scrum events are often known as \emph{ceremonies}}, and with one exception, no phases planned in advance as is often prescribed, for example for UK government services \cite{GOVUKAgile}. And I describe the process as highly-agile because in some cases iterations would take a low number of seconds, especially when writing documentation before the code it documents existed.
 
 This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preston Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, throughout the project but especially at the beginning, I would write documentation for code without the code actually existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone, albeit with advice from others; the other parts are less applicable---they focus on communication between different people involved in project.
@@ -569,7 +569,7 @@ Early on in the design process, in v0.0.2, I considered structuring both the API
 
 \section{Feature 3: Leveraging multiple CPU cores}
 
-OpenTTDLab leverages multiple CPU cores by implementing simple task-based parallelism: it starts a process per experiment to run OpenTTD and to extract data from its savegame files and then aggregate all the results back to the starting process. By default the number of processes is the number of CPU cores on the system.  To further reduce time, a mechanism to reduce the amount of data copied between processes is offered by OpenTTDLab. These features was added to OpenTTDLab to help repeatability: specifically to run more repetitions of experiments in a given amount of time.
+OpenTTDLab leverages multiple CPU cores by implementing simple task-based parallelism: it starts a process per experiment that runs OpenTTD, extracts data from its savegames, and then serialises and returns this data back to the controlling process. By default the number of processes is the number of CPU cores on the system.  To further reduce time, a mechanism to reduce the amount of data returned by each processes is available. These features was added to OpenTTDLab to help repeatability: specifically to run more repetitions of experiments in a given amount of time.
 
 On a more emotional note, I felt frustrated by waiting for experiments to run, and this frustration encouraged me to reduce the number of repetitions rather than increase them. I also suspected that others using OpenTTDLab would feel similar frustration, and result in them repeating experiments less rather than more.
 
@@ -875,7 +875,7 @@ As mentioned in Chapter \ref{chapter:openttdlab-design-process-and-features}, in
 
 \section{Experimental setup}
 
-All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, trAIns 2.1 retrieved from the BaNaNaS content service, and running for seeds 0 to 49, and each for a total of 1465 in-game days (just over 4 in-game years). The Python code to run the experiments can be seen in Appendix \ref{chapter:scaling-running-code}, and the code to subsequently process and visualise the results in Appendix \ref{chapter:scaling-analyis-code}.
+All the simulations were conducted on a 2020 Apple M1 with 8 CPU cores, 16GB of RAM, OpenTTDLab 0.0.72, OpenTTD 13.4, Python 3.11.0, trAIns 2.1 retrieved from the BaNaNaS, and running for seeds 0 to 49, and each for a total of 1465 in-game days (just over 4 in-game years). The Python code to run the experiments can be seen in Appendix \ref{chapter:scaling-running-code}, and the code to subsequently process and visualise the results in Appendix \ref{chapter:scaling-analyis-code}.
 
 The number of worker processes was varied between 1 and 8, and the amount of data was either all the data parsed from the OpenTTD savegame files, and what I class is a minimal set of data to be useful: the date, the company value at that date, and if an error occurred.
 
@@ -920,7 +920,7 @@ plot 'notebooks/03_scaling_results_03_speedups.csv' \
 \label{figure:scaling-speedup}
 \end{figure}
 
-As can be seen from Figure \ref{figure:scaling-wallclock-time}, wall-clock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in an approximately 30\% reduction in time. One can conclude that it's worth running them on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
+As can be seen from Figure \ref{figure:scaling-wallclock-time}, wall-clock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an approximate 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in an approximately 30\% reduction in time. One can conclude that it's worth running them on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
 
 However, Figure \ref{figure:scaling-wallclock-time} also suggest that that there is an aspect of diminishing returns: for example the difference in runtime between 1 and 4 processes is much greater than the difference between 5 and 8. To better show this effect, we investigate \emph{speedup}: how many times faster the program runs for a given number of worker processes compared to the time it takes running on a single worker process. The speedup for the experiments, together with a theoretical linear speedup can be seen in Figure \ref{figure:scaling-speedup}.
 
@@ -928,9 +928,9 @@ It can be seen that the speedup does increase with each addition of a process. H
 
 \section{Discussion}
 
-A reason for the greater-difference-from-linear scaling when the number of processors is greater than 4 could come from that the cores are not identical. According to Apple \cite{AppleM1Overview} 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The scaling profiles found appears roughly consistent with the high/lower performance split, and suggests that the high performance cores being used in preference to the low performance cores.
+A reason for the increased deviation from linear scaling when the number of processors is greater than 4 could come from the fact the cores are not identical. According to Apple~\cite{AppleM1Overview} 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The scaling profiles found appears roughly consistent with the high/lower performance split, and suggests that the high performance cores being used in preference to the low performance cores.
 
-Another reason for the deviation from linear speedup is Amdhal's Law that describes how speedup is related to proportion of the program that runs in serial. This law is usually formulated as
+Another reason for the deviation from linear speedup is Amdhal's Law: it describes how speedup is related to proportion of the program that runs in serial. This law is usually formulated as
 
 \begin{equation}
 S_p = \frac{1}{(1-p) + \frac{p}{s}}
@@ -938,7 +938,7 @@ S_p = \frac{1}{(1-p) + \frac{p}{s}}
 %
 where $S_p$ is the speedup of the entire program, $p$ is the proportion of the program that has been parallelised, and $s$ is speedup of the parallelised part of the program. The most relevant consequence of this is that $\lim_{S\to\infty} S_p = \frac{1}{1-p}$. This means that, for example, even if 95\% of a program is parallelised, then the maximum speedup is $\frac{1}{1-0.95}=20$, even if thousands of processes are used.
 
-This suggests that a way of increasing this limit is to reduce proportion of runtime in serial code. However, in light of Amdhal's law the identical scaling profiles in Figure \ref{figure:scaling-speedup} suggest that changing the amount of data returned from the worker processes does not change the overall proportion of runtime in serial code. Given wall-clock time reduces with less data transferred, it's reasonable to suspect that reducing the data transferred reduces parallel and serial runtimes in the same proportions, possibly from the serialisation and deserialisation involved. Thus removing all data transfer is not likely to improve scaling. Also, one way to remove all data transfer is to use threads rather than processes, but threads in Python are subject to the Global Intepreter Lock (GIL), and so in many cases increases the proportion of serial code compared to using processes, there is a strong reason to suspect that this will make scaling worse, not better.
+This suggests that a way of increasing this limit is to reduce proportion of runtime in serial code. However, in light of Amdhal's law the identical scaling profiles in Figure \ref{figure:scaling-speedup} suggest that changing the amount of data returned from the worker processes does not change the overall proportion of runtime in serial code. Given wall-clock time reduces with less data transferred, it's reasonable to suspect that reducing the data transferred reduces parallel and serial runtimes in similar proportions, possibly from the serialisation and deserialisation involved. Thus removing all data transfer is not likely to improve scaling. Also, one way to remove all data transfer is to use threads rather than processes, but threads in Python are subject to the Global Intepreter Lock (GIL), and so in many cases increases the proportion of serial code compared to using processes, there is a strong reason to suspect that this will make scaling worse, not better.
 
 So a reasonable next step would be to investigate what else in the program could be running serially. This is potentially not a trivial project---for example it might be from what appears to be parallel sections of the code when examining the algorithm or the Python code, but it accesses a shared resource under contention from the other processes, perhaps even indirectly. As examples, in general there some types of memory caches are shared between cores, or reading or writing to disk  may also effectively be done serially, or at least not fully parallel up to the number of cores. To understand and improve upon the current behaviour this would need a more in-depth understanding of the computer architecture being run on, and profiling of the Python code to understand where time is being spent. This is beyond the scope of the project and so is left to further work.
 
@@ -971,7 +971,7 @@ There are numerous other ways that OpenTTDLab can be improved. Improving scalabi
 \chapter{Conclusion}
 \label{chapter:conclusion}
 
-While there are many improvements that can be made in OpenTTDLab and further investigations performed in terms of whether it does in fact achieve its aims, through this work I have provided evidence that OpenTTDLab provides the foundations of a reusable framework for conducting repeatable, reproducible, and replicable research. And I have provided evidence that even through even simple experiments,  OpenTTD can, through OpenTTDLab, produce interesting results that appear to have real-world meanings. OpenTTDLab is already a useful tool, and am extremely optimistic in how it can help further research.
+While there are many improvements that can be made in OpenTTDLab and further investigations performed in terms of whether it does in fact achieve its aims, through this work I have provided evidence that OpenTTDLab provides the foundations of a reusable framework for conducting repeatable, reproducible, and replicable research. And I have provided evidence that even through simple experiments, OpenTTD can produce interesting results that appear to have real-world meanings. OpenTTDLab is already a useful tool, and I am extremely optimistic that it can become even more useful if it's improved  further.
 
 % \chapter{Notes}
 

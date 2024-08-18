@@ -42,6 +42,7 @@
 \usepackage{csquotes}
 \usepackage[british]{babel}
 \usepackage[backend=biber,urldate=long,dateabbrev=false]{biblatex}
+\usepackage{longtable}
 
 % More nicely style url/xurl links
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
@@ -500,7 +501,7 @@ I use the term lightweight in that there were no \emph{events} that are common t
 
 This was in fact the one exception to not having phases planned in advance: I did plan to create an initial version of light usage documentation very early in the project. Taking inspiration from Tom Preston Warner's Readme driven development \cite{ReadmeDrivenDevelopment} and Amazon's Working Backwards method \cite{bryar2021working}, throughout the project but especially at the beginning, I would write documentation for code without the code actually existing. This allowed me to imagine it being used, evaluate how well it would solve the problems I'm trying to solve, and change its design accordingly by quickly changing its documentation. Of course, documentation for code that does not exist has very little value, so I moved quickly to writing and using code, mostly informed by "Working software is the primary measure of progress" and "Deliver working software frequently" from the Agile Manifesto \cite{beck2001manifesto}, which I judge to be the most useful parts of the Agile Manifesto, especially when working alone, albeit with advice from others; the other parts are less applicable---they focus on communication between different people involved in project.
 
-I did not attempt to keep a precise record of the cycles. However, as a guide, the GitHub repository that stores the history of code changes can be used \cite{OpenTTDLab}. I created 72 releases, which I labelled v0.0.1 through v0.0.72, 215 pull requests (PRs), and over 250 non-merge commits in the repository, and each of these I evaluated against problems and desired properties of Chapter~\ref{chapter:introduction}, and then carried on with more of the same activity, or another activity of Figure \ref{fig:solo-agile}.
+I did not attempt to keep a precise record of the cycles. However, as a guide, the GitHub repository that stores the history of code changes can be used \cite{OpenTTDLab}. I created 72 releases, which I labelled v0.0.1 through v0.0.72, 215 pull requests (PRs), and over 250 non-merge commits in the repository, and each of these I evaluated against problems and desired properties of Chapter~\ref{chapter:introduction}, and then carried on with more of the same activity, or another activity of Figure \ref{fig:solo-agile}. A summary of the release can be seen in Appendix~\ref{chapter:openttdlab-releases}.
 
 The first version, v0.0.1, was the result of a fork from Patric Stout's \emph{OpenTTD-savegame-reader} \cite{Stout2024}, an existing Python project that extracts data from OpenTTD savegame files---as described in Chapter~\ref{chapter:openttd-model-and-abilities} these are files that save the state of play in OpenTTD that allows players to exit but resume at the same point later. This project could be be used to extract data from OpenTTD, and seemed a reasonably place to start; but, as mentioned at the end of the same chapter, even with this code there was still no way to easily run OpenTTD over a range of configurations, or extract information from the savegame files in bulk, and no way to leverage multiple CPU cores.
 
@@ -1079,7 +1080,176 @@ While there are many improvements that can be made in OpenTTDLab, especially aro
 % You may delete everything from \appendix up to \end{document} if you don't need it.
 \appendix
 
-\chapter{Documentation of OpenTTDLab}
+\chapter{OpenTTDLab: Releases}
+\label{chapter:openttdlab-releases}
+
+Following is a summary of the 72 releases of OpenTTDLab~\cite{openttd} made during the course of this project.
+
+\begin{longtable}[c]{| p{0.11\linewidth} | p{0.11\linewidth} | p{0.7\linewidth} |}
+
+\hline
+Release & Commit & Release notes \\
+\hline
+\endfirsthead
+
+\hline
+Release & Commit & Release notes \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.1}{v0.0.1} & \href{https://github.com/michalc/OpenTTDLab/commit/f145fd8278d705d14219b974cc3580e7124bf900}{f145fd8} & Initial release after the fork from \href{https://github.com/TrueBrain/OpenTTD-savegame-reader}{OpenTTD-savegame-reader} and the rename to OpenTTDLab \\
+\hline
+v0.0.2 & commit & like this \\
+\hline
+v0.0.3 & commit & like this \\
+\hline
+v0.0.4 & commit & like this \\
+\hline
+v0.0.5 & commit & like this \\
+\hline
+v0.0.6 & commit & like this \\
+\hline
+v0.0.7 & commit & like this \\
+\hline
+v0.0.8 & commit & like this \\
+\hline
+v0.0.9 & commit & like this \\
+\hline
+v0.0.10 & commit & like this \\
+\hline
+v0.0.11 & commit & like this \\
+\hline
+v0.0.12 & commit & like this \\
+\hline
+v0.0.13 & commit & like this \\
+\hline
+v0.0.14 & commit & like this \\
+\hline
+v0.0.15 & commit & like this \\
+\hline
+v0.0.16 & commit & like this \\
+\hline
+v0.0.17 & commit & like this \\
+\hline
+v0.0.18 & commit & like this \\
+\hline
+v0.0.19 & commit & like this \\
+\hline
+v0.0.20 & commit & like this \\
+\hline
+v0.0.21 & commit & like this \\
+\hline
+v0.0.22 & commit & like this \\
+\hline
+v0.0.23 & commit & like this \\
+\hline
+v0.0.24 & commit & like this \\
+\hline
+v0.0.25 & commit & like this \\
+\hline
+v0.0.26 & commit & like this \\
+\hline
+v0.0.27 & commit & like this \\
+\hline
+v0.0.28 & commit & like this \\
+\hline
+v0.0.29 & commit & like this \\
+\hline
+v0.0.30 & commit & like this \\
+\hline
+v0.0.31 & commit & like this \\
+\hline
+v0.0.32 & commit & like this \\
+\hline
+v0.0.33 & commit & like this \\
+\hline
+v0.0.34 & commit & like this \\
+\hline
+v0.0.35 & commit & like this \\
+\hline
+v0.0.36 & commit & like this \\
+\hline
+v0.0.37 & commit & like this \\
+\hline
+v0.0.28 & commit & like this \\
+\hline
+v0.0.39 & commit & like this \\
+\hline
+v0.0.40 & commit & like this \\
+\hline
+v0.0.41 & commit & like this \\
+\hline
+v0.0.42 & commit & like this \\
+\hline
+v0.0.43 & commit & like this \\
+\hline
+v0.0.44 & commit & like this \\
+\hline
+v0.0.45 & commit & like this \\
+\hline
+v0.0.46 & commit & like this \\
+\hline
+v0.0.47 & commit & like this \\
+\hline
+v0.0.48 & commit & like this \\
+\hline
+v0.0.49 & commit & like this \\
+\hline
+v0.0.50 & commit & like this \\
+\hline
+v0.0.51 & commit & like this \\
+\hline
+v0.0.52 & commit & like this \\
+\hline
+v0.0.53 & commit & like this \\
+\hline
+v0.0.54 & commit & like this \\
+\hline
+v0.0.55 & commit & like this \\
+\hline
+v0.0.56 & commit & like this \\
+\hline
+v0.0.57 & commit & like this \\
+\hline
+v0.0.58 & commit & like this \\
+\hline
+v0.0.59 & commit & like this \\
+\hline
+v0.0.60 & commit & like this \\
+\hline
+v0.0.61 & commit & like this \\
+\hline
+v0.0.62 & commit & like this \\
+\hline
+v0.0.63 & commit & like this \\
+\hline
+v0.0.64 & commit & like this \\
+\hline
+v0.0.65 & commit & like this \\
+\hline
+v0.0.66 & commit & like this \\
+\hline
+v0.0.67 & commit & like this \\
+\hline
+v0.0.68 & commit & like this \\
+\hline
+v0.0.69 & commit & like this \\
+\hline
+v0.0.70 & commit & like this \\
+\hline
+v0.0.71 & commit & like this \\
+\hline
+v0.0.72 & commit & like this \\
+
+\end{longtable}
+
+\chapter{OpenTTDLab: Documentation}
 \label{chapter:openttdlab-documentation}
 
 Following is a copy of the documentation for OpenTTDLab created as part of the current work, published in its GitHub repository \cite{OpenTTDLab}. The copy is taken from commit \href{https://github.com/michalc/OpenTTDLab/blob/6b012727/README.md}{6b012727}.
@@ -1089,28 +1259,39 @@ Following is a copy of the documentation for OpenTTDLab created as part of the c
 \chapter{Reproducing results: Python code to run experiments}
 \label{chapter:trains-vs-admiral-run-experiments}
 
-Following is a copy of Python notebook used to run the reproducing experiments of Chapter~\ref{chapter:experiments-attempt-at-reproducing}, also available in source form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/01_trains_ai_vs_admiral_ai_01_run_experiments.ipynb}.
+Following is a copy of Python notebook used to run the reproducing experiments of Chapter~\ref{chapter:experiments-attempt-at-reproducing}. It is available in source code form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/01_trains_ai_vs_admiral_ai_01_run_experiments.ipynb}.
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/01_trains_ai_vs_admiral_ai_01_run_experiments.pdf}
 
 \chapter{Reproducing results: Python code to analyse results}
 \label{chapter:trains-vs-admiral-analyse-results}
 
-Following is a copy of the Python notebook used to analyse the results of the reproducing experiments of Chapter~\ref{chapter:experiments-attempt-at-reproducing}, also available in source form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/01_trains_ai_vs_admiral_ai_01_analyse_results.ipynb}.
+Following is a copy of the Python notebook used to analyse the results of the reproducing experiments of Chapter~\ref{chapter:experiments-attempt-at-reproducing}. It is available in source code form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/01_trains_ai_vs_admiral_ai_01_analyse_results.ipynb}.
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/01_trains_ai_vs_admiral_ai_02_analyse_results.pdf}
 
-\chapter{Simulating a network: Squirrel `info.nut'}
+\chapter{Simulating a network: ParameterisedAI documentation}
+\label{chapter:simulating-a-network-documentation}
+
+Following is the documentation of ParameterisedAI, the AI created for the experiments of Chapter~\ref{chapter:own-parameterised-ai-analyse-results}. The copy is taken from commit \href{https://github.com/michalc/ParameterisedAI/tree/74662403e0764329112dc78e5b279d7f1b5fd510}{74662403}.
+
+\includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{assets/parameterised-ai/parameterisedai-github.pdf}
+
+\chapter{Simulating a network: ParameterisedAI `info.nut'}
 \label{chapter:simulating-a-network-squirrel-info}
+
+Following is the Squirrel code of one of the two files that comprised the AI written to generate the results of Chapter~\ref{chapter:experiments-simple-parameterised-ai}, the `info.nut` file that contains the metadata of the AI.
 
 \lstinputlisting[language=Java]{assets/parameterised-ai/info.nut}
 
-\chapter{Simulating a network: Squirrel `main.nut'}
+\chapter{Simulating a network: ParameterisedAI `main.nut'}
 \label{chapter:simulating-a-network-squirrel-main}
+
+Following is the Squirrel code of one of the two files that comprised the AI written to generate the results of Chapter~\ref{chapter:chapter:experiments-simple-parameterised-ai}, the `main.nut` file that contains the core algorithm of the AI.
 
 \lstinputlisting[language=Java]{assets/parameterised-ai/main.nut}
 
-\chapter{Simulating a network: Python regression test}
+\chapter{Simulating a network: ParameterisedAI Python regression test}
 \label{chapter:simulating-a-network-python-regression-test}
 
 \lstinputlisting[language=Python]{assets/parameterised-ai/test_parameterised_ai.py}
@@ -1118,21 +1299,21 @@ Following is a copy of the Python notebook used to analyse the results of the re
 \chapter{Simulating a network: Python code to run experiments}
 \label{chapter:own-parameterised-ai-run-experiments}
 
-Following is a copy of Python notebook used to run the network simulation experiments of Chapter~\ref{chapter:experiments-simple-parameterised-ai} is below. This latest version is also available at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/02_own_parameterised_ai_01_run_experiments.ipynb}.
+Following is a copy of Python notebook used to run the network simulation experiments of Chapter~\ref{chapter:experiments-simple-parameterised-ai}. It is available in source code form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/02_own_parameterised_ai_01_run_experiments.ipynb}.
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/02_own_parameterised_ai_01_run_experiments.pdf}
 
 \chapter{Simulating a network: Python code to analyse results}
 \label{chapter:own-parameterised-ai-analyse-results}
 
-Following is a copy of Python notebook used to analyse results of the network simulation experiments of Chapter~\ref{chapter:experiments-simple-parameterised-ai} is below. This latest version is also available at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/notebooks/02_own_parameterised_ai_02_analyse_results.ipynb}.
+Following is a copy of Python notebook used to analyse results of the network simulation experiments of Chapter~\ref{chapter:experiments-simple-parameterised-ai}. It is available in source code form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/notebooks/02_own_parameterised_ai_02_analyse_results.ipynb}.
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/02_own_parameterised_ai_02_analyse_results.pdf}
 
 \chapter{Scaling: Python code to run experiments}
 \label{chapter:scaling-running-code}
 
-Following is a copy of Python notebook used to run the scaling experiments of Chapter~\ref{chapter:experiments-scaling} is below. This latest version is also available at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/03_scaling_01_run_experiment.ipynb}
+Following is a copy of Python notebook used to run the scaling experiments of Chapter~\ref{chapter:experiments-scaling}. It is available in source code form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/03_scaling_01_run_experiment.ipynb}.
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/03_scaling_01_run_experiment.pdf}
 
@@ -1140,7 +1321,7 @@ Following is a copy of Python notebook used to run the scaling experiments of Ch
 
 \label{chapter:scaling-analyis-code}
 
-Following is a copy of Python notebook used to analyse results of the scaling experiments of Chapter~\ref{chapter:experiments-scaling} is below. This latest version is also available at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/03_scaling_02_analyse_results.ipynb}
+Following is a copy of Python notebook used to analyse results of the scaling experiments of Chapter~\ref{chapter:experiments-scaling}. It is available in source code form at \url{https://github.com/michalc/OpenTTDLab-MSc-Dissertation/blob/8d432038278685edb0988457c9d2a971a668ac64/notebooks/03_scaling_02_analyse_results.ipynb}
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{notebooks/03_scaling_02_analyse_results.pdf}
 

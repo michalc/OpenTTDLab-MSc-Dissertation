@@ -89,8 +89,9 @@
 \lstdefinestyle{mystyle}{  
     commentstyle=\color{codegreen},
     keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
+    numberstyle=\footnotesize\color{codegray},
     stringstyle=\color{codepurple},
+    numbers=left,
     basicstyle=\ttfamily\bfseries\footnotesize\linespread{0},
     breakatwhitespace=false,         
     breaklines=true,                 
@@ -519,7 +520,7 @@ I chose Python as the main language for both the internals of OpenTTDLab and its
 
 \section{Feature 1: Running over a range of configurations}
 
-OpenTTDLab can run a specific version of OpenTTD and OpenGFX over a range of configurations: a range of random seeds and range of other configurations, and a range of OpenTTD AIs and their parameters with the numbers of runs made clear. This is through a single Python statement, with no steps ahead of time needed other than the installation of Python and OpenTTDLab. This requires that under the hood OpenTTDLab downloads, and caches, OpenTTD, OpenGFX, and OpenTTD AIs and libraries they depend on published on GitHub or OpenTTD's TCP-based BaNaNaS [sic] content publishing service \cite{OpenTTDBaNaNaS}, or on the local filesystem. All files downloaded from OpenTTD servers are cached to reduce server load. An example use of OpenTTDLab can be seen in Listing \ref{listing:openttdlab}.
+OpenTTDLab can run a specific version of OpenTTD and OpenGFX over a range of configurations: a range of random seeds and range of other configurations, and a range of OpenTTD AIs and their parameters with the numbers of runs made clear. During these experiments a progress bar is shown to the user to show how an approximate proportion of experiments complete at any given moment. This is all through a single Python statement, with no steps ahead of time needed other than the installation of Python and OpenTTDLab. This requires that under the hood OpenTTDLab downloads and caches OpenTTD, OpenGFX, and OpenTTD AIs and libraries they depend on published on GitHub or OpenTTD's TCP-based BaNaNaS [sic] content publishing service \cite{OpenTTDBaNaNaS}, or on the local filesystem. An example use of OpenTTDLab can be seen in Listing \ref{listing:openttdlab}.
 
 \begin{lstlisting}[label=listing:openttdlab,language=Python, caption={Example usage of OpenTTDLab that runs the trAIns AI automatically downloaded from BaNaNaS for a single year of in-game time for random seeds 0 to 9.}]
 from openttdlab import run_experiments, bananas_ai
@@ -540,7 +541,7 @@ results = run_experiments(
 )
 \end{lstlisting}
 %
-Keeping to one line of Python code and so with no steps required ahead of time I found extremely convenient for repeatability, and I argue is important for reproducibility because it means only Python code can be shared as artifacts, with no additional information required other than the version of Python and OpenTTDLab; although as discussed the version of Python should not affect the results.
+Keeping to a single Python statement with no steps required ahead of time I found extremely convenient for repeatability, and I argue is important for reproducibility because it means only Python code can be shared as artifacts, with no additional information required other than the version of Python and OpenTTDLab; although as discussed the version of Python should not affect the results.
 
 \section{Feature 2: Output as lists and dictionaries}
 
@@ -1442,6 +1443,8 @@ Following is the Squirrel code of one of the two files that comprised the AI wri
 
 \chapter{Simulating a network: ParameterisedAI Python regression test}
 \label{chapter:simulating-a-network-python-regression-test}
+
+Following is the Python regression test of the AI written to generate the results of Chapter~\ref{chapter:experiments-simple-parameterised-ai}. It is also available at \url{https://github.com/michalc/ParameterisedAI/blob/74662403e0764329112dc78e5b279d7f1b5fd510/test_parameterised_ai.py}.
 
 \lstinputlisting[language=Python]{assets/parameterised-ai/test_parameterised_ai.py}
 

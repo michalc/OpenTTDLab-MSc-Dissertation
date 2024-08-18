@@ -43,6 +43,8 @@
 \usepackage[british]{babel}
 \usepackage[backend=biber,urldate=long,dateabbrev=false]{biblatex}
 \usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{ragged2e}
 
 % More nicely style url/xurl links
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
@@ -1085,15 +1087,15 @@ While there are many improvements that can be made in OpenTTDLab, especially aro
 
 Following is a summary of the 72 releases of OpenTTDLab~\cite{openttd} made during the course of this project.
 
-\begin{longtable}[c]{| p{0.11\linewidth} | p{0.11\linewidth} | p{0.69\linewidth} |}
+\begin{longtable}[c]{| p{0.09\linewidth} | p{0.10\linewidth} | p{0.71\linewidth} |}
 
 \hline
-Release & Commit & Release notes \\
+\footnotesize Release & \footnotesize Commit & \footnotesize Release notes \\
 \hline
 \endfirsthead
 
 \hline
-Release & Commit & Release notes \\
+\footnotesize Release & \footnotesize Commit & \footnotesize Release notes \\
 \hline
 \endhead
 
@@ -1103,293 +1105,296 @@ Release & Commit & Release notes \\
 \hline
 \endlastfoot
 
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.1}{v0.0.1} &
-\href{https://github.com/michalc/OpenTTDLab/commit/f145fd8278d705d14219b974cc3580e7124bf900}{f145fd82} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.2}{v0.0.2} &
-\href{https://github.com/michalc/OpenTTDLab/commit/93dcb2ecf8e62d387930f7bf3705914555fe0e70}{93dcb2ec} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.3}{v0.0.3} &
-\href{https://github.com/michalc/OpenTTDLab/commit/3260e19db8ca5dc4f3fab3c60d1897916394e311}{3260e19d} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.4}{v0.0.4} &
-\href{https://github.com/michalc/OpenTTDLab/commit/914378b2473f5404a69ddacec65bde148d40a790}{914378b2} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.5}{v0.0.5} &
-\href{https://github.com/michalc/OpenTTDLab/commit/b3c74d119873bd777fd2c71e9658d64c5c8908eb}{b3c74d11} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.6}{v0.0.6} &
-\href{https://github.com/michalc/OpenTTDLab/commit/952fd6e304d3954b0ab1ca346b30dca5e49919a5}{952fd6e3} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.7}{v0.0.7} &
-\href{https://github.com/michalc/OpenTTDLab/commit/d4bf4505950121a541927f93a6500734a6e3e435}{d4bf4505} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.8}{v0.0.8} &
-\href{https://github.com/michalc/OpenTTDLab/commit/52b3a4714d42390676b24b32993ac79a8497c985}{52b3a471} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.9}{v0.0.9} &
-\href{https://github.com/michalc/OpenTTDLab/commit/686a61098b52fd294684381824078ae394dc98c1}{686a6109} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.10}{v0.0.10} &
-\href{https://github.com/michalc/OpenTTDLab/commit/38042533c83040cf05b5306167363ca918de3516}{38042533} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.11}{v0.0.11} &
-\href{https://github.com/michalc/OpenTTDLab/commit/8a87b4b2f9751e9321e3db61054004c50e4c9ff1}{8a87b4b2} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.12}{v0.0.12} &
-\href{https://github.com/michalc/OpenTTDLab/commit/82649631003041173cff53eba9920c89b3edd435}{82649631} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.13}{v0.0.13} &
-\href{https://github.com/michalc/OpenTTDLab/commit/a5df211602282d65f2959d987aaa9126c0aa4dc5}{a5df2116} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.14}{v0.0.14} &
-\href{https://github.com/michalc/OpenTTDLab/commit/a6a0fc0f75260a831c8a91f4413b5c473b39a298}{a6a0fc0f} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.15}{v0.0.15} &
-\href{https://github.com/michalc/OpenTTDLab/commit/a79d44b9317bd8e6394de3ebec3450d9db472b6b}{a79d44b9} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.16}{v0.0.16} &
-\href{https://github.com/michalc/OpenTTDLab/commit/2dcb2c5d4110450d0a198a11c1cb4aaa394c5831}{2dcb2c5d} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.17}{v0.0.17} &
-\href{https://github.com/michalc/OpenTTDLab/commit/b7cd9e6f3e37873802fa72f889661931e1854fb6}{b7cd9e6f} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.18}{v0.0.18} &
-\href{https://github.com/michalc/OpenTTDLab/commit/4a7c3952065a6270b31c412ab7278af9feea8ce8}{4a7c3952} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.19}{v0.0.19} &
-\href{https://github.com/michalc/OpenTTDLab/commit/be2402f2f57d6d20991da629fe9fa8f9c9a2b24b}{be2402f2} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.20}{v0.0.20} &
-\href{https://github.com/michalc/OpenTTDLab/commit/1abe35a6a3edf8fa9bb92b2d5ecf746bf6fbd4cc}{1abe35a6} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.21}{v0.0.21} &
-\href{https://github.com/michalc/OpenTTDLab/commit/22d02daf70d5b544cabf2d8f86aa7a776c2f4835}{22d02daf} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.22}{v0.0.22} &
-\href{https://github.com/michalc/OpenTTDLab/commit/0f0594bc66c54adbe4232a46d4731b44fb4946c2}{0f0594bc} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.23}{v0.0.23} &
-\href{https://github.com/michalc/OpenTTDLab/commit/b1d2a443ed43a103cef8fb4fc5adbd04e3171180}{b1d2a443} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.24}{v0.0.24} &
-\href{https://github.com/michalc/OpenTTDLab/commit/290d356e60be85df6fb4ab631ae2fbc4e373e1cc}{290d356e} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.25}{v0.0.25} &
-\href{https://github.com/michalc/OpenTTDLab/commit/d67e005e1ff3ef76e319ffe6438b04a1d94d5c94}{d67e005e} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.26}{v0.0.26} &
-\href{https://github.com/michalc/OpenTTDLab/commit/2a1f64b8ed033afcaf2e60034aa3014c86f7738e}{2a1f64b8} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.27}{v0.0.27} &
-\href{https://github.com/michalc/OpenTTDLab/commit/1e6d7c471d7cfa29c4390b5100257bd4dbee40b5}{1e6d7c47} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.28}{v0.0.28} &
-\href{https://github.com/michalc/OpenTTDLab/commit/60f9fc0b01394d0cbdb5490c39f842d3feae35cc}{60f9fc0b} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.29}{v0.0.29} &
-\href{https://github.com/michalc/OpenTTDLab/commit/612e0463cb753aa279f27a924f39ef6ba2a6c8b3}{612e0463} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.30}{v0.0.30} &
-\href{https://github.com/michalc/OpenTTDLab/commit/60f848a30073b92e012837177d642f5030f4ff86}{60f848a3} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.31}{v0.0.31} &
-\href{https://github.com/michalc/OpenTTDLab/commit/3ddcaa573f5772dc72601767de04efce7190ae63}{3ddcaa57} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.32}{v0.0.32} &
-\href{https://github.com/michalc/OpenTTDLab/commit/db02801d703b3e77eb35cd2f994c57abbd05e1bd}{db02801d} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.33}{v0.0.33} &
-\href{https://github.com/michalc/OpenTTDLab/commit/8760575a49a27207740a5f0e348306d05602e042}{8760575a} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.34}{v0.0.34} &
-\href{https://github.com/michalc/OpenTTDLab/commit/f6d27c138b07e5fbd2d9c1fcefde9e55919f182b}{f6d27c13} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.35}{v0.0.35} &
-\href{https://github.com/michalc/OpenTTDLab/commit/ad22fa24a0b45a7098c61cae2b5ca38a9ade7925}{ad22fa24} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.36}{v0.0.36} &
-\href{https://github.com/michalc/OpenTTDLab/commit/872148605e634086075734eec48f34de085fbd21}{87214860} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.37}{v0.0.37} &
-\href{https://github.com/michalc/OpenTTDLab/commit/0ddc5f6e2abdbcba7c4bd6f3beffc62131691f44}{0ddc5f6e} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.38}{v0.0.38} &
-\href{https://github.com/michalc/OpenTTDLab/commit/c144428a2ad427e7c587e0a1c2e3b900af70acc6}{c144428a} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.39}{v0.0.39} &
-\href{https://github.com/michalc/OpenTTDLab/commit/f9e46c65331a25ad285498cb9bd9550dee0dd8dd}{f9e46c65} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.40}{v0.0.40} &
-\href{https://github.com/michalc/OpenTTDLab/commit/28a27ca50e05b4f1079db8f9015cd1c30e42b02e}{28a27ca5} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.41}{v0.0.41} &
-\href{https://github.com/michalc/OpenTTDLab/commit/e7cfbe9c02d9d97f3c549f00e4e5985e8595c757}{e7cfbe9c} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.42}{v0.0.42} &
-\href{https://github.com/michalc/OpenTTDLab/commit/9759a60c76682d9e7a0ba39582d960ecc69c5012}{9759a60c} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.43}{v0.0.43} &
-\href{https://github.com/michalc/OpenTTDLab/commit/0cc75dab6664b7bc0db33c2595a7a0358a3edc57}{0cc75dab} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.44}{v0.0.44} &
-\href{https://github.com/michalc/OpenTTDLab/commit/c28d546911fb53cf55f45f0eb5ba419b6afb3b82}{c28d5469} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.45}{v0.0.45} &
-\href{https://github.com/michalc/OpenTTDLab/commit/6f90a53cc9119cbfd052aa20efaf85ee7204b16c}{6f90a53c} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.46}{v0.0.46} &
-\href{https://github.com/michalc/OpenTTDLab/commit/07a0a36432551c3ce77f03bd5422ef4b6a2dbb1d}{07a0a364} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.47}{v0.0.47} &
-\href{https://github.com/michalc/OpenTTDLab/commit/8fb73c892b2d768c4acd6475d79dfc7957010ee6}{8fb73c89} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.48}{v0.0.48} &
-\href{https://github.com/michalc/OpenTTDLab/commit/62b051e4000d4fe6bafe48837cea4c647f8fda91}{62b051e4} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.49}{v0.0.49} &
-\href{https://github.com/michalc/OpenTTDLab/commit/a4c19fca0d517e9fb97bcab1505577927fe916b5}{a4c19fca} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.50}{v0.0.50} &
-\href{https://github.com/michalc/OpenTTDLab/commit/6b005b22bcec81fb168d29ca830217453dcae039}{6b005b22} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.51}{v0.0.51} &
-\href{https://github.com/michalc/OpenTTDLab/commit/a54c78db29d8cea013c3d216eaaa0f7b345f2d0e}{a54c78db} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.52}{v0.0.52} &
-\href{https://github.com/michalc/OpenTTDLab/commit/f29985a5c6d3de9e4cbaa97c28d0d8ff481ab306}{f29985a5} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.53}{v0.0.53} &
-\href{https://github.com/michalc/OpenTTDLab/commit/5a4191fc441a9d10071c5c0c05a3a16a3f91ca33}{5a4191fc} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.54}{v0.0.54} &
-\href{https://github.com/michalc/OpenTTDLab/commit/16f49a08ac5231a4d0dc3e96a6bf77ae56cefa0e}{16f49a08} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.55}{v0.0.55} &
-\href{https://github.com/michalc/OpenTTDLab/commit/7858609abc7f577018db61c24aab1c52b2365141}{7858609a} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.56}{v0.0.56} &
-\href{https://github.com/michalc/OpenTTDLab/commit/ede4a1e2c552163dd40fcb56cce4db8c0aee19e4}{ede4a1e2} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.57}{v0.0.57} &
-\href{https://github.com/michalc/OpenTTDLab/commit/6f6664d490e086fabff16562df8d3297faeacd05}{6f6664d4} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.58}{v0.0.58} &
-\href{https://github.com/michalc/OpenTTDLab/commit/b34e941e49ac69cce71068244ca9b2f9c8679f55}{b34e941e} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.59}{v0.0.59} &
-\href{https://github.com/michalc/OpenTTDLab/commit/8324e4b460c4084b5ccb8aebb0be43aeddadb81c}{8324e4b4} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.60}{v0.0.60} &
-\href{https://github.com/michalc/OpenTTDLab/commit/39af96baa72d9956b0553a96f5940155d81620e5}{39af96ba} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.61}{v0.0.61} &
-\href{https://github.com/michalc/OpenTTDLab/commit/0d29074b95ee9932fca9e99f16979a6841561035}{0d29074b} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.62}{v0.0.62} &
-\href{https://github.com/michalc/OpenTTDLab/commit/793682558d23d68cc9ea99cb971eac37eaa8d8c7}{79368255} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.63}{v0.0.63} &
-\href{https://github.com/michalc/OpenTTDLab/commit/1cfae3e83de0a04b76266450dbb6c3c0571c47ad}{1cfae3e8} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.64}{v0.0.64} &
-\href{https://github.com/michalc/OpenTTDLab/commit/02d72ab0fceaba80f4a3d47b609851083734a78b}{02d72ab0} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.65}{v0.0.65} &
-\href{https://github.com/michalc/OpenTTDLab/commit/2406be3ad2cef781a03762f4f10fd12288b5aa20}{2406be3a} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.66}{v0.0.66} &
-\href{https://github.com/michalc/OpenTTDLab/commit/bf7ec9b53f34b4cf0eb7ee588ca09967efa78770}{bf7ec9b5} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.67}{v0.0.67} &
-\href{https://github.com/michalc/OpenTTDLab/commit/61b89dc754f6ebe00aa571372443e68ee1393eee}{61b89dc7} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.68}{v0.0.68} &
-\href{https://github.com/michalc/OpenTTDLab/commit/6aeb9d74f2787740db035fb982ff0957c65aab68}{6aeb9d74} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.69}{v0.0.69} &
-\href{https://github.com/michalc/OpenTTDLab/commit/194ac21e3b8071c15d3458bb5144ee00ac296068}{194ac21e} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.70}{v0.0.70} &
-\href{https://github.com/michalc/OpenTTDLab/commit/19561a4d75ca29ab6f75f997659d9b967fa5511f}{19561a4d} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.71}{v0.0.71} &
-\href{https://github.com/michalc/OpenTTDLab/commit/32c2792818d6e889b3cc5416be6bf7ae1bf58ed4}{32c27928} &
-\\ \hline
-
-\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.72}{v0.0.72} &
-\href{https://github.com/michalc/OpenTTDLab/commit/50c807c34b85df4d7495c5efe970e15e14ab75c3}{50c807c3} &
-\\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.1}{v0.0.1} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/f145fd8278d705d14219b974cc3580e7124bf900}{f145fd82} &
+\RaggedRight\footnotesize Initial release after the fork from \url{https://github.com/TrueBrain/OpenTTD-savegame-reader} and the rename to OpenTTDLab  \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.2}{v0.0.2} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/93dcb2ecf8e62d387930f7bf3705914555fe0e70}{93dcb2ec} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: cite upstream fork by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/1}{\#1}\end{item}\begin{item}docs: mention that this is a WIP and the README is a design spec by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/2}{\#2}\end{item}\begin{item}ci: remove unused deploy to GH pages workflow by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/3}{\#3}\end{item}\begin{item}docs: basic install instructions and remove upstream info that isn't needed by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/4}{\#4}\end{item}\begin{item}feat: remove webapp by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/5}{\#5}\end{item}\begin{item}docs: use based on rather than forked by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/6}{\#6}\end{item}\begin{item}docs: remove cli image that is only applicable for upstream by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/7}{\#7}\end{item}\begin{item}docs: very initial API design by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/8}{\#8}\end{item}\begin{item}docs: more details on usage/API and what an experiment is by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/9}{\#9}\end{item}\begin{item}docs: how to reproduce an experiment by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/10}{\#10}\end{item}\begin{item}docs: info on API design by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/11}{\#11}\end{item}\begin{item}docs: allow platform differences by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/12}{\#12}\end{item}\begin{item}docs: much more concise and accurate definition of experiment by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/13}{\#13}\end{item}\begin{item}docs: put concept definition right up top by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/14}{\#14}\end{item}\begin{item}feat: initial empty openttdlab module by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/15}{\#15}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.3}{v0.0.3} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/3260e19db8ca5dc4f3fab3c60d1897916394e311}{3260e19d} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: use Note alert to highlight WIP by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/16}{\#16}\end{item}\begin{item}docs: include suggestion on how to save and load the file by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/17}{\#17}\end{item}\begin{item}docs: rename variables so they're shorter by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/18}{\#18}\end{item}\begin{item}docs: mention that this project is not affiliated with OpenTTD by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/19}{\#19}\end{item}\begin{item}docs: mention that we're OOP-free mostly for now by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/20}{\#20}\end{item}\begin{item}feat: support Python from 3.6.7 by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/22}{\#22}\end{item}\begin{item}feat: initial empty functions by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/21}{\#21}\end{item}\begin{item}chore: remove requirements files by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/23}{\#23}\end{item}\begin{item}ci: test with code coverage by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/24}{\#24}\end{item}\begin{item}docs: add badges for PyPI, GitHub Actions and CodeCov by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/25}{\#25}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.4}{v0.0.4} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/914378b2473f5404a69ddacec65bde148d40a790}{914378b2} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat!: download OpenTTD to a cache directory by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/26}{\#26}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.5}{v0.0.5} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/b3c74d119873bd777fd2c71e9658d64c5c8908eb}{b3c74d11} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: use python rather than pip by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/27}{\#27}\end{item}\begin{item}feat: extract the downloaded file by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/28}{\#28}\end{item}\begin{item}feat: initial run\textunderscore experiment and get\textunderscore config functions by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/29}{\#29}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.6}{v0.0.6} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/952fd6e304d3954b0ab1ca346b30dca5e49919a5}{952fd6e3} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: use get\textunderscore config consistently by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/30}{\#30}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.7}{v0.0.7} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/d4bf4505950121a541927f93a6500734a6e3e435}{d4bf4505} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: run OpenTTD by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/31}{\#31}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.8}{v0.0.8} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/52b3a4714d42390676b24b32993ac79a8497c985}{52b3a471} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: first attempt at logo by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/32}{\#32}\end{item}\begin{item}docs: remove accidentally duplicated heading by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/33}{\#33}\end{item}\begin{item}docs: next version of logo by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/34}{\#34}\end{item}\begin{item}docs: make the height and width of the logo exactly equal to the viewBox by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/35}{\#35}\end{item}\begin{item}docs: tweak height of logo by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/36}{\#36}\end{item}\begin{item}docs: tweak accessibility attributes by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/37}{\#37}\end{item}\begin{item}docs: add image alt by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/38}{\#38}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.9}{v0.0.9} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/686a61098b52fd294684381824078ae394dc98c1}{686a6109} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: make it clear we want to extract results from the experiments by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/39}{\#39}\end{item}\begin{item}docs: use raw url for logo rather than relative link by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/40}{\#40}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.10}{v0.0.10} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/38042533c83040cf05b5306167363ca918de3516}{38042533} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: remove API design considerations by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/41}{\#41}\end{item}\begin{item}docs: set height of badges to try to avoid jumping as they load by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/42}{\#42}\end{item}\begin{item}docs: remove granularity of output from experiment description by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/43}{\#43}\end{item}\begin{item}docs: clearer installation instructions by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/44}{\#44}\end{item}\begin{item}docs: mention OpenTTD does not need to be installed separately by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/45}{\#45}\end{item}\begin{item}fix: location of baseset by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/46}{\#46}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.11}{v0.0.11} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/8a87b4b2f9751e9321e3db61054004c50e4c9ff1}{8a87b4b2} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: add comments as to what the command line arguments do by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/47}{\#47}\end{item}\begin{item}feat: extract (very unusable) results by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/48}{\#48}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.12}{v0.0.12} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/82649631003041173cff53eba9920c89b3edd435}{82649631} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: include version in source file by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/49}{\#49}\end{item}\begin{item}fix: deploying to PyPI by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/50}{\#50}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.13}{v0.0.13} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/a5df211602282d65f2959d987aaa9126c0aa4dc5}{a5df2116} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: simpler 1-stage API by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/51}{\#51}\end{item}\begin{item}feat: implement some of the simpler one stage API by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/52}{\#52}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.14}{v0.0.14} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/a6a0fc0f75260a831c8a91f4413b5c473b39a298}{a6a0fc0f} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: use Python libraries for tar and zips to avoid the binary dependencies by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/53}{\#53}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.15}{v0.0.15} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/a79d44b9317bd8e6394de3ebec3450d9db472b6b}{a79d44b9} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: fix a few typos/improve clarity by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/54}{\#54}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.16}{v0.0.16} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/2dcb2c5d4110450d0a198a11c1cb4aaa394c5831}{2dcb2c5d} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: remove unused file by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/55}{\#55}\end{item}\begin{item}devex: more recent Python .gitignore by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/56}{\#56}\end{item}\begin{item}docs: add licenses and attributions section by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/57}{\#57}\end{item}\begin{item}refactor: remove unused files by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/58}{\#58}\end{item}\begin{item}refactor: combine savegame reader and linkgraph by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/59}{\#59}\end{item}\begin{item}docs: fix typo/copy-paste error in notice by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/60}{\#60}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.17}{v0.0.17} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/b7cd9e6f3e37873802fa72f889661931e1854fb6}{b7cd9e6f} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}style: comments on same line as code by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/61}{\#61}\end{item}\begin{item}refactor: tidy imports by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/62}{\#62}\end{item}\begin{item}docs: put copyright/license notice in SVG logo by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/63}{\#63}\end{item}\begin{item}docs: use the real name of savegame-reader's author by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/64}{\#64}\end{item}\begin{item}docs: much more concise introduction by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/65}{\#65}\end{item}\begin{item}docs: remove accidentally committed double full stop by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/66}{\#66}\end{item}\begin{item}docs: remove non-affiliation-statement by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/67}{\#67}\end{item}\begin{item}docs: make the original author of the logo clear by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/68}{\#68}\end{item}\begin{item}feat: run with AI players by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/69}{\#69}\end{item}\begin{item}feat: parse just a single save game, asserting can extract the AI name by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/70}{\#70}\end{item}\begin{item}docs: hint that some things work by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/71}{\#71}\end{item}\begin{item}feat: allow days to run to be configurable and return results for each save file by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/72}{\#72}\end{item}\begin{item}fix: more deterministic saving by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/73}{\#73}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.18}{v0.0.18} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/4a7c3952065a6270b31c412ab7278af9feea8ce8}{4a7c3952} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}ci: test on macOS (and fewer Python versions) by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/74}{\#74}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.19}{v0.0.19} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/be2402f2f57d6d20991da629fe9fa8f9c9a2b24b}{be2402f2} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: run experiment into a temporary directory by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/75}{\#75}\end{item}\begin{item}feat: run for a range of seeds by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/76}{\#76}\end{item}\begin{item}fix: actually pass the random seed to OpenTTD by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/77}{\#77}\end{item}\begin{item}feat: extract a much smaller subset of data by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/78}{\#78}\end{item}\begin{item}feat: use a function to get AI files by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/79}{\#79}\end{item}\begin{item}docs: example for plotting by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/80}{\#80}\end{item}\begin{item}docs: a few things work now - say it by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/81}{\#81}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.20}{v0.0.20} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/1abe35a6a3edf8fa9bb92b2d5ecf746bf6fbd4cc}{1abe35a6} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: remove double import by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/83}{\#83}\end{item}\begin{item}refactor: delegate copying of ai file to function by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/84}{\#84}\end{item}\begin{item}feat: basic AI downloading by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/85}{\#85}\end{item}\begin{item}docs: make it clear avoiding manual steps by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/86}{\#86}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.21}{v0.0.21} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/22d02daf70d5b544cabf2d8f86aa7a776c2f4835}{22d02daf} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: make the licensing section clearer - it's all GPL v2 by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/87}{\#87}\end{item}\begin{item}docs: remove detail about every file being GPL v2 by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/88}{\#88}\end{item}\begin{item}docs: use the absolute URL for the chart in README by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/89}{\#89}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.22}{v0.0.22} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/0f0594bc66c54adbe4232a46d4731b44fb4946c2}{0f0594bc} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: support Windows by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/90}{\#90}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.23}{v0.0.23} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/b1d2a443ed43a103cef8fb4fc5adbd04e3171180}{b1d2a443} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}perf: less downloading of AIs by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/91}{\#91}\end{item}\begin{item}docs: supported Python and OS versions in compatibility section by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/92}{\#92}\end{item}\begin{item}refactor: fewer layers in reader by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/93}{\#93}\end{item}\begin{item}refactor: towards using iterables and less mutation by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/94}{\#94}\end{item}\begin{item}refactor: less mutation by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/95}{\#95}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.24}{v0.0.24} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/290d356e60be85df6fb4ab631ae2fbc4e373e1cc}{290d356e} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: make binary reader return length read by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/96}{\#96}\end{item}\begin{item}refactor: reduce binary reading duplication by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/97}{\#97}\end{item}\begin{item}refactor: remove unused function by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/98}{\#98}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.25}{v0.0.25} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/d67e005e1ff3ef76e319ffe6438b04a1d94d5c94}{d67e005e} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: less mutation when reading items by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/99}{\#99}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.26}{v0.0.26} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/2a1f64b8ed033afcaf2e60034aa3014c86f7738e}{2a1f64b8} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: clearer item parsing by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/100}{\#100}\end{item}\begin{item}refactor: remove unreachable code by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/101}{\#101}\end{item}\begin{item}refactor: simpler gamma function by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/102}{\#102}\end{item}\begin{item}fix: parsing when structs have the same key by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/103}{\#103}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.27}{v0.0.27} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/1e6d7c471d7cfa29c4390b5100257bd4dbee40b5}{1e6d7c47} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: reduce mutation by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/104}{\#104}\end{item}\begin{item}feat: JSON-encodable parsed save games by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/105}{\#105}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.28}{v0.0.28} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/60f9fc0b01394d0cbdb5490c39f842d3feae35cc}{60f9fc0b} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: return a (so far null) metadata for cpu and memory info by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/106}{\#106}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.29}{v0.0.29} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/612e0463cb753aa279f27a924f39ef6ba2a6c8b3}{612e0463} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: add table of contents by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/107}{\#107}\end{item}\begin{item}docs: shorter WIP warning by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/108}{\#108}\end{item}\begin{item}feat: a rough way of settings any config value by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/109}{\#109}\end{item}\begin{item}refactor: prefer ternary operator to if by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/110}{\#110}\end{item}\begin{item}refactor: reduce a small amount of nesting by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/111}{\#111}\end{item}\begin{item}docs: more detail on why no supporting OTTD by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/112}{\#112}\end{item}\begin{item}refactor: fewer cases of if for flow control by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/113}{\#113}\end{item}\begin{item}refactor: neater mutable state in non-sparse tables by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/114}{\#114}\end{item}\begin{item}refactor: use variable passed to function not from scope by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/115}{\#115}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.30}{v0.0.30} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/60f848a30073b92e012837177d642f5030f4ff86}{60f848a3} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: ability to fetch AIs published on content server by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/116}{\#116}\end{item}\begin{item}docs: remove incorrect argument to bananas\textunderscore file by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/117}{\#117}\end{item}\begin{item}feat: cache bananas AI files by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/118}{\#118}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.31}{v0.0.31} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/3ddcaa573f5772dc72601767de04efce7190ae63}{3ddcaa57} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: a more straightforward API by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/119}{\#119}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.32}{v0.0.32} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/db02801d703b3e77eb35cd2f994c57abbd05e1bd}{db02801d} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: run experiments in parallel by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/120}{\#120}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.33}{v0.0.33} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/8760575a49a27207740a5f0e348306d05602e042}{8760575a} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: add list of features by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/121}{\#121}\end{item}\begin{item}docs: fix grammar by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/122}{\#122}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.34}{v0.0.34} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/f6d27c138b07e5fbd2d9c1fcefde9e55919f182b}{f6d27c13} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: expose much more data in results object by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/123}{\#123}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.35}{v0.0.35} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/ad22fa24a0b45a7098c61cae2b5ca38a9ade7925}{ad22fa24} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline The main change is the addition of two optional parameters to the run\textunderscore experiment function: openttd\textunderscore version and opengfx\textunderscore version. They take a string of the version of OpenTTD and OpenGFX to download and run the experiments on. Bother can be left as their default None to use the latest version available. \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: allow the specification of OpenTTD and OpenGFX version by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/124}{\#124}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.36}{v0.0.36} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/872148605e634086075734eec48f34de085fbd21}{87214860} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline This release adds two keys in each results object: openttd\textunderscore version and opengfx\textunderscore version containing the version of OpenTTD and OpenGFX respectively. \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: include OpenTTD and OpenGFX version in results by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/125}{\#125}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.37}{v0.0.37} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/0ddc5f6e2abdbcba7c4bd6f3beffc62131691f44}{0ddc5f6e} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline The main non-documentation change of this release is to retry HTTP requests, and allow the http client to be configurable through the get\textunderscore http\textunderscore client client parameter. \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: improve clarity of main example by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/126}{\#126}\end{item}\begin{item}docs: slightly more detail on each AI definition function in its own section by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/127}{\#127}\end{item}\begin{item}docs: change reference from OpenTTD to OpenTTDLab by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/128}{\#128}\end{item}\begin{item}feat: retry HTTP requests, and make the client configurable by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/129}{\#129}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.38}{v0.0.38} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/c144428a2ad427e7c587e0a1c2e3b900af70acc6}{c144428a} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline This is a doc-only release \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: add an example notebook by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/130}{\#130}\end{item}\begin{item}docs: remove printing of results from experiment by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/131}{\#131}\end{item}\begin{item}doc: link to examples folder so it's a touch more discoverable by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/132}{\#132}\end{item}\begin{item}docs: add scaling example by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/133}{\#133}\end{item}\begin{item}docs: be up front about poor scaling by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/134}{\#134}\end{item}\begin{item}docs: add more detail to API docs by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/135}{\#135}\end{item}\begin{item}docs: don't make it sound like there are loads of examples by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/136}{\#136}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.39}{v0.0.39} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/f9e46c65331a25ad285498cb9bd9550dee0dd8dd}{f9e46c65} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: support an AI in a local folder by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/137}{\#137}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.40}{v0.0.40} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/28a27ca50e05b4f1079db8f9015cd1c30e42b02e}{28a27ca5} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline The main change is how AIs are started - they now use the start\textunderscore ai command in a startup script under the hood. This does unfortunately slightly change output because it changes exactly when AIs are started. But this pattern is hopefully more reproducible, because AIs are started consistently right at the beginning, and it allows passing parameters into AIs (although this will be a later change). \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}test: remove unnecessary call to os.path.join by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/139}{\#139}\end{item}\begin{item}feat: start AIs immediately using a startup script by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/138}{\#138}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.41}{v0.0.41} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/e7cfbe9c02d9d97f3c549f00e4e5985e8595c757}{e7cfbe9c} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline The main chain in this release is the breaking change of each member of the ais iterable passed to run\textunderscore experiment. It was a pair, but now it's a triple. The extra parameter (which is the second parameter) must be an iterable of (key,value) parameters passed to the AI when it starts. \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: allow passing of parameters to AIs by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/140}{\#140}\end{item}\begin{item}docs: fix the OpenTTD version in the example notebooks by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/141}{\#141}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.42}{v0.0.42} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/9759a60c76682d9e7a0ba39582d960ecc69c5012}{9759a60c} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline This release contains a breaking change - how AIs are passed to the run\textunderscore experiment function has changed (hopefully for the better). \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: slightly less clunky API for AIs by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/142}{\#142}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.43}{v0.0.43} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/0cc75dab6664b7bc0db33c2595a7a0358a3edc57}{0cc75dab} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: Updating example code in README by @BasicBeluga in \href{https://github.com/michalc/OpenTTDLab/pull/143}{\#143}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.44}{v0.0.44} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/c28d546911fb53cf55f45f0eb5ba419b6afb3b82}{c28d5469} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: rename bananas\textunderscore file to bananas\textunderscore ai by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/144}{\#144}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.45}{v0.0.45} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/6f90a53cc9119cbfd052aa20efaf85ee7204b16c}{6f90a53c} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: support download of AI libraries from bananas by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/145}{\#145}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.46}{v0.0.46} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/07a0a36432551c3ce77f03bd5422ef4b6a2dbb1d}{07a0a364} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: option to take final screenshot by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/146}{\#146}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.47}{v0.0.47} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/8fb73c892b2d768c4acd6475d79dfc7957010ee6}{8fb73c89} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}tests: assert that screenshots do get made by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/147}{\#147}\end{item}\begin{item}feat: avoid windows popping up during screenshots if xvfb-run is available by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/148}{\#148}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.48}{v0.0.48} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/62b051e4000d4fe6bafe48837cea4c647f8fda91}{62b051e4} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}tests: disable test that uses the latest version of OpenTTD by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/150}{\#150}\end{item}\begin{item}feat: show basic progress bar when running by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/149}{\#149}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.49}{v0.0.49} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/a4c19fca0d517e9fb97bcab1505577927fe916b5}{a4c19fca} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat!: rename run\textunderscore experiment to run\textunderscore experiments by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/151}{\#151}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.50}{v0.0.50} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/6b005b22bcec81fb168d29ca830217453dcae039}{6b005b22} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: swap 'experiment' and 'run' in variable names by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/152}{\#152}\end{item}\begin{item}feat!: more flexible batching of experiments by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/153}{\#153}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.51}{v0.0.51} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/a54c78db29d8cea013c3d216eaaa0f7b345f2d0e}{a54c78db} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: expose experiment dictionary in results by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/154}{\#154}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.52}{v0.0.52} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/f29985a5c6d3de9e4cbaa97c28d0d8ff481ab306}{f29985a5} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: document experiments parameter by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/155}{\#155}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.53}{v0.0.53} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/5a4191fc441a9d10071c5c0c05a3a16a3f91ca33}{5a4191fc} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: update examples to work with latest OpenTTDLabAPI by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/156}{\#156}\end{item}\begin{item}feat: allow OpenTTD config to be changed per experiment by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/157}{\#157}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.54}{v0.0.54} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/16f49a08ac5231a4d0dc3e96a6bf77ae56cefa0e}{16f49a08} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: add result processor by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/158}{\#158}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.55}{v0.0.55} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/7858609abc7f577018db61c24aab1c52b2365141}{7858609a} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: make the result processor return iterable by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/159}{\#159}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.56}{v0.0.56} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/ede4a1e2c552163dd40fcb56cce4db8c0aee19e4}{ede4a1e2} &
+\RaggedRight\footnotesize {\bfseries What's Changed}\newline The main change in this release is the ability to (automatically) download dependencies, and transitive dependencies, for AIs (and AI libraries) fetched from bananas \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: read all bytes from socket when querying BaNaNaS by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/161}{\#161}\end{item}\begin{item}refactor: step towards automatically downloading dependencies by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/162}{\#162}\end{item}\begin{item}refactor: store files using info from downloading by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/163}{\#163}\end{item}\begin{item}refactor: clearer variable names by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/164}{\#164}\end{item}\begin{item}refactor: more code that support multiple files per AI by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/165}{\#165}\end{item}\begin{item}refactor: towards downloading AI libraries from AI download by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/166}{\#166}\end{item}\begin{item}refactor: move fetching content ID to function by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/167}{\#167}\end{item}\begin{item}feat: automatically download dependencies from BaNaNaS by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/168}{\#168}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.57}{v0.0.57} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/6f6664d490e086fabff16562df8d3297faeacd05}{6f6664d4} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: output combined stdout and stderr, and indicate if we think it errored by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/160}{\#160}\end{item}\begin{item}docs: document that AI libraries are automatically downloaded by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/169}{\#169}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.58}{v0.0.58} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/b34e941e49ac69cce71068244ca9b2f9c8679f55}{b34e941e} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: improve clarity on ai\textunderscore libraries by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/170}{\#170}\end{item}\begin{item}docs: fix style around version warning by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/171}{\#171}\end{item}\begin{item}docs: put downloading and caching of AI libraries up front by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/172}{\#172}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.59}{v0.0.59} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/8324e4b460c4084b5ccb8aebb0be43aeddadb81c}{8324e4b4} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}refactor: remove unused linkgraph code by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/173}{\#173}\end{item}\begin{item}feat: uncompress binaries into the run directory rather than the cache directory by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/175}{\#175}\end{item}\begin{item}docs: explain what versions of OpenTTD are supported by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/176}{\#176}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.60}{v0.0.60} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/39af96baa72d9956b0553a96f5940155d81620e5}{39af96ba} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: move to multiprocess from threads by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/177}{\#177}\end{item}\begin{item}ci: use token for CodeCov upload to avoid rate limiting errors by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/178}{\#178}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.61}{v0.0.61} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/0d29074b95ee9932fca9e99f16979a6841561035}{0d29074b} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: use built-in Python multiprocessing by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/180}{\#180}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.62}{v0.0.62} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/793682558d23d68cc9ea99cb971eac37eaa8d8c7}{79368255} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: update scaling example by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/181}{\#181}\end{item}\begin{item}fix: don't copy the OpenGFX binary to the current directory by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/182}{\#182}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.63}{v0.0.63} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/1cfae3e83de0a04b76266450dbb6c3c0571c47ad}{1cfae3e8} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}fix: caching behaviour of libraries when there are multiple by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/183}{\#183}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.64}{v0.0.64} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/02d72ab0fceaba80f4a3d47b609851083734a78b}{02d72ab0} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}fix: local folder behaviour by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/184}{\#184}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.65}{v0.0.65} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/2406be3ad2cef781a03762f4f10fd12288b5aa20}{2406be3a} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: documentation on parse\textunderscore savegame by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/185}{\#185}\end{item}\begin{item}docs: mention that OpenTTDLab can be used as a test harness by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/186}{\#186}\end{item}\begin{item}docs: links to API sections by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/187}{\#187}\end{item}\begin{item}docs: rename fetching to configuring by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/188}{\#188}\end{item}\begin{item}docs: fix link to running experiments by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/189}{\#189}\end{item}\begin{item}docs: rename second 'Running experiments' section to 'Core function' by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/190}{\#190}\end{item}\begin{item}refactor: use partial to reduce indentation and step towards public BaNaNaS client by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/191}{\#191}\end{item}\begin{item}refactor: remove almost unused argument in (private) \textunderscore bananas\textunderscore download by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/192}{\#192}\end{item}\begin{item}refactor: fewer arguments in private bananas function by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/193}{\#193}\end{item}\begin{item}refactor: fewer arguments private bananas download function by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/194}{\#194}\end{item}\begin{item}refactor: split querying TCP server and download by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/195}{\#195}\end{item}\begin{item}perf: make only one connection per content to tcp server by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/196}{\#196}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.66}{v0.0.66} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/bf7ec9b53f34b4cf0eb7ee588ca09967efa78770}{bf7ec9b5} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: fix titles to match TOC by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/198}{\#198}\end{item}\begin{item}refactor: AI and AI library funcs return iterables of data by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/197}{\#197}\end{item}\begin{item}tests: restore overwritten test by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/199}{\#199}\end{item}\begin{item}feat: use context in bananas download function for http client by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/200}{\#200}\end{item}\begin{item}feat: bust cache between versions of OpenTTDLab by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/201}{\#201}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.67}{v0.0.67} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/61b89dc754f6ebe00aa571372443e68ee1393eee}{61b89dc7} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: bananas download has customisable cache dir by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/202}{\#202}\end{item}\begin{item}feat: bananas http client has default by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/203}{\#203}\end{item}\begin{item}refactor: more code supports more types from bananas by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/204}{\#204}\end{item}\begin{item}feat: tweak return types of bananas function to return user-facing content-id by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/205}{\#205}\end{item}\begin{item}fix: scenario and basemap locations by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/206}{\#206}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.68}{v0.0.68} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/6aeb9d74f2787740db035fb982ff0957c65aab68}{6aeb9d74} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: return and cache md5sum by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/207}{\#207}\end{item}\begin{item}feat: public BaNaNaS client by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/208}{\#208}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.69}{v0.0.69} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/194ac21e3b8071c15d3458bb5144ee00ac296068}{194ac21e} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}docs: tweak description of bananas client by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/209}{\#209}\end{item}\begin{item}docs: mention to not download everything from BaNaNaS by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/210}{\#210}\end{item}\begin{item}docs: slightly more practical BaNaNaS download example by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/211}{\#211}\end{item}\begin{item}docs: put more features up front by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/212}{\#212}\end{item}\begin{item}fix: multiple AIs from local folders by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/213}{\#213}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.70}{v0.0.70} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/19561a4d75ca29ab6f75f997659d9b967fa5511f}{19561a4d} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: expose the license when downloading from BaNaNaS by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/214}{\#214}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.71}{v0.0.71} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/32c2792818d6e889b3cc5416be6bf7ae1bf58ed4}{32c27928} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: allow download of exact version from BaNaNaS by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/215}{\#215}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.72}{v0.0.72} &
+\footnotesize\href{https://github.com/michalc/OpenTTDLab/commit/50c807c34b85df4d7495c5efe970e15e14ab75c3}{50c807c3} &
+\RaggedRight\footnotesize {\bfseries What's Changed} \begin{itemize}[noitemsep,leftmargin=10pt,topsep=0pt] \begin{item}feat: run experiments with specific version of BaNaNaS content by @michalc in \href{https://github.com/michalc/OpenTTDLab/pull/216}{\#216}\end{item}\end{itemize}\vspace{-1.2em} \\ \hline
+
+
 
 \end{longtable}
 

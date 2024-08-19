@@ -569,9 +569,7 @@ Early on in the design process, in v0.0.2, I considered structuring both the API
 
 \section{Feature 3: Leveraging multiple CPU cores}
 
-OpenTTDLab leverages multiple CPU cores by implementing simple task-based parallelism: it starts a process per experiment that runs OpenTTD, extracts data from its savegames, and then serialises and returns this data back to the controlling process. By default the number of processes is the number of CPU cores on the system.  To further reduce time, a mechanism to reduce the amount of data returned by each processes is available. These features was added to OpenTTDLab to help repeatability: specifically to run more repetitions of experiments in a given amount of time.
-
-On a more emotional note, I felt frustrated by waiting for experiments to run, and this frustration encouraged me to reduce the number of repetitions rather than increase them. I also suspected that others using OpenTTDLab would feel similar frustration, and result in them repeating experiments less rather than more.
+OpenTTDLab leverages multiple CPU cores by implementing simple task-based parallelism: it starts a process per experiment that runs OpenTTD, extracts data from its savegames, and then serialises and returns this data back to the controlling process. By default the number of processes is the number of CPU cores on the system. To further reduce time, a mechanism to reduce the amount of data returned by each processes is available. These features I added to OpenTTDLab to help repeatability: specifically to run more repetitions of experiments in a given amount of time. A contributing reason was my own frustration while waiting for experiments to complete in the original single core version; I suspected that others using OpenTTDLab would feel similar frustration, and repeat experiments a fewer number of times.
 
 \section{Documentation}
 

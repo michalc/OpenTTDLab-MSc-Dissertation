@@ -121,7 +121,7 @@
 \begin{document}
 \begin{preliminary}
 
-\title{OpenTTDLab: A reusable Python framework for repeatable, replicable, \& reproducible experiments using OpenTTD}
+\title{A reusable Python framework for repeatable, replicable, \& reproducible experiments using OpenTTD}
 
 \author{Michal Charemza}
 
@@ -179,10 +179,10 @@ Of all these possible uses for OpenTTD, using OpenTTD as a tool for researching 
 
 As a secondary and more speculative aim, it is hoped that the work here allows for OpenTTD to be investigated as a tool to simulate supply chain or transportation networks that could ultimately inform government policies. However, the nature of the correspondence between OpenTTD and what it is simulating must be determined, or in other words it must be \emph{validated} \cite{doi:10.1177/1046878198291003}.
 
-\section{The 3Rs}
+\section[Repeatability, Reproducibility, \& Replicability: The 3Rs]{Repeatability, Reproducibility, \& Replicability:\texorpdfstring{\\}{ }The 3Rs}
 \label{section:define-3rs}
 
-The terms \emph{repeatability}, \emph{replicability}, and \emph{reproducibility}, the so-called \emph{3Rs}, unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. Even the highly-cited 2016 Nature survey that reported that approximately 50\% of scientists believe there is a substantial reproducibility crisis \cite{baker20161}  uses the terms reproducible and replicable seemingly interchangeably. And both helpfully and confusingly, the Association for Computing Machinery (ACM) in 2020 swapped their definitions reproducibility and replicability to align with the broader scientific community \cite{association_for_computing_machiner_new_2020}.
+The terms \emph{repeatability}, \emph{reproducibility}, and \emph{replicability}, the so-called \emph{3Rs}, unfortunately do not historically have universally agreed meanings \cite{plesser_reproducibility_2018}. Even the highly-cited 2016 Nature survey that reported that approximately 50\% of scientists believe there is a substantial reproducibility crisis \cite{baker20161}  uses the terms reproducible and replicable seemingly interchangeably. And both helpfully and confusingly, the Association for Computing Machinery (ACM) in 2020 swapped their definitions reproducibility and replicability to align with the broader scientific community \cite{association_for_computing_machiner_new_2020}.
 
 Choosing what I believe to be an authoritative source, I primarily use the post-swap ACM definitions from its \emph{Artifact Review and Badging Version 1.1} \cite{association_for_computing_machiner_artifact_2020}; these appear to broadly align with the definitions of \emph{The Turing Way} \cite{turingway2022}, a collaborative guide to reproducible data science, spearheaded by the UK's national institute for data science and artificial intelligence, a similarly authoritative source. The ACM definition is given in terms of artifacts:
 
@@ -276,7 +276,7 @@ However, even if there is sufficient detail, in all cases bar one they are not p
 %
 Determining replicability by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review. While my review focused on OpenTTD, there are related wider problem in simulations in general: ``many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility'' \cite{dalle2012reproducibility}.
 
-\section{The 4\texorpdfstring{\textsuperscript{th}}{th} R: Reusability}
+\section{Reusability: The 4\texorpdfstring{\textsuperscript{th}}{th} R}
 
 There is a 4\textsuperscript{th} concept given alongside ACM's definitions \cite{association_for_computing_machiner_new_2020}, not so much property of the results that the 3Rs focus on, but a property of the artifacts used to generate the results:
 
@@ -508,7 +508,7 @@ I did not attempt to keep a precise record of the cycles. However, as a guide, t
 
 The first version, v0.0.1, was the result of a fork from Patric Stout's \emph{OpenTTD-savegame-reader} \cite{Stout2024}, an existing Python project that extracts data from OpenTTD savegame files---as described in Chapter~\ref{chapter:openttd-model-and-abilities} these are files that save the state of play in OpenTTD that allows players to exit but resume at the same point later. This project could be be used to extract data from OpenTTD, and seemed a reasonably place to start; but, as mentioned at the end of the same chapter, even with this code there was still no way to easily run OpenTTD over a range of configurations, or extract information from the savegame files in bulk, and no way to leverage multiple CPU cores.
 
-Then, but still from very early in the process, v0.0.3, I created and maintained a small suite of tests for OpenTTDLab, asserting on its high level behaviour. However, the tests were not just for asserting on the behaviour of the code, they were also a special case of ``Use code'' in the design process of Figure~\ref{fig:solo-agile}: they allowed me to extremely quickly gauge the suitability of the design of the OpenTTDLab, because to write these tests I used OpenTTDLab in a way very similar to those that experimenters would use it. I also configured these test to run automatically on every change: a ```very helpful'' property for software used in reproducible research according to \emph{The Turing Way}~\cite{turingway2022}. The tests essentially use OpenTTDLab to run experiments and assert on their results; they must be identical to previous runs of the experiments to pass, and so themselves give evidence that OpenTTDLab can be used to run bitwise repeatable experiments.
+Then, but still from very early in the process, v0.0.3, I created and maintained a small suite of tests for OpenTTDLab, asserting on its high level behaviour. However, the tests were not just for asserting on the behaviour of the code, they were also a special case of ``Use code'' in the design process of Figure~\ref{fig:solo-agile}: they allowed me to extremely quickly gauge the suitability of the design of the OpenTTDLab, because to write these tests I used OpenTTDLab in a way very similar to those that experimenters would use it. I also configured these test to run automatically on every change: a ``very helpful'' property for software used in reproducible research according to \emph{The Turing Way}~\cite{turingway2022}. The tests essentially use OpenTTDLab to run experiments and assert on their results; they must be identical to previous runs of the experiments to pass, and so themselves give evidence that OpenTTDLab can be used to run bitwise repeatable experiments.
 
 This leads to the main downside of this process: while the process allowed a high number of cycles of evaluations, all evaluation was from myself, from either running the code or, even worse, just imagining running the code. Being the creator I knew it extremely well and so was ill-placed to evaluate what amounts to its ease of use for people that don't know it as well: I'm essentially \emph{marking my own homework}, and in some cases before it was even written. This is true when writing any code, but in this case this is especially true as are different groups of people that are the target audience: original researchers, reproducers, and replicators. User research was not included in the process in order to limit the scope of the project, and to allow as many iterations as possible within the available time. However, while making OpenTTDLab I conducted (initial versions of) the three different experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} in which I played multiple roles: I conducted original research and used OpenTTDLab to attempt to reproduce existing research, and so slightly mitigating this downside.
 
@@ -603,7 +603,7 @@ The issue of replicating results (Issue 7) is not directly addressed by features
 
 OpenTTDLab offers three features through a single Python statement: it allows a researcher to easily run OpenTTD over a range of configurations, including running ranges of AIs; it returns results from these experiments in a way that's suitable for analysis; and it leverages multiple CPU cores which allows more experiments to be run in a given amount of time. These are all useful for repeating experiments; if artifacts are shared, then reproducing experiments; and if the algorithm of OpenTTD AIs created are shared as encouraged by the OpenTTDLab documentation, also replicating experiments.
 
-In the following chapters I give more direct evidence of OpenTTDLab's usefulness in repeating and replicating by using OpenTTDLab in experiments. In Chapter~\ref{chapter:experiments-attempt-at-reproducing} I play the role of replicator, using OpenTTDLab to attempt to replicate existing research. In Chapter~\ref{chapter:experiments-simple-parameterised-ai} I play the role of original researcher, creating a simple OpenTTD AI; also suggesting that OpenTTD is a compelling landscape for simulation and worthy of further research. In Chapter~\ref{chapter:experiments-scaling} I provide evidence that the parallelism features added actually work, and argue that this helps repeatability.
+In the following chapters I give more direct evidence of OpenTTDLab's usefulness in repeating and replicating by using OpenTTDLab in experiments. In Chapter~\ref{chapter:experiments-attempt-at-reproducing}, I play the role of replicator, using OpenTTDLab to attempt to replicate existing research. In Chapter~\ref{chapter:experiments-simple-parameterised-ai}, I play the role of original researcher, creating a simple OpenTTD AI; also suggesting that OpenTTD is a compelling landscape for simulation and worthy of further research. In Chapter~\ref{chapter:experiments-scaling}, I provide evidence that the parallelism features added actually work, and argue that this helps repeatability.
 
 % \chapter{Example results}
 
@@ -1086,7 +1086,9 @@ While there are many improvements that can be made in OpenTTDLab, especially aro
 \chapter{OpenTTDLab: Releases}
 \label{chapter:openttdlab-releases}
 
-Following is a summary of the 72 releases of OpenTTDLab~\cite{openttd} made during the course of this project.
+Following is a summary of the 72 releases of OpenTTDLab~\cite{openttd} I made during the course of this project.
+
+All code and documentation changes were made by myself, with the exceptions of the first release, \href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.1}{v0.0.1}, which was an almost an exact copy of \href{https://github.com/TrueBrain/OpenTTD-savegame-reader}{OpenTTD-savegame-reader} by Patric Stout (A. K. A. TrueBrain); and \href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.43}{v0.0.43}, which contained a single line documentation change by Ian Earle (A. K. A. BasicBeluga). Patric Stout also advised on the protocol used by BaNaNaS, the OpenTTD content service, and how OpenTTDLab should behave, specifically in regards to caching; the ability to download AIs from BaNaNaS I added to OpenTTDLab in \href{https://github.com/michalc/OpenTTDLab/releases/tag/v0.0.30}{v0.0.30}, and I made improvements in later releases.
 
 \begin{longtable}[c]{| p{0.09\linewidth} | p{0.10\linewidth} | p{0.71\linewidth} |}
 

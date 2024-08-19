@@ -417,11 +417,11 @@ This AI system is the core feature that allows OpenTTD to be used to experiment 
 
 \section{Configurability}
 
-OpenTTD has over 400 options that allows the game to be customised; it is not useful to review them all here, see \cite{OpenTTDWiki} for the complete list and their defaults. However, there are several that are particularly relevant to using OpenTTD to conduct repeatable, reproducible or replicable experiments.
+OpenTTD has over 400 options set through a combination of a configuration file and command line arguments; it is not useful to review them all here, see \cite{OpenTTDWiki} for the complete list and their defaults. However, there are several that are particularly relevant to using OpenTTD to conduct repeatable, reproducible, or replicable experiments.
 
 \begin{itemize}
 \begin{descitem}{Properties of the pseudo-randomly generated world}
-As suggested earlier, OpenTTD allows the configuration of the dimensions of the world, between  64x64 and 4096x4096 tiles. It also allows the specification of other properties, such as if the generated world is flat or mountainous. Flat and mountainous worlds are compared in the experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing}.
+As suggested earlier, OpenTTD allows the configuration of the dimensions of the world, between  64x64 and 4096x4096 tiles. It also allows the specification of other related properties, such as if the generated world is flat or mountainous. Flat and mountainous worlds are compared in the experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing}.
 \end{descitem}
 \begin{descitem}{Total number of ticks}
 OpenTTD allows the specification of the maximum number of ticks taken before it exits. This allows experiments to run for a fixed amount of in-game time, rather than the default of indefinitely. All of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
@@ -969,7 +969,11 @@ There are many other ways that OpenTTDLab can be improved. For example, OpenTTDL
 \chapter{Conclusion}
 \label{chapter:conclusion}
 
-While there are many improvements that can be made in OpenTTDLab, especially around output and visualisation, and further investigations performed in terms of whether it does in fact achieve its aims, through this work I have provided evidence that OpenTTDLab provides the foundations of a reusable framework for conducting repeatable, reproducible, and replicable research. And through just simple experiments, I provided evidence that OpenTTD can produce interesting results that appear to have real-world meanings. OpenTTDLab is already a useful tool, and I believe that it can become even more useful if it's improved further, which I sincerely hope it will be.
+While there are many improvements that can be made in OpenTTDLab, especially around output and visualisation, and further investigations performed in terms of whether it does in fact achieve its aims, through this work I have provided evidence that OpenTTDLab provides the foundations of a reusable framework for conducting repeatable, reproducible, and replicable research. And through just simple experiments, I provided evidence that OpenTTD can produce interesting results that appear to have real-world meanings. 
+
+I am especially pleased with the fact that OpenTTDLab offers rich behaviour through just a single Python statement. It hides what I think is complex behaviour: downloading OpenTTD AIs and their libraries from BaNaNaS I am especially proud of not just because of the technical aspects involved, but because of the manual steps it saves on behalf of potential users--the 
+
+OpenTTDLab is already a useful tool, and I believe that it can become even more useful if it's improved further, which I sincerely hope it will be.
 
 % \chapter{Notes}
 

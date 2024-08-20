@@ -811,11 +811,11 @@ set ylabel 'Money in the bank $\textrm{\pounds}$'
 set xlabel 'Date'
 set xrange ["1949-04-01":"2000-12-01"]
 plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses' lt 1 lw 3, \
-   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean for 8 buses' lt 2 lw 3, \
-   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean for 4 buses' lt 3 lw 3, \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean for 2 buses' lt 4 lw 3, \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus' lt 6 lw 3
+   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses' lt 1 lw 2, \
+   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean for 8 buses' lt 2 lw 2, \
+   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean for 4 buses' lt 3 lw 2, \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean for 2 buses' lt 4 lw 2, \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus' lt 6 lw 2
 \end{gnuplot}
 \caption{How the mean money in the bank changes over time for the AI of Algorithm \ref{algorithm:simple-parameterised-ai} when run for 1, 2, 4, 8 and 16 buses.}
 \label{fig:simple-parameterised-ai-means}
@@ -842,14 +842,14 @@ plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation
    '' using (timecolumn(1, '%Y-%m-%d')):($6+$10) skip 2 with lines lc rgb '#cccccc' title '', \
    '' using (timecolumn(1, '%Y-%m-%d')):($6-$10) skip 2 with lines lc rgb '#cccccc' title '', \
    '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' notitle, \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines notitle lt 6 lw 3, \
-   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines notitle lt 1 lw 3, \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines notitle lt 6 lw 2, \
+   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines notitle lt 1 lw 2, \
    '' using (timecolumn(1, '%Y-%m-%d')):($2+$6) skip 2 with lines lc rgb '#cccccc' title '', \
    '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title '', \
    NaN with filledcurves fs pattern 2 title "$\\pm \\textrm{1 std. dev.}$" lc rgb "#cccccc", \
-   NaN with lines title 'Mean for 16 buses'  lt 1 lw 3, \
+   NaN with lines title 'Mean for 16 buses'  lt 1 lw 2, \
    NaN with filledcurves fs solid lc rgb '#cccccc' title "$\\pm \\textrm{1 std. dev.}$", \
-   NaN with lines title 'Mean for 1 bus' lt 6 lw 3
+   NaN with lines title 'Mean for 1 bus' lt 6 lw 2
 \end{gnuplot}
 \caption{How the distribution of money in the bank changes over time for the AI of Algorithm \ref{algorithm:simple-parameterised-ai} when run for 1 and 16 buses.}
 \label{fig:simple-parameterised-ai-distributions}
@@ -895,8 +895,8 @@ set ylabel 'Time (seconds)'
 set yrange [0:]
 set xlabel 'Number of worker processes'
 plot 'notebooks/03_scaling_results_02_wallclock_times.csv' \ 
-   using 1:2 with linespoints ls 1 title 'All data', \
-   '' using 1:3 with linespoints ls 2 title 'Minimal data'
+   using 1:2 with linespoints ls 1 lw 2 title 'All data', \
+   '' using 1:3 with linespoints ls 2 lw 2 title 'Minimal data'
 \end{gnuplot}
 \caption{Total wall-clock time of when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data.}
 \label{figure:scaling-wallclock-time}
@@ -914,9 +914,9 @@ set ylabel 'Speedup'
 set yrange [1:]
 set xlabel 'Number of worker processes'
 plot 'notebooks/03_scaling_results_03_speedups.csv' \ 
-   using 1:4 with linespoints ls 3 title 'Linear scaling', \
-   '' using 1:2 with linespoints ls 1 title 'All data', \
-   '' using 1:3 with linespoints ls 2 title 'Minimal data'
+   using 1:4 with linespoints ls 3 lw 2 title 'Linear scaling', \
+   '' using 1:2 with linespoints ls 1 lw 2 title 'All data', \
+   '' using 1:3 with linespoints ls 2 lw 2 title 'Minimal data'
 \end{gnuplot}
 \caption{Speedup when running 50 experiments using OpenTTDLab between 1 and 8 worker processes, comparing returning all data to the controlling process, and returning a minimal amount of data.}
 \label{figure:scaling-speedup}

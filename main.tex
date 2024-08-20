@@ -405,9 +405,9 @@ It is beyond the scope of this project to more rigorously analyse or validate th
 
 \section{Agents, ticks, and threads}
 
-OpenTTD is an agent-based system, with agents: buses, trains, planes, ships, industries and even buildings in towns to an extent running apparently independently and in accelerated real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are 74 ticks per in-game day. During a tick, game time progresses in a deterministic way---vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, a number of passengers are "produced" by towns wanting to travel.
+OpenTTD is an agent-based system: buses, trains, planes, ships, industries and even buildings in towns run apparently independently and in accelerated real time. However, the real-time aspect is somewhat of an illusion. OpenTTD runs on the concept of \emph{ticks}, where there are 74 ticks per in-game day. During a tick game time progresses in a deterministic way: vehicles move a certain amount, pick up or drop off a certain amount of passengers or goods, industries produce a certain amount of goods, and a certain number of passengers wanting to travel are ``produced'' by towns and oil rigs.
 
-This determinism makes OpenTTD particularly suitable for exactly repeatable simulations. If, for example, instead of ticks, threads were used for the various agents, since thread scheduling is in general non-deterministic, then bitwise repeatable experiments would not be possible. OpenTTD does use threads in secondary activities, such as showing progress bars or saving games, but with these exceptions the core of OpenTTD can be described as \emph{single-threaded}.
+This determinism makes OpenTTD particularly suitable for bitwise repeatable simulations. If for example, instead of ticks, threads were used for the various agents, since thread scheduling is in general non-deterministic, then bitwise repeatable experiments would not be possible. OpenTTD does use threads for secondary activities, such as showing progress bars or saving games, but with these exceptions the core of OpenTTD can be described as \emph{single-threaded}.
 
 \section{OpenTTD AIs}
 

@@ -235,14 +235,16 @@ and there are ``no set criteria to assess the alignment of replicated simulation
 
 \section{3Rs issues of existing OpenTTD research}
 
-The aim of OpenTTDLab is to help studies that run OpenTTD to generate results by writing and running AIs without a human player; 7 existing studies have been found that do this\singlespacedfootnote{Found from the fist 100 results of a search for "OpenTTD" in Google Scholar in July 2024}: the work of Beuneker et al \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 7 problems. For brevity not all problems for all studies are listed.
+The aim of OpenTTDLab is to help studies that run OpenTTD to generate results by writing and running AIs without a human player; 7 existing studies have been found that do this\singlespacedfootnote{Found from the fist 100 results of a search for "OpenTTD" in Google Scholar in July 2024}: the work of Beuneker \cite{beuneker2019autonomous}, Bijlsma \cite{bijlsma2014evolving}, Konijnendijk \cite{konijnendijk2015mcts}, {Lakom{\`y} \cite{lakomy2020railroad}, Rios and Chaimowicz \cite{rios2009trains}, Wisniewski and Witt \cite{wisniewski2011artificial}, and Volna \cite{volna2017fuzzy}. Informally reviewing these in terms of how they have or have not seemingly achieved repeatability (the domain of the original researchers) or help achieve reproducibility and replicability (the domain of independent researchers), I found 7 problems. For brevity not all problems for all studies are listed.
 
 \begin{itemize}
 
 \begin{descitem}{Issue 1: Insufficient artifacts supplied to reproduce or analyse results}
-One of the most complex and impressive studies is the work of Bijlsma \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually, especially because the AI code would be different each generation. The study does not explain how this was done, and so I suspect there were artifacts created not mentioned in the study.
+One of the most complex and impressive studies is the work of Bijlsma \cite{bijlsma2014evolving}, using dynamic scripting to evolve the code of an OpenTTD AI using a genetic algorithm. In total there were at least 1250 experiments in total: 50 experiments each for 25 generations of the genetic algorithm, and after each of these in game metrics must have been extracted. There is nothing in OpenTTD that allows this to be done automatically, and it seems infeasible to have run this manually, especially because the AI code would be different each generation. It is mentioned in the text that a modified version of OpenTTD was used, but it does not describe how it was integrated with the genetic algorithm, and it is also not available.
 
-The work of Konijnendijk \cite{konijnendijk2015mcts} more directly suggests artifacts were created: additions to the source code of OpenTTD itself. Although described in a high level, the code of these is not available.
+Similarly the work of Konijnendijk \cite{konijnendijk2015mcts} suggests modifications of OpenTTD were made. Although described in a high level, the code of these is not available.
+
+No study included the code used to analyse results or produce visualisations.
 \end{descitem}
 
 \begin{descitem}{Issue 2: Low or unknown number of repetitions}
@@ -258,18 +260,18 @@ The study of {Lakom{\`y}} \cite{lakomy2020railroad} explicitly describes the man
 \end{descitem}
 
 \begin{descitem}{Issue 5: Insufficient detail on the version or configuration of OpenTTD}
-Bijlsma \cite{bijlsma2014evolving} does not mention the version of OpenTTD.
+The version of OpenTTD used to generate results is rarely mentioned. As examples, Bijlsma \cite{bijlsma2014evolving} does not mention the version of OpenTTD that was then modified. Similarly the works of Volna \cite{volna2017fuzzy} and Beuneker \cite{beuneker2019autonomous} do not mention the version of, the presumably unmodified, OpenTTD used.
 
-OpenTTD has a wide array of configuration options that can affect results.
+OpenTTD has a wide array of configuration options that can affect results, but these are also rarely described, even to state that the default configuration was used. As examples neither the works of Volna \cite{volna2017fuzzy} nor Konijnendijk \cite{konijnendijk2015mcts} describe the options used to generate results.
 \end{descitem}
 \begin{descitem}{Issue 6: No random seeds to bitwise reproduce results}
-Possibly a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, Beuneker et al. \cite{beuneker2019autonomous}, including a discussion of them. Not providing the random seeds impacts repeatability, and specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
+Possibly a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, Beuneker \cite{beuneker2019autonomous}, includes a discussion of them. Not providing the random seeds impacts reproducibility, and specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
 \end{descitem}
 
 \begin{descitem}{Issue 7: Insufficient or unclear detail of the algorithms to replicate results}
 All of the studies included some high level detail of the algorithms implemented, but I found it difficult to judge if it was sufficient within the time constraints of the current work.
 
-However, even if there is sufficient detail, in all cases bar one they are not presented in a way where  replication appeared considered: the detail is spread throughout the work, and not presented as a clear set of algorithms to be replicated. The exception is the work of {Lakom{\`y}} \cite{lakomy2020railroad}: it includes many algorithms each of them explained and discussed, although they are presented as snippets of code rather than pseudo-code. If these snippets of code were used, this would muddy the water between reproducing and replicating their results.
+However, even if there is sufficient detail, in all cases bar one they are not presented in a way where replication appeared considered: the detail is spread throughout the work, and not presented as a clear algorithm or set of algorithms to be replicated. The exception is the work of {Lakom{\`y}} \cite{lakomy2020railroad}: it includes many algorithms each of them explained and discussed, although they are presented as snippets of code rather than pseudo-code. If these snippets of code were used, this would muddy the water between reproducing and replicating their results.
 \end{descitem}
 
 \end{itemize}

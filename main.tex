@@ -811,11 +811,11 @@ set ylabel 'Money in the bank $\textrm{\pounds}$'
 set xlabel 'Date'
 set xrange ["1949-04-01":"2000-12-01"]
 plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean for 8 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean for 4 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean for 2 buses', \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus'
+   using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses' lt 1 lw 3, \
+   '' using (timecolumn(1, '%Y-%m-%d')):5 skip 2 with lines title 'Mean for 8 buses' lt 2 lw 3, \
+   '' using (timecolumn(1, '%Y-%m-%d')):4 skip 2 with lines title 'Mean for 4 buses' lt 3 lw 3, \
+   '' using (timecolumn(1, '%Y-%m-%d')):3 skip 2 with lines title 'Mean for 2 buses' lt 4 lw 3, \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus' lt 6 lw 3
 \end{gnuplot}
 \caption{How the mean money in the bank changes over time for the AI of Algorithm \ref{algorithm:simple-parameterised-ai} when run for 1, 2, 4, 8 and 16 buses.}
 \label{fig:simple-parameterised-ai-means}
@@ -838,14 +838,18 @@ set ylabel 'Money in the bank $\textrm{\pounds}$'
 set xlabel 'Date'
 set xrange ["1949-04-01":"2000-12-01"]
 plot 'notebooks/02_own_parameterised_ai_results_02_money_mean_standard_deviation.csv' \ 
-   using (timecolumn(1, '%Y-%m-%d')):($6+$10):($6-$10) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 std. dev.}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines title 'Mean for 16 buses', \
+   using (timecolumn(1, '%Y-%m-%d')):($6+$10):($6-$10) skip 2 with filledcurves lc rgb '#cccccc' notitle, \
    '' using (timecolumn(1, '%Y-%m-%d')):($6+$10) skip 2 with lines lc rgb '#cccccc' title '', \
    '' using (timecolumn(1, '%Y-%m-%d')):($6-$10) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' title "$\\pm \\textrm{1 std. dev.}$", \
-   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines title 'Mean for 1 bus', \
+   '' using (timecolumn(1, '%Y-%m-%d')):($2+$6):($2-$6) skip 2 with filledcurves lc rgb '#cccccc' notitle, \
+   '' using (timecolumn(1, '%Y-%m-%d')):2 skip 2 with lines notitle lt 6 lw 3, \
+   '' using (timecolumn(1, '%Y-%m-%d')):6 skip 2 with lines notitle lt 1 lw 3, \
    '' using (timecolumn(1, '%Y-%m-%d')):($2+$6) skip 2 with lines lc rgb '#cccccc' title '', \
-   '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title ''
+   '' using (timecolumn(1, '%Y-%m-%d')):($2-$6) skip 2 with lines lc rgb '#cccccc' title '', \
+   NaN with filledcurves fs pattern 2 title "$\\pm \\textrm{1 std. dev.}$" lc rgb "#cccccc", \
+   NaN with lines title 'Mean for 16 buses'  lt 1 lw 3, \
+   NaN with filledcurves fs solid lc rgb '#cccccc' title "$\\pm \\textrm{1 std. dev.}$", \
+   NaN with lines title 'Mean for 1 bus' lt 6 lw 3
 \end{gnuplot}
 \caption{How the distribution of money in the bank changes over time for the AI of Algorithm \ref{algorithm:simple-parameterised-ai} when run for 1 and 16 buses.}
 \label{fig:simple-parameterised-ai-distributions}
@@ -971,9 +975,9 @@ There are many other ways that OpenTTDLab can be improved. For example, OpenTTDL
 
 While there are many improvements that can be made in OpenTTDLab, especially around output and visualisation, and further investigations performed in terms of whether it does in fact achieve its aims, through this work I have provided evidence that OpenTTDLab provides the foundations of a reusable framework for conducting repeatable, reproducible, and replicable research. And through just simple experiments, I provided evidence that OpenTTD can produce interesting results that appear to have real-world meanings. 
 
-I am especially pleased with the fact that OpenTTDLab offers rich behaviour through just a single Python statement. It removes the the need for manual and error prone behaviour such as creating ranges of configuration files or command line options. It handles what I think is the fairly technically complex aspect of downloading from BaNaNaS---there is no straightforward API to do this, and no equivalent client outside of OpenTTD itself; indeed a number of the 72 releases of OpenTTDLab focused on this problem. It saves what I think would be a lot of time to potential users, so they should be able to get on with the actual research they care about on algorithms or networks, rather than worrying about downloading AIs, starting up games, or parsing binary files. And this is all a way that addresses the reproducibility crisis rather than continuing to contribute to it.
+I am especially pleased with the fact that OpenTTDLab offers rich behaviour through just a single Python statement. It removes the the need for manual and error prone behaviour such as creating ranges of configuration files or command line options. It handles what I think is the fairly technically complex aspect of downloading from BaNaNaS---there is no straightforward API to do this, and no equivalent client outside of OpenTTD itself; indeed a number of the 72 releases of OpenTTDLab focused on this problem. It saves what I think would be a lot of time to potential users, so they should be able to get on with the actual research they care about on algorithms or networks, rather than worrying about downloading AIs, starting up games, or gathering and parsing binary files. And this is all a way that addresses the reproducibility crisis rather than continuing to contribute to it.
 
-OpenTTDLab is already a useful tool, and I am excited what it can become in future if it's used and contributed to, which I sincerely hope it will be.
+OpenTTDLab is already a useful tool, and I am excited about what it can become in future if it's used and contributed to further, which I sincerely hope it will be.
 
 \vspace{1em}
 \centerline{\url{https://github.com/michalc/OpenTTDLab}}
@@ -1434,14 +1438,14 @@ Following is the documentation of ParameterisedAI, the AI created for the experi
 
 \includepdf[pages=-,width=\columnwidth,offset=0.8cm 0,pagecommand={},frame]{assets/parameterised-ai/parameterisedai-github.pdf}
 
-\chapter{Simulating a network: ParameterisedAI `info.nut'}
+\chapter{Simulating a network: ParameterisedAI Squirrel `info.nut'}
 \label{chapter:simulating-a-network-squirrel-info}
 
 Following is the Squirrel code of one of the two files that comprised the AI written to generate the results of Chapter~\ref{chapter:experiments-simple-parameterised-ai}, the `info.nut` file that contains the metadata of the AI. It is also available at \url{https://github.com/michalc/ParameterisedAI/blob/74662403e0764329112dc78e5b279d7f1b5fd510/info.nut}.
 
 \lstinputlisting[language=Java]{assets/parameterised-ai/info.nut}
 
-\chapter{Simulating a network: ParameterisedAI `main.nut'}
+\chapter{Simulating a network: ParameterisedAI Squirrel `main.nut'}
 \label{chapter:simulating-a-network-squirrel-main}
 
 Following is the Squirrel code of one of the two files that comprised the AI written to generate the results of Chapter~\ref{chapter:experiments-simple-parameterised-ai}, the `main.nut` file that contains the core algorithm of the AI. It is also available at \url{https://github.com/michalc/ParameterisedAI/blob/74662403e0764329112dc78e5b279d7f1b5fd510/main.nut}.

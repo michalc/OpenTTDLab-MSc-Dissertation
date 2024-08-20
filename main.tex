@@ -248,7 +248,7 @@ No study included the code used to analyse results or produce visualisations.
 \end{descitem}
 
 \begin{descitem}{Issue 2: Low or unknown number of repetitions}
-While there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. As examples, the 2 experiments of Rios and Chaimowicz \cite{rios2009trains} were run 7 times each, the experiments of Wisniewski and Witt \cite{wisniewski2011artificial} were run just 3 times, and the work of Volna \cite{volna2017fuzzy} does not list the number of repetitions, or even suggest there was more than one for each configuration.
+While there is no one-size fits all number to how many repetitions an experiments must have, some of the studies I would argue have repetitions that are so few they call into question the results that are based on them. As examples, the two experiments of Rios and Chaimowicz \cite{rios2009trains} were run seven times each, the experiments of Wisniewski and Witt \cite{wisniewski2011artificial} were run just three times, and the work of Volna \cite{volna2017fuzzy} does not list the number of repetitions, or even suggests there was more than one for each configuration.
 \end{descitem}
 \begin{descitem}{Issue 3: Non-comparable repetitions}
 Rios and Chaimowicz \cite{rios2009trains} ran a total of 14 repetitions over 2 experiments, but not for the same amount of in-game time. This calls into question whether these were actually repetitions of the experiment.
@@ -260,23 +260,23 @@ The study of {Lakom{\`y}} \cite{lakomy2020railroad} explicitly describes the man
 \end{descitem}
 
 \begin{descitem}{Issue 5: Insufficient detail on the version or configuration of OpenTTD}
-The version of OpenTTD used to generate results is rarely mentioned. As examples, Bijlsma \cite{bijlsma2014evolving} does not mention the version of OpenTTD that was then modified. Similarly the works of Volna \cite{volna2017fuzzy} and Beuneker \cite{beuneker2019autonomous} do not mention the version of, the presumably unmodified, OpenTTD used.
+The version of OpenTTD used to generate results is rarely mentioned. For example, the work of Bijlsma \cite{bijlsma2014evolving} does not mention the version of OpenTTD that was then modified. Similarly the works of Volna \cite{volna2017fuzzy} and Beuneker \cite{beuneker2019autonomous} do not mention the version of, the presumably unmodified, OpenTTD used.
 
-OpenTTD has a wide array of configuration options that can affect results, but these are also rarely described, even to state that the default configuration was used. As examples neither the works of Volna \cite{volna2017fuzzy} nor Konijnendijk \cite{konijnendijk2015mcts} describe the options used to generate results.
+OpenTTD has a wide array of configuration options that can affect results, but it varies how well these are described. For example, the work of Wisniewski and Witt \cite{wisniewski2011artificial} describes the configuration exhaustively and in one place, but the work of Beuneker \cite{bijlsma2014evolving} only has limited detail, and what there is is spread throughout the work.
 \end{descitem}
 \begin{descitem}{Issue 6: No random seeds to bitwise reproduce results}
-Possibly a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used, Beuneker \cite{beuneker2019autonomous}, includes a discussion of them. Not providing the random seeds impacts reproducibility, and specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
+Possibly a special case of configuration, but it merits special attention since to gain statistical results typically experiments would be run for a fixed configuration over a range of random seeds. However, only one study reported the random seeds used: the work of Beuneker \cite{beuneker2019autonomous}. Not providing the random seeds impacts reproducibility, and specifically bitwise reproducibility: without the random seeds it is impossible to reproduce the results exactly.
 \end{descitem}
 
 \begin{descitem}{Issue 7: Insufficient or unclear detail of the algorithms to replicate results}
-All of the studies included some high level detail of the algorithms implemented, but I found it difficult to judge if it was sufficient within the time constraints of the current work.
+All of the studies included some high level detail of the algorithms implemented, but I found it difficult to judge if it each is sufficient to replicate results within the time constraints of the current work.
 
 However, even if there is sufficient detail, in all cases bar one they are not presented in a way where replication appeared considered: the detail is spread throughout the work, and not presented as a clear algorithm or set of algorithms to be replicated. The exception is the work of {Lakom{\`y}} \cite{lakomy2020railroad}: it includes many algorithms each of them explained and discussed, although they are presented as snippets of code rather than pseudo-code. If these snippets of code were used, this would muddy the water between reproducing and replicating their results.
 \end{descitem}
 
 \end{itemize}
 %
-Determining replicability by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, off of such a review. While my review focused on OpenTTD, there are related wider problem in simulations in general: ``many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility'' \cite{dalle2012reproducibility}.
+Determining replicability by reading the papers is certainly not as strong evidence as actually attempting to reproduce or replicate results, but an independent researcher reading through a draft manuscript has been given as a recommendation to find issues before publication with the strongest of the 3Rs, replicability \cite{luijken2024replicability}, so I argue it is reasonable to extend the process to all of the 3Rs and to base further actions, such as the creation of a framework to help avoid such issues, from such a review. While my review focused on OpenTTD, there are related wider problem in simulations in general: ``many published works based on simulation still fail to meet the minimum conditions to ensure reproducibility'' \cite{dalle2012reproducibility}.
 
 \section{Reusability: The 4\texorpdfstring{\textsuperscript{th}}{th} R}
 

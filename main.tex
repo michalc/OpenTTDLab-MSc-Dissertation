@@ -417,7 +417,7 @@ The AI system is the core feature that allows OpenTTD to be used to research alg
 
 \section{Configurability}
 
-OpenTTD has over 400 options set through a combination of its graphical interface or configuration file, and command line arguments; it is not useful to review them all here; see \cite{OpenTTDWiki} for the complete list and their defaults. However, there are several that are particularly relevant to using OpenTTD to conduct repeatable, reproducible, or replicable experiments.
+OpenTTD has over 400 options set through a combination of its graphical interface or configuration file, and command line arguments; it is not useful to review them all here; see \cite{OpenTTDWiki} for the complete list and their defaults. However, there are several that are particularly relevant for repeatable, reproducible, or replicable experiments.
 
 \begin{itemize}
 \begin{descitem}{Properties of the pseudo-randomly generated world}
@@ -429,11 +429,11 @@ OpenTTD allows the specification of the maximum number of ticks taken before it 
 \begin{descitem}{Random seed}
 As described earlier in this chapter, OpenTTD allows the specification of random seed which controls how the world is generated at the start of play.
 
-Keeping track of the random seeds allows experiments to be bitwise repeatable, and including the random seeds with published results should help them be (bitwise) reproducible, such as the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
+Keeping track of the random seeds allows experiments to be bitwise repeatable, and including the random seeds with published results should help them be bitwise reproducible, such as the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
 \end{descitem}
 
 \end{itemize}
-
+%
 OpenTTD also requires what's known as a \emph{base graphics set}. While this does not affect gameplay, it affects the visuals of the game. OpenGFX \cite{OpenGFXSource} is an open source base graphics set that is easily installable through the OpenTTD interface.
 
 It should be noted that while OpenTTD has a wide range of options, there is nothing in OpenTTD to help run it over a specific range of configurations, for example over two different configurations of worlds, or over a range of random seeds.

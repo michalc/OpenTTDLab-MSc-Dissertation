@@ -45,6 +45,7 @@
 \usepackage{longtable}
 \usepackage{enumitem}
 \usepackage{ragged2e}
+\usepackage{amsmath}
 
 % More nicely style url/xurl links
 \hypersetup{colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,citecolor=blue}
@@ -875,7 +876,7 @@ Through simulating basic transportation networks using OpenTTDLab, OpenTTD can p
 \chapter{Experiments 3: Scaling}
 \label{chapter:experiments-scaling}
 
-As mentioned in Chapter \ref{chapter:openttdlab-design-process-and-features}, in order to make it quicker to repeat more repeat experiments, I added two features to OpenTTDLab: simple task-based parallelism and a mechanism to reduce the amount of data copied between the worker and the main process. To validate these features, and to start to investigate how OpenTTDLab could be further improved on these fronts, I ran a set of basic experiments: measuring how the wall-clock runtime of OpenTTDLab changes with the number of worker processes, and how it changes with the amount of data passed between processes.
+As mentioned in Chapter \ref{chapter:openttdlab-design-process-and-features}, in order to make it quicker to repeat more experiments, I added two features to OpenTTDLab: simple task-based parallelism and a mechanism to reduce the amount of data copied between the worker and the main process. To validate these features, and to start to investigate how OpenTTDLab could be further improved on these fronts, I ran a set of basic experiments: measuring how the wall-clock runtime of OpenTTDLab changes with the number of worker processes, and how it changes with the amount of data passed between each worker and the controlling process.
 
 \section{Experimental setup}
 
@@ -924,21 +925,21 @@ plot 'notebooks/03_scaling_results_03_speedups.csv' \
 \label{figure:scaling-speedup}
 \end{figure}
 
-As can be seen from Figure \ref{figure:scaling-wallclock-time}, wall-clock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an approximate 80\% reduction of runtime compared to running on 1 process. Also returning a minimal set of data from the worker resulted in approximately an additional 30\% reduction in time. This suggests that it's worth running experiments on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
+As can be seen in Figure \ref{figure:scaling-wallclock-time}, wall-clock time decreases as the number of processors increases, and so there is some useful parallelisation: running with 8 worker processes results in an approximate 80\% reduction of runtime compared to running on 1 process. Also, returning a minimal set of data from the worker resulted in approximately an additional 30\% reduction in time. This suggests that it's worth running experiments on multiple workers, and to reduce the amount of data returned from the workers, especially if running a high number of experiments.
 
 However, Figure \ref{figure:scaling-wallclock-time} also suggests that there is an aspect of diminishing returns: for example the difference in runtime between 1 and 4 processes is much greater than the difference between 5 and 8. To better show this effect, Figure \ref{figure:scaling-speedup} shows \emph{speedup}: how many times faster the program runs for a given number of worker processes compared to the time it takes running on a single worker process. The speedup for the experiments does increase with each addition of a process. However, the greater the number of processes, the greater the deviation from linear speedup. It gets especially worse from 5 processes onwards, ending with a speedup of approximately 4.5 with 8 processes. Figure \ref{figure:scaling-wallclock-time} also shows that the speedup profiles of returning all data and minimal data from the worker processes are almost identical.
 
 \section{Discussion}
 
-A reason for the increased deviation from linear speedup when the number of processors is greater than 4 could come from the fact the cores are not identical. According to Apple~\cite{AppleM1Overview} 4 cores are high performance, but the other 4 are lower performance (but have higher efficiency in terms of power usage). The speedup profiles found appears roughly consistent with the high/lower performance split, and suggests that the high performance cores being used in preference to the low performance cores.
+A reason for the increased deviation from linear speedup when the number of processors is greater than 4 could come from the fact the cores are not identical. According to Apple~\cite{AppleM1Overview} 4 cores are high performance, but the other 4 are low performance (but have higher efficiency in terms of power usage). The speedup profiles appear roughly consistent with the high/low performance split, and suggests that the high performance cores are being used in preference to the low performance cores.
 
 Another reason for the deviation from linear speedup is Amdhal's Law: it describes how speedup is related to proportion of the program that runs in serial. This law is usually formulated as
-
-\begin{equation}
-S_p = \frac{1}{(1-p) + \frac{p}{s}}
-\end{equation}
 %
-where $S_p$ is the speedup of the entire program, $p$ is the proportion of the program that has been parallelised, and $s$ is speedup of the parallelised part of the program. The most relevant consequence of this is that $\lim_{S\to\infty} S_p = \frac{1}{1-p}$. This means that, for example, even if 95\% of a program is parallelised, then the maximum speedup is $\frac{1}{1-0.95}=20$, even if thousands of processes are used.
+\begin{equation*}
+S_p = \frac{1}{(1-p) + \frac{p}{s}}
+\end{equation*}
+%
+where $S_p$ is the speedup of the entire program, $p$ is the proportion of the program that has been parallelised, and $s$ is speedup of the parallelised part of the program. The most relevant consequence of this is that $\lim_{S\to\infty} S_p = 1/\left(1-p\right)$. This means that, for example, even if 95\% of a program is parallelised, then the maximum speedup is $1 / \left(1-0.95\right)=20$, even if thousands of processes are used.
 
 This suggests that a way of increasing this limit is to reduce proportion of runtime in serial code. However, in light of Amdhal's law the identical speedup profiles in Figure~\ref{figure:scaling-speedup} suggest that changing the amount of data returned from the worker processes does not change the overall proportion of runtime in serial code. Given wall-clock time reduces with less data transferred, it's reasonable to suspect that reducing the data transferred reduces parallel and serial runtimes in similar proportions, possibly from the serialisation and deserialisation involved. Thus removing all data transfer is not likely to improve scaling. One way to remove all data transfer is to use threads rather than processes, but since threads in Python are subject to the Global Intepreter Lock (GIL), and so in many cases would increase the proportion of serial code compared to using processes, there is a strong reason to suspect that this would make scaling worse rather than better.
 

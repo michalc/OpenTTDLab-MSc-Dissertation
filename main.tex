@@ -425,12 +425,12 @@ OpenTTD has over 400 options set through a combination of its graphical interfac
 As suggested earlier, OpenTTD allows the configuration of the dimensions of the world, between $64 \times 64$ and $4096 \times 4096$ tiles. It also allows the specification of other related properties, such as if the generated world is flat or mountainous. Flat and mountainous worlds are compared in the experiments of Chapter \ref{chapter:experiments-attempt-at-reproducing}.
 \end{descitem}
 \begin{descitem}{Total number of ticks}
-OpenTTD allows the specification of the maximum number of ticks taken before it exits. This allows experiments to run for a fixed amount of in-game time, rather than the default of indefinitely. All of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} do this.
+OpenTTD allows the specification of the number of ticks taken before it exits. This allows experiments to run for a fixed amount of in-game time, rather than the default of indefinitely. Each of the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} does this.
 \end{descitem}
 \begin{descitem}{Random seed}
-As described earlier in this chapter, OpenTTD allows the specification of random seed which controls how the world is generated at the start of play.
+As described earlier in this chapter, OpenTTD allows the specification of the random seed which controls how the world is generated at the start of play.
 
-Keeping track of the random seeds allows experiments to be bitwise repeatable, and including the random seeds with published results should help them be bitwise reproducible, such as the experiments of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling}.
+Keeping track of the random seeds allows experiments to be bitwise repeatable, and including the random seeds with published results should help them be bitwise reproducible. Each of Chapters \ref{chapter:experiments-attempt-at-reproducing}--\ref{chapter:experiments-scaling} includes the random seeds used.
 \end{descitem}
 
 \end{itemize}
